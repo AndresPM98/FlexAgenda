@@ -3,3 +3,5 @@ const queryPage = () => {
         <h1>Query Page</h1>
     )
 }
+
+export default queryPage;
