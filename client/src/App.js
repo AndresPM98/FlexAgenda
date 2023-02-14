@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route } from "react-router-dom";
+import { Form, Home, LandingPage, ProfessionalPage, QueryPage } from "./Pages"
+import axios from 'axios';
+axios.defaults.baseURL='http://localhost:3001/'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/form" component={Form} />
+      <Route exact path="/professionalDetail" component={ProfessionalPage} />
+      <Route exact path="/queryDetail" component={QueryPage} />
+      
     </div>
   );
 }
