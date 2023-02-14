@@ -1,7 +1,7 @@
 import './App.css';
 import { Route } from "react-router-dom";
 import { Form, Home, LandingPage, ProfessionalPage, QueryPage } from "./Pages"
-import Navbar from './Components/Navbar/Navbar';
+
 import axios from 'axios';
 axios.defaults.baseURL='http://localhost:3001/'
 
