@@ -22,7 +22,7 @@ const initialState = {
 
         case FILTER_BY_CLIENT:
             const allClients = state.allClients;
-            const filterClient = action.payload === 'Clients' ? allClients : allClients.filter(e => e.client === action.payload);
+            const filterClient = action.payload === 'Clients' ? allClients : allClients.filter(e => e.id === action.payload);
             return{
                 ...state,
                 clients: filterClient
