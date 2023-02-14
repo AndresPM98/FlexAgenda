@@ -6,8 +6,12 @@ const Filters = () => {
 
     const dispatch = useDispatch();
     const clients = useSelector(state => state.clients);
+    const allClients = useSelector(state => state.allClients);
+    console.log(clients)
 
     function handleFilterByClient(event) {
+        event.preventDefault();
+        console.log(event.target.value);
         dispatch(filterByClient(event.target.value));
         };
 
@@ -15,18 +19,22 @@ const Filters = () => {
         dispatch(getClients());
         }, [dispatch]);
         
-        return (
-
+        return clients? ( 
+            
          <div>
-            <select onChange={(e) => handleFilterByClient(e)}>
+            <select onChange={(event) => handleFilterByClient(event)}>
               <option value="Clients"> Clients </option>
-                {clients
+                {allClients
                   .sort((a, b) => (a.name > b.name ? 1 : -1))
                   .map((v) => (
-                    <option value={v.id}>{v.name}</option>
+                    <option value={v.id} key={v.id}>{v.name}</option>
                   ))}
             </select>
          </div>
+         
+        ): (
+            <div>Hola</div>
         )
     };
+
   export default Filters;
