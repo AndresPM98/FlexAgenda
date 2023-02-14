@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getClients, getClientByName, filterByClient} from "../../Redux/Actions"
+import React, { useEffect } from "react";
+import { getClients, filterByClient} from "../../Redux/Actions"
 import { useDispatch, useSelector} from "react-redux";
 
 const Filters = () => {
