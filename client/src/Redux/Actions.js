@@ -1,6 +1,7 @@
 import axios from "axios";
 export const GET_CLIENTS = "GET_CLIENTS";
 export const GET_CLIENT_BY_NAME = "GET_CLIENT_BY_NAME";
+export const FILTER_BY_CLIENT = "FILTER_BY_CLIENT";
 
 export const getClients = () => {
     return async function (dispatch) {
@@ -18,4 +19,11 @@ export const getClientByName = (name)=> {
      payload: res.data
       });
     }
+  };
+
+export const filterByClient = (payload) => {
+    return {
+      type: FILTER_BY_CLIENT,
+      payload,
+    };
   };

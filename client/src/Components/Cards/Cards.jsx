@@ -17,6 +17,7 @@ const Cards = () => {
             {clients.map((client) => {
             return (
             <Card
+                id={client.id}
                 key={client.id}
                 name={client.name}
                 email={client.email}

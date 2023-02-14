@@ -1,4 +1,4 @@
-import {GET_CLIENTS, GET_CLIENT_BY_NAME} from "./Actions";
+import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT} from "./Actions";
 
 const initialState = {
     allClients:[],
@@ -18,6 +18,14 @@ const initialState = {
             return{
             ...state,
             clients: action.payload
+            };
+
+        case FILTER_BY_CLIENT:
+            const allClients = state.allClients;
+            const filterClient = action.payload === 'Clients' ? allClients : allClients.filter(e => e.client === action.payload);
+            return{
+                ...state,
+                clients: filterClient
             };
     
         default:

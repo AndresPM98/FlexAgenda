@@ -21,7 +21,7 @@ export default function Search(){
 
         type='text' 
         onChange={handleOnChange} 
-        placeholder='Country...' 
+        placeholder='Client...' 
         className="InputSearch">
 
         </input>
