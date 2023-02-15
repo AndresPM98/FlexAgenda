@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import   {NavLink} from "react-router-dom";
 
-export default function (props){
+export default function Navbar (props){
     return(
         <div className="navbarContainer">
             <div className="logo">

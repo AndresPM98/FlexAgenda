@@ -7,11 +7,9 @@ const Filters = () => {
     const dispatch = useDispatch();
     const clients = useSelector(state => state.clients);
     const allClients = useSelector(state => state.allClients);
-    console.log(clients)
 
     function handleFilterByClient(event) {
         event.preventDefault();
-        console.log(event.target.value);
         dispatch(filterByClient(event.target.value));
         };
 

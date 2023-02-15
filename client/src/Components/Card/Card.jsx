@@ -1,15 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import './Card.css';
 
 const Card = ({ name, email, dni, id }) => {
 
   return (
-    <div>
-        <Link to={`/queryDetail/${id}`} className="Link">
-            <h3>{name}</h3>
-        </Link>
+    <div className='cardsContainer'>
+      <div className='card'>
+          <div className='name'>
+            <NavLink to={`/queryDetail/${id}`} className="nameLink">{name}</NavLink>
+          </div>
+          <div className='info'>
             <p>{email}</p>
             <p>{dni}</p>
+          </div>
+      </div>
     </div>
   )
 }
