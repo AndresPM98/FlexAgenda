@@ -5,14 +5,14 @@
   justify-content: flex-start;
   align-items: center;
 }
-.container {
+.containerForm {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.singup {
+.singupForm {
   color: #0051ee;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -23,7 +23,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-.card {
+.cardForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +106,7 @@
   border-radius: 8px;
 }
 
-.enter {
+.enterForm {
   height: 45px;
   width: 105px;
   border-radius: 5px;
@@ -120,7 +120,7 @@
   margin-bottom: 3em;
 }
 
-.enter:hover {
+.enterForm:hover {
   background-color: #0051ee;
   color: white;
 }
