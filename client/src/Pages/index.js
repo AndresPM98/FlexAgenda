@@ -2,6 +2,7 @@ import Form from "./Form/Form";
 import Home from "./Home/Home";
 import LandingPage from "./Landing Page/LandingPage";
 import ProfessionalPage from "./Professional Detail/ProfessionalPaje";
-import QueryPage from "./Query Detail/QueryPaje";
+import QueryPage from "./Query Detail/QueryPage";
+import FormClient from "./FormClient/FormClient";
 
-export {Form, Home, LandingPage, ProfessionalPage, QueryPage};
+export {Form, Home, LandingPage, ProfessionalPage, QueryPage, FormClient};
