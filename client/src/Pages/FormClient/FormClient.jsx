@@ -21,9 +21,9 @@ const FormClient = () => {
         </div>
 
         <form>
-          <div className="container">
-            <div className="card">
-              <a className="signup">Formulario del cliente</a>
+          <div className="containerForm">
+            <div className="cardForm">
+              <a className="signupForm">Formulario del cliente</a>
               <div className="inputBox">
                 <input type="text" required />
                 <span>NOMBRE</span>
@@ -36,7 +36,7 @@ const FormClient = () => {
                 <input type="text" required />
                 <span>DNI</span>
               </div>
-              <button className="enter">REGISTRARSE</button>
+              <button className="enterForm">REGISTRARSE</button>
             </div>
           </div>
         </form>
