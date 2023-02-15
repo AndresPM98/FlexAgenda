@@ -1,8 +1,10 @@
-import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT} from "./Actions";
+import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT, GET_TURNS, GET_TURN_BY_NAME, FILTER_BY_DATE, FILTER_BY_HOUR} from "./Actions";
 
 const initialState = {
-    clients:[],
-    allClients:[]
+    //clients:[],
+    allClients:[], 
+    turns:[],
+    allTurns:[]
     };
 
     const rootReducer = (state = initialState, action) => {
@@ -10,23 +12,56 @@ const initialState = {
         case GET_CLIENTS:
             return {
             ...state,
-            clients: action.payload,
+           /*  turns: action.payload,
+            allTurns: action.payload, */
             allClients: action.payload,
             };
-
+/* 
         case GET_CLIENT_BY_NAME:
             return{
             ...state,
-            clients: action.payload
+            turns: action.payload
             };
 
         case FILTER_BY_CLIENT:
-            const allClients = state.allClients;
-            const filterClient = action.payload === 'Clients' ? allClients : allClients.filter(e => e.id === action.payload);
+            const allClients = state.allTurns;
+            const filterClient = action.payload === 'Clients' ? allTurns : allTurns.filter(e => e.id === action.payload);
             return{
                 ...state,
-                clients: filterClient
+                turns: filterClient
             };
+ */
+        /* ---------------------------------------------------- */
+        
+        case GET_TURNS:
+            return {
+            ...state,
+            turns: action.payload,
+            allTurns: action.payload,
+            };
+        
+        /* case GET_TURN_BY_NAME:
+            return{
+            ...state,
+            turns: action.payload.turns.map(t => t.Client.name == action.payload.name)
+            }; */
+
+        case FILTER_BY_DATE:
+            const allTurn = state.allTurns;
+            const filterDate = action.payload === 'Hours' ? allTurn : allTurn.filter(e => e.id === action.payload);
+            return{
+                ...state,
+                turns: filterDate
+            };
+            
+        case FILTER_BY_HOUR:
+            const allTurns = state.allTurns;
+            const filterHours = action.payload === 'Hours' ? allTurns : allTurns.filter(e => e.hour == action.payload);
+            return{
+                ...state,
+                turns: filterHours
+            };
+
     
         default:
             return {

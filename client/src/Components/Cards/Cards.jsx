@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getClients} from "../../Redux/Actions"
+import { getTurns} from "../../Redux/Actions"
 import { useDispatch, useSelector} from "react-redux"; 
 import Card from "../Card/Card";
 import './Cards.css'
@@ -7,22 +7,24 @@ import './Cards.css'
 const Cards = () => {
 
     const dispatch = useDispatch();
-    const clients = useSelector(state => state.clients);
+    const turns = useSelector(state => state.turns);
+    console.log(turns);
 
     useEffect(() => {
-        dispatch(getClients());
+        dispatch(getTurns());
         }, [dispatch]);
 
     return (
         <div className="cardsContainer">
-            {clients.map((client) => {
+            {turns.map((turn) => {
+                console.log(turn.client);
             return (
             <Card
-                id={client.id}
-                key={client.id}
-                name={client.name}
-                email={client.email}
-                dni={client.dni}
+                id={turn.id}
+                key={turn.id}
+                name={turn.client.name}  
+                date={turn.date}
+                hour={turn.hour}
             />
             );
             })}

@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { Form, Home, LandingPage, ProfessionalPage, QueryPage, FormClient } from "./Pages"
 
 import axios from 'axios';
-axios.defaults.baseURL='http://localhost:3001/'
+axios.defaults.baseURL='https://backend-pf-production-1672.up.railway.app/'
 
 
 function App() {

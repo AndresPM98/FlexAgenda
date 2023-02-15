@@ -27,3 +27,38 @@ export const filterByClient = (payload) => {
       payload,
     };
   };
+
+/* ------------------------------------------------------------- */
+
+export const GET_TURNS = "GET_TURNS";
+export const FILTER_BY_HOUR = "FILTER_BY_HOUR";
+export const FILTER_BY_DATE = "FILTER_BY_DATE";
+export const GET_TURN_BY_NAME = "GET_TURN_BY_NAME";
+
+
+export const getTurns = () => {
+    return async function (dispatch) {
+      const bdInfo = await axios.get('/turn'); 
+      const turns = bdInfo.data
+      dispatch({ type: GET_TURNS, payload: turns })
+    };
+  };
+
+/* export const getTurnByName = (turns, name) => {
+  return {
+    type: GET_TURN_BY_NAME, payload: {turns, name} 
+};
+} */
+  export const filterByDate = (payload) => {
+    return {
+      type: FILTER_BY_DATE,
+      payload,
+    };
+  };
+
+  export const filterByHour = (payload) => {
+    return {
+      type: FILTER_BY_HOUR,
+      payload,
+    };
+  };
