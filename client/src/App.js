@@ -14,7 +14,7 @@ function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/form" component={Form} />
       <Route exact path="/formClient" component={FormClient} />
-      <Route exact path="/professionalDetail" component={ProfessionalPage} />
+      <Route exact path="/professionalDetail/id" component={ProfessionalPage} />
       <Route exact path="/queryDetail/:id" component={QueryPage} />
       
     </div>

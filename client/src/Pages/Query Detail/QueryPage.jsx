@@ -17,6 +17,7 @@ const queryPage = () => {
                 </div>
                 <div className="queryDetailContainer">
                     <h1>Query Details</h1>
+                    <h3>Hola</h3>
                 </div>
             </div>
             <Footer/>
