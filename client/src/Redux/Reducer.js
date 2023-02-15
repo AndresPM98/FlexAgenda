@@ -1,8 +1,8 @@
 import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT} from "./Actions";
 
 const initialState = {
-    allClients:[],
     clients:[],
+    allClients:[]
     };
 
     const rootReducer = (state = initialState, action) => {

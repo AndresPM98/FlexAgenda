@@ -1,0 +1,37 @@
+.queryPage{
+    margin: 0;
+    min-height: 41.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.queryDetailContainer{
+    background-color: #F0E9FF;
+    width: 50rem;
+    height: 30rem;
+    border: 3px solid #0051EE;
+    border-radius: 2rem;
+    margin-left: 16rem;
+}
+
+.backContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 32rem;
+}
+
+.back{
+    border-radius: 0 1rem 1rem 0;
+    background-color: #0051EE;
+    text-decoration: none;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    height: 2.5rem;
+    margin-left: 0px;
+}
