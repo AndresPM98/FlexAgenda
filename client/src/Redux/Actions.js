@@ -5,7 +5,7 @@ export const FILTER_BY_CLIENT = "FILTER_BY_CLIENT";
 
 export const getClients = () => {
     return async function (dispatch) {
-      const bdInfo = await axios.get('/client');  
+      const bdInfo = await axios.get('/client'); 
       const clients = bdInfo.data
       dispatch({ type: GET_CLIENTS, payload: clients })
     };

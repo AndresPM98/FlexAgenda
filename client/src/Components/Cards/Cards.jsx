@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getClients} from "../../Redux/Actions"
 import { useDispatch, useSelector} from "react-redux"; 
 import Card from "../Card/Card";
+import './Cards.css'
 
 const Cards = () => {
 
@@ -13,7 +14,7 @@ const Cards = () => {
         }, [dispatch]);
 
     return (
-        <div>
+        <div className="cardsContainer">
             {clients.map((client) => {
             return (
             <Card
