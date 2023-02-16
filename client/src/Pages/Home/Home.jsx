@@ -4,7 +4,7 @@ import { getProfessionalDetail, getTurns } from "../../Redux/Actions";
 import Cards from "../../Components/Cards/Cards"
 import Filters from "../../Components/Filters/Filters";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import Footer from "../../Components/Footer/Footer";
+// import Footer from "../../Components/Footer/Footer";
 import BotonProf from "../../Components/BottonProf/BottonProf"; 
 import './Home.css';
 
@@ -33,7 +33,7 @@ useEffect(() => {
                 <BotonProf />
                 <Cards turns = {turns}/>
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     )
 }
