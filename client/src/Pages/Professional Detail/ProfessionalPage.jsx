@@ -10,6 +10,7 @@ import style from "./ProfessionalPage.module.css";
 const ProfessionalPage = () => {
   const { id } = useParams();
   const professional = useSelector((state) => state.profDetail);
+  const darkMode = useSelector((state) => state.darkMode);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +23,7 @@ const ProfessionalPage = () => {
   return (
     <>
       <NavbarTwo />
-      <div className={style.container}>
+      <div className={darkMode == false ? style.container : style.containerDark}>
         <div className={style.backContainer}>
           <NavLink className={style.back} to="/home">
             <iconify-icon

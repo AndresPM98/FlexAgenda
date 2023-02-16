@@ -4,7 +4,16 @@
     align-items: center;
     
     height: 100vh;
-    border: 1px solid rgb(217, 255, 0);
+    /* border: 1px solid rgb(217, 255, 0); */
+}
+
+.containerDark{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    height: 100vh;
+    /* border: 1px solid rgb(217, 255, 0); */
 }
 
 .detailContainer{
@@ -12,7 +21,7 @@
     flex-direction: column;
     align-items: flex-start;
     
-    border: 1px solid red;
+    border: 3px solid #0051EE;
     border-radius: 20px;
     background-color: rgb(255, 250, 244);
     
