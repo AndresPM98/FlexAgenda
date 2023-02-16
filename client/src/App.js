@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { Form, Home, LandingPage, ProfessionalPage, QueryPage, FormClient } from "./Pages"
 
 import axios from 'axios';
+import Footer from './Components/Footer/Footer';
 axios.defaults.baseURL='https://backend-pf-production-1672.up.railway.app/'
 
 
@@ -16,7 +17,8 @@ function App() {
       <Route exact path="/formClient" component={FormClient} />
       <Route exact path="/professionalDetail/:id" component={ProfessionalPage} />
       <Route exact path="/queryDetail/:id" component={QueryPage} />
-      
+
+      <Footer/>
     </div>
   );
 }

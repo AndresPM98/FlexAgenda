@@ -8,6 +8,7 @@ import {
   filterByHour,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
+import "./Filters.css";
 
 const Filters = ({allTurns}) => {
   const [inputName, setInputName] = useState("");
@@ -71,7 +72,7 @@ const Filters = ({allTurns}) => {
     };
 
   return (
-    <div>
+    <div className="filterContainer">
       <div>
         <button 
         onClick={handleOnClickName} className="ButtonSearch">Search</button>

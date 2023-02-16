@@ -1,0 +1,35 @@
+.profContainer {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    position: relative;
+    margin-bottom: 1rem;
+    margin-left: 0px; 
+  }
+  .nameLinkProf div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nameLinkProf iconify-icon {
+    margin-left: 0rem;
+  }
+  .nameLinkProf {
+    text-decoration: none;
+    color: #0051EE;
+  }
+  
+  .textProf {
+    border-radius: 1rem 0 0 1rem; 
+    background-color: #0051EE;
+    text-decoration: none;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+    height: 3.75rem;
+    margin-right: 0px; 
+  }
+  

@@ -1,0 +1,49 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    height: 100vh;
+    border: 1px solid rgb(217, 255, 0);
+}
+
+.detailContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    border: 1px solid red;
+    border-radius: 20px;
+    background-color: rgb(255, 250, 244);
+    
+    padding: 30px;
+    margin: 20px 10px;
+    width: 75%;
+}
+
+.description {
+    font-size: 18px;
+}
+
+.backContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    position: absolute;
+    left: 0;
+    margin-top: 100px;
+}
+
+.back{
+    border-radius: 0 1rem 1rem 0;
+    background-color: #0051EE;
+    text-decoration: none;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    height: 2.5rem;
+    margin-left: 0px;
+}
