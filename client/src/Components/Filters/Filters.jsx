@@ -9,13 +9,13 @@ import {
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 
-const Filters = () => {
+const Filters = ({allTurns}) => {
   const [inputName, setInputName] = useState("");
   const [inputDate, setInputDate] = useState("");
   const dispatch = useDispatch();
-  const allClients = useSelector((state) => state.allClients);
-  const allTurns = useSelector((state) => state.turnBackup);
-  const turns = useSelector((state) => state.turns);
+ 
+  /* const allTurns = useSelector((state) => state.turnBackup); */
+  
 
   function handleFilterByClient(event) {
     event.preventDefault();
