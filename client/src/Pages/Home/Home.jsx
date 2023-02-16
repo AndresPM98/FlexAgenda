@@ -30,15 +30,9 @@ useEffect(() => {
             <NavbarTwo/>
 
             <div className="homeContainer">
-                <Filters allTurns = {allTurns}/>
                 <BotonProf />
+                <Filters allTurns = {allTurns}/>
                 <DarkMode/>
-            </div>
-
-            <div className="homeContainer">
-                <BotonProf />
-                <Filters allTurns = {allTurns}/>
-
                 <Cards turns = {turns}/>
             </div>
         </div>

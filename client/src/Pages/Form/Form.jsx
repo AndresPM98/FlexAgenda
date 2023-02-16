@@ -31,7 +31,7 @@ const Form = () => {
   });
 
 
-  const serv = useSelector((state) => state.allServices);
+ 
 
   function validate(form) {
     let error = {};
@@ -82,57 +82,6 @@ const Form = () => {
       })
     );
   }
-
-  return (
-    <div>
-      <NavbarTwo />
-      <div className="formTurnPage">
-        <div className="backContainer">
-          <NavLink className="back" to="/home">
-            <iconify-icon
-              icon="ion:arrow-back-circle"
-              width="40"
-              height="30"
-            ></iconify-icon>
-            BACK
-          </NavLink>
-        </div>
-
-
-    const changeHandler = (event) => {
-      const property = event.target.name;
-      const value = event.target.value;
-  
-      setForm({ ...form, [property]: value });
-      validate({ ...form, [property]: value });
-    };
-  
-      const submitHandler = (event) => {
-        event.preventDefault();
-        axios
-          .post("https://backend-pf-production-1672.up.railway.app/turn", form)
-          .then((res) => alert("Turn taken correctly"))
-          .catch((err) => alert(err));
-      };
-      
-      
-      function handleSelectServ(event) {
-        if (
-          event.target.value !== "ServiceId" &&
-          !form.ServiceId.includes(event.target.value)
-        )
-          setForm({
-            ...form,
-            ServiceId: [...form.ServiceId, event.target.value],
-          });
-          setError(
-            validate({
-              ...form,
-              ServiceId: [...form.ServiceId, event.target.value],
-            })
-          );
-      }
-     
 
     return(
         <div>
