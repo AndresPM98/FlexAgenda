@@ -22,8 +22,8 @@ useEffect(() => {
         <div>
             <NavbarTwo/>
             <div className="homeContainer">
-                <Filters allTurns = {allTurns}/>
                 <BotonProf />
+                <Filters allTurns = {allTurns}/>
                 <Cards turns = {turns}/>
             </div>
         </div>
