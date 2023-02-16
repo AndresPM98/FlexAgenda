@@ -18,7 +18,6 @@ const ProfessionalPage = () => {
       dispatch(cleanProfDetail());
     };
   }, [dispatch, id]);
-
   return (
     <>
       <NavbarTwo />

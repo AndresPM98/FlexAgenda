@@ -4,7 +4,7 @@
     align-items: center;
     
     height: 100vh;
-    border: 1px solid blue;
+    border: 1px solid rgb(217, 255, 0);
 }
 
 .detailContainer{
@@ -21,3 +21,6 @@
     width: 75%;
 }
 
+.description {
+    font-size: 18px;
+}
