@@ -7,13 +7,13 @@ const Filters = () => {
     const[input, setInput] = useState('');
     const dispatch = useDispatch();
      const allClients = useSelector(state => state.allClients); 
-    const allTurns = useSelector(state => state.allTurns)
+    const allTurns = useSelector(state => state.turnBackup)
     const turns = useSelector(state => state.turns)
-    console.log(allTurns);
+    
 
     function handleFilterByClient(event) {
         event.preventDefault();
-        dispatch(getTurns(turns, event.target.value));
+        dispatch(filterByClient(event.target.value));
         };
 
     function handleOnChange(e){
@@ -25,7 +25,6 @@ const Filters = () => {
     }
 
     function handleFilterByHour(event) {
-      console.log(event.target.value);
         event.preventDefault();
         dispatch(filterByHour(event.target.value));
         };

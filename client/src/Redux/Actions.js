@@ -21,12 +21,7 @@ export const getClientByName = (name)=> {
     }
   };
 
-export const filterByClient = (payload) => {
-    return {
-      type: FILTER_BY_CLIENT,
-      payload,
-    };
-  };
+
 
 /* ------------------------------------------------------------- */
 
@@ -44,11 +39,17 @@ export const getTurns = () => {
     };
   };
 
-/* export const getTurnByName = (turns, name) => {
-  return {
-    type: GET_TURN_BY_NAME, payload: {turns, name} 
-};
-} */
+export const filterByClient = (payload) => {
+    return {
+      type: FILTER_BY_CLIENT,
+      payload,
+    };
+  };
+  
+export const getTurnByName = (name) => {
+  return { type: GET_TURN_BY_NAME, payload: name };
+} 
+
   export const filterByDate = (payload) => {
     return {
       type: FILTER_BY_DATE,
