@@ -2,6 +2,10 @@ import axios from "axios";
 export const GET_CLIENTS = "GET_CLIENTS";
 export const GET_CLIENT_BY_NAME = "GET_CLIENT_BY_NAME";
 export const FILTER_BY_CLIENT = "FILTER_BY_CLIENT";
+export const GET_TURN_DETAIL = "GET_TURN_DETAIL";
+export const GET_CLIENT_DETAIL_TURN = "GET_CLIENT_DETAIL_TURN";
+export const CLEAN_DETAIL_TURN = "CLEAN_DETAIL_TURN";
+
 
 export const getClients = () => {
     return async function (dispatch) {
@@ -62,3 +66,23 @@ export const getTurns = () => {
       payload,
     };
   };
+
+  export const getTurnDetail = (id) => {
+    return async function (dispatch) {
+      const bdInfo = await axios.get(`/turn/${id}`); 
+      dispatch({ type: GET_TURN_DETAIL, payload: bdInfo })
+    };
+  };
+
+  export const getClientDetailTurn = (id) => {
+    return async function (dispatch) {
+      const bdInfo = await axios.get(`/client/${id}`); 
+      dispatch({ type: GET_CLIENT_DETAIL_TURN, payload: bdInfo })
+    };
+  };
+
+  export const cleanDetailTurn = () => {
+    return{
+      type: CLEAN_DETAIL_TURN
+    }
+  }

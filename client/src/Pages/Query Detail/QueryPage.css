@@ -35,3 +35,44 @@
     height: 2.5rem;
     margin-left: 0px;
 }
+
+.img-turn{
+    width: 6rem;
+    margin-left: 4rem;
+    margin-top: 2rem;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.turn-detail-tittle{
+    margin-left: 10rem;
+    color: #0051EE;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 2.5rem;
+}
+
+.data-turn-container{
+    margin-left: 12.5rem;
+    width: 50%;
+    text-align: start;
+}
+
+.data-turn-text{
+    border-bottom: 1px solid #0051EE;
+}
+
+.data-turn-text-info{
+    margin-left: 3rem;
+}
+
+.lineDni{
+    margin-left: 3.8rem;
+}
+
+.lineDate{
+    margin-left: 3.4rem;
+}

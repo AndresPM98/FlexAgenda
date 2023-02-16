@@ -1,7 +1,10 @@
-import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT, GET_TURNS, GET_TURN_BY_NAME, FILTER_BY_DATE, FILTER_BY_HOUR} from "./Actions";
+import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT, GET_TURNS, GET_TURN_BY_NAME, FILTER_BY_DATE, FILTER_BY_HOUR, CLEAN_DETAIL_TURN,
+     GET_TURN_DETAIL, GET_CLIENT_DETAIL_TURN} from "./Actions";
 
 const initialState = {
     //clients:[],
+    turnDetail:'',
+    clientDetailTurn: '',
     allClients:[], 
     turns:[],
     allTurns:[]
@@ -61,6 +64,25 @@ const initialState = {
                 ...state,
                 turns: filterHours
             };
+
+        case GET_TURN_DETAIL:
+            return{
+                ...state,
+                turnDetail: action.payload.data
+            }
+
+        case GET_CLIENT_DETAIL_TURN:
+            return{
+                ...state,
+                clientDetailTurn: action.payload.data
+            }
+
+        case CLEAN_DETAIL_TURN:
+            return{
+                ...state,
+                turnDetail: '',
+                clientDetailTurn: ''
+            }
 
     
         default:
