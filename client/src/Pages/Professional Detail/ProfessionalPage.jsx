@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-// import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { cleanProfDetail, getProfessionalDetail } from "../../Redux/Actions";
 
@@ -33,7 +32,7 @@ const ProfessionalPage = () => {
         <p className={style.description}>{professional?.description}</p>
         </div>
       </div>
-        {/* <Footer /> */}
+
     </>
   );
 };

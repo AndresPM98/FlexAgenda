@@ -1,6 +1,6 @@
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-// import Footer from "../../Components/Footer/Footer";
+
 import "./Form.css";
 import { NavLink } from "react-router-dom";
 
@@ -174,7 +174,6 @@ const Form = () => {
           </div>
         </div>
       </div>
-      {/* <Footer/> */}
     </div>
   );
 };
