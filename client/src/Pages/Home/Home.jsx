@@ -6,6 +6,7 @@ import Filters from "../../Components/Filters/Filters";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Footer from "../../Components/Footer/Footer";
 import BotonProf from "../../Components/BottonProf/BottonProf"; 
+import DarkMode from '../../Components/DarkMode/DarkMode'
 import './Home.css';
 
 
@@ -14,6 +15,7 @@ const Home = () => {
     const allTurns = useSelector((state) => state.turnBackup);
     const turns = useSelector(state => state.turns);
     const profDetail = useSelector(state => state.profDetail)
+    const darkMode = useSelector((state) => state.darkMode)
    
    /*  console.log(profDetail); */
 
@@ -28,9 +30,10 @@ useEffect(() => {
     return(
         <div>
             <NavbarTwo/>
-            <div className="homeContainer">
+            <div className={darkMode == false ? "homeContainer" : "homeContainerDark"}>
                 <Filters allTurns = {allTurns}/>
                 <BotonProf />
+                <DarkMode/>
                 <Cards turns = {turns}/>
             </div>
             <Footer/>

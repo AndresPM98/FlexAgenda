@@ -11,7 +11,8 @@ import {
   GET_CLIENT_DETAIL_TURN,
   GET_PROF_DETAIL,
   CLEAN_PROF_DETAIL,
-  GET_SERVICES
+  GET_SERVICES,
+  CHANGE_THEME
 } from "./Actions";
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   turnFiltered: [],
   profDetail: [],
   allServices: [],
+  darkMode: false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -137,6 +139,14 @@ const rootReducer = (state = initialState, action) => {
           ...state,
          allServices: action.payload
         };  
+
+       /*--------------------DARK MODE -------------------------------------*/ 
+
+      case CHANGE_THEME:
+        return{
+          ...state,
+          darkMode: action.payload
+        }
 
     default:
       return {

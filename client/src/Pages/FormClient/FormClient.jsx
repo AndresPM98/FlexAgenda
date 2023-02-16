@@ -5,8 +5,12 @@ import "./FormClient.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const FormClient = () => {
+
+  const darkMode = useSelector((state) => state.darkMode)
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -48,7 +52,7 @@ const FormClient = () => {
   return (
     <div>
       <NavbarTwo />
-      <div className="formClientPage">
+      <div className={darkMode == false ? "formClientPage" : "formClientPageDark" } >
         <div className="backContainer">
           <NavLink className="back" to="/home">
             <iconify-icon

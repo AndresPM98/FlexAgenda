@@ -28,6 +28,7 @@ const Form = () => {
       });
 
   const serv = useSelector((state)=> state.allServices)
+  const darkMode = useSelector((state) => state.darkMode)
 
      
 
@@ -81,12 +82,12 @@ const Form = () => {
             })
           );
       }
-    
+     
 
     return(
         <div>
             <NavbarTwo/>
-            <div className="formTurnPage">
+            <div className={darkMode == false ? 'formTurnPage' : 'formTurnPageDark'}>
                 <div className="backContainer">
                     <NavLink className='back' to='/home'><iconify-icon icon="ion:arrow-back-circle" width="40" height="30"></iconify-icon>BACK</NavLink>
                 </div>
