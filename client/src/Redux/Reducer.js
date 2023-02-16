@@ -1,25 +1,36 @@
-import {GET_CLIENTS, GET_CLIENT_BY_NAME, FILTER_BY_CLIENT, GET_TURNS, GET_TURN_BY_NAME, FILTER_BY_DATE, FILTER_BY_HOUR, CLEAN_DETAIL_TURN,
-     GET_TURN_DETAIL, GET_CLIENT_DETAIL_TURN} from "./Actions";
+import {
+  GET_CLIENTS,
+  GET_CLIENT_BY_NAME,
+  FILTER_BY_CLIENT,
+  GET_TURNS,
+  GET_TURN_BY_NAME,
+  FILTER_BY_DATE,
+  FILTER_BY_HOUR,
+  CLEAN_DETAIL_TURN,
+  GET_TURN_DETAIL,
+  GET_CLIENT_DETAIL_TURN,
+} from "./Actions";
 
 const initialState = {
-    //clients:[],
-    turnDetail:'',
-    clientDetailTurn: '',
-    allClients:[], 
-    turns:[],
-    turnBackup:[]
-    };
+  //clients:[],
+  turnDetail: "",
+  clientDetailTurn: "",
+  allClients: [],
+  turns: [],
+  turnBackup: [],
+  turnFiltered: [],
+};
 
-    const rootReducer = (state = initialState, action) => {
-        switch (action.type) {
-        case GET_CLIENTS:
-            return {
-            ...state,
-           /*  turns: action.payload,
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_CLIENTS:
+      return {
+        ...state,
+        /*  turns: action.payload,
             allTurns: action.payload, */
-            allClients: action.payload,
-            };
-/* 
+        allClients: action.payload,
+      };
+    /* 
         case GET_CLIENT_BY_NAME:
             return{
             ...state,
@@ -27,70 +38,86 @@ const initialState = {
             };
             */
 
-        case FILTER_BY_CLIENT:
-            const allClients = state.turnBackup;
-            const filterClient = action.payload === 'Clients' ? allClients : allClients.filter(e => e.id === action.payload);
-            return{
-                ...state,
-                turns: filterClient
-            };
- 
-        /* ---------------------------------------------------- */
-        
-        case GET_TURNS:
-            return {
-            ...state,
-            turns: action.payload,
-            turnBackup: action.payload,
-            };
-        
-        case GET_TURN_BY_NAME:
-            return{
-            ...state,
-            turns: state.turnBackup.map(t => t.client.name === action.payload)
-            }; 
+    case FILTER_BY_CLIENT:
+      const allClients = state.turnBackup;
+      const filterClient =
+        action.payload === "Clients"
+          ? allClients
+          : allClients.filter((e) => e.id === action.payload);
+      return {
+        ...state,
+        turns: filterClient,
+      };
 
-        case FILTER_BY_DATE:
-            const allTurn = state.turnBackup;
-            const filterDate = action.payload === 'Hours' ? allTurn : allTurn.filter(e => e.id === action.payload);
-            return{
-                ...state,
-                turns: filterDate
-            };
-            
-        case FILTER_BY_HOUR:
-            const allTurns = state.turnBackup;
-            const filterHours = action.payload === 'Hours' ? allTurns : allTurns.filter(e => e.hour == action.payload);
-            return{
-                ...state,
-                turns: filterHours
-            };
+    /* ---------------------------------------------------- */
 
-        case GET_TURN_DETAIL:
-            return{
-                ...state,
-                turnDetail: action.payload.data
-            }
+    case GET_TURNS:
+      return {
+        ...state,
+        turns: action.payload,
+        turnBackup: action.payload,
+      };
 
-        case GET_CLIENT_DETAIL_TURN:
-            return{
-                ...state,
-                clientDetailTurn: action.payload.data
-            }
+    case GET_TURN_BY_NAME:
 
-        case CLEAN_DETAIL_TURN:
-            return{
-                ...state,
-                turnDetail: '',
-                clientDetailTurn: ''
-            }
+      const source = state.turnFiltered.length? state.turnFiltered : state.turnBackup;
+      const filtered = action.payload
+        ? source.filter((t) => t.client.name === action.payload)
+        : state.turnBackup;
 
-    
-        default:
-            return {
-            ...state,
-            };
-         }
-        };
-            
+      return {
+        ...state,
+        turns: filtered,
+        turnFiltered: filtered,
+      };
+
+    case FILTER_BY_DATE:
+        const sourceDate = state.turnFiltered.length? state.turnFiltered : state.turnBackup;
+        const date = action.payload
+        ? sourceDate.filter((t) => t.date === action.payload)
+        : state.turnBackup;
+
+      return {
+        ...state,
+        turns: date,
+        turnFiltered: date,
+      };
+
+    case FILTER_BY_HOUR:
+      const allTurns = state.turnBackup;
+      const filterHours =
+        action.payload === "Hours"
+          ? allTurns
+          : allTurns.filter((e) => e.hour == action.payload);
+      return {
+        ...state,
+        turns: filterHours,
+      };
+
+    case GET_TURN_DETAIL:
+      return {
+        ...state,
+        turnDetail: action.payload.data,
+      };
+
+    case GET_CLIENT_DETAIL_TURN:
+      return {
+        ...state,
+        clientDetailTurn: action.payload.data,
+      };
+
+    case CLEAN_DETAIL_TURN:
+      return {
+        ...state,
+        turnDetail: "",
+        clientDetailTurn: "",
+      };
+
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
 export default rootReducer;

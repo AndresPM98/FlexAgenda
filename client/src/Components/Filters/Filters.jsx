@@ -50,7 +50,8 @@ const Filters = () => {
               <button 
               onClick={handleOnClick} className="ButtonSearch">Search</button>
               <input 
-                type='text' 
+                type='text'
+                value={input} 
                 onChange={handleOnChange} 
                 placeholder='Date...' 
                 className="InputSearch">
