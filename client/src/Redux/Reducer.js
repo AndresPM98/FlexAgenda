@@ -9,6 +9,9 @@ import {
   CLEAN_DETAIL_TURN,
   GET_TURN_DETAIL,
   GET_CLIENT_DETAIL_TURN,
+  GET_PROF_DETAIL,
+  CLEAN_PROF_DETAIL,
+  GET_SERVICES
 } from "./Actions";
 
 const initialState = {
@@ -19,6 +22,8 @@ const initialState = {
   turns: [],
   turnBackup: [],
   turnFiltered: [],
+  profDetail: [],
+  allServices: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -112,6 +117,26 @@ const rootReducer = (state = initialState, action) => {
         turnDetail: "",
         clientDetailTurn: "",
       };
+
+      /* - - - - - - - - - - - - - - - - - - - - - - - - - - REDUCER PROFESSIONAL - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - */
+    
+    case GET_PROF_DETAIL:
+      return {
+        ...state,
+        profDetail: action.payload,
+      };
+      
+    case CLEAN_PROF_DETAIL:
+      return {
+        ...state,
+        profDetail: action.payload,
+      };
+
+      case GET_SERVICES:
+        return{
+          ...state,
+         allServices: action.payload
+        };  
 
     default:
       return {

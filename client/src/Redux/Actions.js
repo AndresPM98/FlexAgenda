@@ -83,3 +83,35 @@ export const cleanDetailTurn = () => {
     type: CLEAN_DETAIL_TURN,
   };
 };
+
+/* ------------------------------------------------------------- */
+
+export const GET_PROF_DETAIL = "GET_PROF_DETAIL";
+export const CLEAN_PROF_DETAIL = "CLEAN_PROF_DETAIL";
+
+export const getProfessionalDetail = (id) => {
+  return async function (dispatch) {
+    const bdInfoProf = await axios.get(`/professional/${id}`);
+    const professional = bdInfoProf.data;
+    console.log(professional);
+    dispatch({ type: GET_PROF_DETAIL, payload: professional });
+  };
+};
+
+export const cleanProfDetail = () => {
+  return {
+    type: CLEAN_PROF_DETAIL,
+  };
+};
+
+/* ------------------------------------------------------------- */
+
+export const GET_SERVICES = "GET_SERVICES"
+
+export const getServices = () => {
+  return async function (dispatch) {
+    const bdInfo = await axios.get('/service'); 
+    const services = bdInfo.data.map(s => s.id)
+    dispatch({ type: GET_SERVICES, payload: services })
+  };
+};
