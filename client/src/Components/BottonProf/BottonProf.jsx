@@ -23,6 +23,7 @@ const BotonProf = () => {
             <Link to={`/professionalDetail/${profDetail.id}`} className="nameLinkProf"> 
               <div>
                 <p className='textProf'>Hola {profDetail.name}</p>
+                <iconify-icon icon="healthicons:ui-user-profile-negative" width="60" height="60"></iconify-icon>
               </div>
             </Link> 
           </div>
