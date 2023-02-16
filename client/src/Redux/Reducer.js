@@ -67,7 +67,7 @@ const rootReducer = (state = initialState, action) => {
 
       const source = state.turnFiltered.length? state.turnFiltered : state.turnBackup;
       const filtered = action.payload
-        ? source.filter((t) => t.client.name === action.payload)
+        ? source.filter((t) => t.client.name.toLowerCase() === action.payload)
         : state.turnBackup;
 
       return {
