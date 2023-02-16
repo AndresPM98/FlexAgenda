@@ -1,74 +1,125 @@
 import React, { useEffect, useState } from "react";
-import { getClients, filterByClient, getTurns, getTurnByName, filterByDate,filterByHour} from "../../Redux/Actions"
-import { useDispatch, useSelector} from "react-redux";
+import {
+  getClients,
+  filterByClient,
+  getTurns,
+  getTurnByName,
+  filterByDate,
+  filterByHour,
+} from "../../Redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Filters = () => {
+  const [inputName, setInputName] = useState("");
+  const [inputDate, setInputDate] = useState("");
+  const dispatch = useDispatch();
+  const allClients = useSelector((state) => state.allClients);
+  const allTurns = useSelector((state) => state.turnBackup);
+  const turns = useSelector((state) => state.turns);
 
-    const[input, setInput] = useState('');
-    const dispatch = useDispatch();
-     const allClients = useSelector(state => state.allClients); 
-    const allTurns = useSelector(state => state.turnBackup)
-    const turns = useSelector(state => state.turns)
-    
+  function handleFilterByClient(event) {
+    event.preventDefault();
+    dispatch(filterByClient(event.target.value));
+  }
 
-    function handleFilterByClient(event) {
-        event.preventDefault();
-        dispatch(filterByClient(event.target.value));
-        };
+  function handleOnChangeName(e) {
+    setInputName(e.target.value);
+  }
+  function handleOnChangeDate(e) {
+    setInputDate(e.target.value);
+  }
+  function handleOnClickDate(e) {
+    e.preventDefault();
+    dispatch(filterByDate(inputDate));
+  }
 
-    function handleOnChange(e){
-        setInput(e.target.value)
-    }
-    function handleOnClick(e){
-        e.preventDefault()
-        dispatch(filterByDate(input))
-    }
+  function handleOnClickName(e){
+    e.preventDefault()
+    dispatch(getTurnByName(inputName))
+}
 
-    function handleFilterByHour(event) {
-        event.preventDefault();
-        dispatch(filterByHour(event.target.value));
-        };
+  function handleFilterByHour(event) {
+    event.preventDefault();
+    dispatch(filterByHour(event.target.value));
+  }
 
-    useEffect(() => {
-        dispatch(getClients());
-        dispatch(getTurns())
-        }, [dispatch]);
-        
-        return( 
-        <div>
-          <div>
-              <select onChange={(event) => handleFilterByClient(event)}>
-                <option value="Clients"> Clients </option>
-                  {allTurns
-                    .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
-                    .map((v) => (
-                      <option value={v.id} key={v.id}>{v.client.name}</option>
-                    ))}
-              </select>
-          </div>
-          <div>
-              <button 
-              onClick={handleOnClick} className="ButtonSearch">Search</button>
-              <input 
-                type='text'
-                value={input} 
-                onChange={handleOnChange} 
-                placeholder='Date...' 
-                className="InputSearch">
-              </input>
-          </div>
-          <div>
-          <select onChange={(event) => handleFilterByHour(event)}>
-                <option value="Hours"> Hours </option>
-                  {allTurns
-                    .sort((a, b) => (a.hour > b.hour ? 1 : -1)) 
-                    .map((v) => (
-                      <option value={v.hour} key={v.hour}>{v.hour}</option>
-                    ))}
-              </select>
-          </div>
-        </div>
-        )
+  useEffect(() => {
+    dispatch(getClients());
+    dispatch(getTurns());
+  }, [dispatch]);
+
+  const uniqueOptions = allTurns
+    .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
+    .filter(
+      (v, i, arr) => arr.findIndex((t) => t.client.name === v.client.name) === i
+    );
+
+  const uniqueHour = allTurns
+    .sort((a, b) => (a.hour > b.hour ? 1 : -1))
+    .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
+
+    const handleKeyPressName = (event) => {
+      if (event.key === "Enter") {
+        handleOnClickName(event);
+      }
     };
 
-  export default Filters; 
+    const handleKeyPressDate = (event) => {
+      if (event.key === "Enter") {
+        handleOnClickDate(event);
+      }
+    };
+
+  return (
+    <div>
+      <div>
+        <button 
+        onClick={handleOnClickName} className="ButtonSearch">Search</button>
+        <input 
+        onKeyPress={handleKeyPressName}
+        type='text'
+        value={inputName} 
+        onChange={handleOnChangeName} 
+        placeholder='Client...' 
+        className="InputSearch">
+
+        </input>
+    </div>
+      <div>
+        <select onChange={(event) => handleFilterByClient(event)}>
+          <option value="Clients"> Clients </option>
+          {uniqueOptions.map((v) => (
+            <option value={v.id} key={v.id}>
+              {v.client.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <button onClick={handleOnClickDate} className="ButtonSearch">
+          Search
+        </button>
+        <input
+          onKeyPress={handleKeyPressDate}
+          type="text"
+          value={inputDate}
+          onChange={handleOnChangeDate}
+          placeholder="Date..."
+          className="InputSearch"
+        ></input>
+      </div>
+      <div>
+        <select onChange={(event) => handleFilterByHour(event)}>
+          <option value="Hours"> Hours </option>
+          {uniqueHour.map((v) => (
+            <option value={v.hour} key={v.hour}>
+              {v.hour}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
+};
+
+export default Filters;
