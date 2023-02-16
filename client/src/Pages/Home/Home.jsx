@@ -1,5 +1,4 @@
 import React from "react";
-import Search from "../../Components/Searchbar/Searchbar";
 import Cards from "../../Components/Cards/Cards"
 import Filters from "../../Components/Filters/Filters";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
