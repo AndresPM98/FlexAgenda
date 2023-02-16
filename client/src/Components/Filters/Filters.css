@@ -1,0 +1,37 @@
+.filterContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+    width: 80%;
+  }
+  
+  .ButtonSearch {
+    background-color: #0051EE;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .InputSearch {
+    border-radius: 0.5rem;
+    border: 1px solid #0051EE;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    width: 12rem;
+  }
+  
+  select {
+    border-radius: 0.5rem;
+    border: 1px solid #0051EE;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    width: 12rem;
+  }
+  

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { getProfessionalDetail } from "../../Redux/Actions";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import "./BottonProf.css"
 
 const BotonProf = () => {
   const dispatch = useDispatch(); 
@@ -18,10 +19,10 @@ const BotonProf = () => {
     <div>
       {profDetail ?
         <div>
-          <div>
-            <Link to={`/professionalDetail/${profDetail.id}`} className="nameLink"> 
+          <div className='profContainer'>
+            <Link to={`/professionalDetail/${profDetail.id}`} className="nameLinkProf"> 
               <div>
-                <p>Hola {profDetail.name}</p>
+                <p className='textProf'>Hola {profDetail.name}</p>
               </div>
             </Link> 
           </div>
