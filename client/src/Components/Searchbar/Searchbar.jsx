@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {getClientByName} from '../../Redux/Actions';
+import {getClientByName, getTurnByName} from '../../Redux/Actions';
 
 export default function Search(){
     const[input, setInput] = useState('');
@@ -11,7 +11,7 @@ export default function Search(){
     }
     function handleOnClick(e){
         e.preventDefault()
-        dispatch(getClientByName(input))
+        dispatch(getTurnByName(input))
     }
     return (
         <div>
@@ -19,7 +19,8 @@ export default function Search(){
         onClick={handleOnClick} className="ButtonSearch">Search</button>
         <input 
 
-        type='text' 
+        type='text'
+        value={input} 
         onChange={handleOnChange} 
         placeholder='Client...' 
         className="InputSearch">

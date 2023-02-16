@@ -8,16 +8,16 @@ const Cards = () => {
 
     const dispatch = useDispatch();
     const turns = useSelector(state => state.turns);
-    console.log(turns);
+    
 
     useEffect(() => {
         dispatch(getTurns());
         }, [dispatch]);
-
+        
     return (
         <div className="cardsContainer">
             {turns.map((turn) => {
-                console.log(turn.client);
+                
             return (
             <Card
                 id={turn.id}

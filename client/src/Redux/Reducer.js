@@ -7,7 +7,7 @@ const initialState = {
     clientDetailTurn: '',
     allClients:[], 
     turns:[],
-    allTurns:[]
+    turnBackup:[]
     };
 
     const rootReducer = (state = initialState, action) => {
@@ -25,32 +25,33 @@ const initialState = {
             ...state,
             turns: action.payload
             };
+            */
 
         case FILTER_BY_CLIENT:
-            const allClients = state.allTurns;
-            const filterClient = action.payload === 'Clients' ? allTurns : allTurns.filter(e => e.id === action.payload);
+            const allClients = state.turnBackup;
+            const filterClient = action.payload === 'Clients' ? allClients : allClients.filter(e => e.id === action.payload);
             return{
                 ...state,
                 turns: filterClient
             };
- */
+ 
         /* ---------------------------------------------------- */
         
         case GET_TURNS:
             return {
             ...state,
             turns: action.payload,
-            allTurns: action.payload,
+            turnBackup: action.payload,
             };
         
-        /* case GET_TURN_BY_NAME:
+        case GET_TURN_BY_NAME:
             return{
             ...state,
-            turns: action.payload.turns.map(t => t.Client.name == action.payload.name)
-            }; */
+            turns: state.turnBackup.map(t => t.client.name === action.payload)
+            }; 
 
         case FILTER_BY_DATE:
-            const allTurn = state.allTurns;
+            const allTurn = state.turnBackup;
             const filterDate = action.payload === 'Hours' ? allTurn : allTurn.filter(e => e.id === action.payload);
             return{
                 ...state,
@@ -58,7 +59,7 @@ const initialState = {
             };
             
         case FILTER_BY_HOUR:
-            const allTurns = state.allTurns;
+            const allTurns = state.turnBackup;
             const filterHours = action.payload === 'Hours' ? allTurns : allTurns.filter(e => e.hour == action.payload);
             return{
                 ...state,
