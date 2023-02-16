@@ -33,6 +33,7 @@ useEffect(() => {
                 <Filters allTurns = {allTurns}/>
                 <BotonProf />
                 <DarkMode/>
+            </div>
 
             <div className="homeContainer">
                 <BotonProf />
