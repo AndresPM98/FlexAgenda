@@ -20,7 +20,7 @@ const landingPage = () => {
                 </div>
                 <div className="imagesContainer">
                     <div className="images">
-                        <img className="image1" src={calendar} alt='calendar'/>
+                        <img className="image1" src={calendar} alt='calendar'/> 
                         <img className="image2" src={illustration} alt='calendar'/>
                     </div>                   
                 </div>
