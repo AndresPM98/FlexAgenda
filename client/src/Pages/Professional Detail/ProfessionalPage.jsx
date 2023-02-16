@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { cleanProfDetail, getProfessionalDetail } from "../../Redux/Actions";
@@ -18,20 +18,31 @@ const ProfessionalPage = () => {
       dispatch(cleanProfDetail());
     };
   }, [dispatch, id]);
+  
   return (
     <>
       <NavbarTwo />
       <div className={style.container}>
+        <div className={style.backContainer}>
+          <NavLink className={style.back} to="/home">
+            <iconify-icon
+              icon="ion:arrow-back-circle"
+              width="40"
+              height="30"
+            ></iconify-icon>
+            BACK
+          </NavLink>
+        </div>
+
         <p>Professional Page</p>
         <div className={style.detailContainer}>
-        <h1 className={style.name}>{professional?.name}</h1>
-        <h2 className={style.category}>{professional?.category}</h2>
-        <h4 className={style.phone}>{professional?.phone}</h4>
-        <h4 className={style.adress}>{professional?.adress}</h4>
-        <p className={style.description}>{professional?.description}</p>
+          <h1 className={style.name}>{professional?.name}</h1>
+          <h2 className={style.category}>{professional?.category}</h2>
+          <h4 className={style.phone}>{professional?.phone}</h4>
+          <h4 className={style.adress}>{professional?.adress}</h4>
+          <p className={style.description}>{professional?.description}</p>
         </div>
       </div>
-
     </>
   );
 };
