@@ -2,3 +2,15 @@
     min-height: 41rem;
 
 }
+
+.homeContainerDark{
+    min-height: 41rem;
+    background-color: black;
+}
+
+.filtersContainer{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+}

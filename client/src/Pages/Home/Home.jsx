@@ -13,6 +13,7 @@ const Home = () => {
 
     const allTurns = useSelector((state) => state.turnBackup);
     const turns = useSelector(state => state.turns);
+    const darkMode = useSelector((state) => state.darkMode)
 
     const profDetail = useSelector(state => state.profDetail)
 
@@ -29,9 +30,11 @@ useEffect(() => {
         <div>
             <NavbarTwo/>
 
-            <div className="homeContainer">
+            <div className={darkMode == false ? 'homeContainer' : 'homeContainerDark'}>
+                <div className="filtersContainer">
                 <BotonProf />
-                <Filters allTurns = {allTurns}/>
+                <Filters allTurns = {allTurns}/>  
+                </div>
                 <DarkMode/>
                 <Cards turns = {turns}/>
             </div>
