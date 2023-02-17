@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-import  EditProfileProf  from "../src/Pages/EditProfileProf/EditProfileProf.jsx"
+import EditProfileProf from "../src/Pages/EditProfileProf/EditProfileProf.jsx";
 import {
   Form,
   Home,
@@ -10,7 +10,7 @@ import {
   FormClient,
   Login,
 } from "./Pages";
-
+import CalendarxD from "./Pages/Calendar/CalendarxD";
 
 import axios from "axios";
 import Footer from "./Components/Footer/Footer";
@@ -23,18 +23,23 @@ function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/form" component={Form} />
       <Route exact path="/formClient" component={FormClient} />
+      <Route exact path="/Calendarpage" component={CalendarxD} />
 
-      <Route exact path="/professionalDetail/:id" component={ProfessionalPage} />
+      <Route
+        exact
+        path="/professionalDetail/:id"
+        component={ProfessionalPage}
+      />
       <Route exact path="/professional/edit/:id" component={EditProfileProf} />
 
       <Route exact path="/queryDetail/:id" component={QueryPage} />
       <Route path="/login" component={Login} />
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <Footer />
     </div>
   );
