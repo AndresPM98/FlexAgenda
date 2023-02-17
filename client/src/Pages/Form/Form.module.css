@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    height: 100vh;
+
+}
+
+
+.backContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+  position: absolute;
+  left: 0;
+  margin-top: 100px;
+}
+
+.back{
+  border-radius: 0 1rem 1rem 0;
+  background-color: #0051EE;
+  text-decoration: none;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 2.5rem;
+  margin-left: 0px;
+}
+
+.tittle {
+  grid-column: 1/5;
+  color: #0051EE;
+}
+.form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 15px;
+  width: 50%;
+  height: fit-content;
+  background-color: #fff;
+  border: 1px solid #0051EE;
+  border-radius: 20px;
+  box-shadow: 12px 0 10px -4px #0051EE,
+  -4px 0 10px -4px #0051EE,
+  0 4px 6px -2px #0051EE;
+  margin-top: 20px;
+}
+
+.button {
+  grid-column: 2 / 4;
+  margin: 20px;
+  border-radius: 30px;
+  border: 3px solid #0051EE;
+  height: 50px;
+  color: #0051EE;
+  font-weight: bold;
+  font-size: 15px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+.button:hover {
+  transform: scale(1.025);
+  font-size: 17px;
+  transition: font-size 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.label {
+  grid-column: 2/3;
+  font-weight: bold;
+  color: #0051EE;
+  justify-self: start;
+}
+.input {
+  grid-column: 2/4;
+  align-self: center; /* Centra verticalmente */
+  justify-self: start; /* Alinea a la izquierda horizontalmente */
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 8px #0051EE;
+}
+.input:focus {
+  outline: none;
+  font-size: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 8px #0051EE;
+}
