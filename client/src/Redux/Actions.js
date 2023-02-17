@@ -88,6 +88,7 @@ export const cleanDetailTurn = () => {
 
 export const GET_PROF_DETAIL = "GET_PROF_DETAIL";
 export const CLEAN_PROF_DETAIL = "CLEAN_PROF_DETAIL";
+export const EDIT_PROFESSIONAL = "EDIT_PROFESSIONAL";
 
 export const getProfessionalDetail = (id) => {
   return async function (dispatch) {
@@ -103,6 +104,8 @@ export const cleanProfDetail = () => {
     type: CLEAN_PROF_DETAIL,
   };
 };
+
+
 
 /* ------------------------------------------------------------- */
 

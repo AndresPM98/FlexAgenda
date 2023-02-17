@@ -1,6 +1,7 @@
 import './App.css';
 import { Route } from "react-router-dom";
-import { Form, Home, LandingPage, ProfessionalPage, QueryPage, FormClient } from "./Pages"
+import { Form, Home, LandingPage, ProfessionalPage, QueryPage, FormClient,  } from "./Pages"
+import  EditProfileProf  from "../src/Pages/EditProfileProf/EditProfileProf.jsx"
 
 import axios from 'axios';
 import Footer from './Components/Footer/Footer';
@@ -16,6 +17,7 @@ function App() {
       <Route exact path="/form" component={Form} />
       <Route exact path="/formClient" component={FormClient} />
       <Route exact path="/professionalDetail/:id" component={ProfessionalPage} />
+      <Route exact path="/professional/edit/:id" component={EditProfileProf} />
       <Route exact path="/queryDetail/:id" component={QueryPage} />
 
       <Footer/>

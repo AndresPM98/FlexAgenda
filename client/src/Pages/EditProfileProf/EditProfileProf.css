@@ -1,4 +1,4 @@
-.container{
+.container-edit {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,17 +6,11 @@
     height: 100vh;
     border: 1px solid blue;
 }
-.ProfessionalPage_imagen__cShgg {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    border-radius: 50%;
-    justify-content: center;
-}
-.detailContainer{
+
+.detail-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     
     border: 1px solid red;
     border-radius: 20px;
@@ -27,7 +21,7 @@
     width: 75%;
 }
 
-.btnEditar {
+.buttonEdit{
     background-color: #0051EE;
     border-radius: 0.3rem;
     border: none;

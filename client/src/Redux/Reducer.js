@@ -11,7 +11,9 @@ import {
   GET_CLIENT_DETAIL_TURN,
   GET_PROF_DETAIL,
   CLEAN_PROF_DETAIL,
-  GET_SERVICES
+  GET_SERVICES,
+  EDIT_PROFESSIONAL
+
 } from "./Actions";
 
 const initialState = {
@@ -125,6 +127,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profDetail: action.payload,
       };
+     
       
     case CLEAN_PROF_DETAIL:
       return {
