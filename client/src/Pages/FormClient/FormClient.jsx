@@ -1,15 +1,16 @@
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Footer from "../../Components/Footer/Footer";
-import "./FormClient.css";
+import styles from "./FormClient.module.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const FormClient = () => {
-
-  const darkMode = useSelector((state) => state.darkMode)
+  const darkMode = useSelector((state) => state.darkMode);
+  const history = useHistory();
 
   const [form, setForm] = useState({
     name: "",
@@ -45,65 +46,59 @@ const FormClient = () => {
     event.preventDefault();
     axios
       .post("https://backend-pf-production-1672.up.railway.app/client", form)
-      .then((res) => alert("User create"))
+      .then((res) => {
+        alert("Created correctly");
+        history.push(`/form`);
+      })
       .catch((err) => alert(err));
   };
 
   return (
     <div>
       <NavbarTwo />
-      <div className={darkMode == false ? "formClientPage" : "formClientPageDark" } >
-        <div className="backContainer">
-          <NavLink className="back" to="/home">
-            <iconify-icon
-              icon="ion:arrow-back-circle"
-              width="40"
-              height="30"
-            ></iconify-icon>
-            BACK
-          </NavLink>
-        </div>
+      <div className={darkMode == false ? styles.container : styles.containerDark}>
+        
 
-        <form onSubmit={submitHandler}>
-          <div className="containerForm">
-            <div className="cardForm">
-              <a className="signupForm">Formulario del cliente</a>
-              <div className="inputBox">
+        <form onSubmit={submitHandler} className={styles.form}>
+        <h1 className={styles.tittle}>Formulario del cliente</h1> 
+
+
+              <label className={styles.label}>NAME:</label>
                 <input
+                  className={styles.input}
                   type="text"
                   required
                   value={form.name}
                   onChange={changeHandler}
                   name="name"
                 />
-                <span>NOMBRE</span>
-              </div>
-              <div className="inputBox1">
+
+              <label className={styles.label}>EMAIL:</label>
                 <input
+                  className={styles.input}
                   type="text"
                   required
                   value={form.email}
                   onChange={changeHandler}
                   name="email"
                 />
-                <span className="user">Email</span>
                 {error.email && <span>{error.email}</span>}
-              </div>
-              <div className="inputBox">
+
+                <label className={styles.label}>DNI:</label>
                 <input
+                  className={styles.input}
                   type="text"
                   required
                   value={form.dni}
                   onChange={changeHandler}
                   name="dni"
                 />
-                <span>DNI</span>
-              </div>
-              <button type="submit" className="enterForm">
+
+              <button type="submit" className={styles.button}>
                 REGISTRARSE
               </button>
-            </div>
-          </div>
+
+            
         </form>
       </div>
       <Footer></Footer>
