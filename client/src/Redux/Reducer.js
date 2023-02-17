@@ -14,6 +14,7 @@ import {
   GET_SERVICES,
   CHANGE_THEME,
   GET_PROFESSIONALS,
+  GET_PROF_CLIENTS_TURNS
 } from "./Actions";
 
 const initialState = {
@@ -25,6 +26,8 @@ const initialState = {
   turnBackup: [],
   turnFiltered: [],
   profDetail: [],
+  profClientsTurns: [],
+  profClientsTurnsBackup: [],
   allServices: [],
   darkMode: false,
 };
@@ -44,14 +47,14 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_CLIENT:
-      const allClients = state.turnBackup;
+      const allTurnsC = state.profClientsTurnsBackup;
       const filterClient =
         action.payload === "Clients"
-          ? allClients
-          : allClients.filter((e) => e.id === action.payload);
+          ? state.profClientsTurnsBackup
+          : allTurnsC.filter((e) => e.client.name == action.payload);
       return {
         ...state,
-        turns: filterClient,
+        profClientsTurns: filterClient
       };
 
     /* ---------------------------------------------------- */
@@ -92,14 +95,14 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_HOUR:
-      const allTurns = state.turnBackup;
+      const allTurns = state.profClientsTurns;
       const filterHours =
         action.payload === "Hours"
           ? allTurns
           : allTurns.filter((e) => e.hour == action.payload);
       return {
         ...state,
-        turns: filterHours,
+        profClientsTurns: filterHours
       };
 
     case GET_TURN_DETAIL:
@@ -140,6 +143,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allServices: action.payload,
       };
+
+    case GET_PROF_CLIENTS_TURNS:
+      const allTurnsClient = state.turnBackup;
+      const allTurnsClientFiltered = allTurnsClient.filter((t) => t.professionalID == action.payload);
+      return{
+        ...state,
+        profClientsTurnsBackup: allTurnsClientFiltered,
+        profClientsTurns: allTurnsClientFiltered
+      }
 
     /*--------------------DARK MODE -------------------------------------*/
 

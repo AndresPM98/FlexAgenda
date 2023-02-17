@@ -50,6 +50,7 @@ export const getTurns = () => {
 };
 
 export const filterByClient = (payload) => {
+  console.log(payload)
   return {
     type: FILTER_BY_CLIENT,
     payload,
@@ -57,7 +58,7 @@ export const filterByClient = (payload) => {
 };
 
 export const getTurnByName = (name) => {
-  return { type: GET_TURN_BY_NAME, payload: name };
+  return { type: GET_TURN_BY_NAME, payload: name }; 
 };
 
 export const filterByDate = (payload) => {
@@ -99,12 +100,12 @@ export const cleanDetailTurn = () => {
 export const GET_PROF_DETAIL = "GET_PROF_DETAIL";
 export const CLEAN_PROF_DETAIL = "CLEAN_PROF_DETAIL";
 export const EDIT_PROFESSIONAL = "EDIT_PROFESSIONAL";
+export const GET_PROF_CLIENTS_TURNS = "GET_PROF_CLIENTS_TURNS"
 
 export const getProfessionalDetail = (id) => {
   return async function (dispatch) {
     const bdInfoProf = await axios.get(`/professional/${id}`);
     const professional = bdInfoProf.data;
-    console.log(professional);
     dispatch({ type: GET_PROF_DETAIL, payload: professional });
   };
 };
@@ -114,6 +115,13 @@ export const cleanProfDetail = () => {
     type: CLEAN_PROF_DETAIL,
   };
 };
+
+export const getProfClientsTurns = (id) => {
+  return{
+    type: GET_PROF_CLIENTS_TURNS,
+    payload: id
+  }
+}
 
 
 

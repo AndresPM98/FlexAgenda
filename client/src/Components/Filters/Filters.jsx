@@ -6,22 +6,34 @@ import {
   /* getTurnByName, */
   filterByDate,
   filterByHour,
+  getProfClientsTurns
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./Filters.css";
 
-const Filters = ({allTurns}) => {
+const Filters = ({lastProfessional}) => {
   /* const [inputName, setInputName] = useState(""); */
   const [inputDate, setInputDate] = useState("");
   const dispatch = useDispatch();
  
   /* const allTurns = useSelector((state) => state.turnBackup); */
+  const profDetail = useSelector((state) => state.profDetail)
+  const turns = useSelector((state) => state.turns)
+  const profClientsTurns = useSelector((state) => state.profClientsTurns)
+  const profClientsTurnsBackup = useSelector((state) => state.profClientsTurnsBackup)
+  console.log(lastProfessional)
+
+
   
 
   function handleFilterByClient(event) {
     event.preventDefault();
-    dispatch(filterByClient(event.target.value));
+    setClient(event.target.value)
+    dispatch(filterByClient(event.target.value)); 
   }
+
+  const [hour, setHour] = useState('Hours')
+  const [client, setClient] = useState('Clients')
 
   /* function handleOnChangeName(e) {
     setInputName(e.target.value);
@@ -41,6 +53,7 @@ const Filters = ({allTurns}) => {
 
   function handleFilterByHour(event) {
     event.preventDefault();
+    setHour(event.target.value)
     dispatch(filterByHour(event.target.value));
   }
 
@@ -49,13 +62,13 @@ const Filters = ({allTurns}) => {
     dispatch(getTurns());
   }, [dispatch]);
 
-  const uniqueOptions = allTurns
+  const uniqueOptions = profClientsTurnsBackup
     .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
     .filter(
       (v, i, arr) => arr.findIndex((t) => t.client.name === v.client.name) === i
     );
 
-  const uniqueHour = allTurns
+  const uniqueHour = profClientsTurns
     .sort((a, b) => (a.hour > b.hour ? 1 : -1))
     .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
 
@@ -69,6 +82,12 @@ const Filters = ({allTurns}) => {
       if (event.key === "Enter") {
         handleOnClickDate(event);
       }
+    };
+
+    const refreshHandler = () => {
+      setHour("Hours")
+      setClient("Clients")
+      dispatch(filterByClient("Clients"));
     };
 
   return (
@@ -87,16 +106,16 @@ const Filters = ({allTurns}) => {
         </input>
     </div> */}
       <div>
-        <select onChange={(event) => handleFilterByClient(event)}>
+        <select value={client} onChange={(event) => handleFilterByClient(event)}>
           <option value="Clients"> Clients </option>
           {uniqueOptions.map((v) => (
-            <option value={v.id} key={v.id}>
+            <option value={v.name} key={v.id}>
               {v.client.name}
             </option>
           ))}
         </select>
       </div>
-      <div>
+      {/* <div>
         <button onClick={handleOnClickDate} className="ButtonSearch">
           Search
         </button>
@@ -108,9 +127,9 @@ const Filters = ({allTurns}) => {
           placeholder="Date..."
           className="InputSearch"
         ></input>
-      </div>
+      </div> */}
       <div>
-        <select onChange={(event) => handleFilterByHour(event)}>
+        <select value={hour} onChange={(event) => handleFilterByHour(event)}>
           <option value="Hours"> Hours </option>
           {uniqueHour.map((v) => (
             <option value={v.hour} key={v.hour}>
@@ -118,6 +137,9 @@ const Filters = ({allTurns}) => {
             </option>
           ))}
         </select>
+      </div>
+      <div className="buttonContainer">
+            <button onClick={refreshHandler}><iconify-icon icon="material-symbols:refresh" width="20"></iconify-icon></button>
       </div>
     </div>
   );

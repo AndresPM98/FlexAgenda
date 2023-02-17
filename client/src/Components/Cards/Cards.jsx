@@ -4,7 +4,9 @@ import { useDispatch, useSelector} from "react-redux";
 import Card from "../Card/Card";
 import './Cards.css'
 
+// const Cards = ({turns}) => {
 const Cards = ({turns}) => {
+
         
     return (
         <div className="cardsContainer">
