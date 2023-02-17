@@ -1,16 +1,18 @@
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 
-import "./Form.css";
+import styles from "./Form.module.css";
 import { NavLink } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { getClients, getServices } from "../../Redux/Actions";
+import { useHistory } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [error, setError] = useState({});
 
   useEffect(() => {
@@ -21,17 +23,13 @@ const Form = () => {
 
   const serv = useSelector((state)=> state.allServices)
 
-
   const [form, setForm] = useState({
     date: "",
     hour: "",
     ProfessionalId: "87de3b43-6331-4493-adfa-c73a4b0afaff",
-    ClientId: "2f77e3c6-5b83-4eba-9483-60d775cee7ea",
+    ClientId: "7e72a047-dc92-4f18-b0b6-f81527aabd08",
     ServiceId: "",
   });
-
-
- 
 
   function validate(form) {
     let error = {};
@@ -62,7 +60,10 @@ const Form = () => {
     event.preventDefault();
     axios
       .post("https://backend-pf-production-1672.up.railway.app/turn", form)
-      .then((res) => alert("Turn taken correctly"))
+      .then((res) => {
+        alert("Turn taken correctly");
+        history.push(`/professionalDetail/87de3b43-6331-4493-adfa-c73a4b0afaff`);
+      })
       .catch((err) => alert(err));
   };
 
@@ -83,96 +84,81 @@ const Form = () => {
     );
   }
 
-    return(
-        <div>
-            <NavbarTwo/>
-            <div className='formTurnPage'>
-                <div className="backContainer">
-                    <NavLink className='back' to='/home'><iconify-icon icon="ion:arrow-back-circle" width="40" height="30"></iconify-icon>BACK</NavLink>
-                </div>
-                    
+  return (
+    <div>
+      <NavbarTwo/>
 
-        <div className="containerForm">
-          <div className="cardForm">
-            <h1 className="signupForm">Schedule your turn</h1>
+      <div className={styles.container}>
+        
 
-            <form onSubmit={submitHandler}>
-              <div className="inputBox">
+        <form onSubmit={submitHandler} className={styles.form}>
+          <h1 className={styles.tittle}>Schedule your turn</h1>
+
+          <label className={styles.label}>DATE:</label>
+          <input
+            className={styles.input}
+            type="date"
+            value={form.date}
+            onChange={changeHandler}
+            name="date"
+          />
+          <div className={styles.error}>
+            {error.date && <span>{error.date}</span>}{" "}
+          </div>
+
+          <label className={styles.label}>HOUR:</label>
+          <input
+            className={styles.input}
+            type="time"
+            value={form.hour}
+            onChange={changeHandler}
+            name="hour"
+          />
+          <div className={styles.error}>
+            {error.hour && <span>{error.hour}</span>}{" "}
+          </div>
+
+          <label className={styles.label}>PROFESSIONAL:</label>
                 <input
-                  className="input"
-                  type="date"
-                  value={form.date}
-                  onChange={changeHandler}
-                  name="date"
-                />
-                <span>DATE</span>
-              </div>
-              <div className="error">
-                {error.date && <span>{error.date}</span>}{" "}
-              </div>
-
-              <div className="inputBox">
-                <input
-                  className="input"
-                  type="time"
-                  value={form.hour}
-                  onChange={changeHandler}
-                  name="hour"
-                />
-                <span>HOUR</span>
-              </div>
-              <div className="error">
-                {error.hour && <span>{error.hour}</span>}{" "}
-              </div>
-
-              <div className="inputBox">
-                <input
-                  className="input"
+                  className={styles.input}
                   type="text"
                   value={form.ProfessionalId}
                   readOnly
                   onChange={changeHandler}
                   name="ProfessionalId"
                 />
-                <span>PROFESSIONAL</span>
-              </div>
 
+              <label className={styles.label}>SERVICE:</label>
               <select
                 name="ServiceId"
                 onChange={handleSelectServ}
-                className="desplegable"
+                className={styles.input}
               >
                 <option value="ServiceId">Service</option>
                 {serv?.map((element, index) => (
                   <option key={index}>{element}</option>
                 ))}
-                <div className="error">
-                  {error.ServiceId && <span>{error.ServiceId}</span>}{" "}
+                <div className={styles.error}>
+                  {error.ServiceId && <span>{error.ServiceId}</span>}
                 </div>
               </select>
 
-              <div className="inputBox">
+              <label className={styles.label}> CLIENT:</label>
                 <input
-                  className="input"
+                  className={styles.input}
                   type="text"
                   value={form.ClientId}
                   readOnly
                   name="ClientId"
                   onChange={changeHandler}
                 />
-                <span>CLIENT</span>
-              </div>
-              {error.ClientId && (
-                <span className="error">{error.ClientId}</span>
-              )}
 
-              <button className="enterForm" type="submit">
+              <button className={styles.button} type="submit">
                 TAKE TURN
               </button>
             </form>
-          </div>
         </div>
-      </div>
+      
     </div>
   );
 };
