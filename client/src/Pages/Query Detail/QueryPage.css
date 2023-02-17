@@ -1,87 +1,105 @@
-.queryPage{
-    margin: 0;
-    min-height: 41.5rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.queryPage {
+  margin: 0;
+  min-height: 41.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-.queryPageDark{
-    margin: 0;
-    min-height: 41.5rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: black;
-}
-
-
-.queryDetailContainer{
-    background-color: #F0E9FF;
-    width: 50rem;
-    height: 30rem;
-    border: 3px solid #0051EE;
-    border-radius: 2rem;
-    margin-left: 16rem;
+.queryPageDark {
+  margin: 0;
+  min-height: 41.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: black;
 }
 
-.backContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 32rem;
+.queryDetailContainer {
+  background-color: #f0e9ff;
+  width: 50rem;
+  height: 30rem;
+  border: 3px solid #0051ee;
+  border-radius: 2rem;
+  margin-left: 16rem;
 }
 
-.back{
-    border-radius: 0 1rem 1rem 0;
-    background-color: #0051EE;
-    text-decoration: none;
-    color: aliceblue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 6rem;
-    height: 2.5rem;
-    margin-left: 0px;
+.backContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 32rem;
 }
 
-.img-turn{
-    width: 6rem;
-    margin-left: 4rem;
-    margin-top: 2rem;
+.back {
+  border-radius: 0 1rem 1rem 0;
+  background-color: #0051ee;
+  text-decoration: none;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 2.5rem;
+  margin-left: 0px;
 }
 
-.header-container{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+.img-turn {
+  width: 6rem;
+  margin-left: 4rem;
+  margin-top: 2rem;
 }
 
-.turn-detail-tittle{
-    margin-left: 10rem;
-    color: #0051EE;
-    font-family: 'Kaushan Script', cursive;
-    font-size: 2.5rem;
+.header-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
-.data-turn-container{
-    margin-left: 12.5rem;
-    width: 50%;
-    text-align: start;
+.turn-detail-tittle {
+  margin-left: 10rem;
+  color: #0051ee;
+  font-family: "Kaushan Script", cursive;
+  font-size: 2.5rem;
 }
 
-.data-turn-text{
-    border-bottom: 1px solid #0051EE;
+.data-turn-container {
+  margin-left: 12.5rem;
+  width: 50%;
+  text-align: start;
 }
 
-.data-turn-text-info{
-    margin-left: 3rem;
+.data-turn-text {
+  border-bottom: 1px solid #0051ee;
 }
 
-.lineDni{
-    margin-left: 3.8rem;
+.data-turn-text-info {
+  margin-left: 3rem;
 }
 
-.lineDate{
-    margin-left: 3.4rem;
+.lineDni {
+  margin-left: 3.8rem;
+}
+
+.lineDate {
+  margin-left: 3.4rem;
+}
+
+.buttonDelete {
+  font-family: inherit;
+  border: none;
+  outline: 1px dotted rgb(37, 37, 37);
+  outline-offset: -4px;
+  background: hsl(0deg 0% 75%);
+  box-shadow: inset -1px -1px #292929, inset 1px 1px #fff,
+    inset -2px -2px rgb(158, 158, 158), inset 2px 2px #ffffff;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 30px;
+}
+
+.buttonDelete:active {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #292929,
+    inset -2px -2px #ffffff, inset 2px 2px rgb(158, 158, 158);
 }
