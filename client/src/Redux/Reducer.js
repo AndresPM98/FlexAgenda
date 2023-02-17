@@ -13,6 +13,7 @@ import {
   CLEAN_PROF_DETAIL,
   GET_SERVICES,
   CHANGE_THEME
+
 } from "./Actions";
 
 const initialState = {
@@ -127,6 +128,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profDetail: action.payload,
       };
+     
       
     case CLEAN_PROF_DETAIL:
       return {
