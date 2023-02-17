@@ -132,7 +132,7 @@ export const GET_SERVICES = "GET_SERVICES";
 export const getServices = () => {
   return async function (dispatch) {
     const bdInfo = await axios.get("/service");
-    const services = bdInfo.data.map((s) => s.id);
+    const services = bdInfo.data
     dispatch({ type: GET_SERVICES, payload: services });
   };
 };

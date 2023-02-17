@@ -1,7 +1,6 @@
 import React from "react";
 import './LandingPage.css';
 import Navbar from "../../Components/Navbar/Navbar";
-// import Footer from "../../Components/Footer/Footer"
 import { NavLink } from "react-router-dom";
 import calendar from '../../Imagenes y logos/Calendar.png';
 import illustration from '../../Imagenes y logos/people.png';
@@ -25,7 +24,6 @@ const landingPage = () => {
                     </div>                   
                 </div>
             </div>
-            {/* <Footer/> */}
         </div>
     )
 }
