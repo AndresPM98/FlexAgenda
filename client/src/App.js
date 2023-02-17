@@ -29,7 +29,12 @@ function App() {
 
       <Route exact path="/queryDetail/:id" component={QueryPage} />
       <Route path="/login" component={Login} />
-
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <Footer />
     </div>
   );
