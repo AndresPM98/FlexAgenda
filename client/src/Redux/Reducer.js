@@ -14,6 +14,7 @@ import {
   GET_SERVICES,
   CHANGE_THEME,
   GET_PROFESSIONALS,
+  DELETE,
 } from "./Actions";
 
 const initialState = {
@@ -61,6 +62,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         turns: action.payload,
         turnBackup: action.payload,
+      };
+    case DELETE:
+      return {
+        ...state,
       };
 
     case GET_TURN_BY_NAME:
