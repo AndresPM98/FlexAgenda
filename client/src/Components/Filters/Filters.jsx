@@ -3,7 +3,7 @@ import {
   getClients,
   filterByClient,
   getTurns,
-  getTurnByName,
+  /* getTurnByName, */
   filterByDate,
   filterByHour,
 } from "../../Redux/Actions";
@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Filters.css";
 
 const Filters = ({allTurns}) => {
-  const [inputName, setInputName] = useState("");
+  /* const [inputName, setInputName] = useState(""); */
   const [inputDate, setInputDate] = useState("");
   const dispatch = useDispatch();
  
@@ -23,9 +23,9 @@ const Filters = ({allTurns}) => {
     dispatch(filterByClient(event.target.value));
   }
 
-  function handleOnChangeName(e) {
+  /* function handleOnChangeName(e) {
     setInputName(e.target.value);
-  }
+  } */
   function handleOnChangeDate(e) {
     setInputDate(e.target.value);
   }
@@ -34,10 +34,10 @@ const Filters = ({allTurns}) => {
     dispatch(filterByDate(inputDate));
   }
 
-  function handleOnClickName(e){
+  /* function handleOnClickName(e){
     e.preventDefault()
     dispatch(getTurnByName(inputName))
-}
+} */
 
   function handleFilterByHour(event) {
     event.preventDefault();
@@ -59,12 +59,12 @@ const Filters = ({allTurns}) => {
     .sort((a, b) => (a.hour > b.hour ? 1 : -1))
     .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
 
-    const handleKeyPressName = (event) => {
+   /*  const handleKeyPressName = (event) => {
       if (event.key === "Enter") {
         handleOnClickName(event);
       }
     };
-
+ */
     const handleKeyPressDate = (event) => {
       if (event.key === "Enter") {
         handleOnClickDate(event);
@@ -73,7 +73,7 @@ const Filters = ({allTurns}) => {
 
   return (
     <div className="filterContainer">
-      <div>
+     {/*  <div>
         <button 
         onClick={handleOnClickName} className="ButtonSearch">Search</button>
         <input 
@@ -85,7 +85,7 @@ const Filters = ({allTurns}) => {
         className="InputSearch">
 
         </input>
-    </div>
+    </div> */}
       <div>
         <select onChange={(event) => handleFilterByClient(event)}>
           <option value="Clients"> Clients </option>
