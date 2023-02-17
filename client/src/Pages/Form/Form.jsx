@@ -18,6 +18,10 @@ const Form = () => {
     dispatch(getServices());
   }, []);
 
+
+  const serv = useSelector((state)=> state.allServices)
+
+
   const [form, setForm] = useState({
     date: "",
     hour: "",
@@ -26,7 +30,8 @@ const Form = () => {
     ServiceId: "",
   });
 
-  const serv = useSelector((state) => state.allServices);
+
+ 
 
   function validate(form) {
     let error = {};
@@ -78,20 +83,14 @@ const Form = () => {
     );
   }
 
-  return (
-    <div>
-      <NavbarTwo />
-      <div className="formTurnPage">
-        <div className="backContainer">
-          <NavLink className="back" to="/home">
-            <iconify-icon
-              icon="ion:arrow-back-circle"
-              width="40"
-              height="30"
-            ></iconify-icon>
-            BACK
-          </NavLink>
-        </div>
+    return(
+        <div>
+            <NavbarTwo/>
+            <div className='formTurnPage'>
+                <div className="backContainer">
+                    <NavLink className='back' to='/home'><iconify-icon icon="ion:arrow-back-circle" width="40" height="30"></iconify-icon>BACK</NavLink>
+                </div>
+                    
 
         <div className="containerForm">
           <div className="cardForm">

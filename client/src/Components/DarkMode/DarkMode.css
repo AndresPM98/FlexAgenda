@@ -1,0 +1,58 @@
+.darkModeContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0051EE;
+    width: 12rem;
+    height: 3rem;
+    color: aliceblue;
+    border-radius: 1rem;
+}
+
+.switch-button {
+    display: inline-block;
+    margin-top: 0.2rem;
+}
+.switch-button .switch-button__checkbox {
+    display: none;
+}
+.switch-button .switch-button__label {
+    background-color: rgb(57, 57, 57);
+    width: 3rem;
+    height: 1rem;
+    border-radius: 3rem;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #0051EE;
+
+}
+.switch-button .switch-button__label:before {
+    transition: .2s;
+    display: block;
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: #9d65a5;
+    content: '';
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 1px black;
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+    background-color: aliceblue;
+    border: 1px solid #0051EE;
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+    transform: translateX(2rem);
+}
+
+.theme-text{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.9rem;
+    margin: 0 0.7rem;
+}
+
+.text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

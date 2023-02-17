@@ -12,7 +12,7 @@ import {
   GET_PROF_DETAIL,
   CLEAN_PROF_DETAIL,
   GET_SERVICES,
-  EDIT_PROFESSIONAL
+  CHANGE_THEME
 
 } from "./Actions";
 
@@ -26,6 +26,7 @@ const initialState = {
   turnFiltered: [],
   profDetail: [],
   allServices: [],
+  darkMode: false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -140,6 +141,14 @@ const rootReducer = (state = initialState, action) => {
           ...state,
          allServices: action.payload
         };  
+
+       /*--------------------DARK MODE -------------------------------------*/ 
+
+      case CHANGE_THEME:
+        return{
+          ...state,
+          darkMode: action.payload
+        }
 
     default:
       return {

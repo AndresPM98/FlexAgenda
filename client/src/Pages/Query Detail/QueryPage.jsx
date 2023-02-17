@@ -12,6 +12,7 @@ import img from '../../Imagenes y logos/agenda.png';
 const QueryPage = () => {
 
     const params = useParams();
+    const darkMode = useSelector((state) => state.darkMode)
     const turnDetail = useSelector((state) => state.turnDetail)
     const clientDetail = useSelector((state) => state.clientDetailTurn)
 
@@ -36,7 +37,7 @@ const QueryPage = () => {
         <div>
             {turnDetail && dispatchClientDetail(turnDetail.ClientId)}
             <NavbarTwo/>
-            <div className="queryPage">
+            <div className={darkMode == false ? 'queryPage' : 'queryPageDark'}>
                 <div className="backContainer">
                     <NavLink className='back' to='/home'><iconify-icon icon="ion:arrow-back-circle" width="40" height="30"></iconify-icon>BACK</NavLink>
                 </div>

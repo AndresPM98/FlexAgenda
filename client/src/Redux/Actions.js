@@ -5,6 +5,7 @@ export const FILTER_BY_CLIENT = "FILTER_BY_CLIENT";
 export const GET_TURN_DETAIL = "GET_TURN_DETAIL";
 export const GET_CLIENT_DETAIL_TURN = "GET_CLIENT_DETAIL_TURN";
 export const CLEAN_DETAIL_TURN = "CLEAN_DETAIL_TURN";
+export const CHANGE_THEME = "CHANGE_THEME";
 
 export const getClients = () => {
   return async function (dispatch) {
@@ -118,3 +119,12 @@ export const getServices = () => {
     dispatch({ type: GET_SERVICES, payload: services })
   };
 };
+
+/*---------------------------DARK MODE--------------------------------------*/
+
+export const changeTheme = (mode) => {
+  return {
+    type: CHANGE_THEME,
+    payload: mode
+  }
+}

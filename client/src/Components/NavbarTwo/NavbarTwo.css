@@ -5,6 +5,17 @@
     width: 100%;
     height: 3rem;
     border-bottom: 2px solid #0051EE;
+    color: #0051EE;
+}
+
+.navbarContainerDark{
+    background-color: #0051EE;
+    color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 3rem;
+    border-bottom: 2px solid #c0c0c0;
 }
 
 .buttons{
@@ -12,9 +23,8 @@
     align-items: center;
     margin-right: 2rem;
 }
-.logo{
+.logoTwo{
     display: flex;
     align-items: center;
-    color: #0051EE;
     margin-left: 1rem;
 }
