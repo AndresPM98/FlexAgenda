@@ -8,10 +8,11 @@ import {
   ProfessionalPage,
   QueryPage,
   FormClient,
-  Login,
+  Login
 } from "./Pages";
 import CalendarxD from "./Pages/Calendar/CalendarxD";
 
+import ProfessionalTakeTurn from "./Pages/ProfessionalTakeTurn/ProfessionalTakeTurn"
 import axios from "axios";
 import Footer from "./Components/Footer/Footer";
 axios.defaults.baseURL = "https://backend-pf-production-1672.up.railway.app/";
@@ -29,6 +30,11 @@ function App() {
         exact
         path="/professionalDetail/:id"
         component={ProfessionalPage}
+      />
+      <Route
+        exact
+        path="/profTT/:id"
+        component={ProfessionalTakeTurn}
       />
       <Route exact path="/professional/edit/:id" component={EditProfileProf} />
 

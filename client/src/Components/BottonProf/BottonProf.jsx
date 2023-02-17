@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom' 
-import { getProfessionalDetail } from "../../Redux/Actions";
+import { getProfessionalDetail, getProfessionals } from "../../Redux/Actions";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./BottonProf.css"
@@ -8,28 +8,35 @@ const BotonProf = () => {
   const dispatch = useDispatch(); 
   const allTurns = useSelector((state) => state.turnBackup);
   const profDetail = useSelector(state => state.profDetail);
-  console.log(allTurns);
-
+  
   useEffect(() => {
-    if (allTurns.length > 0) {
+    if (allTurns.length) {
       dispatch(getProfessionalDetail(allTurns[0].professionalID));
+      dispatch(getProfessionals());
     }
   }, [dispatch, allTurns]);
+  
+  const allProfessionals = useSelector(state => state.allProfessionals)
+
+  const ultimoProfesional = allProfessionals.length
+  ? allProfessionals[allProfessionals.length - 1]
+  : "";
+
 
   return (
     <div>
       {profDetail ?
         <div>
           <div className='profContainer'>
-            <Link to={`/professionalDetail/${profDetail.id}`} className="nameLinkProf"> 
+            <Link to={`/professionalDetail/${ultimoProfesional.id}`} className="nameLinkProf"> 
               <div>
-                <p className='textProf'>Hola {profDetail.name}</p>
+                <p className='textProf'>Hola {ultimoProfesional.name}</p>
                 <iconify-icon icon="healthicons:ui-user-profile-negative" width="60" height="60"></iconify-icon>
               </div>
             </Link> 
           </div>
           <div className='profContainer'>
-            <Link to={`/professionalDetail/${profDetail.id}`} className="nameLinkProf"> 
+            <Link to={`/profTT/${ultimoProfesional.id}`} className="nameLinkProf"> 
               <div>
                 <p className='textProf'>Cliente</p>
                 <iconify-icon icon="healthicons:ui-user-profile-negative" width="60" height="60"></iconify-icon>

@@ -8,8 +8,7 @@ const Cards = ({turns}) => {
         
     return (
         <div className="cardsContainer">
-            {turns.map((turn) => {
-                
+            {turns.map((turn) => {     
             return (
             <Card
                 id={turn.id}

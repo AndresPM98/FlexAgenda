@@ -12,21 +12,21 @@ import {
   GET_PROF_DETAIL,
   CLEAN_PROF_DETAIL,
   GET_SERVICES,
-  CHANGE_THEME
-
+  CHANGE_THEME,
+  GET_PROFESSIONALS,
 } from "./Actions";
 
 const initialState = {
-  //clients:[],
   turnDetail: "",
   clientDetailTurn: "",
   allClients: [],
+  allProfessionals: [],
   turns: [],
   turnBackup: [],
   turnFiltered: [],
   profDetail: [],
   allServices: [],
-  darkMode: false
+  darkMode: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -34,17 +34,14 @@ const rootReducer = (state = initialState, action) => {
     case GET_CLIENTS:
       return {
         ...state,
-        /*  turns: action.payload,
-            allTurns: action.payload, */
         allClients: action.payload,
       };
-    /* 
-        case GET_CLIENT_BY_NAME:
-            return{
-            ...state,
-            turns: action.payload
-            };
-            */
+
+    case GET_PROFESSIONALS:
+      return {
+        ...state,
+        allProfessionals: action.payload,
+      };
 
     case FILTER_BY_CLIENT:
       const allClients = state.turnBackup;
@@ -67,8 +64,9 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_TURN_BY_NAME:
-
-      const source = state.turnFiltered.length? state.turnFiltered : state.turnBackup;
+      const source = state.turnFiltered.length
+        ? state.turnFiltered
+        : state.turnBackup;
       const filtered = action.payload
         ? source.filter((t) => t.client.name.toLowerCase() === action.payload)
         : state.turnBackup;
@@ -80,8 +78,10 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_DATE:
-        const sourceDate = state.turnFiltered.length? state.turnFiltered : state.turnBackup;
-        const date = action.payload
+      const sourceDate = state.turnFiltered.length
+        ? state.turnFiltered
+        : state.turnBackup;
+      const date = action.payload
         ? sourceDate.filter((t) => t.date === action.payload)
         : state.turnBackup;
 
@@ -121,34 +121,33 @@ const rootReducer = (state = initialState, action) => {
         clientDetailTurn: "",
       };
 
-      /* - - - - - - - - - - - - - - - - - - - - - - - - - - REDUCER PROFESSIONAL - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - */
-    
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - REDUCER PROFESSIONAL - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - */
+
     case GET_PROF_DETAIL:
       return {
         ...state,
         profDetail: action.payload,
       };
-     
-      
+
     case CLEAN_PROF_DETAIL:
       return {
         ...state,
         profDetail: action.payload,
       };
 
-      case GET_SERVICES:
-        return{
-          ...state,
-         allServices: action.payload
-        };  
+    case GET_SERVICES:
+      return {
+        ...state,
+        allServices: action.payload,
+      };
 
-       /*--------------------DARK MODE -------------------------------------*/ 
+    /*--------------------DARK MODE -------------------------------------*/
 
-      case CHANGE_THEME:
-        return{
-          ...state,
-          darkMode: action.payload
-        }
+    case CHANGE_THEME:
+      return {
+        ...state,
+        darkMode: action.payload,
+      };
 
     default:
       return {

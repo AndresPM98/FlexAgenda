@@ -2,12 +2,11 @@ import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 
 import styles from "./Form.module.css";
-import { NavLink } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { getClients, getServices } from "../../Redux/Actions";
+import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory } from "react-router-dom";
 
 const Form = () => {
@@ -17,19 +16,39 @@ const Form = () => {
 
   useEffect(() => {
     dispatch(getClients());
+    dispatch(getProfessionals());
     dispatch(getServices());
-  }, []);
+  }, [dispatch]);
 
+  const allClients = useSelector((state) => state.allClients);
+  const allProfessionals = useSelector((state) => state.allProfessionals);
+  const serv = useSelector((state) => state.allServices);
 
-  const serv = useSelector((state)=> state.allServices)
+  const ultimoCliente = allClients.length
+    ? allClients[allClients.length - 1]
+    : "";
+  const ultimoProfesional = allProfessionals.length
+    ? allProfessionals[allProfessionals.length - 1]
+    : "";
 
   const [form, setForm] = useState({
     date: "",
     hour: "",
-    ProfessionalId: "87de3b43-6331-4493-adfa-c73a4b0afaff",
-    ClientId: "7e72a047-dc92-4f18-b0b6-f81527aabd08",
+    ProfessionalId: "",
+    ClientId: "",
     ServiceId: "",
   });
+
+  useEffect(() => {
+    if (allClients.length && allProfessionals.length) {
+      setForm({
+        ...form,
+        ClientId: ultimoCliente.id,
+        ProfessionalId: ultimoProfesional.id,
+      });
+    }
+  }, [allClients, allProfessionals]);
+
 
   function validate(form) {
     let error = {};
@@ -62,7 +81,9 @@ const Form = () => {
       .post("https://backend-pf-production-1672.up.railway.app/turn", form)
       .then((res) => {
         alert("Turn taken correctly");
-        history.push(`/professionalDetail/87de3b43-6331-4493-adfa-c73a4b0afaff`);
+        history.push(
+          `/professionalDetail/${ultimoProfesional.id}`
+        );
       })
       .catch((err) => alert(err));
   };
@@ -86,11 +107,9 @@ const Form = () => {
 
   return (
     <div>
-      <NavbarTwo/>
+      <NavbarTwo />
 
       <div className={styles.container}>
-        
-
         <form onSubmit={submitHandler} className={styles.form}>
           <h1 className={styles.tittle}>Schedule your turn</h1>
 
@@ -118,47 +137,30 @@ const Form = () => {
             {error.hour && <span>{error.hour}</span>}{" "}
           </div>
 
-          <label className={styles.label}>PROFESSIONAL:</label>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={form.ProfessionalId}
-                  readOnly
-                  onChange={changeHandler}
-                  name="ProfessionalId"
-                />
+          <label className={styles.label}>PROFESSIONAL: 
+          <h2>{ultimoProfesional.name}</h2>
+          </label>
 
-              <label className={styles.label}>SERVICE:</label>
-              <select
-                name="ServiceId"
-                onChange={handleSelectServ}
-                className={styles.input}
-              >
-                <option value="ServiceId">Service</option>
-                {serv?.map((element, index) => (
-                  <option key={index}>{element}</option>
-                ))}
-                <div className={styles.error}>
-                  {error.ServiceId && <span>{error.ServiceId}</span>}
-                </div>
-              </select>
 
-              <label className={styles.label}> CLIENT:</label>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={form.ClientId}
-                  readOnly
-                  name="ClientId"
-                  onChange={changeHandler}
-                />
-
-              <button className={styles.button} type="submit">
-                TAKE TURN
-              </button>
-            </form>
-        </div>
-      
+          <label className={styles.label}>SERVICE:</label>
+          <select
+            name="ServiceId"
+            onChange={handleSelectServ}
+            className={styles.input}
+          >
+            <option value="ServiceId">Service</option>
+            {serv?.map((element, index) => (
+              <option key={index}>{element}</option>
+            ))}
+            <div className={styles.error}>
+              {error.ServiceId && <span>{error.ServiceId}</span>}
+            </div>
+          </select>
+          <button className={styles.button} type="submit">
+            TAKE TURN
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

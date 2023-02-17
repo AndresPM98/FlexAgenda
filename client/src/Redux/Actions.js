@@ -1,5 +1,6 @@
 import axios from "axios";
 export const GET_CLIENTS = "GET_CLIENTS";
+export const GET_PROFESSIONALS = "GET_PROFESSIONALS";
 export const GET_CLIENT_BY_NAME = "GET_CLIENT_BY_NAME";
 export const FILTER_BY_CLIENT = "FILTER_BY_CLIENT";
 export const GET_TURN_DETAIL = "GET_TURN_DETAIL";
@@ -12,6 +13,14 @@ export const getClients = () => {
     const bdInfo = await axios.get("/client");
     const clients = bdInfo.data;
     dispatch({ type: GET_CLIENTS, payload: clients });
+  };
+};
+
+export const getProfessionals = () => {
+  return async function (dispatch) {
+    const bdInfo = await axios.get("/professional");
+    const profs = bdInfo.data;
+    dispatch({ type: GET_PROFESSIONALS, payload: profs });
   };
 };
 
