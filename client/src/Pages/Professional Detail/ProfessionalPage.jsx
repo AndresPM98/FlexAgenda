@@ -52,6 +52,9 @@ const ProfessionalPage = () => {
         <Link to={`/professional/edit/${id}`}>
         <button className={style.btnEditar}>Editar Perfil</button>
         </Link>
+        <Link to={`/professional/edit/${id}/services`}>
+        <button className={style.btnEditar}>Agregar Servicios</button>
+        </Link>
       </div>
     </>
   );

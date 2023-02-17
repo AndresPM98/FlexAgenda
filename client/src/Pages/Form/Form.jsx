@@ -24,6 +24,8 @@ const Form = () => {
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const serv = useSelector((state) => state.allServices);
 
+console.log(serv);
+
   const ultimoCliente = allClients.length
     ? allClients[allClients.length - 1]
     : "";
@@ -89,18 +91,19 @@ const Form = () => {
   };
 
   function handleSelectServ(event) {
+    const selected = event.target.value
     if (
       event.target.value !== "ServiceId" &&
       !form.ServiceId.includes(event.target.value)
     )
       setForm({
         ...form,
-        ServiceId: [...form.ServiceId, event.target.value],
+        ServiceId: selected
       });
     setError(
       validate({
         ...form,
-        ServiceId: [...form.ServiceId, event.target.value],
+        ServiceId: selected
       })
     );
   }
@@ -150,7 +153,7 @@ const Form = () => {
           >
             <option value="ServiceId">Service</option>
             {serv?.map((element, index) => (
-              <option key={index}>{element}</option>
+              <option key={index} value={element.id}>{element.name}</option>
             ))}
             <div className={styles.error}>
               {error.ServiceId && <span>{error.ServiceId}</span>}
