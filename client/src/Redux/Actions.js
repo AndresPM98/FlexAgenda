@@ -7,6 +7,7 @@ export const GET_TURN_DETAIL = "GET_TURN_DETAIL";
 export const GET_CLIENT_DETAIL_TURN = "GET_CLIENT_DETAIL_TURN";
 export const CLEAN_DETAIL_TURN = "CLEAN_DETAIL_TURN";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const DELETE = "DELETE";
 
 export const getClients = () => {
   return async function (dispatch) {
@@ -95,6 +96,15 @@ export const cleanDetailTurn = () => {
   };
 };
 
+export const deleteTurn = (id) => {
+  return async function (dispatch) {
+    let url = await axios.delete(`/turn/${id}`);
+    return {
+      type: "DELETE",
+      url,
+    };
+  };
+};
 /* ------------------------------------------------------------- */
 
 export const GET_PROF_DETAIL = "GET_PROF_DETAIL";
@@ -116,6 +126,7 @@ export const cleanProfDetail = () => {
   };
 };
 
+
 export const getProfClientsTurns = (id) => {
   return{
     type: GET_PROF_CLIENTS_TURNS,
@@ -123,17 +134,15 @@ export const getProfClientsTurns = (id) => {
   }
 }
 
-
-
 /* ------------------------------------------------------------- */
 
-export const GET_SERVICES = "GET_SERVICES"
+export const GET_SERVICES = "GET_SERVICES";
 
 export const getServices = () => {
   return async function (dispatch) {
-    const bdInfo = await axios.get('/service'); 
-    const services = bdInfo.data.map(s => s.id)
-    dispatch({ type: GET_SERVICES, payload: services })
+    const bdInfo = await axios.get("/service");
+    const services = bdInfo.data.map((s) => s.id);
+    dispatch({ type: GET_SERVICES, payload: services });
   };
 };
 
@@ -142,6 +151,6 @@ export const getServices = () => {
 export const changeTheme = (mode) => {
   return {
     type: CHANGE_THEME,
-    payload: mode
-  }
-}
+    payload: mode,
+  };
+};
