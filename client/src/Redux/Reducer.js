@@ -15,9 +15,7 @@ import {
   CHANGE_THEME,
   GET_PROFESSIONALS,
   GET_PROF_CLIENTS_TURNS,
-
   DELETE,
-
 } from "./Actions";
 
 const initialState = {
@@ -57,7 +55,7 @@ const rootReducer = (state = initialState, action) => {
           : allTurnsC.filter((e) => e.client.name == action.payload);
       return {
         ...state,
-        profClientsTurns: filterClient
+        profClientsTurns: filterClient,
       };
 
     /* ---------------------------------------------------- */
@@ -88,11 +86,11 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_DATE:
-      const sourceDate = state.profClientsTurns
-      const date =  
-      action.payload === ""
-        ? sourceDate
-        : sourceDate.filter((t) => t.date == action.payload)
+      const sourceDate = state.profClientsTurns;
+      const date =
+        action.payload === ""
+          ? sourceDate
+          : sourceDate.filter((t) => t.date == action.payload);
       return {
         ...state,
         profClientsTurns: date,
@@ -106,7 +104,7 @@ const rootReducer = (state = initialState, action) => {
           : allTurns.filter((e) => e.hour == action.payload);
       return {
         ...state,
-        profClientsTurns: filterHours
+        profClientsTurns: filterHours,
       };
 
     case GET_TURN_DETAIL:
@@ -150,12 +148,14 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_PROF_CLIENTS_TURNS:
       const allTurnsClient = state.turnBackup;
-      const allTurnsClientFiltered = allTurnsClient.filter((t) => t.professionalID == action.payload);
-      return{
+      const allTurnsClientFiltered = allTurnsClient.filter(
+        (t) => t.professionalID == action.payload
+      );
+      return {
         ...state,
         profClientsTurnsBackup: allTurnsClientFiltered,
-        profClientsTurns: allTurnsClientFiltered
-      }
+        profClientsTurns: allTurnsClientFiltered,
+      };
 
     /*--------------------DARK MODE -------------------------------------*/
 

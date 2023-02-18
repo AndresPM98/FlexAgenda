@@ -8,12 +8,14 @@ import {
   ProfessionalPage,
   QueryPage,
   FormClient,
-  Login
+  Login,
+  AllProfessionals,
+  HomeProffesional,
 } from "./Pages";
 import CalendarxD from "./Pages/Calendar/CalendarxD";
 
-import ProfessionalTakeTurn from "./Pages/ProfessionalTakeTurn/ProfessionalTakeTurn"
-import FormService from "./Pages/FormService/FormService"
+import ProfessionalTakeTurn from "./Pages/ProfessionalTakeTurn/ProfessionalTakeTurn";
+import FormService from "./Pages/FormService/FormService";
 import axios from "axios";
 import Footer from "./Components/Footer/Footer";
 axios.defaults.baseURL = "https://backend-pf-production-1672.up.railway.app/";
@@ -32,16 +34,18 @@ function App() {
         path="/professionalDetail/:id"
         component={ProfessionalPage}
       />
+      <Route exact path="/profTT/:id" component={ProfessionalTakeTurn} />
+      <Route exact path="/professional/edit/:id" component={EditProfileProf} />
       <Route
         exact
-        path="/profTT/:id"
-        component={ProfessionalTakeTurn}
+        path="/professional/edit/:id/services"
+        component={FormService}
       />
-      <Route exact path="/professional/edit/:id" component={EditProfileProf} />
-      <Route exact path="/professional/edit/:id/services" component={FormService} />
 
       <Route exact path="/queryDetail/:id" component={QueryPage} />
       <Route path="/login" component={Login} />
+      <Route path="/allProfessionals" component={AllProfessionals} />
+      <Route path="/home/:id" component={HomeProffesional} />
 
       <Footer />
     </div>

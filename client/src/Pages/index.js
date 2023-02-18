@@ -5,6 +5,8 @@ import ProfessionalPage from "./Professional Detail/ProfessionalPage";
 import QueryPage from "./Query Detail/QueryPage";
 import FormClient from "./FormClient/FormClient";
 import Login from "./Login/Login";
+import AllProfessionals from "./AllProfessionals/AllProfessionals";
+import HomeProffesional from "./HomeProfessional/HomeProfessional";
 
 export {
   Form,
@@ -14,4 +16,6 @@ export {
   QueryPage,
   FormClient,
   Login,
+  AllProfessionals,
+  HomeProffesional,
 };
