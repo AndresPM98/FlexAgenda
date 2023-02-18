@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { getProfessionalDetail } from "../../Redux/Actions";
-import "./EditProfileProf.css";
+import styles from "./EditProfileProf.module.css";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 // funcion que edita el profesional
 export default function EditProfileProf() {
@@ -81,62 +82,76 @@ export default function EditProfileProf() {
   }
 
   return (
-    <div className="container-edit">
+    <div >
       <NavbarTwo />
-      <br />
-      <form onSubmit={handleSubmit} className="detail-container">
-        <label>
-          Nombre:
+      <div className={styles.backContainer}>
+          <NavLink className={styles.back} to="/home">
+            <iconify-icon
+              icon="ion:arrow-back-circle"
+              width="40"
+              height="30"
+            ></iconify-icon>
+            CANCEL
+          </NavLink>
+        </div>
+
+      <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h1 className={styles.tittle}>EDIT YOUR PROFILE</h1>
+
+        <label className={styles.label}>NAME:</label>
           <input
+            className={styles.input}
             type="text"
             name="name"
             defaultValue={profDetail.name}
             onChange={(e) => setProf({ ...prof, name: e.target.value })}
           />
-        </label>
-        <br />
-        <label>
-          category:
+        
+        
+        <label className={styles.label}>CATEGORY:</label>
           <input
+            className={styles.input}
             type="text"
             defaultValue={profDetail.category}
             name="category"
             onChange={(e) => setProf({ ...prof, category: e.target.value })}
           />
-        </label>
-        <br />
-        <label>
-          phone:
+        
+       
+        <label className={styles.label}>PHONE:</label>
           <input
+            className={styles.input}
             name="phone"
             defaultValue={profDetail.phone}
             onChange={(e) => setProf({ ...prof, phone: e.target.value })}
           />
-        </label>
-        <br />
-        <label>
-          adress:
+        
+        
+        <label className={styles.label}>ADRESS:</label>
           <input
+            className={styles.input}
             name="adress"
             defaultValue={profDetail.adress}
             onChange={(e) => setProf({ ...prof, adress: e.target.value })}
           />
-        </label>
-        <br />
-        <label>
-          description:
+        
+        
+        <label className={styles.label}>DESCRIPTION:</label>
           <textarea
+            className={styles.input}
             name="description"
             defaultValue={profDetail.description}
             onChange={(e) => setProf({ ...prof, description: e.target.value })}
           />
-        </label>
-        <br />
+       
+       
 
-        <button type="submit" className="buttonEdit">
-          Guardar cambios
+        <button type="submit" className={styles.button}>
+          SAVE CHANGES
         </button>
       </form>
+      </div>
     </div>
   );
 }
