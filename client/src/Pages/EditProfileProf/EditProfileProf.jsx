@@ -9,6 +9,7 @@ import { getProfessionalDetail } from "../../Redux/Actions";
 import styles from "./EditProfileProf.module.css";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 // funcion que edita el profesional
 export default function EditProfileProf() {
@@ -78,14 +79,15 @@ export default function EditProfileProf() {
   };
 
   if (loading) {
-    return <div>Cargando datos ...</div>;
+    return <Loading/>;
   }
 
   return (
     <div >
       <NavbarTwo />
+     
       <div className={styles.backContainer}>
-          <NavLink className={styles.back} to="/home">
+          <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
             <iconify-icon
               icon="ion:arrow-back-circle"
               width="40"
@@ -128,12 +130,12 @@ export default function EditProfileProf() {
           />
         
         
-        <label className={styles.label}>ADRESS:</label>
+        <label className={styles.label}>ADDRESS:</label>
           <input
             className={styles.input}
-            name="adress"
-            defaultValue={profDetail.adress}
-            onChange={(e) => setProf({ ...prof, adress: e.target.value })}
+            name="address"
+            defaultValue={profDetail.address}
+            onChange={(e) => setProf({ ...prof, address: e.target.value })}
           />
         
         
@@ -152,6 +154,7 @@ export default function EditProfileProf() {
         </button>
       </form>
       </div>
+      
     </div>
   );
 }
