@@ -6,34 +6,33 @@ import {
   /* getTurnByName, */
   filterByDate,
   filterByHour,
-  getProfClientsTurns
+  getProfClientsTurns,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./Filters.css";
 
-const Filters = ({lastProfessional}) => {
+const Filters = ({ lastProfessional }) => {
   /* const [inputName, setInputName] = useState(""); */
   const [inputDate, setInputDate] = useState("");
   const dispatch = useDispatch();
- 
+
   /* const allTurns = useSelector((state) => state.turnBackup); */
-  const profDetail = useSelector((state) => state.profDetail)
-  const turns = useSelector((state) => state.turns)
-  const profClientsTurns = useSelector((state) => state.profClientsTurns)
-  const profClientsTurnsBackup = useSelector((state) => state.profClientsTurnsBackup)
+  const profDetail = useSelector((state) => state.profDetail);
+  const turns = useSelector((state) => state.turns);
+  const profClientsTurns = useSelector((state) => state.profClientsTurns);
+  const profClientsTurnsBackup = useSelector(
+    (state) => state.profClientsTurnsBackup
+  );
   console.log(profClientsTurns);
-
-
-  
 
   function handleFilterByClient(event) {
     event.preventDefault();
-    setClient(event.target.value)
-    dispatch(filterByClient(event.target.value)); 
+    setClient(event.target.value);
+    dispatch(filterByClient(event.target.value));
   }
 
-  const [hour, setHour] = useState('Hours')
-  const [client, setClient] = useState('Clients')
+  const [hour, setHour] = useState("Hours");
+  const [client, setClient] = useState("Clients");
 
   /* function handleOnChangeName(e) {
     setInputName(e.target.value);
@@ -44,7 +43,7 @@ const Filters = ({lastProfessional}) => {
     setInputDate(e.target.value);
     dispatch(filterByDate(e.target.value));
   }
-/*   function handleOnClickDate(e) {
+  /*   function handleOnClickDate(e) {
     e.preventDefault();
     dispatch(filterByDate(inputDate));
   }
@@ -56,13 +55,14 @@ const Filters = ({lastProfessional}) => {
 
   function handleFilterByHour(event) {
     event.preventDefault();
-    setHour(event.target.value)
+    setHour(event.target.value);
     dispatch(filterByHour(event.target.value));
   }
 
   useEffect(() => {
     dispatch(getClients());
     dispatch(getTurns());
+    dispatch(getProfClientsTurns(lastProfessional));
   }, [dispatch]);
 
   const uniqueOptions = profClientsTurnsBackup
@@ -75,28 +75,28 @@ const Filters = ({lastProfessional}) => {
     .sort((a, b) => (a.hour > b.hour ? 1 : -1))
     .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
 
-   /*  const handleKeyPressName = (event) => {
+  /*  const handleKeyPressName = (event) => {
       if (event.key === "Enter") {
         handleOnClickName(event);
       }
     };
  */
-    /* const handleKeyPressDate = (event) => {
+  /* const handleKeyPressDate = (event) => {
       if (event.key === "Enter") {
         handleOnClickDate(event);
       }
     }; */
 
-    const refreshHandler = () => {
-      setHour("Hours")
-      setClient("Clients")
-      setInputDate("")
-      dispatch(filterByClient("Clients"));
-    };
+  const refreshHandler = () => {
+    setHour("Hours");
+    setClient("Clients");
+    setInputDate("");
+    dispatch(filterByClient("Clients"));
+  };
 
   return (
     <div className="filterContainer">
-     {/*  <div>
+      {/*  <div>
         <button 
         onClick={handleOnClickName} className="ButtonSearch">Search</button>
         <input 
@@ -110,7 +110,10 @@ const Filters = ({lastProfessional}) => {
         </input>
     </div> */}
       <div>
-        <select value={client} onChange={(event) => handleFilterByClient(event)}>
+        <select
+          value={client}
+          onChange={(event) => handleFilterByClient(event)}
+        >
           <option value="Clients"> Clients </option>
           {uniqueOptions.map((v) => (
             <option value={v.name} key={v.id}>
@@ -141,6 +144,7 @@ const Filters = ({lastProfessional}) => {
             onChange={handleOnChangeDate}
             name="date"
           />
+
       </div>
       <div>
         <select value={hour} onChange={(event) => handleFilterByHour(event)}>
@@ -154,6 +158,7 @@ const Filters = ({lastProfessional}) => {
       </div>
       <div className="buttonContainer">
             <button className="inputReset" onClick={refreshHandler}><iconify-icon icon="material-symbols:refresh" width="20"></iconify-icon></button>
+
       </div>
     </div>
   );

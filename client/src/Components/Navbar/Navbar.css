@@ -49,3 +49,19 @@
     background-color: #0051EE;
     color: aliceblue;
 }
+
+.allProfessionals{
+    text-decoration: none;
+    color: #0051EE;
+    width: fit-content;
+    margin-right: 3rem;
+    border: 2px solid #0051EE;
+    padding: 0.2rem;
+    border-radius: 0.6rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.allProfessionals:hover{
+    background-color: #0051EE;
+    color: aliceblue;
+}

@@ -1,15 +1,29 @@
 import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProfClientsTurns, getTurns } from "../../Redux/Actions";
-import Cards from "../../Components/Cards/Cards"
+import {
+  getProfessionals,
+  getTurns,
+  getProfClientsTurns,
+} from "../../Redux/Actions";
+import Cards from "../../Components/Cards/Cards";
 import Filters from "../../Components/Filters/Filters";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import BotonProf from "../../Components/BottonProf/BottonProf"; 
-import DarkMode from '../../Components/DarkMode/DarkMode'
-import './Home.css';
+import BotonProf from "../../Components/BottonProf/BottonProf";
+import DarkMode from "../../Components/DarkMode/DarkMode";
 import Loading from "../Loading/Loading";
+import "./Home.css";
 
-const Home = () => {
+const Home = ({ id }) => {
+  console.log(id);
+  const allTurns = useSelector((state) => state.turnBackup);
+  const turns = useSelector((state) => state.turns);
+  const profClientsTurns = useSelector((state) => state.profClientsTurns);
+
+
+  const darkMode = useSelector((state) => state.darkMode);
+
+
+  const profDetail = useSelector((state) => state.profDetail);
 
     const [loading, setLoading] = useState(true)
 
@@ -17,22 +31,26 @@ const Home = () => {
     const turns = useSelector(state => state.turns);
     const profClientsTurns = useSelector((state) => state.profClientsTurns)
 
-    const darkMode = useSelector((state) => state.darkMode)
 
-    const profDetail = useSelector(state => state.profDetail)
+  const allProfessionals = useSelector((state) => state.allProfessionals);
 
-  const allProfessionals = useSelector(state => state.allProfessionals)
+  const ultimoProfesional = id
+    ? id
+    : allProfessionals.length
+    ? allProfessionals[0].id
+    : "";
 
-    const ultimoProfesional = allProfessionals.length
-  ? allProfessionals[allProfessionals.length - 1]
-  : "";
-   
-   
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-   
-useEffect(() => {
+  useEffect(() => {
     dispatch(getTurns());
+
+  }, []);
+
+  useEffect(() => {
+    dispatch(getProfClientsTurns(ultimoProfesional));
+  }, [ultimoProfesional]);
+
         }, [dispatch]);
 
 useEffect(() => {
@@ -45,11 +63,13 @@ useEffect(() => {
     return () => clearTimeout(timer);
   }, []);
 
+
   return (
     <div>
       <NavbarTwo />
 
-      {/* renderizar Loading mientras loading es true */}
+
+      
       {loading ? (
         <Loading />
       ) : (
@@ -63,6 +83,7 @@ useEffect(() => {
           {profClientsTurns.length && <Cards turns={profClientsTurns} />}
         </div>
       )}
+
     </div>
   );
 };
