@@ -27,10 +27,6 @@ const Home = ({ id }) => {
 
     const [loading, setLoading] = useState(true)
 
-    const allTurns = useSelector((state) => state.turnBackup);
-    const turns = useSelector(state => state.turns);
-    const profClientsTurns = useSelector((state) => state.profClientsTurns)
-
 
   const allProfessionals = useSelector((state) => state.allProfessionals);
 
@@ -51,11 +47,11 @@ const Home = ({ id }) => {
     dispatch(getProfClientsTurns(ultimoProfesional));
   }, [ultimoProfesional]);
 
-        }, [dispatch]);
+      /*   }, [dispatch]); */
 
-useEffect(() => {
+/* useEffect(() => {
     dispatch(getProfClientsTurns(ultimoProfesional.id))
-},[ultimoProfesional.id])
+},[ultimoProfesional.id]) */
 
 
 useEffect(() => {
@@ -80,7 +76,7 @@ useEffect(() => {
             <Filters lastProfessional={ultimoProfesional} />
           </div>
           <DarkMode />
-          {profClientsTurns.length && <Cards turns={profClientsTurns} />}
+          {profClientsTurns.length && <Cards turns={profClientsTurns} type="turns"/>}
         </div>
       )}
 
