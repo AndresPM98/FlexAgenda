@@ -135,6 +135,7 @@ const Filters = ({lastProfessional}) => {
         <div>
       <label>DATE:</label>
           <input
+          className="input"
             value={inputDate}
             type="date"
             onChange={handleOnChangeDate}
@@ -152,7 +153,7 @@ const Filters = ({lastProfessional}) => {
         </select>
       </div>
       <div className="buttonContainer">
-            <button onClick={refreshHandler}><iconify-icon icon="material-symbols:refresh" width="20"></iconify-icon></button>
+            <button className="inputReset" onClick={refreshHandler}><iconify-icon icon="material-symbols:refresh" width="20"></iconify-icon></button>
       </div>
     </div>
   );

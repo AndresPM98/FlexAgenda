@@ -35,3 +35,20 @@
     width: 12rem;
   }
   
+  .input {
+    border-radius: 0.5rem;
+    border: 1px solid #0051EE;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    width: 12rem;
+  }
+
+  .inputReset{
+    border-radius: 0.5rem;
+    border: 1px solid #0051EE;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    width: 5rem;
+  }
