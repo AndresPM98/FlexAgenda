@@ -26,7 +26,7 @@
 .detailContainer{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     
     border: 3px solid #0051EE;
     border-radius: 20px;
@@ -39,8 +39,10 @@
 
 
 .btnEditar {
+    display: inline-block;
     background-color: #0051EE;
     border-radius: 0.3rem;
+    margin: 5px;
     border: none;
     color: white;
     cursor: pointer;

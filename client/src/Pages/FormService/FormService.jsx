@@ -8,17 +8,26 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [error, setError] = useState({});
+  const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
     dispatch(getClients());
     dispatch(getProfessionals());
     dispatch(getServices());
   }, [dispatch]);
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []); 
 
   const allClients = useSelector((state) => state.allClients);
   const allProfessionals = useSelector((state) => state.allProfessionals);
@@ -112,7 +121,7 @@ const Form = () => {
   return (
     <div>
       <NavbarTwo />
-
+{loading ? <Loading/> : 
       <div className={styles.container}>
         <div className={styles.label}>
           SOY:
@@ -178,6 +187,7 @@ const Form = () => {
           </button>
         </form>
       </div>
+      }
     </div>
   );
 };
