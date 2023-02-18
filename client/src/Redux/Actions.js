@@ -51,7 +51,7 @@ export const getTurns = () => {
 };
 
 export const filterByClient = (payload) => {
-  console.log(payload)
+  
   return {
     type: FILTER_BY_CLIENT,
     payload,

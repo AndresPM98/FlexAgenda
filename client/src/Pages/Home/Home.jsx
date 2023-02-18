@@ -25,7 +25,7 @@ const Home = () => {
   ? allProfessionals[allProfessionals.length - 1]
   : "";
    
-   /*  console.log(profDetail); */
+   
 
     const dispatch = useDispatch();
    
