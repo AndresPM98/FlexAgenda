@@ -21,7 +21,7 @@ const Filters = ({lastProfessional}) => {
   const turns = useSelector((state) => state.turns)
   const profClientsTurns = useSelector((state) => state.profClientsTurns)
   const profClientsTurnsBackup = useSelector((state) => state.profClientsTurnsBackup)
-  console.log(lastProfessional)
+  console.log(profClientsTurns);
 
 
   
@@ -39,13 +39,16 @@ const Filters = ({lastProfessional}) => {
     setInputName(e.target.value);
   } */
   function handleOnChangeDate(e) {
+    e.preventDefault();
+    console.log(e.target.value);
     setInputDate(e.target.value);
+    dispatch(filterByDate(e.target.value));
   }
-  function handleOnClickDate(e) {
+/*   function handleOnClickDate(e) {
     e.preventDefault();
     dispatch(filterByDate(inputDate));
   }
-
+ */
   /* function handleOnClickName(e){
     e.preventDefault()
     dispatch(getTurnByName(inputName))
@@ -78,15 +81,16 @@ const Filters = ({lastProfessional}) => {
       }
     };
  */
-    const handleKeyPressDate = (event) => {
+    /* const handleKeyPressDate = (event) => {
       if (event.key === "Enter") {
         handleOnClickDate(event);
       }
-    };
+    }; */
 
     const refreshHandler = () => {
       setHour("Hours")
       setClient("Clients")
+      setInputDate("")
       dispatch(filterByClient("Clients"));
     };
 
@@ -128,6 +132,15 @@ const Filters = ({lastProfessional}) => {
           className="InputSearch"
         ></input>
       </div> */}
+        <div>
+      <label>DATE:</label>
+          <input
+            value={inputDate}
+            type="date"
+            onChange={handleOnChangeDate}
+            name="date"
+          />
+      </div>
       <div>
         <select value={hour} onChange={(event) => handleFilterByHour(event)}>
           <option value="Hours"> Hours </option>

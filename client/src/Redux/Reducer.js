@@ -88,17 +88,14 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_DATE:
-      const sourceDate = state.turnFiltered.length
-        ? state.turnFiltered
-        : state.turnBackup;
-      const date = action.payload
-        ? sourceDate.filter((t) => t.date === action.payload)
-        : state.turnBackup;
-
+      const sourceDate = state.profClientsTurns
+      const date =  
+      action.payload === ""
+        ? sourceDate
+        : sourceDate.filter((t) => t.date == action.payload)
       return {
         ...state,
-        turns: date,
-        turnFiltered: date,
+        profClientsTurns: date,
       };
 
     case FILTER_BY_HOUR:
