@@ -22,8 +22,17 @@ const Cards = ({ turns, type, professionals }) => {
     </div>
   ) : (
     <div>
-      {professionals.map(({ id, name }) => {
-        return <Card id={id} key={id} name={name} />;
+      {professionals.map(({ id, name, email, address, description }) => {
+        return (
+          <Card
+            id={id}
+            key={id}
+            name={name}
+            email={email}
+            address={address}
+            description={description}
+          />
+        );
       })}
     </div>
   );

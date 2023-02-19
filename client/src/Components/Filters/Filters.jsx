@@ -60,10 +60,9 @@ const Filters = ({ lastProfessional }) => {
   }
 
   useEffect(() => {
-    dispatch(getClients());
     dispatch(getTurns());
     dispatch(getProfClientsTurns(lastProfessional));
-  }, [dispatch]);
+  }, []);
 
   const uniqueOptions = profClientsTurnsBackup
     .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
@@ -135,16 +134,15 @@ const Filters = ({ lastProfessional }) => {
           className="InputSearch"
         ></input>
       </div> */}
-        <div>
-      <label>DATE:</label>
-          <input
+      <div>
+        <label>DATE:</label>
+        <input
           className="input"
-            value={inputDate}
-            type="date"
-            onChange={handleOnChangeDate}
-            name="date"
-          />
-
+          value={inputDate}
+          type="date"
+          onChange={handleOnChangeDate}
+          name="date"
+        />
       </div>
       <div>
         <select value={hour} onChange={(event) => handleFilterByHour(event)}>
@@ -157,8 +155,12 @@ const Filters = ({ lastProfessional }) => {
         </select>
       </div>
       <div className="buttonContainer">
-            <button className="inputReset" onClick={refreshHandler}><iconify-icon icon="material-symbols:refresh" width="20"></iconify-icon></button>
-
+        <button className="inputReset" onClick={refreshHandler}>
+          <iconify-icon
+            icon="material-symbols:refresh"
+            width="20"
+          ></iconify-icon>
+        </button>
       </div>
     </div>
   );

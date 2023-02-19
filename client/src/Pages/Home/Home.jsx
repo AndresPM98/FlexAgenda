@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getProfessionals,
@@ -19,14 +19,11 @@ const Home = ({ id }) => {
   const turns = useSelector((state) => state.turns);
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
 
-
   const darkMode = useSelector((state) => state.darkMode);
-
 
   const profDetail = useSelector((state) => state.profDetail);
 
-    const [loading, setLoading] = useState(true)
-
+  const [loading, setLoading] = useState(true);
 
   const allProfessionals = useSelector((state) => state.allProfessionals);
 
@@ -40,46 +37,34 @@ const Home = ({ id }) => {
 
   useEffect(() => {
     dispatch(getTurns());
-
   }, []);
 
   useEffect(() => {
-    dispatch(getProfClientsTurns(ultimoProfesional));
-  }, [ultimoProfesional]);
-
-      /*   }, [dispatch]); */
-
-/* useEffect(() => {
-    dispatch(getProfClientsTurns(ultimoProfesional.id))
-},[ultimoProfesional.id]) */
-
-
-useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
-
 
   return (
     <div>
       <NavbarTwo />
 
-
-      
       {loading ? (
         <Loading />
       ) : (
-        <div className={darkMode == false ? "homeContainer" : "homeContainerDark"}>
+        <div
+          className={darkMode == false ? "homeContainer" : "homeContainerDark"}
+        >
           <div className="filtersContainer">
             {/* {console.log(profDetail)} */}
             <BotonProf />
             <Filters lastProfessional={ultimoProfesional} />
           </div>
           <DarkMode />
-          {profClientsTurns.length && <Cards turns={profClientsTurns} type="turns"/>}
+          {profClientsTurns.length && (
+            <Cards turns={profClientsTurns} type="turns" />
+          )}
         </div>
       )}
-
     </div>
   );
 };
