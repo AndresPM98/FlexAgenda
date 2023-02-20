@@ -16,6 +16,7 @@ import {
   GET_PROFESSIONALS,
   GET_PROF_CLIENTS_TURNS,
   DELETE,
+  CLEAN_DATE,
 } from "./Actions";
 
 const initialState = {
@@ -29,8 +30,12 @@ const initialState = {
   profDetail: [],
   profClientsTurns: [],
   profClientsTurnsBackup: [],
+  profClientsTurnsFilteredByDate: [],
+  profClientsTurnsFilteredByName: [],
   allServices: [],
   darkMode: false,
+  hasTurn: null,
+  currentDate: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -51,11 +56,17 @@ const rootReducer = (state = initialState, action) => {
       const allTurnsC = state.profClientsTurnsBackup;
       const filterClient =
         action.payload === "Clients"
-          ? state.profClientsTurnsBackup
-          : allTurnsC.filter((e) => e.client.name == action.payload);
+          ? allTurnsC
+          : allTurnsC.filter((e) => e.client.name === action.payload);
+      console.log(state.currentDate); // primer render => NULL
+
       return {
         ...state,
         profClientsTurns: filterClient,
+        profClientsTurnsFilteredByName: filterClient,
+        hasTurn: state.currentDate && allTurnsC.some(
+          (t) => t.date === state.currentDate && t.client.name === action.payload
+        ),
       };
 
     /* ---------------------------------------------------- */
@@ -70,15 +81,19 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case CLEAN_DATE:
+      return {
+        ...state,
+        currentDate: null,
+      };
 
     case GET_TURN_BY_NAME:
-      const source = state.turnFiltered.length
+      const toFilter = state.turnFiltered.length
         ? state.turnFiltered
         : state.turnBackup;
       const filtered = action.payload
-        ? source.filter((t) => t.client.name.toLowerCase() === action.payload)
+        ? toFilter.filter((t) => t.client.name.toLowerCase() === action.payload)
         : state.turnBackup;
-
       return {
         ...state,
         turns: filtered,
@@ -86,14 +101,17 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_DATE:
-      const sourceDate = state.profClientsTurns;
+      const toFilterDate = state.profClientsTurnsFilteredByName;
       const date =
         action.payload === ""
-          ? sourceDate
-          : sourceDate.filter((t) => t.date == action.payload);
+          ? toFilterDate
+          : toFilterDate.filter((t) => t.date === action.payload);
+      console.log(action.payload);
       return {
         ...state,
         profClientsTurns: date,
+        profClientsTurnsFilteredByDate: date,
+        currentDate: action.payload,
       };
 
     case FILTER_BY_HOUR:
@@ -101,7 +119,7 @@ const rootReducer = (state = initialState, action) => {
       const filterHours =
         action.payload === "Hours"
           ? allTurns
-          : allTurns.filter((e) => e.hour == action.payload);
+          : allTurns.filter((e) => e.hour === action.payload);
       return {
         ...state,
         profClientsTurns: filterHours,
@@ -153,6 +171,7 @@ const rootReducer = (state = initialState, action) => {
       );
       return {
         ...state,
+        profClientsTurnsFilteredByName: allTurnsClientFiltered,
         profClientsTurnsBackup: allTurnsClientFiltered,
         profClientsTurns: allTurnsClientFiltered,
       };
