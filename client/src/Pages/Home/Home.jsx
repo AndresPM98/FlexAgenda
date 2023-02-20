@@ -56,6 +56,7 @@ const Home = ({ id }) => {
       <NavbarTwo />
 
       <h1>Hola {nameProfessional} !</h1>
+      <p>{profClientsTurns.length ? `Tienes ${profClientsTurns.length} turnos` : "No hay turnos"}</p>
       <div
         className={darkMode == false ? "homeContainer" : "homeContainerDark"}
         >

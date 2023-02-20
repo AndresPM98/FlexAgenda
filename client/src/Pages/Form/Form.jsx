@@ -84,10 +84,10 @@ console.log(serv);
       .then((res) => {
         alert("Turn taken correctly");
         history.push(
-          `/professionalDetail/${ultimoProfesional.id}`
+          `/profTT/${ultimoProfesional.id}`
         );
       })
-      .catch((err) => alert(err));
+      .catch((err) => alert("Algo salio mal"));
   };
 
   function handleSelectServ(event) {
