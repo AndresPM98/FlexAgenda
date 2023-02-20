@@ -4,9 +4,9 @@ import { NavLink, useParams } from "react-router-dom";
 
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { cleanProfDetail, getProfessionalDetail } from "../../Redux/Actions";
-
+import Loading from "../Loading/Loading";
 import style from "./ProfessionalTakeTurn.module.css";
-
+import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -14,14 +14,19 @@ const ProfessionalPage = () => {
   const { id } = useParams();
   const professional = useSelector((state) => state.profDetail);
   const darkMode = useSelector((state) => state.darkMode);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProfessionalDetail(id));
+    dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
     return () => {
       dispatch(cleanProfDetail());
     };
   }, [dispatch, id]);
+
+  if (loading) {
+    return <Loading />;
+  }
   
   return (
     <>
@@ -38,15 +43,16 @@ const ProfessionalPage = () => {
           </NavLink>
         </div>
 
-        <p>Professional Page</p>
+        <p> Professional Page</p>
         <div className={style.detailContainer}>
 
+        <img style={{borderRadius:"50%"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
         <h1 className={style.name}>{professional?.name}</h1>
         <h2 className={style.category}>{professional?.category}</h2>
         <h4 className={style.phone}>{professional?.phone}</h4>
-        <h4 className={style.adress}>{professional?.adress}</h4>
+        <h4 className={style.adress}>{professional?.address}</h4>
+        <h4 className={style.adress}>{professional?.email}</h4>
         <p className={style.description}>{professional?.description}</p>
-        <img style={{borderRadius:"50%"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
 
         </div>
         <Link to={`/formClient`}>

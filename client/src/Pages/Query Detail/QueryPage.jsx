@@ -13,19 +13,22 @@ import {
   deleteTurn,
 } from "../../Redux/Actions";
 import img from "../../Imagenes y logos/agenda.png";
+import Loading from "../Loading/Loading";
+import { useState } from "react";
 
 const QueryPage = () => {
   const params = useParams();
   const darkMode = useSelector((state) => state.darkMode);
   const turnDetail = useSelector((state) => state.turnDetail);
   const clientDetail = useSelector((state) => state.clientDetailTurn);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTurnDetail(params.id));
+    dispatch(getTurnDetail(params.id)).then (() => setLoading(false));
     return () => {
-      dispatch(cleanDetailTurn());
+      dispatch(cleanDetailTurn())
     };
   }, [params]);
 
@@ -43,6 +46,7 @@ const QueryPage = () => {
     history.push("/home");
     dispatch(getTurnDetail);
   };
+  if (loading) return <Loading />;
 
   return (
     <div>
