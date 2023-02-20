@@ -8,6 +8,7 @@ export const GET_CLIENT_DETAIL_TURN = "GET_CLIENT_DETAIL_TURN";
 export const CLEAN_DETAIL_TURN = "CLEAN_DETAIL_TURN";
 export const CHANGE_THEME = "CHANGE_THEME";
 export const DELETE = "DELETE";
+export const CLEAN_DATE = "CLEAN_DATE";
 
 export const getClients = () => {
   return async function (dispatch) {
@@ -123,6 +124,11 @@ export const getProfessionalDetail = (id) => {
 export const cleanProfDetail = () => {
   return {
     type: CLEAN_PROF_DETAIL,
+  };
+};
+export const cleanDate = () => {
+  return {
+    type: CLEAN_DATE,
   };
 };
 

@@ -7,7 +7,6 @@ import {
   filterByDate,
   filterByHour,
   getProfClientsTurns,
-  cleanDate,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./Filters.css";
@@ -19,26 +18,18 @@ const Filters = ({ lastProfessional }) => {
 
   /* const allTurns = useSelector((state) => state.turnBackup); */
   const profDetail = useSelector((state) => state.profDetail);
-  const hasTurn = useSelector((state) => state.hasTurn);
+  const turns = useSelector((state) => state.turns);
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
+  console.log(profClientsTurns);
 
   function handleFilterByClient(event) {
     event.preventDefault();
     setClient(event.target.value);
-
     dispatch(filterByClient(event.target.value));
   }
-
-  useEffect(() => {
-    // console.log(hasTurn); // primer render: CUANDO CAMBIE HASTURN
-    if (!hasTurn) {
-      setInputDate("");
-      dispatch(cleanDate());
-    }
-  }, [hasTurn]);
 
   const [hour, setHour] = useState("Hours");
   const [client, setClient] = useState("Clients");
@@ -48,6 +39,7 @@ const Filters = ({ lastProfessional }) => {
   } */
   function handleOnChangeDate(e) {
     e.preventDefault();
+    console.log(e.target.value);
     setInputDate(e.target.value);
     dispatch(filterByDate(e.target.value));
   }
@@ -98,7 +90,6 @@ const Filters = ({ lastProfessional }) => {
     setHour("Hours");
     setClient("Clients");
     setInputDate("");
-    dispatch(cleanDate());
     dispatch(filterByClient("Clients"));
   };
 
@@ -122,10 +113,7 @@ const Filters = ({ lastProfessional }) => {
           value={client}
           onChange={(event) => handleFilterByClient(event)}
         >
-          <option value="" hidden>
-            {" "}
-            Clients{" "}
-          </option>
+          <option value="Clients"> Clients </option>
           {uniqueOptions.map((v) => (
             <option value={v.name} key={v.id}>
               {v.client.name}
@@ -147,6 +135,7 @@ const Filters = ({ lastProfessional }) => {
         ></input>
       </div> */}
       <div>
+        <label>DATE:</label>
         <input
           className="input"
           value={inputDate}
@@ -157,10 +146,7 @@ const Filters = ({ lastProfessional }) => {
       </div>
       <div>
         <select value={hour} onChange={(event) => handleFilterByHour(event)}>
-          <option value="" hidden>
-            {" "}
-            Hours{" "}
-          </option>
+          <option value="Hours"> Hours </option>
           {uniqueHour.map((v) => (
             <option value={v.hour} key={v.hour}>
               {v.hour}
