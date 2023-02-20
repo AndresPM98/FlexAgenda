@@ -36,13 +36,13 @@ const Home = ({ id }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTurns());
+    dispatch(getTurns()).then(() => { setLoading(false) });
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
+
+  if (loading) {
+    return <Loading/>;
+  }
 
   return (
     <div>
@@ -60,9 +60,9 @@ const Home = ({ id }) => {
             <Filters lastProfessional={ultimoProfesional} />
           </div>
           <DarkMode />
-          {profClientsTurns.length && (
+          {profClientsTurns.length ? 
             <Cards turns={profClientsTurns} type="turns" />
-          )}
+          : <h2>No hay turnos </h2>}
         </div>
       )}
     </div>
