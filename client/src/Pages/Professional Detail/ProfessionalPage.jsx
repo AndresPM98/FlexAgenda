@@ -21,9 +21,11 @@ const ProfessionalPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
-    return () => {
-      dispatch(cleanProfDetail());
-    };
+
+    // return () => {
+    //   dispatch(cleanProfDetail());
+    // };
+
   }, [dispatch, id]);
 
 

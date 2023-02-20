@@ -86,23 +86,23 @@ const Form = () => {
     const { name, value } = event.target;
     let newValue = value;
 
-    if (name === "duration") {
-        const minutes = parseFloat(value) * 60;
-        let step, updatedValue;
-        if (minutes >= 60) {
-          const hours = Math.floor(minutes / 60);
-          const remainder = minutes % 60;
-          const formattedRemainder = remainder.toFixed(0).padStart(2, "0");
-          updatedValue = `${hours.toString()}.${formattedRemainder}`;
-          step = 60;
-        } else {
-          const formattedValue = minutes.toFixed(0).padStart(2, "0");
-          updatedValue = `0.${formattedValue}`;
-          step = 10;
-        }
-        event.target.step = step;
-        newValue = updatedValue;
-      }
+    // if (name === "duration") {
+    //     const minutes = parseFloat(value) * 60;
+    //     let step, updatedValue;
+    //     if (minutes >= 60) {
+    //       const hours = Math.floor(minutes / 60);
+    //       const remainder = minutes % 60;
+    //       const formattedRemainder = remainder.toFixed(0).padStart(2, "0");
+    //       updatedValue = `${hours.toString()}.${formattedRemainder}`;
+    //       step = 60;
+    //     } else {
+    //       const formattedValue = minutes.toFixed(0).padStart(2, "0");
+    //       updatedValue = `0.${formattedValue}`;
+    //       step = 10;
+    //     }
+    //     event.target.step = step;
+    //     newValue = updatedValue;
+    //   }
     setForm({ ...form, [name]: newValue });
     validate({ ...form, [name]: newValue });
   };
@@ -175,8 +175,8 @@ const Form = () => {
   onChange={changeHandler}
   placeholder="¿Quieres agregar una duracion aproximada en horas?"
   name="duration"
-  min="0"
-  step="00.10"
+  // min="0"
+  // step="00.10"
 />
           <div className={styles.error}>
             {error.price && <span>{error.price}</span>}{" "}

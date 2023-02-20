@@ -19,9 +19,9 @@ const ProfessionalPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
-    return () => {
-      dispatch(cleanProfDetail());
-    };
+    // return () => {
+    //   dispatch(cleanProfDetail());
+    // };
   }, [dispatch, id]);
 
   if (loading) {
@@ -32,16 +32,6 @@ const ProfessionalPage = () => {
     <>
       <NavbarTwo />
       <div className={darkMode == false ? style.container : style.containerDark}>
-        <div className={style.backContainer}>
-          <NavLink className={style.back} to="/home">
-            <iconify-icon
-              icon="ion:arrow-back-circle"
-              width="40"
-              height="30"
-            ></iconify-icon>
-            BACK
-          </NavLink>
-        </div>
 
         <p> Professional Page</p>
         <div className={style.detailContainer}>
