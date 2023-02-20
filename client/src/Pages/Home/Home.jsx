@@ -34,46 +34,47 @@ const Home = ({ id }) => {
     : allProfessionals.length
     ? allProfessionals[allProfessionals.length - 1].id
     : "";
-  
-console.log(ultimoProfesional);
+
+  const nameProfessional = allProfessionals.length
+    ? allProfessionals[allProfessionals.length - 1].name
+    : "";
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTurns()).then(() => { setLoading(false) });
+    dispatch(getTurns()).then(() => {
+      setLoading(false);
+    });
   }, [dispatch]);
-
 
   useEffect(() => {
     dispatch(getProfessionals());
   }, [dispatch]);
 
-
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <div>
       <NavbarTwo />
 
-      {loading ? (
-        <Loading />
-      ) : (
-        <div
-          className={darkMode == false ? "homeContainer" : "homeContainerDark"}
+      <h1>Hola {nameProfessional} !</h1>
+      <div
+        className={darkMode == false ? "homeContainer" : "homeContainerDark"}
         >
-          <div className="filtersContainer">
-            {/* {console.log(profDetail)} */}
-            <BotonProf />
-            <Filters lastProfessional={ultimoProfesional} />
-          </div>
-          <DarkMode />
-          {profClientsTurns.length ? 
-            <Cards turns={profClientsTurns} type="turns" />
-          : <h2>No hay turnos</h2>}
+        <div className="filtersContainer">
+          {/* {console.log(profDetail)} */}
+          <BotonProf />
+          <Filters lastProfessional={ultimoProfesional} />
         </div>
-      )}
+        <DarkMode />
+        {profClientsTurns.length ? (
+          <Cards turns={profClientsTurns} type="turns" />
+        ) : (
+          <h2>No hay turnos</h2>
+        )}
+      </div>
     </div>
   );
 };

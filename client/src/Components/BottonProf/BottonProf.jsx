@@ -32,7 +32,7 @@ const BotonProf = () => {
               className="nameLinkProf"
             >
               <div>
-                <p className="textProf">Hola {ultimoProfesional.name}</p>
+                <p className="textProf">Perfil</p>
                 <iconify-icon
                   icon="healthicons:ui-user-profile-negative"
                   width="60"
