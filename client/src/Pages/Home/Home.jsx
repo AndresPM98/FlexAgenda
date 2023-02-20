@@ -62,7 +62,7 @@ const Home = ({ id }) => {
           <DarkMode />
           {profClientsTurns.length ? 
             <Cards turns={profClientsTurns} type="turns" />
-          : <h2>No hay turnos </h2>}
+          : <h2>No hay turnos</h2>}
         </div>
       )}
     </div>
