@@ -43,6 +43,7 @@ const QueryPage = () => {
 
   const handlerDelete = () => {
     dispatch(deleteTurn(id));
+    alert("Turno eliminado")
     history.push("/home");
     dispatch(getTurnDetail);
   };
