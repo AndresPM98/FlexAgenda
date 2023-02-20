@@ -143,6 +143,9 @@ console.log(serv);
           <label className={styles.label}>PROFESSIONAL: 
           <h2>{ultimoProfesional.name}</h2>
           </label>
+          <label className={styles.label}>CLIENTE: 
+          <h2>{ultimoCliente.name}</h2>
+          </label>
 
 
           <label className={styles.label}>SERVICE:</label>
