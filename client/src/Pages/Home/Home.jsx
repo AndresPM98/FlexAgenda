@@ -43,9 +43,11 @@ console.log(ultimoProfesional);
     dispatch(getTurns()).then(() => { setLoading(false) });
   }, [dispatch]);
 
+
   useEffect(() => {
     dispatch(getProfessionals());
   }, [dispatch]);
+
 
   if (loading) {
     return <Loading/>;

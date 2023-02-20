@@ -20,24 +20,22 @@ const ProfessionalPage = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProfessionalDetail(id));
+    dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
     return () => {
       dispatch(cleanProfDetail());
     };
   }, [dispatch, id]);
 
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+ if(loading) return <Loading/>
+
 
   
   
   return (
     <>
       <NavbarTwo />
-      {loading? <Loading/> : 
+      
       <div className={darkMode == false ? style.container : style.containerDark}>
         <div className={style.backContainer}>
           <NavLink className={style.back} to="/home">
@@ -70,7 +68,7 @@ const ProfessionalPage = () => {
         </Link>
         </div>
       </div>
-      }
+      
     </>
   );
 };
