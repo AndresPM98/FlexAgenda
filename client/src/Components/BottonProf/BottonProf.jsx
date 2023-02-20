@@ -18,7 +18,9 @@ const BotonProf = () => {
 
   const allProfessionals = useSelector((state) => state.allProfessionals);
 
-  const ultimoProfesional = allProfessionals.length ? allProfessionals[0] : "";
+  const ultimoProfesional = allProfessionals.length
+    ? allProfessionals[allProfessionals.length - 1]
+    : "";
 
   return (
     <div>

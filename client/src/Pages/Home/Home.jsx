@@ -30,7 +30,7 @@ const Home = ({ id }) => {
   const ultimoProfesional = id
     ? id
     : allProfessionals.length
-    ? allProfessionals[0].id
+    ? allProfessionals[allProfessionals.length - 1].id
     : "";
 
   const dispatch = useDispatch();
