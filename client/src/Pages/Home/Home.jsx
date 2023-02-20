@@ -17,8 +17,7 @@ const Home = ({ id }) => {
   console.log(id);
   const allTurns = useSelector((state) => state.turnBackup);
   const turns = useSelector((state) => state.turns);
-  // console.log(turns);
-  // console.log(allTurns);
+
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
 
   const darkMode = useSelector((state) => state.darkMode);
@@ -42,13 +41,10 @@ const Home = ({ id }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getProfessionals());
     dispatch(getTurns()).then(() => {
       setLoading(false);
     });
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getProfessionals());
   }, [dispatch]);
 
   if (loading) {
