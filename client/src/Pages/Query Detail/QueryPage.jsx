@@ -53,7 +53,7 @@ const QueryPage = () => {
     <div>
       {turnDetail && dispatchClientDetail(turnDetail.ClientId)}
       <NavbarTwo />
-      <div className={darkMode == false ? "queryPage" : "queryPageDark"}>
+      <div className={darkMode === false ? "queryPage" : "queryPageDark"}>
         <div className="backContainer">
           <NavLink className="back" to="/home">
             <iconify-icon
