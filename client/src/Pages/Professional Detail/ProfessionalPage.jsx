@@ -58,7 +58,16 @@ const ProfessionalPage = () => {
           <h4 className={style.adress}>{professional?.address}</h4>
           <h4 className={style.adress}>{professional?.email}</h4>
 
-          <p className={style.description}>{professional?.description}</p>
+
+        <img style={{borderRadius:"50%", float:"left", marginRight:"10px", width:"200px", height:"200px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
+        <h1 className={style.name}>{professional?.name}</h1>
+        <h2 className={style.category}>{professional?.category}</h2>
+        <h4 className={style.phone}>{professional?.phone}</h4>
+        <h4 className={style.adress}>{professional?.address}</h4>
+        <h4 className={style.adress}>{professional?.email}</h4>
+        
+        <p className={style.description}>{professional?.description}</p>
+
 
           <Link to={`/professional/edit/${id}`}>
             <button className={style.btnEditar}>Editar Perfil</button>
