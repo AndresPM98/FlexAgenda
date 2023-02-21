@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import Styles from "./HomeProfessional.module.css";
-import Home from "../Home/Home";
+import Styles from "./allProfessionalPageById.module.css";
+import HomeProfessional from "../../Components/HomeProfessional/HomeProfessional";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getClients, getTurns } from "../../Redux/Actions";
 
-const HomeProfessional = () => {
+const AllProfessionalPageById = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -15,9 +15,9 @@ const HomeProfessional = () => {
   }, [dispatch]);
   return (
     <div className={Styles.mainContainer}>
-      <Home id={id}></Home>
+      <HomeProfessional id={id}></HomeProfessional>
     </div>
   );
 };
 
-export default HomeProfessional;
+export default AllProfessionalPageById;
