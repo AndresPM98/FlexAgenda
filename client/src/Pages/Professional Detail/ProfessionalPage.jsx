@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import { cleanProfDetail, getProfessionalDetail } from "../../Redux/Actions";
+import { getProfessionalDetail } from "../../Redux/Actions";
 import Loading from "../Loading/Loading";
 import style from "./ProfessionalPage.module.css";
 import { useState } from "react";
@@ -22,10 +22,6 @@ const ProfessionalPage = () => {
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
 
-    // return () => {
-    //   dispatch(cleanProfDetail());
-    // };
-
   }, [dispatch, id]);
 
 
@@ -38,7 +34,7 @@ const ProfessionalPage = () => {
     <>
       <NavbarTwo />
       
-      <div className={darkMode == false ? style.container : style.containerDark}>
+      <div className={darkMode === false ? style.container : style.containerDark}>
         <div className={style.backContainer}>
           <NavLink className={style.back} to="/home">
             <iconify-icon

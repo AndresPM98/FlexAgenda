@@ -1,8 +1,6 @@
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-
 import styles from "./FormService.module.css";
-
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -60,7 +58,7 @@ const Form = () => {
         ProfessionalId: ultimoProfesional.id,
       });
     }
-  }, [allClients, allProfessionals]);
+  }, [allClients, allProfessionals, ultimoCliente.id, ultimoProfesional.id, form]);
 
   function validate(form) {
     let error = {};

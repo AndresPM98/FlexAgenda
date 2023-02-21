@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import { cleanProfDetail, getProfessionalDetail } from "../../Redux/Actions";
+import { getProfessionalDetail } from "../../Redux/Actions";
 import Loading from "../Loading/Loading";
 import style from "./ProfessionalTakeTurn.module.css";
 import { useState } from "react";
@@ -19,9 +19,7 @@ const ProfessionalPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
-    // return () => {
-    //   dispatch(cleanProfDetail());
-    // };
+    
   }, [dispatch, id]);
 
   if (loading) {
@@ -31,7 +29,7 @@ const ProfessionalPage = () => {
   return (
     <>
       <NavbarTwo />
-      <div className={darkMode == false ? style.container : style.containerDark}>
+      <div className={darkMode === false ? style.container : style.containerDark}>
 
         <p> Professional Page</p>
         <div className={style.detailContainer}>

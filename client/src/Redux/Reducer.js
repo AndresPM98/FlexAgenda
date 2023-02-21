@@ -1,6 +1,5 @@
 import {
   GET_CLIENTS,
-  GET_CLIENT_BY_NAME,
   FILTER_BY_CLIENT,
   GET_TURNS,
   GET_TURN_BY_NAME,
@@ -167,7 +166,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_PROF_CLIENTS_TURNS:
       const allTurnsClient = state.turnBackup;
       const allTurnsClientFiltered = allTurnsClient.filter(
-        (t) => t.professionalID == action.payload
+        (t) => t.professionalID === action.payload
       );
       return {
         ...state,
