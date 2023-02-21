@@ -24,7 +24,7 @@ const FormClient = () => {
   });
 
   const validate = (form) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
+    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
       setErrors({ ...error, email: "" });
     } else {
       setErrors({ ...error, email: "Hay un error en email" });
@@ -55,7 +55,7 @@ const FormClient = () => {
   return (
     <div>
       <NavbarTwo />
-      <div className={darkMode == false ? styles.container : styles.containerDark}>
+      <div className={darkMode === false ? styles.container : styles.containerDark}>
         
 
         <form onSubmit={submitHandler} className={styles.form}>

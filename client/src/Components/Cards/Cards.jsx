@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { getTurns } from "../../Redux/Actions";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import Card from "../Card/Card";
 import "./Cards.css";
 

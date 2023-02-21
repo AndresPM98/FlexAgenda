@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-  getClients,
   filterByClient,
   getTurns,
-  /* getTurnByName, */
   filterByDate,
   filterByHour,
   getProfClientsTurns,
@@ -13,12 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Filters.css";
 
 const Filters = ({ lastProfessional }) => {
-  /* const [inputName, setInputName] = useState(""); */
-  const [inputDate, setInputDate] = useState("");
   const dispatch = useDispatch();
 
-  /* const allTurns = useSelector((state) => state.turnBackup); */
-  const profDetail = useSelector((state) => state.profDetail);
   const hasTurn = useSelector((state) => state.hasTurn);
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
   const profClientsTurnsBackup = useSelector(
@@ -32,34 +26,24 @@ const Filters = ({ lastProfessional }) => {
     dispatch(filterByClient(event.target.value));
   }
 
+  const [inputDate, setInputDate] = useState("");
+
   useEffect(() => {
     // console.log(hasTurn); // primer render: CUANDO CAMBIE HASTURN
     if (!hasTurn) {
       setInputDate("");
       dispatch(cleanDate());
     }
-  }, [hasTurn]);
+  }, [dispatch, hasTurn]);
 
   const [hour, setHour] = useState("Hours");
   const [client, setClient] = useState("Clients");
 
-  /* function handleOnChangeName(e) {
-    setInputName(e.target.value);
-  } */
   function handleOnChangeDate(e) {
     e.preventDefault();
     setInputDate(e.target.value);
     dispatch(filterByDate(e.target.value));
   }
-  /*   function handleOnClickDate(e) {
-    e.preventDefault();
-    dispatch(filterByDate(inputDate));
-  }
- */
-  /* function handleOnClickName(e){
-    e.preventDefault()
-    dispatch(getTurnByName(inputName))
-} */
 
   function handleFilterByHour(event) {
     event.preventDefault();
@@ -70,7 +54,7 @@ const Filters = ({ lastProfessional }) => {
   useEffect(() => {
     dispatch(getTurns());
     dispatch(getProfClientsTurns(lastProfessional));
-  }, []);
+  }, [dispatch, lastProfessional]);
 
   const uniqueOptions = profClientsTurnsBackup
     .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
@@ -82,18 +66,6 @@ const Filters = ({ lastProfessional }) => {
     .sort((a, b) => (a.hour > b.hour ? 1 : -1))
     .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
 
-  /*  const handleKeyPressName = (event) => {
-      if (event.key === "Enter") {
-        handleOnClickName(event);
-      }
-    };
- */
-  /* const handleKeyPressDate = (event) => {
-      if (event.key === "Enter") {
-        handleOnClickDate(event);
-      }
-    }; */
-
   const refreshHandler = () => {
     setHour("Hours");
     setClient("Clients");
@@ -104,19 +76,6 @@ const Filters = ({ lastProfessional }) => {
 
   return (
     <div className="filterContainer">
-      {/*  <div>
-        <button 
-        onClick={handleOnClickName} className="ButtonSearch">Search</button>
-        <input 
-        onKeyPress={handleKeyPressName}
-        type='text'
-        value={inputName} 
-        onChange={handleOnChangeName} 
-        placeholder='Client...' 
-        className="InputSearch">
-
-        </input>
-    </div> */}
       <div>
         <select
           value={client}
@@ -133,19 +92,6 @@ const Filters = ({ lastProfessional }) => {
           ))}
         </select>
       </div>
-      {/* <div>
-        <button onClick={handleOnClickDate} className="ButtonSearch">
-          Search
-        </button>
-        <input
-          onKeyPress={handleKeyPressDate}
-          type="text"
-          value={inputDate}
-          onChange={handleOnChangeDate}
-          placeholder="Date..."
-          className="InputSearch"
-        ></input>
-      </div> */}
       <div>
         <input
           className="input"

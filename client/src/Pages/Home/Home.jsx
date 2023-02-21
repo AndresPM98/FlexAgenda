@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getProfessionals,
-  getTurns,
-  getProfClientsTurns,
-} from "../../Redux/Actions";
+import { getProfessionals, getTurns } from "../../Redux/Actions";
 import Cards from "../../Components/Cards/Cards";
 import Filters from "../../Components/Filters/Filters";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
@@ -14,15 +10,9 @@ import Loading from "../Loading/Loading";
 import "./Home.css";
 
 const Home = ({ id }) => {
-  console.log(id);
-  const allTurns = useSelector((state) => state.turnBackup);
-  const turns = useSelector((state) => state.turns);
-
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
 
   const darkMode = useSelector((state) => state.darkMode);
-
-  const profDetail = useSelector((state) => state.profDetail);
 
   const [loading, setLoading] = useState(true);
 
@@ -56,10 +46,14 @@ const Home = ({ id }) => {
       <NavbarTwo />
 
       <h1>Hola {nameProfessional} !</h1>
-      <p>{profClientsTurns.length ? `Tienes ${profClientsTurns.length} turnos` : "No hay turnos"}</p>
+      <p>
+        {profClientsTurns.length
+          ? `Tienes ${profClientsTurns.length} turnos`
+          : "No hay turnos"}
+      </p>
       <div
-        className={darkMode == false ? "homeContainer" : "homeContainerDark"}
-        >
+        className={darkMode === false ? "homeContainer" : "homeContainerDark"}
+      >
         <div className="filtersContainer">
           {/* {console.log(profDetail)} */}
           <BotonProf />

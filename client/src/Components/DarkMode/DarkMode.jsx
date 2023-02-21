@@ -9,7 +9,7 @@ export default function DarkMode (props) {
     const darkMode = useSelector((state) => state.darkMode)
 
     const handlerTheme = () => {
-        if(darkMode == false){
+        if(darkMode === false){
         dispatch(changeTheme(true))
         }else{
             dispatch(changeTheme(false))

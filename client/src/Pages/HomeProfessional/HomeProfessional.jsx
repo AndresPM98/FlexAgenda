@@ -3,7 +3,7 @@ import Styles from "./HomeProfessional.module.css";
 import Home from "../Home/Home";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getClients, getProfClientsTurns, getTurns } from "../../Redux/Actions";
+import { getClients, getTurns } from "../../Redux/Actions";
 
 const HomeProfessional = () => {
   const { id } = useParams();
@@ -12,7 +12,7 @@ const HomeProfessional = () => {
   useEffect(() => {
     dispatch(getClients());
     dispatch(getTurns());
-  }, []);
+  }, [dispatch]);
   return (
     <div className={Styles.mainContainer}>
       <Home id={id}></Home>

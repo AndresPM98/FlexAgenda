@@ -49,7 +49,7 @@ console.log(serv);
         ProfessionalId: ultimoProfesional.id,
       });
     }
-  }, [allClients, allProfessionals]);
+  }, [allClients, allProfessionals, form, ultimoCliente.id, ultimoProfesional.id]);
 
 
   function validate(form) {
