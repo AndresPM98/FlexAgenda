@@ -10,9 +10,9 @@ import {
   FormClient,
   Login,
   AllProfessionals,
-  HomeProffesional,
 } from "./Pages";
 import CalendarxD from "./Pages/Calendar/CalendarxD";
+import AllProfessionalPageById from "./Pages/allProfessionalPageById/allProfessionalPageById";
 
 import ProfessionalTakeTurn from "./Pages/ProfessionalTakeTurn/ProfessionalTakeTurn";
 import FormService from "./Pages/FormService/FormService";
@@ -25,8 +25,10 @@ function App() {
     <div className="App">
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/home" component={Home} />
-      <Route exact path="/form" component={Form} />
-      <Route exact path="/formClient" component={FormClient} />
+
+      <Route exact path="/form/:id" component={Form} />
+      <Route exact path="/formClient/:id" component={FormClient} />
+
       <Route exact path="/Calendarpage" component={CalendarxD} />
 
       <Route
@@ -45,7 +47,8 @@ function App() {
       <Route exact path="/queryDetail/:id" component={QueryPage} />
       <Route path="/login" component={Login} />
       <Route path="/allProfessionals" component={AllProfessionals} />
-      <Route path="/home/:id" component={HomeProffesional} />
+
+      <Route path="/home/:id" component={AllProfessionalPageById} />
 
       <Footer />
     </div>

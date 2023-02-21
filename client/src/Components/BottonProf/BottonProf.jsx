@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./BottonProf.css";
 
-const BotonProf = () => {
+const BotonProf = ({ id }) => {
   const dispatch = useDispatch();
   const allTurns = useSelector((state) => state.turnBackup);
   const profDetail = useSelector((state) => state.profDetail);
@@ -18,9 +18,7 @@ const BotonProf = () => {
 
   const allProfessionals = useSelector((state) => state.allProfessionals);
 
-  const ultimoProfesional = allProfessionals.length
-    ? allProfessionals[allProfessionals.length - 1]
-    : "";
+  const findProfessional = allProfessionals.find((prof) => id === prof.id);
 
   return (
     <div>
@@ -28,7 +26,7 @@ const BotonProf = () => {
         <div>
           <div className="profContainer">
             <Link
-              to={`/professionalDetail/${ultimoProfesional.id}`}
+              to={`/professionalDetail/${findProfessional?.id}`}
               className="nameLinkProf"
             >
               <div>
@@ -43,7 +41,7 @@ const BotonProf = () => {
           </div>
           <div className="profContainer">
             <Link
-              to={`/profTT/${ultimoProfesional.id}`}
+              to={`/profTT/${findProfessional?.id}`}
               className="nameLinkProf"
             >
               <div>
