@@ -30,7 +30,7 @@ const QueryPage = () => {
     return () => {
       dispatch(cleanDetailTurn())
     };
-  }, [params]);
+  }, [params, dispatch]);
 
   const dispatchClientDetail = () => {
     if (!clientDetail) {
