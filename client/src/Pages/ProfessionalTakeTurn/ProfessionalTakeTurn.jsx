@@ -34,11 +34,13 @@ const ProfessionalPage = () => {
         <p> Professional Page</p>
         <div className={style.detailContainer}>
           <img
+
             style={{ borderRadius: "50%", width: "200px", height: "200px" }}
             src={
               professional?.image
                 ? professional.image
                 : "https://i.stack.https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg.com/4powQ.gif"
+
             }
             alt=""
           />
@@ -49,9 +51,17 @@ const ProfessionalPage = () => {
           <h4 className={style.adress}>{professional?.email}</h4>
           <p className={style.description}>{professional?.description}</p>
         </div>
-        <Link to={`/formClient`}>
-          <button className={style.btnTurn}>Sacar turno</button>
-        </Link>
+
+        {false ? (
+          <Link to={`/formClient/${id}`}>
+            <button className={style.btnTurn}>Registrarse</button>
+          </Link>
+        ) : (
+          <Link to={`/form/${id}`}>
+            <button className={style.btnTurn}>Sacar turno</button>
+          </Link>
+        )}
+
       </div>
     </>
   );
