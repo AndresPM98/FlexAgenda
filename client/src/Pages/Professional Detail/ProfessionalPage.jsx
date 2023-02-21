@@ -49,7 +49,7 @@ const ProfessionalPage = () => {
         <p>Professional Page</p>
         <div className={style.detailContainer}>
 
-        <img style={{borderRadius:"50%", float:"left", marginRight:"10px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
+        <img style={{borderRadius:"50%", float:"left", marginRight:"10px", width:"200px", height:"200px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
         <h1 className={style.name}>{professional?.name}</h1>
         <h2 className={style.category}>{professional?.category}</h2>
         <h4 className={style.phone}>{professional?.phone}</h4>
