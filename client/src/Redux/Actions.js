@@ -152,3 +152,15 @@ export const changeTheme = (mode) => {
     payload: mode,
   };
 };
+
+/*-----------------------------------------------------------------*/
+
+export const SET_CURRENT_DATE = "SET_CURRENT_DATE";
+
+export const setCurrentDateAction = (newDate) => {
+  return {
+    type: SET_CURRENT_DATE,
+    payload: newDate,
+  };
+};
+

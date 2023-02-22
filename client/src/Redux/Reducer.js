@@ -16,6 +16,7 @@ import {
   GET_PROF_CLIENTS_TURNS,
   DELETE,
   CLEAN_DATE,
+  SET_CURRENT_DATE
 } from "./Actions";
 
 const initialState = {
@@ -35,11 +36,19 @@ const initialState = {
   currentName: [],
   allServices: [],
   darkMode: false,
+  setCurrentDate: new Date(),
 };
 
 const rootReducer = (state = initialState, action) => {
   let allTurnsC = state.profClientsTurnsBackup;
   switch (action.type) {
+
+    case "SET_CURRENT_DATE":
+      return {
+        ...state,
+        setCurrentDate: action.payload,
+      };
+
     case GET_CLIENTS:
       return {
         ...state,
