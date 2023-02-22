@@ -21,7 +21,7 @@ const Card = ({ name, date, hour, id, type, email, address, description }) => {
     <div className="cardsContainer">
       <div className="card">
         <div className="name">
-          <NavLink to={`/home/${id}`} className="nameLink">
+          <NavLink to={`/Calendarpage/${id}`} className="nameLink">
             {name}
           </NavLink>
         </div>

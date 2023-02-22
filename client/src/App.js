@@ -11,6 +11,7 @@ import {
   Login,
   AllProfessionals,
 } from "./Pages";
+import HomeProfessional from "./Components/HomeProfessional/HomeProfessional"
 import CalendarxD from "./Pages/Calendar/CalendarxD";
 import AllProfessionalPageById from "./Pages/allProfessionalPageById/allProfessionalPageById";
 
@@ -29,7 +30,7 @@ function App() {
       <Route exact path="/form/:id" component={Form} />
       <Route exact path="/formClient/:id" component={FormClient} />
 
-      <Route exact path="/Calendarpage" component={CalendarxD} />
+      <Route exact path="/Calendarpage/:id" component={CalendarxD} />
 
       <Route
         exact
