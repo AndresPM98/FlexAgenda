@@ -24,29 +24,9 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const events = [
-  {
-    title: "Big Meeting",
-    allDay: true,
-    start: new Date(2023, 6, 0),
-    end: new Date(2023, 6, 0),
-  },
-  {
-    title: "Vacation",
-    start: new Date(2023, 6, 7),
-    end: new Date(2023, 6, 10),
-  },
-  {
-    title: "Conference",
-    start: new Date(2023, 6, 20),
-    end: new Date(2023, 6, 23),
-  },
-];
-/* Array de eventos para mostrar en el calendario */
-
 function CalendarxD() {
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-  const [allEvents, setAllEvents] = useState(events);
+  const [allEvents, setAllEvents] = useState([]);
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -57,39 +37,22 @@ function CalendarxD() {
 
   const profClientsTurns = useSelector((state) => state.turns);
 
-  function handleAddEvent() {
-    for (let i = 0; i < allEvents.length; i++) {
-      const d1 = new Date(allEvents[i].start);
-      const d2 = new Date(newEvent.start);
-      const d3 = new Date(allEvents[i].end);
-      const d4 = new Date(newEvent.end);
-
-      /* console.log(d1 <= d2);
-      console.log(d2 <= d3);
-      console.log(d1 <= d4); */
-
-      if ((d1 <= d2 && d2 <= d3) || (d1 <= d4 && d4 <= d3)) {
-        alert("CLASH");
-        break;
-      }
-    }
-
+  useEffect(() => {
     const newEvents = profClientsTurns.map((turn) => {
       const title = turn.client.name;
-      const start = turn.date + "T" + turn.hour;
-      const end = turn.date + "T" + turn.hour;
+      const start = new Date(turn.date + "T" + turn.hour);
+      const end = new Date(turn.date + "T" + turn.hour);
       const key = turn.id;
       return { ...newEvent, title, start, end };
     });
 
-    setNewEvent({ title: "", start: "", end: "" });
     setAllEvents([...allEvents, ...newEvents]);
-  }
+  }, [profClientsTurns]);
 
   const history = useHistory();
 
   function handleSelectEvent(event, id) {
-    history.push("/home");
+    history.push("/queryDetail/4ba9feaa-0946-4533-8171-7db59d62d842"); //despues va a ser por ID
   }
 
   function handleSelectSlot(slotInfo) {
@@ -99,12 +62,6 @@ function CalendarxD() {
   return (
     <div>
       <h1>Calendar</h1>
-      <h2>Add New Event</h2>
-      <div>
-        <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
-          Add Event
-        </button>
-      </div>
       <Calendar
         localizer={localizer}
         events={allEvents}
