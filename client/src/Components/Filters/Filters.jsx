@@ -17,6 +17,9 @@ const Filters = ({ lastProfessional }) => {
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
+  const fecha = useSelector((state) => state.setCurrentDate);
+  const fecha2 = fecha.toISOString().split('T')[0]; 
+  console.log(fecha2);
 
   const [inputDate, setInputDate] = useState("Date");
   const [hour, setHour] = useState("Hours");
@@ -122,7 +125,7 @@ const Filters = ({ lastProfessional }) => {
       <div>
         <input
           className="input"
-          value={inputDate}
+          value={"date"}
           type="date"
           onChange={handleSelectChange}
           name="date"

@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { getTurns, getProfessionals } from "../../Redux/Actions";
+import { getTurns, getProfessionals, setCurrentDateAction } from "../../Redux/Actions"; //importa la acción setCurrentDate
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
@@ -34,16 +34,16 @@ function CalendarxD() {
 
   const profClientsTurns = useSelector((state) => state.turns);
   const allProfessionals = useSelector((state) => state.allProfessionals);
-  
+  const currentDate = useSelector((state) => state.currentDate); // obtener el estado de currentDate del reducer
 
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
   
 
-const findTurn = profClientsTurns.find((turn) => id === turn.id);
-console.log(findTurn);
+  const findTurn = profClientsTurns.find((turn) => id === turn.id);
+  console.log(findTurn);
 
 
-const nameProfessional = findProfessional
+  const nameProfessional = findProfessional
     ? findProfessional.name
     : "";
 
@@ -51,7 +51,7 @@ const nameProfessional = findProfessional
     dispatch(getTurns());
     dispatch(getProfessionals()).then(() => {
       setLoading(false);
-      })
+    });
   }, [dispatch]);
 
   const memoizedEvents = useMemo(() => {
@@ -59,7 +59,7 @@ const nameProfessional = findProfessional
       const title = turn.client.name;
       const start = new Date(turn.date + "T" + turn.hour);
       const end = new Date(turn.date + "T" + turn.hour);
-      const key = turn.id
+      const key = turn.id;
       return { ...newEvent, title, start, end, key };
     });
   }, [profClientsTurns, newEvent]);
@@ -71,12 +71,14 @@ const nameProfessional = findProfessional
   }
 
   function handleSelectSlot(slotInfo) {
+    dispatch(setCurrentDateAction(slotInfo.start)); // actualiza el estado del reducer con la nueva fecha seleccionada
     history.push(`/home/${findProfessional.id}`);
   }
 
   if (loading) {
     return <Loading />;
   }
+
 
   return (
     <div>
