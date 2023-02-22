@@ -104,6 +104,10 @@ const Filters = ({ lastProfessional }) => {
     dispatch(getProfClientsTurns(lastProfessional));
   }, [dispatch, lastProfessional]);
 
+  useEffect(() => {
+    dispatch(filterByDate(fecha2));
+  }, [fecha2]);
+
   return (
     <div className="filterContainer">
       <div>
@@ -125,7 +129,7 @@ const Filters = ({ lastProfessional }) => {
       <div>
         <input
           className="input"
-          value={"date"}
+          defaultValue={fecha2}
           type="date"
           onChange={handleSelectChange}
           name="date"
