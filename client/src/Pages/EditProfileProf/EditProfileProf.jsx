@@ -28,6 +28,7 @@ export default function EditProfileProf() {
     password: "",
     phone: "",
     address: "",
+    addresslocation: "",
     description: "",
     image: "",
     category: "",
@@ -61,6 +62,7 @@ export default function EditProfileProf() {
         category: profDetail.category,
         phone: profDetail.phone,
         address: profDetail.address,
+        addresslocation: profDetail.addresslocation,
         image: profDetail.image,
         description: profDetail.description,
       }));
@@ -82,6 +84,9 @@ export default function EditProfileProf() {
     }
     if (prof.address !== profDetail.address) {
       updatedFields.address = prof.address;
+    }
+    if (prof.addresslocation !== profDetail.addresslocation) {
+      updatedFields.addresslocation = prof.addresslocation;
     }
     if (prof.description !== profDetail.description) {
       updatedFields.description = prof.description;
@@ -193,6 +198,14 @@ export default function EditProfileProf() {
             name="address"
             defaultValue={profDetail.address}
             onChange={(e) => setProf({ ...prof, address: e.target.value })}
+          />
+
+          <label className={styles.label}>URL GOOGLE MAPS:</label>
+          <input
+            className={styles.input}
+            name="addresslocation"
+            defaultValue={profDetail.addresslocation}
+            onChange={(e) => setProf({ ...prof, addresslocation: e.target.value })}
           />
 
           <label className={styles.label}>DESCRIPTION:</label>
