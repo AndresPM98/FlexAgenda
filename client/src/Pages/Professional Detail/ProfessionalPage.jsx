@@ -14,24 +14,29 @@ const ProfessionalPage = () => {
   const { id } = useParams();
   const professional = useSelector((state) => state.profDetail);
   const darkMode = useSelector((state) => state.darkMode);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
+
+
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
+
   }, [dispatch, id]);
 
-  if (loading) return <Loading />;
 
+ if(loading) return <Loading/>
+
+
+  
+  
   return (
     <>
       <NavbarTwo />
-
-      <div
-        className={darkMode === false ? style.container : style.containerDark}
-      >
+      
+      <div className={darkMode === false ? style.container : style.containerDark}>
         <div className={style.backContainer}>
-          <NavLink className={style.back} to={`/home/${id}`}>
+          <NavLink className={style.back} to="/home">
             <iconify-icon
               icon="ion:arrow-back-circle"
               width="40"
@@ -43,7 +48,8 @@ const ProfessionalPage = () => {
 
         <p>Professional Page</p>
         <div className={style.detailContainer}>
-        <img style={{borderRadius:"50%", float:"left", marginRight:"10px", width:"200px", height:"200px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
+
+        <img style={{borderRadius:"50%", float:"left", marginRight:"10px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
         <h1 className={style.name}>{professional?.name}</h1>
         <h2 className={style.category}>{professional?.category}</h2>
         <h4 className={style.phone}>{professional?.phone}</h4>
@@ -52,15 +58,15 @@ const ProfessionalPage = () => {
         
         <p className={style.description}>{professional?.description}</p>
 
-
-          <Link to={`/professional/edit/${id}`}>
-            <button className={style.btnEditar}>Editar Perfil</button>
-          </Link>
-          <Link to={`/professional/edit/${id}/services`}>
-            <button className={style.btnEditar}>Agregar Servicios</button>
-          </Link>
+        <Link to={`/professional/edit/${id}`}>
+        <button className={style.btnEditar}>Editar Perfil</button>
+        </Link>
+        <Link to={`/professional/edit/${id}/services`}>
+        <button className={style.btnEditar}>Agregar Servicios</button>
+        </Link>
         </div>
       </div>
+      
     </>
   );
 };
