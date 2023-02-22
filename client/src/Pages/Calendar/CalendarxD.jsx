@@ -1,18 +1,16 @@
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import DatePicker from "react-datepicker";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-datepicker/dist/react-datepicker.css";
+import { getClients } from "../../Redux/Actions";
+import { getTurns } from "../../Redux/Actions";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
-import React, { useState } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
-import { useSelector, useDispatch } from "react-redux";
-import { getClients } from "../../Redux/Actions";
-import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
-import { getTurns } from "../../Redux/Actions";
 
 const locales = {
   "es": require("date-fns/locale/es"),
@@ -50,10 +48,8 @@ function CalendarxD() {
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
   const [allEvents, setAllEvents] = useState(events);
 
-  
-
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(getTurns());
@@ -67,42 +63,44 @@ function CalendarxD() {
       const d2 = new Date(newEvent.start);
       const d3 = new Date(allEvents[i].end);
       const d4 = new Date(newEvent.end);
-      
-          /* console.log(d1 <= d2);
-          console.log(d2 <= d3);
-          console.log(d1 <= d4); */
-          
-            
+
+      /* console.log(d1 <= d2);
+      console.log(d2 <= d3);
+      console.log(d1 <= d4); */
 
       if ((d1 <= d2 && d2 <= d3) || (d1 <= d4 && d4 <= d3)) {
         alert("CLASH");
         break;
       }
-    
     }
-   
+
     const newEvents = profClientsTurns.map((turn) => {
       const title = turn.client.name;
       const start = turn.date + "T" + turn.hour;
       const end = turn.date + "T" + turn.hour;
+      const key = turn.id;
       return { ...newEvent, title, start, end };
     });
-  
-    setNewEvent({ title: '', start: '', end: '' });
+
+    setNewEvent({ title: "", start: "", end: "" });
     setAllEvents([...allEvents, ...newEvents]);
   }
 
-  console.log(profClientsTurns);
-  console.log(allEvents);
+  const history = useHistory();
+
+  function handleSelectEvent(event, id) {
+    history.push("/home");
+  }
+
+  function handleSelectSlot(slotInfo) {
+    history.push("/home");
+  }
 
   return (
     <div>
       <h1>Calendar</h1>
       <h2>Add New Event</h2>
       <div>
-        
-        
-
         <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
           Add Event
         </button>
@@ -113,6 +111,11 @@ function CalendarxD() {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500, margin: "50px" }}
+        views={['month','agenda']}
+        defaultView="month"
+        onSelectEvent={handleSelectEvent}
+        selectable={true} // Habilitar la selección de espacios en blanco
+        onSelectSlot={handleSelectSlot} // Agregar este método para manejar la selección de espacios en blanco
       />
     </div>
   );
