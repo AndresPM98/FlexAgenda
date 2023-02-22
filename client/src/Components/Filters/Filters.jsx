@@ -12,16 +12,14 @@ import "./Filters.css";
 
 const Filters = ({ lastProfessional }) => {
   const dispatch = useDispatch();
-  const hasTurn = useSelector((state) => state.hasTurn);
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
   const fecha = useSelector((state) => state.setCurrentDate);
   const fecha2 = fecha.toISOString().split('T')[0]; 
-  console.log(fecha2);
+  const [selectedDate, setSelectedDate] = useState(fecha2);
 
-  const [inputDate, setInputDate] = useState("Date");
   const [hour, setHour] = useState("Hours");
   const [client, setClient] = useState("Clients");
 
@@ -36,8 +34,8 @@ const Filters = ({ lastProfessional }) => {
   // FILTRAR POR FECHA
   function handleOnChangeDate(e) {
     e.preventDefault();
-    setInputDate(e.target.value);
     dispatch(filterByDate(e.target.value));
+    setSelectedDate(e.target.value)
   }
   // FILTRAR POR HORA
   function handleFilterByHour(event) {
@@ -49,8 +47,8 @@ const Filters = ({ lastProfessional }) => {
   const refreshHandler = () => {
     setHour("Hours");
     setClient("Clients");
-    setInputDate("Date");
     dispatch(cleanDate());
+    setSelectedDate("Dale");
     dispatch(getProfClientsTurns(lastProfessional));
   };
   // MOSTRAR HORARIOS ACTUALES
@@ -92,12 +90,12 @@ const Filters = ({ lastProfessional }) => {
   }
 
   // RENDERIZACION - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  useEffect(() => {
-    if (!hasTurn) {
-      setInputDate("");
-      dispatch(cleanDate());
-    }
-  }, [dispatch, hasTurn]);
+  // useEffect(() => {
+  //   if (!hasTurn) {
+  //     setInputDate("");
+  //     dispatch(cleanDate());
+  //   }
+  // }, [input]);
 
   useEffect(() => {
     dispatch(getTurns());
@@ -129,9 +127,10 @@ const Filters = ({ lastProfessional }) => {
       <div>
         <input
           className="input"
-          defaultValue={fecha2}
+          defaultValue={selectedDate}
+          value={selectedDate}
           type="date"
-          onChange={handleSelectChange}
+          onChange={(e)=>handleOnChangeDate(e)}
           name="date"
         />
       </div>
