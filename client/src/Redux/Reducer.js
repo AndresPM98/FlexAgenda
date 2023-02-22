@@ -27,17 +27,18 @@ const initialState = {
   turnBackup: [],
   turnFiltered: [],
   profDetail: [],
-  profClientsTurns: [],
-  profClientsTurnsBackup: [],
-  profClientsTurnsFilteredByDate: [],
-  profClientsTurnsFilteredByName: [],
+  profClientsTurns: [], // renderiza los turnos en pantalla
+  profClientsTurnsBackup: [], // tienetodos los turnos, siempre
+  profClientsTurnsFilteredByDate: [], // el resultado de filtrar por name
+  profClientsTurnsFilteredByName: [], // el resultado de filtrar por date
+  currentDate: [],
+  currentName: [],
   allServices: [],
   darkMode: false,
-  hasTurn: null,
-  currentDate: null,
 };
 
 const rootReducer = (state = initialState, action) => {
+  let allTurnsC = state.profClientsTurnsBackup;
   switch (action.type) {
     case GET_CLIENTS:
       return {
@@ -49,23 +50,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProfessionals: action.payload,
-      };
-
-    case FILTER_BY_CLIENT:
-      const allTurnsC = state.profClientsTurnsBackup;
-      const filterClient =
-        action.payload === "Clients"
-          ? allTurnsC
-          : allTurnsC.filter((e) => e.client.name === action.payload);
-      console.log(state.currentDate); // primer render => NULL
-
-      return {
-        ...state,
-        profClientsTurns: filterClient,
-        profClientsTurnsFilteredByName: filterClient,
-        hasTurn: state.currentDate && allTurnsC.some(
-          (t) => t.date === state.currentDate && t.client.name === action.payload
-        ),
       };
 
     /* ---------------------------------------------------- */
@@ -83,7 +67,40 @@ const rootReducer = (state = initialState, action) => {
     case CLEAN_DATE:
       return {
         ...state,
-        currentDate: null,
+        currentDate: [],
+        currentName: [],
+      };
+
+    case FILTER_BY_CLIENT:
+      // Primero definimos cual es la fuente que vamos a filtrar.
+      // Si ya se filtro por date, usamos esos resultados
+      const toFilterbyName = state.currentDate.length
+        ? state.profClientsTurnsFilteredByDate
+        : allTurnsC;
+      const filteredbyName = toFilterbyName.filter(
+        (e) => e.client.name === action.payload
+      );
+      return {
+        ...state,
+        profClientsTurns: filteredbyName,
+        profClientsTurnsFilteredByName: filteredbyName,
+        currentName: action.payload,
+      };
+
+    case FILTER_BY_DATE:
+      // Primero definimos cual es la fuente que vamos a filtrar.
+      // Si ya se filtro por date, usamos esos resultados:
+      const toFilterbyDate = state.currentName.length
+        ? state.profClientsTurnsFilteredByName
+        : allTurnsC;
+      const filteredbyDate = toFilterbyDate.filter(
+        (e) => e.date === action.payload
+      );
+      return {
+        ...state,
+        profClientsTurns: filteredbyDate,
+        profClientsTurnsFilteredByDate: filteredbyDate,
+        currentDate: action.payload,
       };
 
     case GET_TURN_BY_NAME:
@@ -97,20 +114,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         turns: filtered,
         turnFiltered: filtered,
-      };
-
-    case FILTER_BY_DATE:
-      const toFilterDate = state.profClientsTurnsFilteredByName;
-      const date =
-        action.payload === ""
-          ? toFilterDate
-          : toFilterDate.filter((t) => t.date === action.payload);
-      console.log(action.payload);
-      return {
-        ...state,
-        profClientsTurns: date,
-        profClientsTurnsFilteredByDate: date,
-        currentDate: action.payload,
       };
 
     case FILTER_BY_HOUR:

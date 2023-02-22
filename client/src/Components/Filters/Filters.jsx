@@ -12,78 +12,105 @@ import "./Filters.css";
 
 const Filters = ({ lastProfessional }) => {
   const dispatch = useDispatch();
-
   const hasTurn = useSelector((state) => state.hasTurn);
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
 
+  const [inputDate, setInputDate] = useState("Date");
+  const [hour, setHour] = useState("Hours");
+  const [client, setClient] = useState("Clients");
+
+  // HANDLERS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // FILTRAR POR CLIENTE
   function handleFilterByClient(event) {
     event.preventDefault();
     setClient(event.target.value);
 
     dispatch(filterByClient(event.target.value));
   }
+  // FILTRAR POR FECHA
+  function handleOnChangeDate(e) {
+    e.preventDefault();
+    setInputDate(e.target.value);
+    dispatch(filterByDate(e.target.value));
+  }
+  // FILTRAR POR HORA
+  function handleFilterByHour(event) {
+    event.preventDefault();
+    setHour(event.target.value);
+    dispatch(filterByHour(event.target.value));
+  }
+  // RESETEAR FILTROS
+  const refreshHandler = () => {
+    setHour("Hours");
+    setClient("Clients");
+    setInputDate("Date");
+    dispatch(cleanDate());
+    dispatch(getProfClientsTurns(lastProfessional));
+  };
+  // MOSTRAR HORARIOS ACTUALES
+  const uniqueOptions = profClientsTurnsBackup
+    .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
+    .filter(
+      (v, i, arr) => arr.findIndex((t) => t.client.name === v.client.name) === i
+    );
+  const uniqueHour = profClientsTurns
+    .sort((a, b) => (a.hour > b.hour ? 1 : -1))
+    .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
 
-  const [inputDate, setInputDate] = useState("");
+  // DISTRIBUIR
+  function handleSelectChange(event) {
+    const { name, value } = event.target;
 
+    if (name === "client") {
+      if (value === "Clients") {
+        // El usuario ha seleccionado el valor por defecto del select de nombres
+        // Realiza la acción necesaria para mostrar todos los turnos
+
+        dispatch(getProfClientsTurns(lastProfessional));
+      } else {
+        // El usuario ha seleccionado un nombre específico
+        // Realiza la acción necesaria para filtrar los turnos por ese nombre
+        handleFilterByClient(event);
+      }
+    } else if (name === "date") {
+      if (value === "Date") {
+        // El usuario ha seleccionado el valor por defecto del select de fechas
+        // Realiza la acción necesaria para mostrar todos los turnos
+        dispatch(getProfClientsTurns(lastProfessional));
+      } else {
+        // El usuario ha seleccionado una fecha específica
+        // Realiza la acción necesaria para filtrar los turnos por esa fecha
+        handleOnChangeDate(event);
+      }
+    }
+  }
+
+  // RENDERIZACION - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   useEffect(() => {
-    // console.log(hasTurn); // primer render: CUANDO CAMBIE HASTURN
     if (!hasTurn) {
       setInputDate("");
       dispatch(cleanDate());
     }
   }, [dispatch, hasTurn]);
 
-  const [hour, setHour] = useState("Hours");
-  const [client, setClient] = useState("Clients");
-
-  function handleOnChangeDate(e) {
-    e.preventDefault();
-    setInputDate(e.target.value);
-    dispatch(filterByDate(e.target.value));
-  }
-
-  function handleFilterByHour(event) {
-    event.preventDefault();
-    setHour(event.target.value);
-    dispatch(filterByHour(event.target.value));
-  }
-
   useEffect(() => {
     dispatch(getTurns());
     dispatch(getProfClientsTurns(lastProfessional));
   }, [dispatch, lastProfessional]);
-
-  const uniqueOptions = profClientsTurnsBackup
-    .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
-    .filter(
-      (v, i, arr) => arr.findIndex((t) => t.client.name === v.client.name) === i
-    );
-
-  const uniqueHour = profClientsTurns
-    .sort((a, b) => (a.hour > b.hour ? 1 : -1))
-    .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
-
-  const refreshHandler = () => {
-    setHour("Hours");
-    setClient("Clients");
-    setInputDate("");
-    dispatch(cleanDate());
-    dispatch(filterByClient("Clients"));
-  };
 
   return (
     <div className="filterContainer">
       <div>
         <select
           value={client}
-          onChange={(event) => handleFilterByClient(event)}
+          onChange={(e) => handleSelectChange(e)}
+          name="client"
         >
           <option value="" hidden>
-            {" "}
-            Clients{" "}
+            Clients
           </option>
           {uniqueOptions.map((v) => (
             <option value={v.name} key={v.id}>
@@ -97,7 +124,7 @@ const Filters = ({ lastProfessional }) => {
           className="input"
           value={inputDate}
           type="date"
-          onChange={handleOnChangeDate}
+          onChange={handleSelectChange}
           name="date"
         />
       </div>
