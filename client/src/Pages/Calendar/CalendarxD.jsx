@@ -10,6 +10,8 @@ import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
+import Loading from "../Loading/Loading";
+
 
 const locales = {
   es: require("date-fns/locale/es"),
@@ -25,7 +27,8 @@ const localizer = dateFnsLocalizer({
 
 function CalendarxD() {
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "", key: "" });
-  
+  const [loading, setLoading] = useState(true);
+
   const { id } = useParams(); 
   const dispatch = useDispatch();
 
@@ -40,9 +43,15 @@ const findTurn = profClientsTurns.find((turn) => id === turn.id);
 console.log(findTurn);
 
 
+const nameProfessional = allProfessionals.length
+    ? allProfessionals[allProfessionals.length - 1].name
+    : "";
+
   useEffect(() => {
     dispatch(getTurns());
-    dispatch(getProfessionals());
+    dispatch(getProfessionals()).then(() => {
+      setLoading(false);
+      })
   }, [dispatch]);
 
   const memoizedEvents = useMemo(() => {
@@ -65,11 +74,15 @@ console.log(findTurn);
     history.push(`/home/${findProfessional.id}`);
   }
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
      <NavbarTwo />
 
-<h1>Hola {/* {findProfessional.name} */} !</h1>
+<h1>Hola {nameProfessional}  !</h1>
 <p>
   {profClientsTurns.length
     ? `Tienes ${profClientsTurns.length} turnos`
