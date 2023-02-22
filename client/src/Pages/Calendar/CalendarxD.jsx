@@ -43,8 +43,8 @@ const findTurn = profClientsTurns.find((turn) => id === turn.id);
 console.log(findTurn);
 
 
-const nameProfessional = allProfessionals.length
-    ? allProfessionals[allProfessionals.length - 1].name
+const nameProfessional = findProfessional
+    ? findProfessional.name
     : "";
 
   useEffect(() => {
