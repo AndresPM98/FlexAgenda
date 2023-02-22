@@ -15,7 +15,7 @@ export default function EditProfileProf() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState(profDetail.image);
 
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
@@ -68,7 +68,7 @@ export default function EditProfileProf() {
       }));
     }
   }, [profDetail]);
-
+  console.log(img);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -139,7 +139,7 @@ export default function EditProfileProf() {
             placeholder="Upload your profile picture"
             onChange={(e) => {
               uploadImage(e);
-              setProf({ ...prof, image: img });
+              setImg(e.target.files[0]);
             }}
           />
           {profDetail.img ? (
@@ -205,7 +205,9 @@ export default function EditProfileProf() {
             className={styles.input}
             name="addresslocation"
             defaultValue={profDetail.addresslocation}
-            onChange={(e) => setProf({ ...prof, addresslocation: e.target.value })}
+            onChange={(e) =>
+              setProf({ ...prof, addresslocation: e.target.value })
+            }
           />
 
           <label className={styles.label}>DESCRIPTION:</label>
