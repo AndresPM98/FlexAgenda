@@ -36,7 +36,7 @@ const ProfessionalPage = () => {
       
       <div className={darkMode === false ? style.container : style.containerDark}>
         <div className={style.backContainer}>
-          <NavLink className={style.back} to="/home">
+          <NavLink className={style.back} to={`/home/${id}`}>
             <iconify-icon
               icon="ion:arrow-back-circle"
               width="40"
