@@ -54,6 +54,10 @@ const ProfessionalPage = () => {
         <h2 className={style.category}>{professional?.category}</h2>
         <h4 className={style.phone}>{professional?.phone}</h4>
         <h4 className={style.adress}>{professional?.address}</h4>
+        <a href={professional.addresslocation} target="_blank">
+
+          <h4 className={style.adress}>Google Maps</h4>
+          </a>
         <h4 className={style.adress}>{professional?.email}</h4>
         
         <p className={style.description}>{professional?.description}</p>
