@@ -1,0 +1,22 @@
+.error-container {
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .error-container .errorh1 {
+    font-size: 5em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .error-container .errorp {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .error-container .errora {
+    color: #0099ff;
+    text-decoration: none;
+  }
