@@ -14,6 +14,7 @@ import {
 import img from "../../Imagenes y logos/agenda.png";
 import Loading from "../Loading/Loading";
 import { useState } from "react";
+import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 
 const QueryPage = () => {
   const { id } = useParams();
@@ -56,6 +57,7 @@ const QueryPage = () => {
 
   return (
     <div>
+      <NavbarTwo/>
       {turnDetail && dispatchClientDetail(turnDetail.ClientId)}
       <div className={darkMode === false ? "queryPage" : "queryPageDark"}>
         <div className="backContainer">

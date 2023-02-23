@@ -25,7 +25,6 @@ axios.defaults.baseURL = "https://backend-pf-production-1672.up.railway.app/";
 function App() {
   return (
     <div className="App">
-        <NavbarTwo/>
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Home} />

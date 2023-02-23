@@ -77,6 +77,7 @@ function CalendarxD() {
   return (
     nameProfessional ? 
     <div>
+      <NavbarTwo/>
 
 <h1>Hola {nameProfessional}  !</h1>
 <p>

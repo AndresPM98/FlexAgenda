@@ -62,6 +62,8 @@ const ProfessionalPage = () => {
 
   return (
     <>
+      <NavbarTwo/>
+
       <div
         className={darkMode === false ? style.container : style.containerDark}
       >

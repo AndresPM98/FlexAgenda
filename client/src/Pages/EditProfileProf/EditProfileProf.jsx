@@ -109,7 +109,7 @@ export default function EditProfileProf() {
 
   return (
     <div>
-    
+    <NavbarTwo/>
 
       <div className={styles.backContainer}>
         <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
