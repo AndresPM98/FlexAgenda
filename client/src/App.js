@@ -41,6 +41,7 @@ function App() {
         <Route path="/allProfessionals" component={AllProfessionals} />
         <Route path="/home/:id" component={AllProfessionalPageById} />
         <Route path="/*" component={Error404} />
+        <Route path="/:any+" component={Error404} />
         <Footer />
       </Switch>
     </div>

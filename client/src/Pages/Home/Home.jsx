@@ -4,6 +4,7 @@ import { getProfessionals, getTurns } from "../../Redux/Actions";
 import Cards from "../../Components/Cards/Cards";
 import Filters from "../../Components/Filters/Filters";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
+import Navbar from "../../Components/Navbar/Navbar";
 import BotonProf from "../../Components/BottonProf/BottonProf";
 import DarkMode from "../../Components/DarkMode/DarkMode";
 import Loading from "../Loading/Loading";
