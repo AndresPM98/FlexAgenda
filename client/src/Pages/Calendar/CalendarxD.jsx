@@ -11,6 +11,7 @@ import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Loading from "../Loading/Loading";
+import Error404 from "../../Components/Error404/Error404";
 
 
 const locales = {
@@ -38,7 +39,7 @@ function CalendarxD() {
   
   const nameProfessional = findProfessional
     ? findProfessional.name
-    : "";
+    : <Error404 />;
 
   useEffect(() => {
     dispatch(getTurns());
@@ -74,8 +75,8 @@ function CalendarxD() {
 
 
   return (
+    nameProfessional ? 
     <div>
-     <NavbarTwo />
 
 <h1>Hola {nameProfessional}  !</h1>
 <p>
@@ -95,7 +96,8 @@ function CalendarxD() {
         selectable={true} // Habilitar la selección de espacios en blanco
         onSelectSlot={handleSelectSlot} // Agregar este método para manejar la selección de espacios en blanco
       />
-    </div>
+    </div> :
+    <Error404 />
   );
 }
 

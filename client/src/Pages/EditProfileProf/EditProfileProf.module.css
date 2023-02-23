@@ -6,8 +6,19 @@
       height: 100vh;
   
   }
-  
-  
+  /* input[type="file" i] {
+    appearance: none;
+    background-color: red;
+    justify-content: end;
+    align-items: end;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin-bottom: 50px; 
+    margin-top: 50px;
+    text-align: start ;
+    
+} */
   .backContainer{
     display: flex;
     align-items: center;
@@ -91,8 +102,22 @@
     width: 100%;
     height: 40px;
     border: none; 
+    margin-left: 210px;
   }
-  
+ .imagenEditPerfil {
+    width: 200px;
+    height: 200px;
+    border-radius: 40%;
+    margin-left: -550px;
+
+  }
+  @media (max-width: 1192.22px) {
+    .imagenEditPerfil {
+      margin-left: -400px; /* o cualquier otro valor que desees */
+    }
+  }
+
+
   .input:focus {
     outline: none;
     font-size: 16px;

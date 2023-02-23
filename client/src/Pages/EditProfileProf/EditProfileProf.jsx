@@ -109,7 +109,7 @@ export default function EditProfileProf() {
 
   return (
     <div>
-      <NavbarTwo />
+    
 
       <div className={styles.backContainer}>
         <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
@@ -129,10 +129,12 @@ export default function EditProfileProf() {
           <label className={styles.label}>
             {" "}
             <b> FOTO DE PERFIL: </b>
+            <br />
           </label>
           <Label></Label>
           <Input
-            style={{ color: "white" }}
+            style={{ color: "white", justifyContent: "flex-end",
+            alignitems: "end"}}
             className={styles.inputPerfil}
             name="image"
             type="file"
@@ -144,25 +146,15 @@ export default function EditProfileProf() {
           />
           {profDetail.img ? (
             <img
+            className={styles.imagenEditPerfil}
               src={profDetail.img}
-              style={{
-                width: "200px",
-                height: "200px",
-                borderRadius: "50px",
-                marginRight: "10px",
-                marginLeft: "-397px",
-              }}
+             
             />
           ) : (
             <img
+            className={styles.imagenEditPerfil}
               src={img}
-              style={{
-                width: "200px",
-                height: "200px",
-                borderRadius: "60px",
-                marginRight: "10px",
-                marginLeft: "-397px",
-              }}
+              
             />
           )}
 

@@ -17,7 +17,7 @@ const AllProfessionals = () => {
 
   return (
     <div className={Styles.mainContainer}>
-      <NavbarTwo />
+    
       <NavLink className={Styles.back} to="/">
         <iconify-icon
           icon="ion:arrow-back-circle"
