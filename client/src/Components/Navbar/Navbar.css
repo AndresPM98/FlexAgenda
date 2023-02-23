@@ -1,10 +1,11 @@
 .navbarContainer{
-    background-color: #E7E7E7;
+    background-color: #183a3b;
+    color: white;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 3rem;
-    border-bottom: 2px solid #0051EE;
+    height: 80px;
+    border-bottom: 2px solid #ffffff;
 }
 
 .buttons{
@@ -15,15 +16,15 @@
 .logo{
     display: flex;
     align-items: center;
-    color: #0051EE;
+    color: #ffffff;
     margin-left: 1rem;
 }
 .login{
     text-decoration: none;
-    color: #0051EE;
+    color: #ffffff;
     width: 4.5rem;
     margin-right: 3rem;
-    border: 2px solid #0051EE;
+    border: 2px solid #ffffff;
     padding: 0.2rem;
     border-radius: 0.6rem;
     font-family: 'Poppins', sans-serif;
@@ -31,10 +32,10 @@
 
 .signUp{
     text-decoration: none;
-    color: #0051EE;
+    color: white;
     width: 4.5rem;
     margin-right: 3rem;
-    border: 2px solid #0051EE;
+    border: 2px solid #ffffff;
     padding: 0.2rem;
     border-radius: 0.6rem;
     font-family: 'Poppins', sans-serif;
@@ -52,10 +53,10 @@
 
 .allProfessionals{
     text-decoration: none;
-    color: #0051EE;
+    color: #ffffff;
     width: fit-content;
     margin-right: 3rem;
-    border: 2px solid #0051EE;
+    border: 2px solid #ffffff;
     padding: 0.2rem;
     border-radius: 0.6rem;
     font-family: 'Poppins', sans-serif;

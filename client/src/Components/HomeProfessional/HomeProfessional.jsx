@@ -40,8 +40,12 @@ const HomeProfessional = ({ id }) => {
   }
 
   return (
+    <div>
+      <NavbarTwo/>
     <div className={!darkMode ? style.homeContainer : style.homeContainerDark}>
+      
         <div className={style.filtersAndButtons}>
+          
           <BotonProf id={id} />
           <Filters lastProfessional={ultimoProfesional} />
       {/* <DarkMode /> */}
@@ -61,6 +65,7 @@ const HomeProfessional = ({ id }) => {
             <h2>No hay turnos</h2>
           )}
       </div>
+    </div>
     </div>
   );
 };
