@@ -1,8 +1,7 @@
 import React from "react";
-import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Footer from "../../Components/Footer/Footer";
 import "./QueryPage.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,18 +16,20 @@ import Loading from "../Loading/Loading";
 import { useState } from "react";
 
 const QueryPage = () => {
+  const { id } = useParams();
   const params = useParams();
   const darkMode = useSelector((state) => state.darkMode);
   const turnDetail = useSelector((state) => state.turnDetail);
   const clientDetail = useSelector((state) => state.clientDetailTurn);
+
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTurnDetail(params.id)).then (() => setLoading(false));
+    dispatch(getTurnDetail(params.id)).then(() => setLoading(false));
     return () => {
-      dispatch(cleanDetailTurn())
+      dispatch(cleanDetailTurn());
     };
   }, [params, dispatch]);
 
@@ -38,15 +39,19 @@ const QueryPage = () => {
     }
   };
 
-  const { id } = useParams();
   const history = useHistory();
 
   const handlerDelete = () => {
     dispatch(deleteTurn(id));
-    alert("Turno eliminado")
-    history.push("/home");
+    alert("Turno eliminado");
+    history.push(`/home/${turnDetail.ProfessionalId}`);
     dispatch(getTurnDetail);
   };
+
+  const handlerBack = () => {
+    history.push(`/home/${turnDetail.ProfessionalId}`);
+  };
+
   if (loading) return <Loading />;
 
   return (
@@ -54,14 +59,14 @@ const QueryPage = () => {
       {turnDetail && dispatchClientDetail(turnDetail.ClientId)}
       <div className={darkMode === false ? "queryPage" : "queryPageDark"}>
         <div className="backContainer">
-          <NavLink className="back" to="/home">
+          <Link className="back" onClick={handlerBack}>
             <iconify-icon
               icon="ion:arrow-back-circle"
               width="40"
               height="30"
             ></iconify-icon>
             BACK
-          </NavLink>
+          </Link>
         </div>
         <div className="queryDetailContainer">
           <div className="header-container">
