@@ -16,7 +16,7 @@ import {
   GET_PROF_CLIENTS_TURNS,
   DELETE,
   CLEAN_DATE,
-  SET_CURRENT_DATE
+  SET_CURRENT_DATE,
 } from "./Actions";
 
 const initialState = {
@@ -42,7 +42,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   let allTurnsC = state.profClientsTurnsBackup;
   switch (action.type) {
-
     case "SET_CURRENT_DATE":
       return {
         ...state,
@@ -83,12 +82,26 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_CLIENT:
       // Primero definimos cual es la fuente que vamos a filtrar.
       // Si ya se filtro por date, usamos esos resultados
-      const toFilterbyName = state.currentDate.length
+      let toFilterbyName = state.currentDate.length
         ? state.profClientsTurnsFilteredByDate
         : allTurnsC;
-      const filteredbyName = toFilterbyName.filter(
+
+      // Ahora filtramos
+      let filteredbyName = toFilterbyName.filter(
         (e) => e.client.name === action.payload
       );
+
+      // filtro por nombre en base a la fecha que ya estaba puesta
+      if (
+        state.currentDate.length &&
+        state.currentName.length &&
+        state.currentName !== action.payload
+        ){
+ 
+        filteredbyName = allTurnsC.filter(
+          (t) =>
+            t.date === state.currentDate && t.client.name === action.payload
+        );}
       return {
         ...state,
         profClientsTurns: filteredbyName,
@@ -99,12 +112,24 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_DATE:
       // Primero definimos cual es la fuente que vamos a filtrar.
       // Si ya se filtro por date, usamos esos resultados:
-      const toFilterbyDate = state.currentName.length
+      let toFilterbyDate = state.currentName.length
         ? state.profClientsTurnsFilteredByName
         : allTurnsC;
-      const filteredbyDate = toFilterbyDate.filter(
+      // Ahora filtramos
+      let filteredbyDate = toFilterbyDate.filter(
         (e) => e.date === action.payload
       );
+      // filtro por fecha en base al nombre que ya estaba puesto
+      if (
+        state.currentDate.length &&
+        state.currentName.length &&
+        state.currentDate !== action.payload
+      ){
+        console.log("filtro por fecha en base al nombre que ya estaba puesto");
+        filteredbyDate = allTurnsC.filter(
+          (t) =>
+            t.date === action.payload && t.client.name === state.currentName
+        );}
       return {
         ...state,
         profClientsTurns: filteredbyDate,
