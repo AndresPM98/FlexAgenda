@@ -1,10 +1,12 @@
 import React from "react";
 import Card from "../Card/Card";
-import "./Cards.css";
+import style from "./Cards.module.css";
 
 const Cards = ({ turns, type, professionals }) => {
   return type === "turns" ? (
-    <div className="cardsContainer">
+    <div className={style.cardsContainer}>
+      <div className={style.borderCards}></div>
+
       {turns.map((turn) => {
         return (
           <Card
@@ -17,6 +19,7 @@ const Cards = ({ turns, type, professionals }) => {
           />
         );
       })}
+      <div className={style.borderCards}></div>
     </div>
   ) : (
     <div>

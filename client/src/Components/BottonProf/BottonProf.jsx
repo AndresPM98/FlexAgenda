@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { getProfessionalDetail, getProfessionals } from "../../Redux/Actions";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./BottonProf.css";
+import style from "./BottonProf.module.css";
 
 const BotonProf = ({ id }) => {
   const dispatch = useDispatch();
@@ -21,16 +21,16 @@ const BotonProf = ({ id }) => {
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
 
   return (
-    <div>
+    <div  className={style.profContainer}>
       {profDetail ? (
         <div>
-          <div className="profContainer">
+          <div>
             <Link
               to={`/professionalDetail/${findProfessional?.id}`}
-              className="nameLinkProf"
+              className={style.nameLinkProf}
             >
               <div>
-                <p className="textProf">Perfil</p>
+                <p className={style.textProf}>Perfil</p>
                 <iconify-icon
                   icon="healthicons:ui-user-profile-negative"
                   width="60"
@@ -39,13 +39,13 @@ const BotonProf = ({ id }) => {
               </div>
             </Link>
           </div>
-          <div className="profContainer">
+          <div>
             <Link
               to={`/profTT/${findProfessional?.id}`}
-              className="nameLinkProf"
+              className={style.nameLinkProf}
             >
               <div>
-                <p className="textProf">Cliente</p>
+                <p className={style.textProf}>Cliente</p>
                 <iconify-icon
                   icon="healthicons:ui-user-profile-negative"
                   width="60"

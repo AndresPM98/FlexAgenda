@@ -1,16 +1,35 @@
-.homeContainer{
-    min-height: 41rem;
- padding-bottom: 100px;
+.homeContainer,
+.homeContainerDark {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  padding-bottom: 100px;
 }
 
-.homeContainerDark{
-    min-height: 41rem;
-    background-color: black;
+.homeContainer {
+
+  background-color: #ffffff27;
+
 }
 
-.filtersContainer{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: center;
+.homeContainerDark {
+    background-color: #18122B;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.filtersAndButtons {
+  display: flex;
+  /* background-color: #2b2049e1; */
+  background-color: #363636;
+  width: 19%;
+  /* border-radius: 20px; */
+}
+.header {
+  background-color: #8ea3877e;
 }
