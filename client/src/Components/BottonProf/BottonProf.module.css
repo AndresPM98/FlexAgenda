@@ -1,10 +1,11 @@
 .profContainer {
     display: flex;
+  
     align-items: center;
     justify-content: right;
-    position: relative;
-    margin-bottom: 1rem;
-    margin-left: 3.2rem; 
+    position: absolute;
+    right: 0px;
+    top: 400px;
   }
   .nameLinkProf div {
     display: flex;
@@ -17,12 +18,12 @@
   }
   .nameLinkProf {
     text-decoration: none;
-    color: #0051EE;
+    color: #3E54AC;
   }
   
   .textProf {
     border-radius: 1rem 0 0 1rem; 
-    background-color: #0051EE;
+    background-color: #3E54AC;
     text-decoration: none;
     color: aliceblue;
     display: flex;

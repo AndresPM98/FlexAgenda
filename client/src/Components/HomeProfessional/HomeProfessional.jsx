@@ -7,7 +7,7 @@ import NavbarTwo from "../NavbarTwo/NavbarTwo";
 import BotonProf from "../BottonProf/BottonProf";
 import DarkMode from "../DarkMode/DarkMode";
 import Loading from "../../Pages/Loading/Loading";
-import Styles from "./HomeProfessional.module.css";
+import style from "./HomeProfessional.module.css";
 
 const HomeProfessional = ({ id }) => {
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
@@ -40,31 +40,26 @@ const HomeProfessional = ({ id }) => {
   }
 
   return (
-    <div>
-      <NavbarTwo />
-
-      <h1>Hola {findProfessional.name} !</h1>
-      <p>
-        {profClientsTurns.length
-          ? `Tienes ${profClientsTurns.length} turnos`
-          : "No hay turnos"}
-      </p>
-      <div
-        className={
-          darkMode === false ? Styles.homeContainer : Styles.homeContainerDark
-        }
-      >
-        <div className={Styles.filtersContainer}>
-          {/* {console.log(profDetail)} */}
+    <div className={!darkMode ? style.homeContainer : style.homeContainerDark}>
+        <div className={style.filtersAndButtons}>
           <BotonProf id={id} />
           <Filters lastProfessional={ultimoProfesional} />
+      {/* <DarkMode /> */}
         </div>
-        <DarkMode />
-        {profClientsTurns.length ? (
-          <Cards turns={profClientsTurns} type="turns" />
-        ) : (
-          <h2>No hay turnos</h2>
-        )}
+      <div className={style.content}>
+          <div className={style.header}>
+            <h1>Hola {findProfessional.name} !</h1>
+            <p>
+              {profClientsTurns.length
+                ? `Tienes ${profClientsTurns.length} turnos`
+                : "No hay turnos"}
+            </p>
+          </div>
+          {profClientsTurns.length ? (
+            <Cards turns={profClientsTurns} type="turns" />
+          ) : (
+            <h2>No hay turnos</h2>
+          )}
       </div>
     </div>
   );

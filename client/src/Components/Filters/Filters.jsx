@@ -8,7 +8,7 @@ import {
   cleanDate,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
-import "./Filters.css";
+import style from "./Filters.module.css";
 
 const Filters = ({ lastProfessional }) => {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ const Filters = ({ lastProfessional }) => {
   }, [fecha2]);
 
   return (
-    <div className="filterContainer">
+    <div className={style.filterContainer}>
       <div>
         <select
           value={client}
@@ -147,8 +147,8 @@ const Filters = ({ lastProfessional }) => {
           ))}
         </select>
       </div>
-      <div className="buttonContainer">
-        <button className="inputReset" onClick={refreshHandler}>
+      <div className={style.buttonContainer}>
+        <button className={style.inputReset} onClick={refreshHandler}>
           <iconify-icon
             icon="material-symbols:refresh"
             width="20"

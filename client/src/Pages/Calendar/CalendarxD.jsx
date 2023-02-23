@@ -34,15 +34,8 @@ function CalendarxD() {
 
   const profClientsTurns = useSelector((state) => state.turns);
   const allProfessionals = useSelector((state) => state.allProfessionals);
-  const currentDate = useSelector((state) => state.currentDate); // obtener el estado de currentDate del reducer
-
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
   
-
-  const findTurn = profClientsTurns.find((turn) => id === turn.id);
-  console.log(findTurn);
-
-
   const nameProfessional = findProfessional
     ? findProfessional.name
     : "";
