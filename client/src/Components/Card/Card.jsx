@@ -4,7 +4,7 @@ import style from "./Card.module.css";
 
 const Card = ({ name, date, hour, id, type, email, address, description }) => {
   return type === "turns" ? (
-          <NavLink to={`/Calendarpage/${id}`} className={style.card}>
+          <NavLink to={`/queryDetail/${id}`} className={style.card}>
       {/* <div className={style.card}> */}
         <div className={style.name}>
             {name}
