@@ -87,7 +87,6 @@ const FormClient = () => {
           <input
             className={styles.input}
             type="text"
-            required
             value={form.dni}
             onChange={changeHandler}
             name="dni"
