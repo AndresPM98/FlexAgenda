@@ -32,19 +32,16 @@ const Login = () => {
     axios
       .post("/professional", form)
       .then((res) => {
-        console.log(res);
         alert("Creado correctamente");
-        history.push("/home");
+        history.push(`/home/${res.data.id}`);
       })
       .catch((err) => alert("Algo salió mal!"));
   };
 
-
-
   const handleEmailChange = (e) => {
     setForm({ ...form, email: e.target.value });
     setErrorEmail({ ...errorEmail, email: "" });
-    
+
     // Espera 1 segundo antes de llamar a la API de validación
     setTimeout(() => {
       const validateEmail = async () => {
@@ -67,7 +64,7 @@ const Login = () => {
           });
         }
       };
-  
+
       validateEmail();
     }, 1000);
   };
@@ -175,8 +172,7 @@ const Login = () => {
 
           <label className={Styles.label}>Email:</label>
           <input
-            onChange={e => handleEmailChange(e)}
-            
+            onChange={(e) => handleEmailChange(e)}
             className={Styles.input}
             type="text"
             name="email"
