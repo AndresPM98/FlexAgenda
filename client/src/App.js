@@ -10,6 +10,7 @@ import {
   FormClient,
   Login,
   AllProfessionals,
+  PaymentApproved,
 } from "./Pages";
 import HomeProfessional from "./Components/HomeProfessional/HomeProfessional";
 import CalendarxD from "./Pages/Calendar/CalendarxD";
@@ -36,11 +37,13 @@ function App() {
         <Route exact path="/professional/edit/:id" component={EditProfileProf} />
         <Route exact path="/professional/edit/:id/services" component={FormService} />
         <Route exact path="/queryDetail/:id" component={QueryPage} />
+        <Route exact path="/paymentApproved" component={PaymentApproved} />
         <Route path="/login" component={Login} />
         <Route path="/allProfessionals" component={AllProfessionals} />
         <Route path="/home/:id" component={AllProfessionalPageById} />
         <Route path="/*" component={Error404} />
         <Route path="/:any+" component={Error404} />
+        
         <Footer />
       </Switch>
     </div>
