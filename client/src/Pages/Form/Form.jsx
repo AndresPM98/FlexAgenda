@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -71,35 +71,50 @@ const Form = () => {
     const property = event.target.name;
     const value = event.target.value;
 
+    const selectedDate = new Date(event.target.value);
+    if (selectedDate.getDay() === 6 || selectedDate.getDay() === 5) {
+      setError((prevErrors) => ({
+        ...prevErrors,
+        date: "No hay turnos para este día",
+      }));
+    } else {
+      setError((prevErrors) => ({
+        ...prevErrors,
+        date: "",
+      }));
+      setForm((prevForm) => ({
+        ...prevForm,
+        date: event.target.value,
+      }));
+    }
+
     setForm({ ...form, [property]: value });
     validate({ ...form, [property]: value });
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-  
+
     const servElegido = serv.filter((ser) => ser.id == form.ServiceId);
     const send = {
       ...form,
-      quantity : 1,
+      quantity: 1,
       price: servElegido[0].price,
       title: servElegido[0].name,
-      turnId: `${servElegido[0].id}${servElegido[0].price}${form.ClientId}${form.ProfessionalId}${form.date}${form.hour}`
-    }
+      turnId: `${servElegido[0].id}${servElegido[0].price}${form.ClientId}${form.ProfessionalId}${form.date}${form.hour}`,
+    };
 
     const cookies = new Cookies();
-    cookies.set('turnToPost', form, {path: '/'});
-    cookies.set('idProfessional', id, {path: '/'});
-    cookies.set('findProfessional', findProfesional, {path: '/'});
+    cookies.set("turnToPost", form, { path: "/" });
+    cookies.set("idProfessional", id, { path: "/" });
+    cookies.set("findProfessional", findProfesional, { path: "/" });
 
     axios
 
       .post("https://backend-pf-production-1672.up.railway.app/payment", send)
-      .then((res) =>
-      (window.location.href = res.data.response.body.init_point))
-      .catch(error => console.log(error))
+      .then((res) => (window.location.href = res.data.response.body.init_point))
+      .catch((error) => console.log(error));
   };
-
 
   function handleSelectServ(event) {
     const selected = event.target.value;
@@ -146,7 +161,11 @@ const Form = () => {
             value={form.hour}
             onChange={changeHandler}
             name="hour"
+            step="1800"
+            min="00:00"
+            max="23:30"
           />
+
           <div className={styles.error}>
             {error.hour && <span>{error.hour}</span>}{" "}
           </div>
