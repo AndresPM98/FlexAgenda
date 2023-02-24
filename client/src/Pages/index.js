@@ -7,6 +7,7 @@ import FormClient from "./FormClient/FormClient";
 import Login from "./Login/Login";
 import AllProfessionals from "./AllProfessionals/AllProfessionals";
 import allProfessionalPageById from "./allProfessionalPageById/allProfessionalPageById";
+import PaymentApproved from "./PaymentApproved/PaymentApproved";
 
 export {
   Form,
@@ -18,4 +19,5 @@ export {
   Login,
   AllProfessionals,
   allProfessionalPageById,
+  PaymentApproved
 };

@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-
 import styles from "./Form.module.css";
-
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -78,14 +77,29 @@ const Form = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+  
+    const servElegido = serv.filter((ser) => ser.id == form.ServiceId);
+    const send = {
+      ...form,
+      quantity : 1,
+      price: servElegido[0].price,
+      title: servElegido[0].name,
+      turnId: `${servElegido[0].id}${servElegido[0].price}${form.ClientId}${form.ProfessionalId}${form.date}${form.hour}`
+    }
+
+    const cookies = new Cookies();
+    cookies.set('turnToPost', form, {path: '/'});
+    cookies.set('idProfessional', id, {path: '/'});
+    cookies.set('findProfessional', findProfesional, {path: '/'});
+
     axios
-      .post("https://backend-pf-production-1672.up.railway.app/turn", form)
-      .then((res) => {
-        alert("Turn taken correctly");
-        history.push(`/profTT/${findProfesional.id}`);
-      })
-      .catch((err) => alert("Algo salio mal"));
+
+      .post("https://backend-pf-production-1672.up.railway.app/payment", send)
+      .then((res) =>
+      (window.location.href = res.data.response.body.init_point))
+      .catch(error => console.log(error))
   };
+
 
   function handleSelectServ(event) {
     const selected = event.target.value;
