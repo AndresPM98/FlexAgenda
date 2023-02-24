@@ -17,6 +17,7 @@ import {
   GET_PROF_CLIENTS_TURNS,
   DELETE,
   CLEAN_DATE,
+  POST_LAST_TURN
 } from "./Actions";
 
 const initialState = {
@@ -35,7 +36,7 @@ const initialState = {
   allServices: [],
   darkMode: false,
   hasTurn: null,
-  currentDate: null,
+  currentDate: null
 };
 
 const rootReducer = (state = initialState, action) => {

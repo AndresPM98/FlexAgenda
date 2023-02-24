@@ -33,8 +33,6 @@ const Form = () => {
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const serv = useSelector((state) => state.allServices);
 
-  console.log(serv);
-
   const ultimoCliente = allClients.length
     ? allClients[allClients.length - 1]
     : "";
@@ -57,7 +55,7 @@ const Form = () => {
       setForm({
         ...form,
         ClientId: ultimoCliente.id,
-        ProfessionalId: ultimoProfesional.id,
+        ProfessionalId: "9a653ebf-6ddc-44c4-b8ef-74f8324e55a9",
       });
     }
   }, [allClients, allProfessionals]);
@@ -108,9 +106,11 @@ const Form = () => {
   };
 
   const submitHandler = (event) => {
+    console.log(form)
     event.preventDefault();
     axios
-      .post("https://backend-pf-production-1672.up.railway.app/service/", form)
+      // .post("https://backend-pf-production-1672.up.railway.app/service/", form)
+      .post("https://backend-pf-production-1672.up.railway.app/service", form)
       .then((res) => {
         alert("Turn taken correctly");
         history.push(`/professionalDetail/${ultimoProfesional.id}`);

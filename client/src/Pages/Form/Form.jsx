@@ -1,17 +1,18 @@
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-
 import styles from "./Form.module.css";
-
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
+import { getClients, getServices, getProfessionals, postLastTurn } from "../../Redux/Actions";
 import { useHistory } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import { useParams } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
   const [error, setError] = useState({});
 
   useEffect(() => {
@@ -24,7 +25,8 @@ const Form = () => {
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const serv = useSelector((state) => state.allServices);
 
-console.log(serv);
+  const findProfesional = allProfessionals.find((prof) => id === prof.id);
+
 
   const ultimoCliente = allClients.length
     ? allClients[allClients.length - 1]
@@ -39,6 +41,7 @@ console.log(serv);
     ProfessionalId: "",
     ClientId: "",
     ServiceId: "",
+ 
   });
 
   useEffect(() => {
@@ -79,15 +82,27 @@ console.log(serv);
 
   const submitHandler = (event) => {
     event.preventDefault();
+  
+    const servElegido = serv.filter((ser) => ser.id == form.ServiceId);
+    const send = {
+      ...form,
+      quantity : 1,
+      price: servElegido[0].price,
+      title: servElegido[0].name,
+      turnId: `${servElegido[0].id}${servElegido[0].price}${form.ClientId}${form.ProfessionalId}${form.date}${form.hour}`
+    }
+
+    const cookies = new Cookies();
+    cookies.set('turnToPost', form, {path: '/'});
+    cookies.set('idProfessional', id, {path: '/'});
+    cookies.set('findProfessional', findProfesional, {path: '/'});
+
     axios
-      .post("https://backend-pf-production-1672.up.railway.app/turn", form)
-      .then((res) => {
-        alert("Turn taken correctly");
-        history.push(
-          `/profTT/${ultimoProfesional.id}`
-        );
-      })
-      .catch((err) => alert("Algo salio mal"));
+      .post("https://backend-pf-production-1672.up.railway.app/payment", send)
+      .then((res) =>
+      (window.location.href = res.data.response.body.init_point))
+      .catch(error => console.log(error))
+
   };
 
   function handleSelectServ(event) {
@@ -111,7 +126,6 @@ console.log(serv);
   return (
     <div>
       <NavbarTwo />
-
       <div className={styles.container}>
         <form onSubmit={submitHandler} className={styles.form}>
           <h1 className={styles.tittle}>Schedule your turn</h1>

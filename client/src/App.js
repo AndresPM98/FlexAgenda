@@ -11,6 +11,7 @@ import {
   Login,
   AllProfessionals,
   HomeProffesional,
+  PaymentApproved
 } from "./Pages";
 import CalendarxD from "./Pages/Calendar/CalendarxD";
 
@@ -19,6 +20,7 @@ import FormService from "./Pages/FormService/FormService";
 import axios from "axios";
 import Footer from "./Components/Footer/Footer";
 axios.defaults.baseURL = "https://backend-pf-production-1672.up.railway.app/";
+// axios.defaults.baseURL = "http://localhost:3000/paymentFailure";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
       <Route exact path="/form" component={Form} />
       <Route exact path="/formClient" component={FormClient} />
       <Route exact path="/Calendarpage" component={CalendarxD} />
+      <Route exact path="/paymentApproved" component={PaymentApproved} /> 
 
       <Route
         exact
