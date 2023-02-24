@@ -49,14 +49,15 @@ function CalendarxD() {
   }, [dispatch]);
 
   const memoizedEvents = useMemo(() => {
-    return profClientsTurns.map((turn) => {
+    const filteredTurns = profClientsTurns.filter((turn) => turn.professionalID === id);
+    return filteredTurns.map((turn) => {
       const title = turn.client.name;
       const start = new Date(turn.date + "T" + turn.hour);
       const end = new Date(turn.date + "T" + turn.hour);
       const key = turn.id;
       return { ...newEvent, title, start, end, key };
     });
-  }, [profClientsTurns, newEvent]);
+  }, [profClientsTurns, newEvent, id]);
 
   const history = useHistory();
 
@@ -82,7 +83,7 @@ function CalendarxD() {
 <h1>Hola {nameProfessional}  !</h1>
 <p>
   {profClientsTurns.length
-    ? `Tienes ${profClientsTurns.length} turnos`
+    ? `Tienes ${memoizedEvents.length} turnos`
     : "No hay turnos"}
 </p>
       <Calendar
