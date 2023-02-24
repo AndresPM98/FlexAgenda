@@ -53,7 +53,7 @@ function CalendarxD() {
     return filteredTurns.map((turn) => {
       const title = turn.client.name;
       const start = new Date(turn.date + "T" + turn.hour);
-      const end = new Date(turn.date + "T" + turn.hour);
+      const end = new Date(new Date(turn.date + "T" + turn.hour).getTime() + 30 * 60000); // Agrega 30 minutos a la hora de finalización
       const key = turn.id;
       return { ...newEvent, title, start, end, key };
     });
@@ -66,8 +66,13 @@ function CalendarxD() {
   }
 
   function handleSelectSlot(slotInfo) {
-    dispatch(setCurrentDateAction(slotInfo.start)); // actualiza el estado del reducer con la nueva fecha seleccionada
-    history.push(`/home/${findProfessional.id}`);
+    const selectedDay = slotInfo.start.getDay();
+    if (selectedDay === 0 || selectedDay === 6) {
+      alert("Día deshabilitado.");
+    } else {
+      dispatch(setCurrentDateAction(slotInfo.start)); // actualiza el estado del reducer con la nueva fecha seleccionada
+      history.push(`/home/${findProfessional.id}`);
+    }
   }
 
   if (loading) {
