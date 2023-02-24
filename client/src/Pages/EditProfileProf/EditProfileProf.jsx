@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
-
-import { useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink, useParams, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { getProfessionalDetail } from "../../Redux/Actions";
 import styles from "./EditProfileProf.module.css";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import { FormGroup, Label, Input, FormText, Container } from "reactstrap";
 
 // funcion que edita el profesional
 export default function EditProfileProf() {
@@ -18,7 +15,7 @@ export default function EditProfileProf() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-
+  const [img, setImg] = useState(profDetail.image);
 
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
@@ -31,10 +28,31 @@ export default function EditProfileProf() {
     password: "",
     phone: "",
     address: "",
+    addresslocation: "",
     description: "",
     image: "",
     category: "",
   });
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "FlexAgenda");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/ddiusg8zz/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log(res);
+    setImg(file.secure_url);
+
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (profDetail) {
@@ -44,11 +62,13 @@ export default function EditProfileProf() {
         category: profDetail.category,
         phone: profDetail.phone,
         address: profDetail.address,
+        addresslocation: profDetail.addresslocation,
+        image: profDetail.image,
         description: profDetail.description,
       }));
     }
   }, [profDetail]);
-
+  console.log(img);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -65,10 +85,15 @@ export default function EditProfileProf() {
     if (prof.address !== profDetail.address) {
       updatedFields.address = prof.address;
     }
+    if (prof.addresslocation !== profDetail.addresslocation) {
+      updatedFields.addresslocation = prof.addresslocation;
+    }
     if (prof.description !== profDetail.description) {
       updatedFields.description = prof.description;
     }
-
+    if (img) {
+      updatedFields.image = img;
+    }
     axios
       .put(`/professional/${id}`, updatedFields)
       .then((res) => console.log(res))
@@ -79,29 +104,61 @@ export default function EditProfileProf() {
   };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
-    <div >
-      <NavbarTwo />
-     
+    <div>
+    <NavbarTwo/>
+
       <div className={styles.backContainer}>
-          <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
-            <iconify-icon
-              icon="ion:arrow-back-circle"
-              width="40"
-              height="30"
-            ></iconify-icon>
-            CANCEL
-          </NavLink>
-        </div>
+        <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
+          <iconify-icon
+            icon="ion:arrow-back-circle"
+            width="40"
+            height="30"
+          ></iconify-icon>
+          CANCEL
+        </NavLink>
+      </div>
 
       <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h1 className={styles.tittle}>EDIT YOUR PROFILE</h1>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <h1 className={styles.tittle}>EDIT YOUR PROFILE</h1>
+          <FormGroup />
+          <label className={styles.label}>
+            {" "}
+            <b> FOTO DE PERFIL: </b>
+            <br />
+          </label>
+          <Label></Label>
+          <Input
+            style={{ color: "white", justifyContent: "flex-end",
+            alignitems: "end"}}
+            className={styles.inputPerfil}
+            name="image"
+            type="file"
+            placeholder="Upload your profile picture"
+            onChange={(e) => {
+              uploadImage(e);
+              setImg(e.target.files[0]);
+            }}
+          />
+          {profDetail.img ? (
+            <img
+            className={styles.imagenEditPerfil}
+              src={profDetail.img}
+             
+            />
+          ) : (
+            <img
+            className={styles.imagenEditPerfil}
+              src={img}
+              
+            />
+          )}
 
-        <label className={styles.label}>NAME:</label>
+          <label className={styles.label}>NAME:</label>
           <input
             className={styles.input}
             type="text"
@@ -109,9 +166,8 @@ export default function EditProfileProf() {
             defaultValue={profDetail.name}
             onChange={(e) => setProf({ ...prof, name: e.target.value })}
           />
-        
-        
-        <label className={styles.label}>CATEGORY:</label>
+
+          <label className={styles.label}>CATEGORY:</label>
           <input
             className={styles.input}
             type="text"
@@ -119,42 +175,46 @@ export default function EditProfileProf() {
             name="category"
             onChange={(e) => setProf({ ...prof, category: e.target.value })}
           />
-        
-       
-        <label className={styles.label}>PHONE:</label>
+
+          <label className={styles.label}>PHONE:</label>
           <input
             className={styles.input}
             name="phone"
             defaultValue={profDetail.phone}
             onChange={(e) => setProf({ ...prof, phone: e.target.value })}
           />
-        
-        
-        <label className={styles.label}>ADDRESS:</label>
+
+          <label className={styles.label}>ADDRESS:</label>
           <input
             className={styles.input}
             name="address"
             defaultValue={profDetail.address}
             onChange={(e) => setProf({ ...prof, address: e.target.value })}
           />
-        
-        
-        <label className={styles.label}>DESCRIPTION:</label>
+
+          <label className={styles.label}>URL GOOGLE MAPS:</label>
+          <input
+            className={styles.input}
+            name="addresslocation"
+            defaultValue={profDetail.addresslocation}
+            onChange={(e) =>
+              setProf({ ...prof, addresslocation: e.target.value })
+            }
+          />
+
+          <label className={styles.label}>DESCRIPTION:</label>
           <textarea
             className={styles.input}
             name="description"
             defaultValue={profDetail.description}
             onChange={(e) => setProf({ ...prof, description: e.target.value })}
           />
-       
-       
 
-        <button type="submit" className={styles.button}>
-          SAVE CHANGES
-        </button>
-      </form>
+          <button type="submit" className={styles.button}>
+            SAVE CHANGES
+          </button>
+        </form>
       </div>
-      
     </div>
   );
 }

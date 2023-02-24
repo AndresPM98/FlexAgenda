@@ -1,13 +1,14 @@
 .queryPage {
   margin: 0;
-  min-height: 41.5rem;
+  min-height: 100vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
 }
 .queryPageDark {
   margin: 0;
-  min-height: 41.5rem;
+  min-height: 100vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -20,15 +21,17 @@
   height: 30rem;
   border: 3px solid #0051ee;
   border-radius: 2rem;
-  margin-left: 16rem;
+  /* margin-left: 16rem; */
 }
 
 .backContainer {
   display: flex;
+  /* border: 1px solid blue; */
   align-items: center;
   justify-content: center;
-  position: relative;
-  margin-bottom: 32rem;
+  position: absolute;
+left: 0px;
+top: 20%
 }
 
 .back {

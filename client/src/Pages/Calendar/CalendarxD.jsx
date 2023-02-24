@@ -1,16 +1,23 @@
+import React, { useState, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-datepicker/dist/react-datepicker.css";
+import { getTurns, getProfessionals, setCurrentDateAction } from "../../Redux/Actions"; //importa la acción setCurrentDate
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
-import React, { useState } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
+import Loading from "../Loading/Loading";
+import Error404 from "../../Components/Error404/Error404";
+
 
 const locales = {
-  "en-US": require("date-fns/locale/en-US"),
+  es: require("date-fns/locale/es"),
 };
+
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -19,86 +26,79 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const events = [
-  {
-    title: "Big Meeting",
-    allDay: true,
-    start: new Date(2023, 6, 0),
-    end: new Date(2023, 6, 0),
-  },
-  {
-    title: "Vacation",
-    start: new Date(2023, 6, 7),
-    end: new Date(2023, 6, 10),
-  },
-  {
-    title: "Conference",
-    start: new Date(2023, 6, 20),
-    end: new Date(2023, 6, 23),
-  },
-];
-
 function CalendarxD() {
-  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-  const [allEvents, setAllEvents] = useState(events);
+  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "", key: "" });
+  const [loading, setLoading] = useState(true);
 
-  function handleAddEvent() {
-    for (let i = 0; i < allEvents.length; i++) {
-      const d1 = new Date(allEvents[i].start);
-      const d2 = new Date(newEvent.start);
-      const d3 = new Date(allEvents[i].end);
-      const d4 = new Date(newEvent.end);
-      /*
-          console.log(d1 <= d2);
-          console.log(d2 <= d3);
-          console.log(d1 <= d4);
-          console.log(d4 <= d3);
-            */
+  const { id } = useParams(); 
+  const dispatch = useDispatch();
 
-      if ((d1 <= d2 && d2 <= d3) || (d1 <= d4 && d4 <= d3)) {
-        alert("CLASH");
-        break;
-      }
-    }
+  const profClientsTurns = useSelector((state) => state.turns);
+  const allProfessionals = useSelector((state) => state.allProfessionals);
+  const findProfessional = allProfessionals.find((prof) => id === prof.id);
+  
+  const nameProfessional = findProfessional
+    ? findProfessional.name
+    : <Error404 />;
 
-    setAllEvents([...allEvents, newEvent]);
+  useEffect(() => {
+    dispatch(getTurns());
+    dispatch(getProfessionals()).then(() => {
+      setLoading(false);
+    });
+  }, [dispatch]);
+
+  const memoizedEvents = useMemo(() => {
+    return profClientsTurns.map((turn) => {
+      const title = turn.client.name;
+      const start = new Date(turn.date + "T" + turn.hour);
+      const end = new Date(turn.date + "T" + turn.hour);
+      const key = turn.id;
+      return { ...newEvent, title, start, end, key };
+    });
+  }, [profClientsTurns, newEvent]);
+
+  const history = useHistory();
+
+  function handleSelectEvent(event) {
+    history.push(`/queryDetail/${event.key}`); //despues va a ser por ID
   }
 
+  function handleSelectSlot(slotInfo) {
+    dispatch(setCurrentDateAction(slotInfo.start)); // actualiza el estado del reducer con la nueva fecha seleccionada
+    history.push(`/home/${findProfessional.id}`);
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+
   return (
+    nameProfessional ? 
     <div>
-      <h1>Calendar</h1>
-      <h2>Add New Event</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Add Title"
-          style={{ width: "20%", marginRight: "10px" }}
-          value={newEvent.title}
-          onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-        />
-        <DatePicker
-          placeholderText="Start Date"
-          style={{ marginRight: "10px" }}
-          selected={newEvent.start}
-          onChange={(start) => setNewEvent({ ...newEvent, start })}
-        />
-        <DatePicker
-          placeholderText="End Date"
-          selected={newEvent.end}
-          onChange={(end) => setNewEvent({ ...newEvent, end })}
-        />
-        <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
-          Add Event
-        </button>
-      </div>
+      <NavbarTwo/>
+
+<h1>Hola {nameProfessional}  !</h1>
+<p>
+  {profClientsTurns.length
+    ? `Tienes ${profClientsTurns.length} turnos`
+    : "No hay turnos"}
+</p>
       <Calendar
         localizer={localizer}
-        events={allEvents}
+        events={memoizedEvents}
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500, margin: "50px" }}
+        views={["month", "agenda"]}
+        defaultView="month"
+        onSelectEvent={handleSelectEvent}
+        selectable={true} // Habilitar la selección de espacios en blanco
+        onSelectSlot={handleSelectSlot} // Agregar este método para manejar la selección de espacios en blanco
       />
-    </div>
+    </div> :
+    <Error404 />
   );
 }
 

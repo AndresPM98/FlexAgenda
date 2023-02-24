@@ -5,11 +5,12 @@ import styles from "./FormClient.module.css";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const FormClient = () => {
   const darkMode = useSelector((state) => state.darkMode);
   const history = useHistory();
+  const { id } = useParams();
 
   const [form, setForm] = useState({
     name: "",
@@ -24,7 +25,7 @@ const FormClient = () => {
   });
 
   const validate = (form) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
+    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
       setErrors({ ...error, email: "" });
     } else {
       setErrors({ ...error, email: "Hay un error en email" });
@@ -47,7 +48,7 @@ const FormClient = () => {
       .post("https://backend-pf-production-1672.up.railway.app/client", form)
       .then((res) => {
         alert("Created correctly");
-        history.push(`/form`);
+        history.push(`/form/${id}`);
       })
       .catch((err) => alert(err));
   };
@@ -55,49 +56,45 @@ const FormClient = () => {
   return (
     <div>
       <NavbarTwo />
-      <div className={darkMode == false ? styles.container : styles.containerDark}>
-        
-
+      <div
+        className={darkMode === false ? styles.container : styles.containerDark}
+      >
         <form onSubmit={submitHandler} className={styles.form}>
-        <h1 className={styles.tittle}>Formulario del cliente</h1> 
+          <h1 className={styles.tittle}>Formulario del cliente</h1>
 
+          <label className={styles.label}>NAME:</label>
+          <input
+            className={styles.input}
+            type="text"
+            required
+            value={form.name}
+            onChange={changeHandler}
+            name="name"
+          />
 
-              <label className={styles.label}>NAME:</label>
-                <input
-                  className={styles.input}
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={changeHandler}
-                  name="name"
-                />
+          <label className={styles.label}>EMAIL:</label>
+          <input
+            className={styles.input}
+            type="text"
+            required
+            value={form.email}
+            onChange={changeHandler}
+            name="email"
+          />
+          {error.email && <span>{error.email}</span>}
 
-              <label className={styles.label}>EMAIL:</label>
-                <input
-                  className={styles.input}
-                  type="text"
-                  required
-                  value={form.email}
-                  onChange={changeHandler}
-                  name="email"
-                />
-                {error.email && <span>{error.email}</span>}
+          <label className={styles.label}>DNI:</label>
+          <input
+            className={styles.input}
+            type="text"
+            value={form.dni}
+            onChange={changeHandler}
+            name="dni"
+          />
 
-                <label className={styles.label}>DNI:</label>
-                <input
-                  className={styles.input}
-                  type="text"
-                  required
-                  value={form.dni}
-                  onChange={changeHandler}
-                  name="dni"
-                />
-
-              <button type="submit" className={styles.button}>
-                REGISTRARSE
-              </button>
-
-            
+          <button type="submit" className={styles.button}>
+            REGISTRARSE
+          </button>
         </form>
       </div>
       <Footer></Footer>

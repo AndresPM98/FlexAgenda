@@ -1,6 +1,5 @@
 import {
   GET_CLIENTS,
-  GET_CLIENT_BY_NAME,
   FILTER_BY_CLIENT,
   GET_TURNS,
   GET_TURN_BY_NAME,
@@ -17,7 +16,8 @@ import {
   GET_PROF_CLIENTS_TURNS,
   DELETE,
   CLEAN_DATE,
-  POST_LAST_TURN
+  POST_LAST_TURN,
+  SET_CURRENT_DATE,
 } from "./Actions";
 
 const initialState = {
@@ -29,18 +29,28 @@ const initialState = {
   turnBackup: [],
   turnFiltered: [],
   profDetail: [],
-  profClientsTurns: [],
-  profClientsTurnsBackup: [],
-  profClientsTurnsFilteredByDate: [],
-  profClientsTurnsFilteredByName: [],
+  profClientsTurns: [], // renderiza los turnos en pantalla
+  profClientsTurnsBackup: [], // tienetodos los turnos, siempre
+  profClientsTurnsFilteredByDate: [], // el resultado de filtrar por name
+  profClientsTurnsFilteredByName: [], // el resultado de filtrar por date
+  currentDate: [],
+  currentName: [],
   allServices: [],
   darkMode: false,
   hasTurn: null,
   currentDate: null
+  setCurrentDate: new Date(),
 };
 
 const rootReducer = (state = initialState, action) => {
+  let allTurnsC = state.profClientsTurnsBackup;
   switch (action.type) {
+    case "SET_CURRENT_DATE":
+      return {
+        ...state,
+        setCurrentDate: action.payload,
+      };
+
     case GET_CLIENTS:
       return {
         ...state,
@@ -51,23 +61,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProfessionals: action.payload,
-      };
-
-    case FILTER_BY_CLIENT:
-      const allTurnsC = state.profClientsTurnsBackup;
-      const filterClient =
-        action.payload === "Clients"
-          ? allTurnsC
-          : allTurnsC.filter((e) => e.client.name === action.payload);
-      console.log(state.currentDate); // primer render => NULL
-
-      return {
-        ...state,
-        profClientsTurns: filterClient,
-        profClientsTurnsFilteredByName: filterClient,
-        hasTurn: state.currentDate && allTurnsC.some(
-          (t) => t.date === state.currentDate && t.client.name === action.payload
-        ),
       };
 
     /* ---------------------------------------------------- */
@@ -85,7 +78,66 @@ const rootReducer = (state = initialState, action) => {
     case CLEAN_DATE:
       return {
         ...state,
-        currentDate: null,
+        currentDate: [],
+        currentName: [],
+      };
+
+    case FILTER_BY_CLIENT:
+      // Primero definimos cual es la fuente que vamos a filtrar.
+      // Si ya se filtro por date, usamos esos resultados
+      let toFilterbyName = state.currentDate.length
+        ? state.profClientsTurnsFilteredByDate
+        : allTurnsC;
+
+      // Ahora filtramos
+      let filteredbyName = toFilterbyName.filter(
+        (e) => e.client.name === action.payload
+      );
+
+      // filtro por nombre en base a la fecha que ya estaba puesta
+      if (
+        state.currentDate.length &&
+        state.currentName.length &&
+        state.currentName !== action.payload
+        ){
+ 
+        filteredbyName = allTurnsC.filter(
+          (t) =>
+            t.date === state.currentDate && t.client.name === action.payload
+        );}
+      return {
+        ...state,
+        profClientsTurns: filteredbyName,
+        profClientsTurnsFilteredByName: filteredbyName,
+        currentName: action.payload,
+      };
+
+    case FILTER_BY_DATE:
+      // Primero definimos cual es la fuente que vamos a filtrar.
+      // Si ya se filtro por date, usamos esos resultados:
+      let toFilterbyDate = state.currentName.length
+        ? state.profClientsTurnsFilteredByName
+        : allTurnsC;
+      // Ahora filtramos
+      let filteredbyDate = toFilterbyDate.filter(
+        (e) => e.date === action.payload
+      );
+      // filtro por fecha en base al nombre que ya estaba puesto
+      if (
+        state.currentDate.length &&
+        state.currentName.length &&
+        state.currentDate !== action.payload
+      ){
+        console.log("filtro por fecha en base al nombre que ya estaba puesto");
+        filteredbyDate = allTurnsC.filter(
+          (t) =>
+            t.date === action.payload && t.client.name === state.currentName
+        );}
+      return {
+        ...state,
+        profClientsTurns: filteredbyDate,
+        profClientsTurnsFilteredByDate: filteredbyDate,
+        currentDate: action.payload,
       };
 
     case GET_TURN_BY_NAME:
@@ -99,20 +151,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         turns: filtered,
         turnFiltered: filtered,
-      };
-
-    case FILTER_BY_DATE:
-      const toFilterDate = state.profClientsTurnsFilteredByName;
-      const date =
-        action.payload === ""
-          ? toFilterDate
-          : toFilterDate.filter((t) => t.date === action.payload);
-      console.log(action.payload);
-      return {
-        ...state,
-        profClientsTurns: date,
-        profClientsTurnsFilteredByDate: date,
-        currentDate: action.payload,
       };
 
     case FILTER_BY_HOUR:
@@ -168,7 +206,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_PROF_CLIENTS_TURNS:
       const allTurnsClient = state.turnBackup;
       const allTurnsClientFiltered = allTurnsClient.filter(
-        (t) => t.professionalID == action.payload
+        (t) => t.professionalID === action.payload
       );
       return {
         ...state,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import styles from "./Form.module.css";
@@ -5,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { getClients, getServices, getProfessionals, postLastTurn } from "../../Redux/Actions";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import { useParams } from "react-router-dom";
 
@@ -25,15 +26,16 @@ const Form = () => {
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const serv = useSelector((state) => state.allServices);
 
+
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
+  const servProfs = serv.filter((service) => service.ProfessionalId === id);
+
 
 
   const ultimoCliente = allClients.length
     ? allClients[allClients.length - 1]
     : "";
-  const ultimoProfesional = allProfessionals.length
-    ? allProfessionals[allProfessionals.length - 1]
-    : "";
+  const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
   const [form, setForm] = useState({
     date: "",
@@ -49,11 +51,10 @@ const Form = () => {
       setForm({
         ...form,
         ClientId: ultimoCliente.id,
-        ProfessionalId: ultimoProfesional.id,
+        ProfessionalId: findProfesional.id,
       });
     }
   }, [allClients, allProfessionals]);
-
 
   function validate(form) {
     let error = {};
@@ -98,27 +99,27 @@ const Form = () => {
     cookies.set('findProfessional', findProfesional, {path: '/'});
 
     axios
+
       .post("https://backend-pf-production-1672.up.railway.app/payment", send)
       .then((res) =>
       (window.location.href = res.data.response.body.init_point))
       .catch(error => console.log(error))
-
   };
 
   function handleSelectServ(event) {
-    const selected = event.target.value
+    const selected = event.target.value;
     if (
       event.target.value !== "ServiceId" &&
       !form.ServiceId.includes(event.target.value)
     )
       setForm({
         ...form,
-        ServiceId: selected
+        ServiceId: selected,
       });
     setError(
       validate({
         ...form,
-        ServiceId: selected
+        ServiceId: selected,
       })
     );
   }
@@ -154,13 +155,14 @@ const Form = () => {
             {error.hour && <span>{error.hour}</span>}{" "}
           </div>
 
-          <label className={styles.label}>PROFESSIONAL: 
-          <h2>{ultimoProfesional.name}</h2>
+          <label className={styles.label}>
+            PROFESSIONAL:
+            <h2>{findProfesional.name}</h2>
           </label>
-          <label className={styles.label}>CLIENTE: 
-          <h2>{ultimoCliente.name}</h2>
+          <label className={styles.label}>
+            CLIENTE:
+            <h2>{ultimoCliente.name}</h2>
           </label>
-
 
           <label className={styles.label}>SERVICE:</label>
           <select
@@ -169,8 +171,10 @@ const Form = () => {
             className={styles.input}
           >
             <option value="ServiceId">Service</option>
-            {serv?.map((element, index) => (
-              <option key={index} value={element.id}>{element.name}</option>
+            {servProfs?.map((element, index) => (
+              <option key={index} value={element.id}>
+                {element.name}
+              </option>
             ))}
             <div className={styles.error}>
               {error.ServiceId && <span>{error.ServiceId}</span>}

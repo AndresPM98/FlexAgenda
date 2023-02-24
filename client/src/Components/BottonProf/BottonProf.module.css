@@ -1,10 +1,11 @@
 .profContainer {
     display: flex;
+  
     align-items: center;
     justify-content: right;
-    position: relative;
-    margin-bottom: 1rem;
-    margin-left: 3.2rem; 
+    position: absolute;
+    right: 0px;
+    top: 80px;
   }
   .nameLinkProf div {
     display: flex;
@@ -17,12 +18,12 @@
   }
   .nameLinkProf {
     text-decoration: none;
-    color: #0051EE;
+    color: #3E54AC;
   }
   
   .textProf {
     border-radius: 1rem 0 0 1rem; 
-    background-color: #0051EE;
+    background-color: #3E54AC;
     text-decoration: none;
     color: aliceblue;
     display: flex;
@@ -32,4 +33,20 @@
     height: 3.75rem;
     margin-right: 0px; 
   }
+  .copybtn {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
   
+  .copybtn:hover {
+    background-color: #3e8e41;
+  }

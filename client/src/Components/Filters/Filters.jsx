@@ -1,130 +1,121 @@
 import React, { useEffect, useState } from "react";
 import {
-  getClients,
   filterByClient,
   getTurns,
-  /* getTurnByName, */
   filterByDate,
   filterByHour,
   getProfClientsTurns,
   cleanDate,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
-import "./Filters.css";
+import style from "./Filters.module.css";
 
 const Filters = ({ lastProfessional }) => {
-  /* const [inputName, setInputName] = useState(""); */
-  const [inputDate, setInputDate] = useState("");
   const dispatch = useDispatch();
-
-  /* const allTurns = useSelector((state) => state.turnBackup); */
-  const profDetail = useSelector((state) => state.profDetail);
-  const hasTurn = useSelector((state) => state.hasTurn);
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
+  const fecha = useSelector((state) => state.setCurrentDate);
+  const fecha2 = fecha.toISOString().split('T')[0]; 
+  const [selectedDate, setSelectedDate] = useState(fecha2);
 
+  const [hour, setHour] = useState("Hours");
+  const [client, setClient] = useState("Clients");
+
+  // HANDLERS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // FILTRAR POR CLIENTE
   function handleFilterByClient(event) {
     event.preventDefault();
     setClient(event.target.value);
 
     dispatch(filterByClient(event.target.value));
   }
-
-  useEffect(() => {
-    // console.log(hasTurn); // primer render: CUANDO CAMBIE HASTURN
-    if (!hasTurn) {
-      setInputDate("");
-      dispatch(cleanDate());
-    }
-  }, [hasTurn]);
-
-  const [hour, setHour] = useState("Hours");
-  const [client, setClient] = useState("Clients");
-
-  /* function handleOnChangeName(e) {
-    setInputName(e.target.value);
-  } */
+  // FILTRAR POR FECHA
   function handleOnChangeDate(e) {
     e.preventDefault();
-    setInputDate(e.target.value);
     dispatch(filterByDate(e.target.value));
+    setSelectedDate(e.target.value)
   }
-  /*   function handleOnClickDate(e) {
-    e.preventDefault();
-    dispatch(filterByDate(inputDate));
-  }
- */
-  /* function handleOnClickName(e){
-    e.preventDefault()
-    dispatch(getTurnByName(inputName))
-} */
-
+  // FILTRAR POR HORA
   function handleFilterByHour(event) {
     event.preventDefault();
     setHour(event.target.value);
     dispatch(filterByHour(event.target.value));
   }
-
-  useEffect(() => {
-    dispatch(getTurns());
+  // RESETEAR FILTROS
+  const refreshHandler = () => {
+    setHour("Hours");
+    setClient("Clients");
+    dispatch(cleanDate());
+    setSelectedDate("Dale");
     dispatch(getProfClientsTurns(lastProfessional));
-  }, []);
-
+  };
+  // MOSTRAR HORARIOS ACTUALES
   const uniqueOptions = profClientsTurnsBackup
     .sort((a, b) => (a.client.name > b.client.name ? 1 : -1))
     .filter(
       (v, i, arr) => arr.findIndex((t) => t.client.name === v.client.name) === i
     );
-
   const uniqueHour = profClientsTurns
     .sort((a, b) => (a.hour > b.hour ? 1 : -1))
     .filter((v, i, arr) => arr.findIndex((t) => t.hour === v.hour) === i);
 
-  /*  const handleKeyPressName = (event) => {
-      if (event.key === "Enter") {
-        handleOnClickName(event);
-      }
-    };
- */
-  /* const handleKeyPressDate = (event) => {
-      if (event.key === "Enter") {
-        handleOnClickDate(event);
-      }
-    }; */
+  // DISTRIBUIR
+  function handleSelectChange(event) {
+    const { name, value } = event.target;
 
-  const refreshHandler = () => {
-    setHour("Hours");
-    setClient("Clients");
-    setInputDate("");
-    dispatch(cleanDate());
-    dispatch(filterByClient("Clients"));
-  };
+    if (name === "client") {
+      if (value === "Clients") {
+        // El usuario ha seleccionado el valor por defecto del select de nombres
+        // Realiza la acción necesaria para mostrar todos los turnos
+
+        dispatch(getProfClientsTurns(lastProfessional));
+      } else {
+        // El usuario ha seleccionado un nombre específico
+        // Realiza la acción necesaria para filtrar los turnos por ese nombre
+        handleFilterByClient(event);
+      }
+    } else if (name === "date") {
+      if (value === "Date") {
+        // El usuario ha seleccionado el valor por defecto del select de fechas
+        // Realiza la acción necesaria para mostrar todos los turnos
+        dispatch(getProfClientsTurns(lastProfessional));
+      } else {
+        // El usuario ha seleccionado una fecha específica
+        // Realiza la acción necesaria para filtrar los turnos por esa fecha
+        handleOnChangeDate(event);
+      }
+    }
+  }
+
+  // RENDERIZACION - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // useEffect(() => {
+  //   if (!hasTurn) {
+  //     setInputDate("");
+  //     dispatch(cleanDate());
+  //   }
+  // }, [input]);
+
+  useEffect(() => {
+    dispatch(getTurns());
+    dispatch(getProfClientsTurns(lastProfessional));
+  }, [dispatch, lastProfessional]);
+
+  useEffect(() => {
+    dispatch(filterByDate(fecha2));
+  }, [fecha2]);
 
   return (
-    <div className="filterContainer">
-      {/*  <div>
-        <button 
-        onClick={handleOnClickName} className="ButtonSearch">Search</button>
-        <input 
-        onKeyPress={handleKeyPressName}
-        type='text'
-        value={inputName} 
-        onChange={handleOnChangeName} 
-        placeholder='Client...' 
-        className="InputSearch">
-
-        </input>
-    </div> */}
+    <div className={style.filterContainer}>
       <div>
         <select
           value={client}
-          onChange={(event) => handleFilterByClient(event)}
+          onChange={(e) => handleSelectChange(e)}
+          name="client"
         >
           <option value="" hidden>
-            {" "}
-            Clients{" "}
+            Clients
           </option>
           {uniqueOptions.map((v) => (
             <option value={v.name} key={v.id}>
@@ -133,25 +124,13 @@ const Filters = ({ lastProfessional }) => {
           ))}
         </select>
       </div>
-      {/* <div>
-        <button onClick={handleOnClickDate} className="ButtonSearch">
-          Search
-        </button>
-        <input
-          onKeyPress={handleKeyPressDate}
-          type="text"
-          value={inputDate}
-          onChange={handleOnChangeDate}
-          placeholder="Date..."
-          className="InputSearch"
-        ></input>
-      </div> */}
       <div>
         <input
           className="input"
-          value={inputDate}
+          defaultValue={selectedDate}
+          value={selectedDate}
           type="date"
-          onChange={handleOnChangeDate}
+          onChange={(e)=>handleOnChangeDate(e)}
           name="date"
         />
       </div>
@@ -168,8 +147,8 @@ const Filters = ({ lastProfessional }) => {
           ))}
         </select>
       </div>
-      <div className="buttonContainer">
-        <button className="inputReset" onClick={refreshHandler}>
+      <div className={style.buttonContainer}>
+        <button className={style.inputReset} onClick={refreshHandler}>
           <iconify-icon
             icon="material-symbols:refresh"
             width="20"

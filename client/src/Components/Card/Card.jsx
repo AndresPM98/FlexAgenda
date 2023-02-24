@@ -1,37 +1,33 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./Card.css";
+import style from "./Card.module.css";
 
 const Card = ({ name, date, hour, id, type, email, address, description }) => {
   return type === "turns" ? (
-    <div className="cardsContainer">
-      <div className="card">
-        <div className="name">
-          <NavLink to={`/queryDetail/${id}`} className="nameLink">
+          <NavLink to={`/queryDetail/${id}`} className={style.card}>
+      {/* <div className={style.card}> */}
+        <div className={style.name}>
             {name}
-          </NavLink>
         </div>
-        <div className="info">
+        <div className={style.info}>
           <p>{date}</p>
           <p>{hour}</p>
         </div>
-      </div>
-    </div>
+      {/* </div> */}
+          </NavLink>
   ) : (
-    <div className="cardsContainer">
-      <div className="card">
-        <div className="name">
-          <NavLink to={`/home/${id}`} className="nameLink">
+      <div className={style.card}>
+        <div className={style.name}>
+          <NavLink to={`/Calendarpage/${id}`} className={style.nameLink}>
             {name}
           </NavLink>
         </div>
-        <div className="info">
+        <div className={style.info}>
           <p>{email}</p>
           <p>{address}</p>
           <p>{description}</p>
         </div>
       </div>
-    </div>
   );
 };
 

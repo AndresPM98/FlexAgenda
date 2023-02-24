@@ -1,9 +1,11 @@
 .filterContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin: 1rem 0;
-    width: 60%;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 50%;
+
   }
   
   .ButtonSearch {

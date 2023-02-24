@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  border-bottom: 1px solid rgb(82, 82, 82);
+  width: 100%;
+  height: 7vh;
+  text-decoration: none;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #000000;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+.card:hover {
+  /* background-color: #9488b865; */
+  background-color: #80808065;
+}
+
+.nameLink {
+  text-decoration: none;
+  width: 100%;
+  font-size: 2rem;
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  /* background-color: #CFB8FF; */
+  /* height: 5.6rem; */
+  align-items: center;
+  /* border-radius: 1rem 0 0 1rem ; */
+  /* border: 3px solid #73ee00; */
+  border-right: 1px solid rgba(94, 94, 94, 0.479);
+}
+
+.info {
+  width: 70%;
+  height: 5.6rem;
+  /* background-color: #F0E9FF; */
+  border-radius: 0 1rem 1rem 0;
+  /* border-bottom: 3px solid #0051EE;
+    border-right: 3px solid #0051EE;
+    border-top: 3px solid #0051EE; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
