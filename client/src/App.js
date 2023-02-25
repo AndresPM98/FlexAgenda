@@ -11,9 +11,12 @@ import {
   Login,
   AllProfessionals,
   PaymentApproved,
+  SignUp,
+  LoginFirebase,
   PaymentFailure
+
 } from "./Pages";
-import HomeProfessional from "./Components/HomeProfessional/HomeProfessional";
+
 import CalendarxD from "./Pages/Calendar/CalendarxD";
 import AllProfessionalPageById from "./Pages/allProfessionalPageById/allProfessionalPageById";
 import Error404 from "./Components/Error404/Error404";
@@ -33,19 +36,35 @@ function App() {
         <Route exact path="/form/:id" component={Form} />
         <Route exact path="/formClient/:id" component={FormClient} />
         <Route exact path="/Calendarpage/:id" component={CalendarxD} />
-        <Route exact path="/professionalDetail/:id" component={ProfessionalPage} />
+        <Route
+          exact
+          path="/professionalDetail/:id"
+          component={ProfessionalPage}
+        />
         <Route exact path="/profTT/:id" component={ProfessionalTakeTurn} />
-        <Route exact path="/professional/edit/:id" component={EditProfileProf} />
-        <Route exact path="/professional/edit/:id/services" component={FormService} />
+        <Route
+          exact
+          path="/professional/edit/:id"
+          component={EditProfileProf}
+        />
+        <Route
+          exact
+          path="/professional/edit/:id/services"
+          component={FormService}
+        />
         <Route exact path="/queryDetail/:id" component={QueryPage} />
         <Route exact path="/paymentApproved" component={PaymentApproved} />
+
+        <Route path="/SignUp" component={SignUp} />
+        <Route path="/Login" component={LoginFirebase} />
+
         <Route exact path="/paymentFailure" component={PaymentFailure} />
         <Route path="/login" component={Login} />
         <Route path="/allProfessionals" component={AllProfessionals} />
         <Route path="/home/:id" component={AllProfessionalPageById} />
         <Route path="/*" component={Error404} />
         <Route path="/:any+" component={Error404} />
-        
+
         <Footer />
       </Switch>
     </div>

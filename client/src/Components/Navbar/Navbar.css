@@ -60,6 +60,8 @@
     padding: 0.2rem;
     border-radius: 0.6rem;
     font-family: 'Poppins', sans-serif;
+    outline: none;
+    background-color: #183a3b;
 }
 
 .allProfessionals:hover{

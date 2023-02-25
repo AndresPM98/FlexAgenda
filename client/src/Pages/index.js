@@ -8,6 +8,10 @@ import Login from "./Login/Login";
 import AllProfessionals from "./AllProfessionals/AllProfessionals";
 import allProfessionalPageById from "./allProfessionalPageById/allProfessionalPageById";
 import PaymentApproved from "./PaymentApproved/PaymentApproved";
+
+import SignUp from "./SignUp/SignUp";
+import LoginFirebase from "./LoginFirebase/LoginFirebase";
+
 import PaymentFailure from "./PaymentFailure/PaymentFailure";
 
 export {
@@ -21,5 +25,9 @@ export {
   AllProfessionals,
   allProfessionalPageById,
   PaymentApproved,
+  SignUp,
+  LoginFirebase,
+
   PaymentFailure
+
 };
