@@ -8,6 +8,7 @@ import Login from "./Login/Login";
 import AllProfessionals from "./AllProfessionals/AllProfessionals";
 import allProfessionalPageById from "./allProfessionalPageById/allProfessionalPageById";
 import PaymentApproved from "./PaymentApproved/PaymentApproved";
+import PaymentFailure from "./PaymentFailure/PaymentFailure";
 
 export {
   Form,
@@ -19,5 +20,6 @@ export {
   Login,
   AllProfessionals,
   allProfessionalPageById,
-  PaymentApproved
+  PaymentApproved,
+  PaymentFailure
 };
