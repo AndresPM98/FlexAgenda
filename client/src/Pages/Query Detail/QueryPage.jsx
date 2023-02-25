@@ -15,6 +15,7 @@ import img from "../../Imagenes y logos/agenda.png";
 import Loading from "../Loading/Loading";
 import { useState } from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
+import axios from "axios";
 
 const QueryPage = () => {
   const { id } = useParams();
@@ -24,6 +25,7 @@ const QueryPage = () => {
   const clientDetail = useSelector((state) => state.clientDetailTurn);
 
   const [loading, setLoading] = useState(true);
+ 
 
   const dispatch = useDispatch();
 
@@ -47,6 +49,22 @@ const QueryPage = () => {
     alert("Turno eliminado");
     history.push(`/home/${turnDetail.ProfessionalId}`);
     dispatch(getTurnDetail);
+  };
+
+  
+  const [turnStatus, setTurnStatus] = useState({
+    status: "",
+  });
+  
+  const handlerEdit = async () => {
+    try {
+      await axios.put(`/turn/${id}`, { status: false });
+      setTurnStatus(false); // Actualizar el estado del turno en el componente
+      alert("Turno cancelado");
+      history.push(`/home/${turnDetail.ProfessionalId}`)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handlerBack = () => {
@@ -93,9 +111,12 @@ const QueryPage = () => {
             <h3 className="data-turn-text">
               Hour: <b className="data-turn-text-info">{turnDetail.hour}</b>
             </h3>
-            <button onClick={(e) => handlerDelete(e)} className="buttonDelete">
-              Delete Turn
-            </button>
+            {turnDetail.status === "false" ? <button onClick={(e) => handlerDelete(e)} className="buttonDelete">
+              Borrar turno 
+            </button>:
+            <button onClick={(e) => handlerEdit(e)} className="buttonDelete">
+              Cancelar turno 
+            </button>}
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ import {
   DELETE,
   CLEAN_DATE,
   SET_CURRENT_DATE,
+  FILTER_CANCELED,
 } from "./Actions";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   allClients: [],
   allProfessionals: [],
   turns: [],
+  turnsCanceled: [],
   turnBackup: [],
   turnFiltered: [],
   profDetail: [],
@@ -96,12 +98,12 @@ const rootReducer = (state = initialState, action) => {
         state.currentDate.length &&
         state.currentName.length &&
         state.currentName !== action.payload
-        ){
- 
+      ) {
         filteredbyName = allTurnsC.filter(
           (t) =>
             t.date === state.currentDate && t.client.name === action.payload
-        );}
+        );
+      }
       return {
         ...state,
         profClientsTurns: filteredbyName,
@@ -124,12 +126,13 @@ const rootReducer = (state = initialState, action) => {
         state.currentDate.length &&
         state.currentName.length &&
         state.currentDate !== action.payload
-      ){
+      ) {
         console.log("filtro por fecha en base al nombre que ya estaba puesto");
         filteredbyDate = allTurnsC.filter(
           (t) =>
             t.date === action.payload && t.client.name === state.currentName
-        );}
+        );
+      }
       return {
         ...state,
         profClientsTurns: filteredbyDate,
@@ -179,7 +182,13 @@ const rootReducer = (state = initialState, action) => {
         turnDetail: "",
         clientDetailTurn: "",
       };
-
+      case FILTER_CANCELED:
+        const allTurnsCancel = state.turnBackup;
+        const allTurnsCancelFiltered = allTurnsCancel.filter((t) => !t.status);
+        return {
+          ...state,
+          turns: allTurnsCancelFiltered,
+        };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - REDUCER PROFESSIONAL - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - */
 
     case GET_PROF_DETAIL:

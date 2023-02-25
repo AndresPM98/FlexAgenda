@@ -18,15 +18,3 @@
     height: 7vh;
     background-color: rgb(236, 236, 236);
 }
-.card {
-    background-color: white;
-    /* Agrega otros estilos según tus necesidades */
-  }
-  
-  .card-cancelado {
-    background-color: grey;
-  }
-  
-  .card-confirmado {
-    background-color: green;
-  }

@@ -18,6 +18,7 @@ import {
 } from "./Pages";
 
 import CalendarxD from "./Pages/Calendar/CalendarxD";
+import Borrador from "./Pages/BorradorLogico/Borrador";
 import AllProfessionalPageById from "./Pages/allProfessionalPageById/allProfessionalPageById";
 import Error404 from "./Components/Error404/Error404";
 import ProfessionalTakeTurn from "./Pages/ProfessionalTakeTurn/ProfessionalTakeTurn";
@@ -62,6 +63,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/allProfessionals" component={AllProfessionals} />
         <Route path="/home/:id" component={AllProfessionalPageById} />
+        <Route path="/turnCanceled/:id" component={Borrador} />
         <Route path="/*" component={Error404} />
         <Route path="/:any+" component={Error404} />
 

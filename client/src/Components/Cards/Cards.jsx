@@ -1,8 +1,10 @@
 import React from "react";
 import Card from "../Card/Card";
 import style from "./Cards.module.css";
+import { useSelector } from "react-redux";
 
-const Cards = ({ turns, type, professionals }) => {
+const Cards = ({ turns, type, professionals  }) => {
+
   return type === "turns" ? (
     <div className={style.cardsContainer}>
       <div className={style.borderCards}></div>
@@ -15,6 +17,10 @@ const Cards = ({ turns, type, professionals }) => {
             name={turn.client.name}
             date={turn.date}
             hour={turn.hour}
+            status={
+              turn.status === "false" ? "Cancelado" : "Confirmado"
+            } 
+
             type="turns"
           />
         );
@@ -23,7 +29,7 @@ const Cards = ({ turns, type, professionals }) => {
     </div>
   ) : (
     <div>
-      {professionals.map(({ id, name, email, address, description }) => {
+      {professionals.map(({ id, name, email, address, description, status }) => {
         return (
           <Card
             id={id}
@@ -32,6 +38,8 @@ const Cards = ({ turns, type, professionals }) => {
             email={email}
             address={address}
             description={description}
+            status={status}
+           
           />
         );
       })}
