@@ -13,6 +13,8 @@ import {
   PaymentApproved,
   SignUp,
   LoginFirebase,
+  PaymentFailure
+
 } from "./Pages";
 
 import CalendarxD from "./Pages/Calendar/CalendarxD";
@@ -52,8 +54,12 @@ function App() {
         />
         <Route exact path="/queryDetail/:id" component={QueryPage} />
         <Route exact path="/paymentApproved" component={PaymentApproved} />
+
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Login" component={LoginFirebase} />
+
+        <Route exact path="/paymentFailure" component={PaymentFailure} />
+        <Route path="/login" component={Login} />
         <Route path="/allProfessionals" component={AllProfessionals} />
         <Route path="/home/:id" component={AllProfessionalPageById} />
         <Route path="/*" component={Error404} />
