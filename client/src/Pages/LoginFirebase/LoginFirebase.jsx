@@ -5,10 +5,16 @@ import { useHistory } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 import { auth } from "../../firebase-config";
 
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { async } from "@firebase/util";
 import { getProfessionals } from "../../Redux/Actions";
 
@@ -51,17 +57,40 @@ const LoginFirebase = () => {
         form.email,
         form.password
       );
-      console.log("Logueo exitoso", user);
+      await Swal.fire({
+        title: "Logueo exitoso",
+        icon: "success",
+        // text:,
+        confirmButtonText: "Aceptar",
+      }).then(() => {
+        const findProf = professionals.find(
+          (prof) => prof.email === form.email
+        );
+        history.push(`/home/${findProf.id}`);
+      });
+      console.log(user);
       // Aquí puedes hacer cualquier cosa que necesites después de que el usuario haya iniciado sesión, como redireccionar a otra página o mostrar un mensaje de bienvenida
     } catch (error) {
       console.error(error);
       // Aquí puedes manejar el error de inicio de sesión, como mostrar un mensaje de error al usuario
     }
   };
-  if (currentUser) {
-    const findProf = professionals.find((prof) => prof.email === form.email);
-    history.push(`/home/${findProf.id}`);
-  }
+
+  const handleSignInWithGoogle = async () => {
+    const googleProvider = new GoogleAuthProvider();
+
+    const signInWithGoogle = async (googleProvider) => {
+      try {
+        const res = await signInWithPopup(auth, googleProvider).then(() => {
+          history.push(`/`);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    await signInWithGoogle(googleProvider);
+  };
+
   return (
     <div>
       <NavbarTwo />
@@ -93,6 +122,13 @@ const LoginFirebase = () => {
 
           <button type="submit" className={styles.button}>
             LOGIN
+          </button>
+          <button className={styles.googlebtn} onClick={handleSignInWithGoogle}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              alt="Google logo"
+            />
+            Sign in with Google
           </button>
         </form>
       </div>

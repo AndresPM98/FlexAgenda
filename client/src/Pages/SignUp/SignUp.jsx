@@ -23,7 +23,6 @@ import { useHistory } from "react-router-dom";
 function SignUp() {
   const history = useHistory();
   const [form, setForm] = useState({
-    firebaseId: "",
     name: "",
     email: "",
     password: "",
@@ -70,17 +69,17 @@ function SignUp() {
         form.password
       );
       const user = userCredential.user;
+      console.log(user);
       const uid = user.uid;
-      setForm({ ...form, firebaseId: uid });
-      console.log(uid);
-      console.log(form);
-      const prof = await axios.post("/professional", {
-        ...form,
-        firebaseId: uid,
-      });
-      alert("Creado correctamente");
 
-      await setDoc(doc(db, "professionals", uid), {
+      axios
+        .post("/professional", form)
+        .then((res) => {
+          alert("Creado correctamente");
+        })
+        .catch((err) => alert("Algo salió mal!"));
+
+      await setDoc(doc(db, "users", uid), {
         name: form.name,
         email: form.email,
         password: form.password,
@@ -89,9 +88,9 @@ function SignUp() {
         description: form.description,
         category: form.category,
       });
-      console.log(prof.data.id);
+
       console.log("User registered successfully!");
-      history.push(`/home/${prof.data.id}`);
+      history.push(`/Login`);
     } catch (error) {
       console.error(error.message);
     }
