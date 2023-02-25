@@ -21,6 +21,7 @@ export const GET_TURN_DETAIL = "GET_TURN_DETAIL";
 export const GET_CLIENT_DETAIL_TURN = "GET_CLIENT_DETAIL_TURN";
 export const CLEAN_DETAIL_TURN = "CLEAN_DETAIL_TURN";
 export const DELETE = "DELETE";
+export const FILTER_CANCELED = "FILTER_CANCELED";
 
 
 export const getTurns = () => {
@@ -86,6 +87,21 @@ export const deleteTurn = (id) => {
     };
   };
 };
+
+
+
+export const filterCanceled = () => {
+  return (dispatch, getState) => {
+    const allTurnsCancel = getState().turnBackup;
+    const allTurnsCancelFiltered = allTurnsCancel.filter((t) => !t.status);
+    dispatch({
+      type: FILTER_CANCELED,
+      payload: allTurnsCancelFiltered,
+    });
+    return Promise.resolve();
+  };
+};
+
 /* ----------------------------PROFESSIONALS--------------------------------- */
 export const GET_PROFESSIONALS = "GET_PROFESSIONALS";
 export const GET_PROF_DETAIL = "GET_PROF_DETAIL";

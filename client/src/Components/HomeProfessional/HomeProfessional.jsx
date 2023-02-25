@@ -13,7 +13,7 @@ const HomeProfessional = ({ id }) => {
   const profClientsTurns = useSelector((state) => state.profClientsTurns);
 
   const darkMode = useSelector((state) => state.darkMode);
-
+  const turns = useSelector((state) => state.turns);
   const [loading, setLoading] = useState(true);
 
   const allProfessionals = useSelector((state) => state.allProfessionals);
@@ -25,6 +25,25 @@ const HomeProfessional = ({ id }) => {
     : "";
 
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
+
+  // console.log("PROFTURNS",profClientsTurns);
+
+  const filteredTurns = turns.filter((turn) => turn.professionalID === id);
+  const turnsWithStatus = filteredTurns.map((turn) => {
+    return turn.status;
+  });
+
+  // console.log("FITLER TURN",turnsWithStatus)
+
+  const turnStates2 = turns.filter(
+    (turn) => turn.professionalID === id && turn.status === "false"
+  );
+
+  const turnStatesTrue = turns.filter(
+    (turn) => turn.professionalID === id && turn.status === "true"
+  );
+
+  // console.log("TURNSTATES2", turnStates2);
 
   const dispatch = useDispatch();
 
@@ -41,22 +60,27 @@ const HomeProfessional = ({ id }) => {
 
   return (
     <div>
-      <NavbarTwo/>
-    <div className={!darkMode ? style.homeContainer : style.homeContainerDark}>
-      
+      <NavbarTwo />
+      <div
+        className={!darkMode ? style.homeContainer : style.homeContainerDark}
+      >
         <div className={style.filtersAndButtons}>
-          
           <BotonProf id={id} />
           <Filters lastProfessional={ultimoProfesional} />
-      {/* <DarkMode /> */}
+          {/* <DarkMode /> */}
         </div>
-      <div className={style.content}>
+        <div className={style.content}>
           <div className={style.header}>
             <h1>Hola {findProfessional.name} !</h1>
             <p>
-              {profClientsTurns.length
-                ? `Tienes ${profClientsTurns.length} turnos`
-                : "No hay turnos"}
+              {turnStatesTrue.length === 1
+                ? "Tienes 1 turno confirmado"
+                : `Tienes ${turnStatesTrue.length} turnos confirmados`}
+              {turnStates2.length === 1
+                ? ` y 1 turno cancelado.`
+                : turnStates2.length > 1
+                ? ` y ${turnStates2.length} turnos cancelados.`
+                : "."}
             </p>
           </div>
           {profClientsTurns.length ? (
@@ -64,8 +88,8 @@ const HomeProfessional = ({ id }) => {
           ) : (
             <h2>No hay turnos</h2>
           )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

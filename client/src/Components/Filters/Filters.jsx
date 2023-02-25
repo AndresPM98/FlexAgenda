@@ -9,6 +9,8 @@ import {
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Filters.module.css";
+import { Link } from "react-router-dom";
+import { id } from "date-fns/locale";
 
 const Filters = ({ lastProfessional }) => {
   const dispatch = useDispatch();
@@ -106,8 +108,16 @@ const Filters = ({ lastProfessional }) => {
     dispatch(filterByDate(fecha2));
   }, [fecha2]);
 
+
+// console.log(lastProfessional);
+
+
   return (
     <div className={style.filterContainer}>
+      <Link to={`/turnCanceled/${lastProfessional}`}>
+      
+      <button className={style.turnosCancelados} >Turnos cancelados</button>
+      </Link>
       <div>
         <select
           value={client}

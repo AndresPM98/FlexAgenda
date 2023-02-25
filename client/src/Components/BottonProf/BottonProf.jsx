@@ -55,7 +55,7 @@ const BotonProf = ({ id }) => {
               </div>
             </Link>
           </div>
-
+          
           <div>
             <Link
               to={`/Calendarpage/${findProfessional?.id}`}

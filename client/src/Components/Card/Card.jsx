@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./Card.module.css";
+import { useDispatch, useSelector } from "react-redux";
+const Card = ({ name, date, hour, id, type, email, address, description, status  }) => {
 
-const Card = ({ name, date, hour, id, type, email, address, description }) => {
+
+
+
   return type === "turns" ? (
           <NavLink to={`/queryDetail/${id}`} className={style.card}>
       {/* <div className={style.card}> */}
@@ -10,10 +14,11 @@ const Card = ({ name, date, hour, id, type, email, address, description }) => {
             {name}
         </div>
         <div className={style.info}>
-          <p>{date}</p>
-          <p>{hour}</p>
+          <p style={{marginBottom:"40px"}}>{date} </p>
+          <p style={{marginBottom:"40px"}}>{hour}</p>
+          <p style={status === "Cancelado" ? {color: 'red', fontWeight: 'bold', marginBottom:"40px"} : {color: 'green', fontWeight: 'bold', marginBottom:"40px"}}> {status} </p>
         </div>
-      {/* </div> */}
+        
           </NavLink>
   ) : (
       <div className={style.card}>
@@ -23,9 +28,10 @@ const Card = ({ name, date, hour, id, type, email, address, description }) => {
           </NavLink>
         </div>
         <div className={style.info}>
-          <p>{email}</p>
-          <p>{address}</p>
-          <p>{description}</p>
+          <p style={{marginBottom:"40px"}}>{email}</p>
+          <p> {address} </p>
+          <p> {description}</p>
+          
         </div>
       </div>
   );
