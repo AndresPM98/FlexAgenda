@@ -4,23 +4,27 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { auth } from "../../firebase-config";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { async } from "@firebase/util";
+import { getProfessionals } from "../../Redux/Actions";
 
 const LoginFirebase = () => {
   const history = useHistory();
-  const [currentUser, setCurrentUser] = useState(null);
   const darkMode = useSelector((state) => state.darkMode);
+  const professionals = useSelector((state) => state.allProfessionals);
+  const dispatch = useDispatch();
+  const [currentUser, setCurrentUser] = useState(null);
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
   useEffect(() => {
+    dispatch(getProfessionals());
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
@@ -29,21 +33,6 @@ const LoginFirebase = () => {
       unsubscribe();
     };
   }, []);
-
-  //   const [error, setErrors] = useState({
-  //     email: "",
-  //     name: "",
-  //   });
-
-  //   const validate = (form) => {
-  //     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
-  //       setErrors({ ...error, email: "" });
-  //     } else {
-  //       setErrors({ ...error, email: "Hay un error en email" });
-  //     }
-
-  //     if (form.email === "") setErrors({ ...error, email: "email " });
-  //   };
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -68,16 +57,10 @@ const LoginFirebase = () => {
       console.error(error);
       // Aquí puedes manejar el error de inicio de sesión, como mostrar un mensaje de error al usuario
     }
-    // axios
-    //   .post("https://backend-pf-production-1672.up.railway.app/client", form)
-    //   .then((res) => {
-    //     alert("Created correctly");
-    //     // history.push(`/form/${id}`);
-    //   })
-    //   .catch((err) => alert(err));
   };
   if (currentUser) {
-    history.push("/");
+    const findProf = professionals.find((prof) => prof.email === form.email);
+    history.push(`/home/${findProf.id}`);
   }
   return (
     <div>
