@@ -4,12 +4,12 @@
   flex-direction: row;
   min-height: 100vh;
   padding-bottom: 100px;
+  
 }
 
 .homeContainer {
-
-  background-color: #ffffff27;
-
+ background-color: white; 
+ font-family: "Playfair Display", serif;
 }
 
 .homeContainerDark {
@@ -26,10 +26,11 @@
 .filtersAndButtons {
   display: flex;
   /* background-color: #2b2049e1; */
-  background-color: #363636;
+  background-color: #2C3333;
   width: 19%;
   /* border-radius: 20px; */
 }
 .header {
-  background-color: #7ba199;
+ /* background-color: #7ba199;*/
+ font-family: "Playfair Display", serif;
 }

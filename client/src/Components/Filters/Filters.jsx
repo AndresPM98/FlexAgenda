@@ -150,7 +150,7 @@ const copyLink = () => {
       </div>
       <div>
         <input
-          className="input"
+          className={style.input}
           defaultValue={selectedDate}
           value={selectedDate}
           type="date"

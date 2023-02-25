@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   /* border: 1px solid red; */
+  font-family: "Playfair Display", serif;
 }
 .queryPageDark {
   margin: 0;
@@ -19,7 +20,7 @@
   background-color: #f0e9ff;
   width: 50rem;
   height: 30rem;
-  border: 3px solid #0051ee;
+  border: 8px solid #183a3b;
   border-radius: 2rem;
   /* margin-left: 16rem; */
 }
@@ -36,7 +37,7 @@ top: 20%
 
 .back {
   border-radius: 0 1rem 1rem 0;
-  background-color: #0051ee;
+  background-color: #183a3b;
   text-decoration: none;
   color: aliceblue;
   display: flex;
@@ -61,8 +62,8 @@ top: 20%
 
 .turn-detail-tittle {
   margin-left: 10rem;
-  color: #0051ee;
-  font-family: "Kaushan Script", cursive;
+  color: #183a3b;
+  
   font-size: 2.5rem;
 }
 
