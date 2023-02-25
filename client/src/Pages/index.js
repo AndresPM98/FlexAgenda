@@ -8,7 +8,8 @@ import Login from "./Login/Login";
 import AllProfessionals from "./AllProfessionals/AllProfessionals";
 import allProfessionalPageById from "./allProfessionalPageById/allProfessionalPageById";
 import PaymentApproved from "./PaymentApproved/PaymentApproved";
-
+import SignUp from "./SignUp/SignUp";
+import LoginFirebase from "./LoginFirebase/LoginFirebase";
 export {
   Form,
   Home,
@@ -19,5 +20,7 @@ export {
   Login,
   AllProfessionals,
   allProfessionalPageById,
-  PaymentApproved
+  PaymentApproved,
+  SignUp,
+  LoginFirebase,
 };
