@@ -20,26 +20,13 @@ const BotonProf = ({ id }) => {
 
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
 
-  const copyLink = () => {
-    const el = document.createElement("textarea");
-    el.value = `http://localhost:3000/profTT/${findProfessional?.id}`;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-    alert("Enlace copiado");
-  };
 
   return (
     <div className={style.profContainer}>
       {profDetail ? (
         <div>
           <div>
-            <div className={style.nameLinkProf}>
-              <button className={style.copybtn} onClick={copyLink}>
-                Copiar enlace
-              </button>
-            </div>
+            
 
             <Link
               to={`/professionalDetail/${findProfessional?.id}`}

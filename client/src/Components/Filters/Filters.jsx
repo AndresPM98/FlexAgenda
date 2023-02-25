@@ -110,10 +110,24 @@ const Filters = ({ lastProfessional }) => {
 
 
 // console.log(lastProfessional);
+const copyLink = () => {
+  const el = document.createElement("textarea");
+  el.value = `http://localhost:3000/profTT/${lastProfessional}`;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+  alert("Enlace copiado");
+};
 
 
   return (
     <div className={style.filterContainer}>
+      <div className={style.nameLinkProf}>
+              <button className={style.copybtn} onClick={copyLink}>
+                Copiar enlace
+              </button>
+            </div>
       <Link to={`/turnCanceled/${lastProfessional}`}>
       
       <button className={style.turnosCancelados} >Turnos cancelados</button>
