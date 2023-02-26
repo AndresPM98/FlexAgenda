@@ -60,9 +60,9 @@ const FormClient = () => {
         className={darkMode === false ? styles.container : styles.containerDark}
       >
         <form onSubmit={submitHandler} className={styles.form}>
-          <h1 className={styles.tittle}>Formulario del cliente</h1>
+          <h1 className={styles.tittle}>CREA TU CUENTA </h1>
 
-          <label className={styles.label}>NAME:</label>
+          <label className={styles.label}>NOMBRE:</label>
           <input
             className={styles.input}
             type="text"

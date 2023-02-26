@@ -140,9 +140,10 @@ const Form = () => {
 
       <div className={styles.container}>
         <form onSubmit={submitHandler} className={styles.form}>
-          <h1 className={styles.tittle}>Schedule your turn</h1>
+          <h1 className={styles.tittle}>AGENDÁ TU TURNO</h1>
 
-          <label className={styles.label}>DATE:</label>
+          <label className={styles.label}>FECHA:</label>
+          <br />
           <input
             className={styles.input}
             type="date"
@@ -154,7 +155,8 @@ const Form = () => {
             {error.date && <span>{error.date}</span>}{" "}
           </div>
 
-          <label className={styles.label}>HOUR:</label>
+          <label className={styles.label}>HORA:</label>
+          <br />
           <input
             className={styles.input}
             type="time"
@@ -171,23 +173,23 @@ const Form = () => {
           </div>
 
           <label className={styles.label}>
-            PROFESSIONAL:
-            <h2>{findProfesional.name}</h2>
+            PROFESIONAL:
+            <h2 className={styles.nombres}>{findProfesional.name}</h2>
           </label>
           <label className={styles.label}>
             CLIENTE:
-            <h2>{ultimoCliente.name}</h2>
+            <h2 className={styles.nombres}>{ultimoCliente.name}</h2>
           </label>
 
-          <label className={styles.label}>SERVICE:</label>
+          <label className={styles.label}>SERVICIO:</label>
           <select
             name="ServiceId"
             onChange={handleSelectServ}
             className={styles.input}
           >
-            <option value="ServiceId">Service</option>
+            <option value="ServiceId" className={styles.input}>Servicio</option>
             {servProfs?.map((element, index) => (
-              <option key={index} value={element.id}>
+              <option key={index} value={element.id} className={styles.input}>
                 {element.name}
               </option>
             ))}
@@ -196,7 +198,7 @@ const Form = () => {
             </div>
           </select>
           <button className={styles.button} type="submit">
-            TAKE TURN
+            CONFIRMAR TURNO
           </button>
         </form>
       </div>
