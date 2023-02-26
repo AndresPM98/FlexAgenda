@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-
+import ServiceCard from "../../Components/ServiceCard/ServiceCard";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import { getProfessionalDetail } from "../../Redux/Actions";
+import { getProfessionalDetail, getServices } from "../../Redux/Actions";
 import Loading from "../Loading/Loading";
 import style from "./ProfessionalPage.module.css";
 import { useState } from "react";
@@ -21,6 +21,7 @@ const ProfessionalPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
+    dispatch(getServices())
 
   }, [dispatch, id]);
 
@@ -61,6 +62,7 @@ const ProfessionalPage = () => {
         <h4 className={style.adress}>{professional?.email}</h4>
         
         <p className={style.description}>{professional?.description}</p>
+        <ServiceCard/>
 
         <Link to={`/professional/edit/${id}`}>
         <button className={style.btnEditar}>Editar Perfil</button>
