@@ -93,3 +93,24 @@
   box-shadow: 0 4px 8px #0051EE;
   outline: none;
 }
+
+.googlebtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #757575;
+  font-size: 16px;
+  font-weight: 500;
+  height: 40px;
+  width: 240px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.googlebtn img {
+  height: 24px;
+  margin-right: 10px;
+}
