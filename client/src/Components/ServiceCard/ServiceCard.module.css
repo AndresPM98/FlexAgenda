@@ -1,0 +1,27 @@
+.service {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .service.h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .service.h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  
+  .service.p {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .service.p:last-child {
+    margin-bottom: 0;
+  }
+  
