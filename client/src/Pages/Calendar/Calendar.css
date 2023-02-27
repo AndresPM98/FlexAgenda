@@ -1,0 +1,56 @@
+.containerCalendar {
+    width: 99.3vw;
+    height: 110vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .containerCalendar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("./FONDO-3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* filter: blur(3px); */
+    opacity: 0.9;
+    z-index: -1;
+  }
+.rbc-off-range-bg {
+  background-color: #183a3bb7;
+}
+.rbc-today {
+  background-color: rgba(222, 184, 135, 0.658);
+}
+.saludoCalendar {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 45px;
+  letter-spacing: 2px;
+  word-spacing: 5.4px;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+.rbc-calendar {
+  background-color: rgba(9, 9, 9, 0.719);
+  color: white;
+  backdrop-filter: blur(2px);
+}
+.rbc-event {
+  background-color: #9f44b1c2;
+}
+
+/* .rbc-event-label {
+    color: #0033ff;
+  } */
+
+.turnosCount {
+  color: white;
+}

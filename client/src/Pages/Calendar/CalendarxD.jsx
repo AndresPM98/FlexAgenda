@@ -12,7 +12,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Loading from "../Loading/Loading";
 import Error404 from "../../Components/Error404/Error404";
-
+import "./Calendar.css"
 
 const locales = {
   es: require("date-fns/locale/es"),
@@ -82,16 +82,17 @@ function CalendarxD() {
 
   return (
     nameProfessional ? 
-    <div>
+    <div className="containerCalendar">
       <NavbarTwo/>
 
-<h1>Hola {nameProfessional}  !</h1>
-<p>
+<h1 className="saludoCalendar">Hola {nameProfessional}  !</h1>
+<p className="turnosCount">
   {profClientsTurns.length
     ? `Tienes ${memoizedEvents.length} turnos`
     : "No hay turnos"}
 </p>
       <Calendar
+      className="calendar"
         localizer={localizer}
         events={memoizedEvents}
         startAccessor="start"
