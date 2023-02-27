@@ -48,15 +48,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+// Initialize auth
 export const auth = getAuth(app);
+// Initialize db
 export const db = getFirestore(app);
 
+// verifica si el el usuario existe y lo devuelve
 export async function userExists(uid) {
   const docRef = doc(db, "professionals", uid);
   const docSnap = await getDoc(docRef);
   return docSnap.data();
 }
 
+// autentica al usuario con mail
 export async function RegisterEmailUser(auth, form) {
   const loginUser = await createUserWithEmailAndPassword(
     auth,
@@ -67,6 +71,7 @@ export async function RegisterEmailUser(auth, form) {
   return loginUser;
 }
 
+// crea al usuario en la db de firebase
 export async function createUser(uid, form) {
   try {
     if (
