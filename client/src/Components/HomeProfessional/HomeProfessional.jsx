@@ -26,14 +26,14 @@ const HomeProfessional = ({ id }) => {
 
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
 
-  // console.log("PROFTURNS",profClientsTurns);
+
 
   const filteredTurns = turns.filter((turn) => turn.professionalID === id);
   const turnsWithStatus = filteredTurns.map((turn) => {
     return turn.status;
   });
 
-  // console.log("FITLER TURN",turnsWithStatus)
+
 
   const turnStates2 = turns.filter(
     (turn) => turn.professionalID === id && turn.status === "false"
@@ -43,7 +43,7 @@ const HomeProfessional = ({ id }) => {
     (turn) => turn.professionalID === id && turn.status === "true"
   );
 
-  // console.log("TURNSTATES2", turnStates2);
+
 
   const dispatch = useDispatch();
 

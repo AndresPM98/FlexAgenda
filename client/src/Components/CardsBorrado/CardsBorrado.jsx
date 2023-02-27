@@ -32,6 +32,7 @@ if(loading){
 return  type === "turns" ? (
   <div className={style.cardsContainer}>
     <div className={style.borderCards}></div>
+   
     {turnStates.length > 0 &&
       turnStates.map((turn) => {
         return (
@@ -49,6 +50,7 @@ return  type === "turns" ? (
   </div>
 ) : (
   <div>
+    
     {professionals.map(({ id, name, email, address, description }) => {
       return (
         <CardBorrado
