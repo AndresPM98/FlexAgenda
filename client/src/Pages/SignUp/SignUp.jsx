@@ -21,8 +21,7 @@ import { async } from "@firebase/util";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfessionals } from "../../Redux/Actions";
 
-import styles from "./Singup.module.css"
-
+import styles from "./Singup.module.css";
 
 function SignUp() {
   const history = useHistory();
@@ -120,15 +119,14 @@ function SignUp() {
 
   return (
     <>
-
-    <NavbarTwo />
+      <NavbarTwo />
       <div className={styles.container}>
         <form onSubmit={handleRegister} className={styles.form}>
           <h1 className={styles.tittle}>CREACION DE CUENTA</h1>
           <label className={styles.label}>NOMBRE:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="name"
@@ -140,7 +138,7 @@ function SignUp() {
           <label className={styles.label}>EMAIL:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="email"
@@ -150,7 +148,7 @@ function SignUp() {
           <label className={styles.label}>CONTRASEÑA:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="password"
             onChange={(e) => handleChange(e)}
             name="password"
@@ -160,7 +158,7 @@ function SignUp() {
           <label className={styles.label}>CONTACTO:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="phone"
@@ -170,12 +168,17 @@ function SignUp() {
 
           <label className={styles.label}>DIRECCIÓN:</label>
           <br />
-          <input className={styles.input} type="text" onChange={(e) => handleChange(e)} name="address" />
+          <input
+            className={styles.input}
+            type="text"
+            onChange={(e) => handleChange(e)}
+            name="address"
+          />
 
           <label className={styles.label}>DESCRIPCION/PROFESION:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="description"
@@ -185,16 +188,18 @@ function SignUp() {
           <label className={styles.label}>ÁREA:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="category"
             value={form.category}
           />
 
-          <button className={styles.button} type="submit">REGISTRARSE</button>
-         <h2 >O</h2>
-         <button className={styles.googlebtn} onClick={handleSignInWithGoogle}>
+          <button className={styles.button} type="submit">
+            REGISTRARSE
+          </button>
+          <h2>O</h2>
+          <button className={styles.googlebtn}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
               alt="Google logo"
@@ -208,7 +213,6 @@ function SignUp() {
               Sign in with Google
             </button>
           </div> */}
-
       </div>
       <br />
       <br />
