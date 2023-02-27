@@ -13,9 +13,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("./FONDO-3.png");
+   /* background-image: url("./FONDO-3.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;*/
     /* filter: blur(3px); */
     opacity: 0.9;
     z-index: -1;
@@ -31,7 +31,7 @@
   font-size: 45px;
   letter-spacing: 2px;
   word-spacing: 5.4px;
-  color: #ffffff;
+  color: black;
   font-weight: 700;
   text-decoration: none;
   font-style: normal;
@@ -52,5 +52,5 @@
   } */
 
 .turnosCount {
-  color: white;
+  color: black;
 }
