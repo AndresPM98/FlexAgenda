@@ -14,11 +14,10 @@ const ServiceCard = () => {
         {servicios.map((service) => {
           return (
             <div className={Style.service}>
-              <h1>Servicios</h1>
-              <h3>{service.name}</h3>
-              <p>{service.description}</p>
-              <p>{service.duration}</p>
-              <p>{service.price}</p>
+              <h2>{service.name}</h2>
+              <p>Servicio: {service.description}</p>
+              <p>Duración: {service.duration}  hs</p>
+              <p>Precio: {service.price}</p>
             </div>
           );
         })}

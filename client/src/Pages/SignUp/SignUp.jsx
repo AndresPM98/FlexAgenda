@@ -13,12 +13,17 @@ import {
 
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Swal from "sweetalert2";
 import { async } from "@firebase/util";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfessionals } from "../../Redux/Actions";
+
+import styles from "./Singup.module.css"
+
+
 function SignUp() {
   const history = useHistory();
   const [state, setCurrentState] = useState(null);
@@ -115,13 +120,15 @@ function SignUp() {
 
   return (
     <>
-      <NavbarTwo />
-      <div>
-        <form onSubmit={handleRegister}>
-          <h1>Create Account</h1>
 
-          <label>Name:</label>
+    <NavbarTwo />
+      <div className={styles.container}>
+        <form onSubmit={handleRegister} className={styles.form}>
+          <h1 className={styles.tittle}>CREACION DE CUENTA</h1>
+          <label className={styles.label}>NOMBRE:</label>
+          <br />
           <input
+          className={styles.input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="name"
@@ -130,24 +137,30 @@ function SignUp() {
 
           <br />
 
-          <label>Email:</label>
+          <label className={styles.label}>EMAIL:</label>
+          <br />
           <input
+          className={styles.input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="email"
             value={form.email}
           />
 
-          <label>Password:</label>
+          <label className={styles.label}>CONTRASEÑA:</label>
+          <br />
           <input
+          className={styles.input}
             type="password"
             onChange={(e) => handleChange(e)}
             name="password"
             value={form.password}
           />
 
-          <label>Phone:</label>
+          <label className={styles.label}>CONTACTO:</label>
+          <br />
           <input
+          className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="phone"
@@ -155,32 +168,47 @@ function SignUp() {
             placeholder="Ej: 3511234567"
           />
 
-          <label>Adress:</label>
-          <input type="text" onChange={(e) => handleChange(e)} name="address" />
+          <label className={styles.label}>DIRECCIÓN:</label>
+          <br />
+          <input className={styles.input} type="text" onChange={(e) => handleChange(e)} name="address" />
 
-          <label>Description:</label>
+          <label className={styles.label}>DESCRIPCION/PROFESION:</label>
+          <br />
           <input
+          className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="description"
             value={form.description}
           />
 
-          <label>Category:</label>
+          <label className={styles.label}>ÁREA:</label>
+          <br />
           <input
+          className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="category"
             value={form.category}
           />
 
-          <button type="submit">Register</button>
+          <button className={styles.button} type="submit">REGISTRARSE</button>
+         <h2 >O</h2>
+         <button className={styles.googlebtn} onClick={handleSignInWithGoogle}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              alt="Google logo"
+            />
+            Sign in with Google
+          </button>
         </form>
+
         {/* <div>
             <button onClick={handleSignInWithGoogle}>
               Sign in with Google
             </button>
           </div> */}
+
       </div>
       <br />
       <br />

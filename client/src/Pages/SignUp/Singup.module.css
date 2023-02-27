@@ -1,44 +1,8 @@
-
-  .backContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* position: relative; */
-    position: absolute;
-    left: 0;
-    margin-top: 100px;
-  }
-  
-  .back{
-    border-radius: 0 1rem 1rem 0;
-    background-color: #183a3b;
-    text-decoration: none;
-    color: aliceblue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 8rem;
-    height: 2.5rem;
-    margin-left: 0px;
-  }
-  
-
-
- .imagenEditPerfil {
-    width: 200px;
-    height: 200px;
-    border-radius: 40%;
-    margin-left: -550px;
-    justify-content: center;
-    
-  }
-
-
-  .container {
+.container {
     background-color: #264c4d;
     border-radius: 20px;
     box-sizing: border-box;
-    /*height: 100vh;*/
+   /* height: 100vh;*/
     padding: 20px;
     width: 100vh;
     margin: 0 auto;
@@ -47,7 +11,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
   }
   
   .tittle {
@@ -55,6 +18,7 @@
     font-family: sans-serif;
     font-size: 36px;
     font-weight: 600;
+    margin-bottom: 20px;
   }
   
   .label {
@@ -75,7 +39,7 @@
   
   .input {
     height: 40px;
-    width: 100%;
+    width: 90%;
     background-color: #303245;
     border-radius: 12px;
     border: 0;
@@ -106,3 +70,25 @@
   .button:hover {
     background-color: #87878a;
   }
+
+  .googlebtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #757575;
+    font-size: 16px;
+    font-weight: 500;
+    height: 40px;
+    width: 240px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+  
+  .googlebtn img {
+    height: 24px;
+    margin-right: 10px;
+  }
+  

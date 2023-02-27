@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Loading from "../../Pages/Loading/Loading";
 import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 const CardBorrado = ({ name, date, hour, id, type, email, address, description }) => {
  const turnDetail = useSelector((state) => state.turnDetail);
@@ -40,6 +42,23 @@ useEffect(() => {
     }
   };
 
+  const [turnStatus, setTurnStatus] = useState({
+    status: "",
+  });
+
+  const handlerEdit = async () => {
+    try {
+      const confirmEdit = window.confirm("¿Estás seguro de que deseas recuperar este turno?");
+      if (confirmEdit) {
+      await axios.put(`/turn/${id}`, { status: true });
+      setTurnStatus(true); 
+      alert("Turno recuperado");
+      window.location.reload();}
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if(loading){
     return <Loading />
   }
@@ -55,6 +74,7 @@ useEffect(() => {
         <p style={{marginBottom:"40px"}} >{date}</p>
         <p style={{marginBottom:"40px"}} >{hour}</p>
         <button onClick={handlerDelete} className={style.btnborrar}>X</button>
+        <button onClick={handlerEdit} className={style.btnrecuperar}>Recuperar</button>
       </div>
     </div>
   ) : (

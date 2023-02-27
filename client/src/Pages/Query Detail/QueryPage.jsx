@@ -45,10 +45,12 @@ const QueryPage = () => {
   const history = useHistory();
 
   const handlerDelete = () => {
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo.");
+    if (confirmDelete) {
     dispatch(deleteTurn(id));
     alert("Turno eliminado");
     history.push(`/home/${turnDetail.ProfessionalId}`);
-    dispatch(getTurnDetail);
+    dispatch(getTurnDetail);}
   };
 
   
@@ -59,7 +61,7 @@ const QueryPage = () => {
   const handlerEdit = async () => {
     try {
       await axios.put(`/turn/${id}`, { status: false });
-      setTurnStatus(false); // Actualizar el estado del turno en el componente
+      setTurnStatus(false);
       alert("Turno cancelado");
       history.push(`/home/${turnDetail.ProfessionalId}`)
     } catch (error) {
@@ -111,9 +113,12 @@ const QueryPage = () => {
             <h3 className="data-turn-text">
               Hour: <b className="data-turn-text-info">{turnDetail.hour}</b>
             </h3>
-            {turnDetail.status === "false" ? <button onClick={(e) => handlerDelete(e)} className="buttonDelete">
+            {turnDetail.status === "false" ?           
+              
+            <button onClick={(e) => handlerDelete(e)} className="buttonDelete">
               Borrar turno 
-            </button>:
+            </button> 
+            :
             <button onClick={(e) => handlerEdit(e)} className="buttonDelete">
               Cancelar turno 
             </button>}
