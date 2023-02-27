@@ -21,7 +21,8 @@ import {
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import styles from "./Singup.module.css"
+import styles from "./Singup.module.css";
+import Swal from "sweetalert2";
 
 function SignUp() {
   const history = useHistory();
@@ -81,7 +82,6 @@ function SignUp() {
         ...form,
         firebaseId: uid,
       });
-      alert("Creado correctamente");
 
       await setDoc(doc(db, "professionals", uid), {
         name: form.name,
@@ -93,8 +93,14 @@ function SignUp() {
         category: form.category,
       });
       console.log(prof.data.id);
-      console.log("User registered successfully!");
-      history.push(`/home/${prof.data.id}`);
+      await Swal.fire({
+        title: "Registro exitoso",
+        icon: "success",
+        text: "El usuario ha sido registrado correctamente.",
+        confirmButtonText: "Aceptar",
+      }).then(() => {
+        history.push(`/Calendarpage/${prof.data.id}`);
+      });
     } catch (error) {
       console.error(error.message);
     }
@@ -102,7 +108,7 @@ function SignUp() {
 
   return (
     <>
-    <NavbarTwo />
+      <NavbarTwo />
       <div className={styles.container}>
         <form onSubmit={handleRegister} className={styles.form}>
           <h1 className={styles.tittle}>CREACION DE CUENTA</h1>
@@ -110,7 +116,7 @@ function SignUp() {
           <label className={styles.label}>NOMBRE:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="name"
@@ -122,7 +128,7 @@ function SignUp() {
           <label className={styles.label}>EMAIL:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="email"
@@ -132,7 +138,7 @@ function SignUp() {
           <label className={styles.label}>CONTRASEÑA:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="password"
             onChange={(e) => handleChange(e)}
             name="password"
@@ -142,7 +148,7 @@ function SignUp() {
           <label className={styles.label}>CONTACTO:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="phone"
@@ -152,12 +158,17 @@ function SignUp() {
 
           <label className={styles.label}>DIRECCIÓN:</label>
           <br />
-          <input className={styles.input} type="text" onChange={(e) => handleChange(e)} name="address" />
+          <input
+            className={styles.input}
+            type="text"
+            onChange={(e) => handleChange(e)}
+            name="address"
+          />
 
           <label className={styles.label}>DESCRIPCION/PROFESION:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="description"
@@ -167,16 +178,18 @@ function SignUp() {
           <label className={styles.label}>ÁREA:</label>
           <br />
           <input
-          className={styles.input}
+            className={styles.input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="category"
             value={form.category}
           />
 
-          <button className={styles.button} type="submit">REGISTRARSE</button>
-         <h2 >O</h2>
-         <button className={styles.googlebtn} onClick={handleSignInWithGoogle}>
+          <button className={styles.button} type="submit">
+            REGISTRARSE
+          </button>
+          <h2>O</h2>
+          <button className={styles.googlebtn} onClick={handleSignInWithGoogle}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
               alt="Google logo"
@@ -184,8 +197,6 @@ function SignUp() {
             Sign in with Google
           </button>
         </form>
-      
-       
       </div>
       <br />
       <br />

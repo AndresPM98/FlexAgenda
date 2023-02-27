@@ -71,15 +71,15 @@ const LoginFirebase = () => {
         form.password
       );
       await Swal.fire({
-        title: "Registro exitoso",
+        title: "Logueo exitoso",
         icon: "success",
-        text: "El usuario ha sido registrado correctamente.",
+        text: "El usuario ha sido logueado correctamente.",
         confirmButtonText: "Aceptar",
       }).then(() => {
         const findProf = professionals.find(
           (prof) => prof.email === form.email
         );
-        history.push(`/home/${findProf.id}`);
+        history.push(`/Calendarpage/${findProf.id}`);
       });
     } catch (error) {
       console.error(error);
@@ -129,7 +129,6 @@ const LoginFirebase = () => {
           </button>
         </form>
       </div>
-   
     </div>
   );
 };
