@@ -1,30 +1,34 @@
 import {
-  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { auth, db } from "../../firebase-config";
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  getDoc,
-  query,
-  where,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
+  auth,
+  createUser,
+  RegisterEmailUser,
+  userExists,
+} from "../../firebase-config";
+
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+
+import AuthProvider from "../../Components/AuthProvider/AuthProvider";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
+import Swal from "sweetalert2";
+import { async } from "@firebase/util";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfessionals } from "../../Redux/Actions";
+
 import styles from "./Singup.module.css"
+
 
 function SignUp() {
   const history = useHistory();
+  const [state, setCurrentState] = useState(null);
+  const dispatch = useDispatch();
+  const professionals = useSelector((state) => state.allProfessionals);
   const [form, setForm] = useState({
     firebaseId: "",
     name: "",
@@ -37,64 +41,78 @@ function SignUp() {
   });
 
   useEffect(() => {
-    onAuthStateChanged(auth, handleUserStateChanged);
+    dispatch(getProfessionals());
   }, []);
+
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, async (user) => {
+  //     // el usuario se registro
+  //     if (user) {
+  //       //
+  //       const register = await userExists(user.uid);
+  //       console.log("estoy aca culiao", register);
+  //       const prof = await axios.get("/professional");
+  //       console.log("ando x aca", prof);
+  //       console.log(prof.data);
+  //       console.log(register.email);
+  //       const findProf = prof.data.filter(
+  //         (prof) => prof.email === register.email
+  //       );
+  //       console.log(findProf);
+  //       if (register) {
+  //         console.log("usuario registrado y logueado");
+  //       } else {
+  //         console.log("el usuario esta logueado pero no registrado");
+  //       }
+  //     } else {
+  //       console.log("el usuraio no esta logueado y no esta registrado");
+  //       // console.log("no hay nadie autenticado");
+  //     }
+  //   });
+  // }, []);
 
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
-  const handleUserStateChanged = (user) => {
-    user
-      ? console.log(user.displayName)
-      : console.log("No hay nadie autenticado...");
-  };
 
-  const handleSignInWithGoogle = async () => {
-    const googleProvider = new GoogleAuthProvider();
+  // const handleSignInWithGoogle = async () => {
+  //   const googleProvider = new GoogleAuthProvider();
+  //   // HAY QUE REVISAR EL REGISTRO CON GOOGLE
 
-    const signInWithGoogle = async (googleProvider) => {
-      try {
-        const res = await signInWithPopup(auth, googleProvider);
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    await signInWithGoogle(googleProvider);
-  };
+  //   const signInWithGoogle = async (googleProvider) => {
+  //     try {
+  //       const res = await signInWithPopup(auth, googleProvider);
+  //       console.log(res);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   await signInWithGoogle(googleProvider);
+  // };
 
   const handleRegister = async (event) => {
     event.preventDefault();
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
-      const user = userCredential.user;
-      const uid = user.uid;
-      setForm({ ...form, firebaseId: uid });
-      console.log(uid);
-      console.log(form);
-      const prof = await axios.post("/professional", {
-        ...form,
-        firebaseId: uid,
-      });
-      alert("Creado correctamente");
-
-      await setDoc(doc(db, "professionals", uid), {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        phone: form.phone,
-        address: form.address,
-        description: form.description,
-        category: form.category,
-      });
-      console.log(prof.data.id);
-      console.log("User registered successfully!");
-      history.push(`/home/${prof.data.id}`);
+      //registramos el usuario
+      const { user } = await RegisterEmailUser(auth, form);
+      // guardamos en db de firestore
+      await createUser(user.uid, form);
+      //guardamos en db nuestra
+      if (user) {
+        const prof = await axios.post("/professional", {
+          ...form,
+          firebaseId: user.uid,
+        });
+        await Swal.fire({
+          title: "Registro exitoso",
+          icon: "success",
+          text: "El usuario ha sido registrado correctamente.",
+          confirmButtonText: "Aceptar",
+        }).then(() => {
+          history.push(`/Calendarpage/${prof.data.id}`);
+        });
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -102,11 +120,11 @@ function SignUp() {
 
   return (
     <>
+
     <NavbarTwo />
       <div className={styles.container}>
         <form onSubmit={handleRegister} className={styles.form}>
           <h1 className={styles.tittle}>CREACION DE CUENTA</h1>
-
           <label className={styles.label}>NOMBRE:</label>
           <br />
           <input
@@ -184,14 +202,42 @@ function SignUp() {
             Sign in with Google
           </button>
         </form>
-      
-       
+
+        {/* <div>
+            <button onClick={handleSignInWithGoogle}>
+              Sign in with Google
+            </button>
+          </div> */}
+
       </div>
       <br />
       <br />
       <br />
     </>
   );
+
+  // const handleUserLoggedIn = (id) => {
+  //   console.log("esto se esta ejecutando");
+  //   history.push(`/Calendarpage/${id}`);
+  // };
+  // const handleUserNotLoggedIn = () => {
+  //   setCurrentState(2);
+  // };
+  // const handleUserNotRegistered = () => {};
+
+  // return (
+  //   <>
+  //     <NavbarTwo />
+  //     {/* implementar un mejor loading */}
+  //     <AuthProvider
+  //       onUserLoggedIn={handleUserLoggedIn}
+  //       onUserNotLoggedIn={handleUserNotLoggedIn}
+  //       onUserNotRegistered={handleUserNotRegistered}
+  //     >
+  //       <div>loading...</div>
+  //     </AuthProvider>
+  //   </>
+  // );
 }
 
 export default SignUp;

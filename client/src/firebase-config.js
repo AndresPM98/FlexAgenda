@@ -18,7 +18,7 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import {
   getFirestore,
   collection,
@@ -50,3 +50,47 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+export async function userExists(uid) {
+  const docRef = doc(db, "professionals", uid);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+
+export async function RegisterEmailUser(auth, form) {
+  const loginUser = await createUserWithEmailAndPassword(
+    auth,
+    form.email,
+    form.password
+  );
+  console.log(loginUser);
+  return loginUser;
+}
+
+export async function createUser(uid, form) {
+  try {
+    if (
+      form.name &&
+      form.email &&
+      form.password &&
+      form.phone &&
+      form.address &&
+      form.description &&
+      form.category
+    ) {
+      const newUser = await setDoc(doc(db, "professionals", uid), {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        phone: form.phone,
+        address: form.address,
+        description: form.description,
+        category: form.category,
+      });
+    } else {
+      console.log("faltan datos");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
