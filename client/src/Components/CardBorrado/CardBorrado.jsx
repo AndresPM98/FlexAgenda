@@ -14,9 +14,12 @@ const CardBorrado = ({ name, date, hour, id, type, email, address, description }
   const dispatch = useDispatch();
   const history = useHistory();
 
+
 const [loading, setLoading] = useState(true);
 
 const [turns, setTurns] = useState([]);
+
+
 
 useEffect(() => {
   const fetchData = async () => {
