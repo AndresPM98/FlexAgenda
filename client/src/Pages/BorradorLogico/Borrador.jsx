@@ -9,12 +9,13 @@ import style from "./Borrador.module.css";
 import { useHistory, useParams } from "react-router-dom";
 import CardsBorrado from "../../Components/CardsBorrado/CardsBorrado";
 import BtnBack from "../../Components/BtnBack/BtnBack";
+import axios from "axios";
+
 
 const Borrador = ({ id }) => {
   const turns = useSelector((state) => state.turnBackup);
   const turnDetail = useSelector((state) => state.turnDetail);
   const darkMode = useSelector((state) => state.darkMode);
-
   const [loading, setLoading] = useState(true);
   
   const dispatch = useDispatch();
@@ -28,8 +29,7 @@ const Borrador = ({ id }) => {
   }, [dispatch]);
   
     const turnStates = turns.filter((turn) => turn.professionalId === id && turn.status === "false");
-
-  // console.log("FILTER TURN", turnStates);
+  
 
   if (loading) {
     return <Loading />;
@@ -58,10 +58,10 @@ const Borrador = ({ id }) => {
                     </p>
                   )}
                 </div>
-                {turns.length > 0 ? (
+                {turnStates.length  ? (
                   <CardsBorrado turns={turns} type="turns" />
                 ) : (
-                  <h2>No hay turnos cancelados</h2>
+                  <h2>No tienes ningun turno cancelado</h2>
                 )}
               </div>
             )}

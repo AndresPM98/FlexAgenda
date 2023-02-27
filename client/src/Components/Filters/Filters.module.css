@@ -24,7 +24,7 @@
   }
   .copybtn {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-    background-color: #4caf50;
+    background-color: #3e8e41;
     border: none;
     color: white;
     padding: 10px 16px;
@@ -40,7 +40,7 @@
   }
   
   .copybtn:hover {
-    background-color: #3e8e41;
+    background-color: #4caf50;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-2px); 
   }
