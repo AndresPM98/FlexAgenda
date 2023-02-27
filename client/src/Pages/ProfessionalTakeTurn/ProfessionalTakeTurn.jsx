@@ -65,33 +65,30 @@ const ProfessionalPage = () => {
 
   return (
     <>
-      <NavbarTwo/>
 
-      <div
-        className={darkMode === false ? style.container : style.containerDark}
-      >
-        <p> Professional Page</p>
+      <NavbarTwo/>
+      <div className={darkMode === false ? style.container : style.containerDark}>
+
+        
         <div className={style.detailContainer}>
-          <img
-            style={{ borderRadius: "50%", width: "200px", height: "200px" }}
-            src={
-              professional?.image
-                ? professional.image
-                : "https://i.stack.https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg.com/4powQ.gif"
-            }
-            alt=""
-          />
-          <h1 className={style.name}>{professional?.name}</h1>
-          <h2 className={style.category}>{professional?.category}</h2>
-          <h4 className={style.phone}>{professional?.phone}</h4>
-          <h4 className={style.adress}>{professional?.address}</h4>
-          <a href={professional.addresslocation} target="_blank">
-            <h4 className={style.adress}>Google Maps</h4>
+         <div className={style.info}>
+        <img style={{borderRadius:"50%",width:"200px", height:"200px", float:"left", marginRight:"10px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
+        <h1 className={style.name}>Profesional: {professional?.name}</h1>
+        <h2 className={style.category}>Area: {professional?.category}</h2>
+        <h2 className={style.phone}>Contacto: {professional?.phone}</h2>
+        <h2 className={style.adress}>Dirección: {professional?.address}</h2>
+        <a href={professional.addresslocation} target="_blank">
+
+          <h2 className={style.adress}>Google Maps</h2>
           </a>
-          <h4 className={style.adress}>{professional?.email}</h4>
-          <p className={style.description}>{professional?.description}</p>
-          <ServiceCard/>
-        </div>
+        <h2 className={style.adress}>Email: {professional?.email}</h2>
+        
+        <h1 className={style.description}>Profesion: {professional?.description}</h1>
+         </div>
+         <h1>Servicios:</h1>
+         <div className={style.card}>
+        <ServiceCard/>
+          </div>
         
         {isAuthenticated ? (
           <button
@@ -113,12 +110,13 @@ const ProfessionalPage = () => {
         )}
 
         <Link to={`/formClient/${id}`}>
-          <button className={style.btnTurn}>Registrarse</button>
+          <button className={style.btnEditar}>Registrarse</button>
         </Link>
         <Link to={`/form/${id}`}>
-          <button className={style.btnTurn}>Sacar turno</button>
+          <button className={style.btnEditar}>Sacar turno</button>
         </Link>
-      </div>
+     </div>
+     </div>
     </>
   );
 };

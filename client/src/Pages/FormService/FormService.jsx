@@ -119,8 +119,7 @@ const Form = () => {
       ) : (
         <div className={styles.container}>
           <div className={styles.label}>
-            SOY:
-            <h2>{findProfessional.name}</h2>
+            <h1>{findProfessional.name}</h1>
           </div>
           <form onSubmit={submitHandler} className={styles.form}>
             <h1 className={styles.tittle}>AGREGA UN SERVICIO</h1>

@@ -96,6 +96,7 @@ const LoginFirebase = () => {
           <h1 className={styles.tittle}>LOGIN</h1>
 
           <label className={styles.label}>EMAIL:</label>
+          <br />
           <input
             className={styles.input}
             type="text"
@@ -105,7 +106,8 @@ const LoginFirebase = () => {
             name="email"
           />
 
-          <label className={styles.label}>PASSWORD:</label>
+          <label className={styles.label}>CONTRASEÑA:</label>
+          <br />
           <input
             className={styles.input}
             type="password"
@@ -127,7 +129,7 @@ const LoginFirebase = () => {
           </button>
         </form>
       </div>
-      <Footer></Footer>
+   
     </div>
   );
 };

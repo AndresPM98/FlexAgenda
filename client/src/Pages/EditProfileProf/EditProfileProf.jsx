@@ -109,7 +109,7 @@ export default function EditProfileProf() {
 
   return (
     <div>
-    <NavbarTwo/>
+   
 
       <div className={styles.backContainer}>
         <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
@@ -121,20 +121,16 @@ export default function EditProfileProf() {
           CANCEL
         </NavLink>
       </div>
+      <NavbarTwo/>
 
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h1 className={styles.tittle}>EDIT YOUR PROFILE</h1>
-          <FormGroup />
-          <label className={styles.label}>
-            {" "}
-            <b> FOTO DE PERFIL: </b>
+          <h1 className={styles.tittle}>EDITÁ TU PERFIL</h1>
+          
+          <label className={styles.label}>FOTO DE PERFIL: </label>
             <br />
-          </label>
-          <Label></Label>
-          <Input
-            style={{ color: "white", justifyContent: "flex-end",
-            alignitems: "end"}}
+          
+          <input
             className={styles.inputPerfil}
             name="image"
             type="file"
@@ -157,8 +153,11 @@ export default function EditProfileProf() {
               
             />
           )}
-
-          <label className={styles.label}>NAME:</label>
+         
+         
+         <br />
+          <label className={styles.label}>NOMBRE:</label>
+          <br />
           <input
             className={styles.input}
             type="text"
@@ -167,7 +166,8 @@ export default function EditProfileProf() {
             onChange={(e) => setProf({ ...prof, name: e.target.value })}
           />
 
-          <label className={styles.label}>CATEGORY:</label>
+          <label className={styles.label}>ÁREA:</label>
+          <br />
           <input
             className={styles.input}
             type="text"
@@ -176,7 +176,8 @@ export default function EditProfileProf() {
             onChange={(e) => setProf({ ...prof, category: e.target.value })}
           />
 
-          <label className={styles.label}>PHONE:</label>
+          <label className={styles.label}>CONTACTO:</label>
+          <br />
           <input
             className={styles.input}
             name="phone"
@@ -184,7 +185,8 @@ export default function EditProfileProf() {
             onChange={(e) => setProf({ ...prof, phone: e.target.value })}
           />
 
-          <label className={styles.label}>ADDRESS:</label>
+          <label className={styles.label}>DIRECCIÓN:</label>
+          <br />
           <input
             className={styles.input}
             name="address"
@@ -192,7 +194,9 @@ export default function EditProfileProf() {
             onChange={(e) => setProf({ ...prof, address: e.target.value })}
           />
 
+
           <label className={styles.label}>URL GOOGLE MAPS:</label>
+          <br />
           <input
             className={styles.input}
             name="addresslocation"
@@ -202,7 +206,8 @@ export default function EditProfileProf() {
             }
           />
 
-          <label className={styles.label}>DESCRIPTION:</label>
+          <label className={styles.label}>PROFESION:</label>
+          <br />
           <textarea
             className={styles.input}
             name="description"
@@ -211,7 +216,7 @@ export default function EditProfileProf() {
           />
 
           <button type="submit" className={styles.button}>
-            SAVE CHANGES
+            GUARDAR CAMBIOS
           </button>
         </form>
       </div>

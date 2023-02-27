@@ -47,23 +47,26 @@ const ProfessionalPage = () => {
           </NavLink>
         </div>
 
-        <p>Professional Page</p>
+       
         <div className={style.detailContainer}>
-
+         <div className={style.info}>
         <img style={{borderRadius:"50%",width:"200px", height:"200px", float:"left", marginRight:"10px"}} src={professional?.image ? professional.image: "https://i.stack.imgur.com/4powQ.gif" } alt="" />
-        <h1 className={style.name}>{professional?.name}</h1>
-        <h2 className={style.category}>{professional?.category}</h2>
-        <h4 className={style.phone}>{professional?.phone}</h4>
-        <h4 className={style.adress}>{professional?.address}</h4>
+        <h1 className={style.name}>Profesional: {professional?.name}</h1>
+        <h2 className={style.category}>Area: {professional?.category}</h2>
+        <h2 className={style.phone}>Contacto: {professional?.phone}</h2>
+        <h2 className={style.adress}>Dirección: {professional?.address}</h2>
         <a href={professional.addresslocation} target="_blank">
 
-          <h4 className={style.adress}>Google Maps</h4>
+          <h2 className={style.adress}>Google Maps</h2>
           </a>
-        <h4 className={style.adress}>{professional?.email}</h4>
+        <h2 className={style.adress}>Email: {professional?.email}</h2>
         
-        <p className={style.description}>{professional?.description}</p>
+        <h1 className={style.description}>Profesion: {professional?.description}</h1>
+         </div>
+         <h1>Servicios:</h1>
+         <div className={style.card}>
         <ServiceCard/>
-
+          </div>
         <Link to={`/professional/edit/${id}`}>
         <button className={style.btnEditar}>Editar Perfil</button>
         </Link>

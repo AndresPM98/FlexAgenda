@@ -6,6 +6,9 @@
     height: 100vh;
     padding-bottom: 100px;
     /* border: 1px solid rgb(217, 255, 0); */
+    font-family: "Playfair Display", serif;
+    color: #183a3b;
+    
 }
 
 .containerDark{
@@ -28,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     
-    border: 3px solid #0051EE;
+    border: 5px solid #183a3b;
     border-radius: 20px;
     background-color: rgb(255, 250, 244);
     
@@ -40,7 +43,7 @@
 
 .btnEditar {
     display: inline-block;
-    background-color: #0051EE;
+    background-color: #183a3b;
     border-radius: 0.3rem;
     margin: 5px;
     border: none;
@@ -49,6 +52,8 @@
     font-size: 1rem;
     margin-left: 0.5rem;
     padding: 0.5rem 1rem;
+    font-family: "Playfair Display", serif;
+    margin-top: 15px;
 }
 .description {
     font-size: 18px;
@@ -66,7 +71,7 @@
 
 .back{
     border-radius: 0 1rem 1rem 0;
-    background-color: #0051EE;
+    background-color: #183a3b;
     text-decoration: none;
     color: aliceblue;
     display: flex;
@@ -76,4 +81,23 @@
     height: 2.5rem;
     margin-left: 0px;
 
+}
+
+.category,
+.phone,
+.adress,
+.description{
+    margin-top: -5px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Playfair Display", serif;
+}
+
+.card{
+    display: flex;
+    flex-direction: row;
 }
