@@ -5,35 +5,25 @@ import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
 
-import { auth, userExists } from "../../firebase-config";
+import { auth } from "../../firebase-config";
 
-import {
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-import { getProfessionals } from "../../Redux/Actions";
 import Swal from "sweetalert2";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
 
 const LoginFirebase = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.darkMode);
-  const professionals = useSelector((state) => state.allProfessionals);
 
+  // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
+  //enviar al auth de firebase para que verifique
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    dispatch(getProfessionals());
-  }, [dispatch]);
-
+  // ir seteando el form
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
@@ -60,7 +50,7 @@ const LoginFirebase = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-
+    // registrase con mail
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -72,7 +62,7 @@ const LoginFirebase = () => {
     }
   };
   const handleUserLoggedIn = async (id) => {
-    // redirigir a home
+    // si se logueo correctamente que le mande a su calendario
     await Swal.fire({
       title: "Registro exitoso",
       icon: "success",
@@ -83,8 +73,8 @@ const LoginFirebase = () => {
     });
   };
   const handleUserNotLoggedIn = () => {
+    // si no esta logueado que le muestre el form
     setCurrentState(1);
-    console.log("hola como");
   };
   const handleUserNotRegistered = () => {};
 
@@ -138,13 +128,16 @@ const LoginFirebase = () => {
     );
   }
 
+  // todas las validaciones se manejan aca
   return (
     <AuthProvider
       onUserLoggedIn={handleUserLoggedIn}
       onUserNotLoggedIn={handleUserNotLoggedIn}
       onUserNotRegistered={handleUserNotRegistered}
     >
+      <NavbarTwo></NavbarTwo>
       loading...
+      <Footer></Footer>
     </AuthProvider>
   );
 };

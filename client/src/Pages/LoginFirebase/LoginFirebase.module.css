@@ -2,7 +2,7 @@
   background-color: #264c4d;
   border-radius: 20px;
   box-sizing: border-box;
- /* height: 100vh;*/
+  min-height: 100vh;
   padding: 20px;
   width: 100vh;
   margin: 0 auto;
