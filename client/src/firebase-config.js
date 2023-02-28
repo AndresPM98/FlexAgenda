@@ -60,15 +60,17 @@ export async function userExists(uid) {
   return docSnap.data();
 }
 
-// autentica al usuario con mail
+// registra al usuario con mail
 export async function RegisterEmailUser(auth, form) {
-  const loginUser = await createUserWithEmailAndPassword(
-    auth,
-    form.email,
-    form.password
-  );
-  console.log(loginUser);
-  return loginUser;
+  try {
+    const loginUser = await createUserWithEmailAndPassword(
+      auth,
+      form.email,
+      form.password
+    );
+    console.log(loginUser);
+    return loginUser;
+  } catch (error) {}
 }
 
 // crea al usuario en la db de firebase
