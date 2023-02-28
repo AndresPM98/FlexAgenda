@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import ServiceCard from "../../Components/ServiceCard/ServiceCard";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import { getProfessionalDetail, getServices } from "../../Redux/Actions";
+import { getProfessionalDetail, getServices, getProfessionals } from "../../Redux/Actions";
 import Loading from "../Loading/Loading";
 import style from "./ProfessionalPage.module.css";
 import { useState } from "react";
@@ -22,6 +22,7 @@ const ProfessionalPage = () => {
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
     dispatch(getServices())
+    dispatch(getProfessionals())
 
   }, [dispatch, id]);
 
@@ -75,7 +76,8 @@ const ProfessionalPage = () => {
         </Link>
         </div>
         <div>
-          <DisplayReview/>
+        {professional?.review && <DisplayReview review={professional.review} />}
+        {console.log(professional.review)}
         </div>
       </div>
       
