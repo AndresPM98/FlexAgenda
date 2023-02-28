@@ -16,7 +16,6 @@ const ProfessionalPage = () => {
   const professional = useSelector((state) => state.profDetail);
   const darkMode = useSelector((state) => state.darkMode);
   const [loading, setLoading] = useState(true)
- console.log(professional);
 
 
   const dispatch = useDispatch();
