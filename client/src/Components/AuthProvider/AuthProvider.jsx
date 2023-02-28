@@ -22,20 +22,16 @@ const AuthProvider = ({
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       // el usuario se registro
+      console.log(user);
       if (user) {
         //
         const register = await userExists(user.uid);
-        console.log("estoy aca culiao", register);
-        const prof = await axios.get("/professional");
-        console.log("ando x aca", prof);
-        const findProf = prof.data.find(
-          (prof) => prof.email === register.email
-        );
-        console.log(findProf);
         // usuario logueado y registrado
         if (register) {
+          const prof = await axios.get("/professional");
+
           console.log("usuario registrado y logueado");
-          onUserLoggedIn(findProf.id);
+          onUserLoggedIn(register, prof);
         } else {
           console.log("el usuario esta logueado pero no registrado");
           onUserNotRegistered();
