@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 
 const AllProfessionals = () => {
   const allProfessionals = useSelector((state) => state.allProfessionals);
+  const allProfOrder= allProfessionals.sort((a, b) => (a.name > b.name ? 1 : -1))
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const AllProfessionals = () => {
         ></iconify-icon>
         BACK
       </NavLink>
-      <Cards type="allProfessionals" professionals={allProfessionals} />
+      <Cards type="allProfessionals" professionals={allProfOrder} />
     </div>
   );
 };
