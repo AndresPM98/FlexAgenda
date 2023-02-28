@@ -7,6 +7,7 @@ import { getProfessionalDetail, getServices } from "../../Redux/Actions";
 import Loading from "../Loading/Loading";
 import style from "./ProfessionalPage.module.css";
 import { useState } from "react";
+import DisplayReview from "../../Components/DisplayReview/DisplayReview";
 
 import { Link } from "react-router-dom";
 
@@ -73,6 +74,9 @@ const ProfessionalPage = () => {
         <Link to={`/professional/edit/${id}/services`}>
         <button className={style.btnEditar}>Agregar Servicios</button>
         </Link>
+        </div>
+        <div>
+          <DisplayReview/>
         </div>
       </div>
       
