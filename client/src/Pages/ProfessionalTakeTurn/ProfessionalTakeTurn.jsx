@@ -118,7 +118,7 @@ const ProfessionalPage = () => {
         </Link>
      </div>
       <div>
-          <DisplayReview/>
+      {professional?.review && <DisplayReview review={professional.review} />}
       </div>
      </div>
     </>

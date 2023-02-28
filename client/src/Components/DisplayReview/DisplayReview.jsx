@@ -1,31 +1,10 @@
 import s from './DisplayReview.module.css';
 import React from 'react';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai'
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
-const DisplayReview = () => {
-
-    /* const reviews = [
-        {score: 4,
-        text: "Excelente profesional, muy buen trato"},
-
-        {score: 2,
-        text: "Regular profesional, maso trato"},
-
-        {score: 5,
-        text: "Excelente profesional, excelente trato"},
-
-        {score: 0,
-        text: "Mal profesional, un desastre"}
-    ]; */
-    const { id } = useParams(); 
-    const allProfessionals = useSelector((state) => state.allProfessionals);
-
-    const findProfessional = allProfessionals.find((prof) => id === prof.id);
+const DisplayReview = (props) => {
     
-    console.log(findProfessional);
-    const review = findProfessional.review
+    const review = props.review
 
     return(
         <div className={s.reviewsContainer}>
