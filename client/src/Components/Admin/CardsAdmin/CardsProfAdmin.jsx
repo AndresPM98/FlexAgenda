@@ -82,18 +82,6 @@ export default function CardsAdminProf({ id }) {
   const enabledProfessionals = allProfOrd.filter((professional) => professional.disponibility);
   const combinedProfessionals = [...disabledProfessionals, ...enabledProfessionals];
 
-  const disabledProfessionals = allPorfessionals.filter(
-    (professional) => !professional.disponibility
-  );
-  const enabledProfessionals = allPorfessionals.filter(
-    (professional) => professional.disponibility
-  );
-  const combinedProfessionals = [
-    ...disabledProfessionals,
-    ...enabledProfessionals,
-  ];
-
-
   return (
     <div className={style.adminpage}>
       <h1>Dashboard admin</h1>
