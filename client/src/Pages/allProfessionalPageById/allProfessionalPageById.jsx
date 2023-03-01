@@ -14,6 +14,8 @@ const AllProfessionalPageById = () => {
     dispatch(getClients());
     dispatch(getTurns());
   }, [dispatch]);
+
+
   return (
     <div className={Styles.mainContainer}>
       <HomeProfessional id={id}></HomeProfessional>
