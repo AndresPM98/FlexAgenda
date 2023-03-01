@@ -18,6 +18,8 @@ import {
   CLEAN_DATE,
   SET_CURRENT_DATE,
   FILTER_CANCELED,
+  DELETE_PROFESSIONAL,
+  DELETE_CLIENTS
 } from "./Actions";
 
 const initialState = {
@@ -55,12 +57,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allClients: action.payload,
       };
+      case DELETE_CLIENTS:
+        return {
+          ...state,
+        };
 
     case GET_PROFESSIONALS:
       return {
         ...state,
         allProfessionals: action.payload,
       };
+
+      case DELETE_PROFESSIONAL:
+        return {
+          ...state,
+        };
 
     /* ---------------------------------------------------- */
 
