@@ -70,7 +70,7 @@ const Form = () => {
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
+   console.log(value);
     const selectedDate = new Date(event.target.value);
     if (selectedDate.getDay() === 6 || selectedDate.getDay() === 5) {
       setError((prevErrors) => ({
