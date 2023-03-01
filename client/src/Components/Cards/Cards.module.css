@@ -1,0 +1,22 @@
+.cardsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 7px solid rgba(78, 78, 78, 0.377);
+   
+
+    border-bottom: 7px solid rgba(78, 78, 78, 0.377);
+    min-height: 100vh;
+    margin: 20px 0px 0px 2%;
+    width: 90%;
+    
+    box-shadow: 0 5px 17px rgba(78, 78, 78, 0.658);
+}
+
+  .card-cancelado {
+    background-color: grey;
+  }
+  
+  .card-confirmado {
+    background-color: green;
+  }

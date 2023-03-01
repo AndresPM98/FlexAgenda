@@ -1,0 +1,108 @@
+
+  .backContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: relative; */
+    position: absolute;
+    left: 0;
+    margin-top: 100px;
+  }
+  
+  .back{
+    border-radius: 0 1rem 1rem 0;
+    background-color: #183a3b;
+    text-decoration: none;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 2.5rem;
+    margin-left: 0px;
+  }
+  
+
+
+ .imagenEditPerfil {
+    width: 200px;
+    height: 200px;
+    border-radius: 40%;
+    margin-left: -550px;
+    justify-content: center;
+    
+  }
+
+
+  .container {
+    background-color: #264c4d;
+    border-radius: 20px;
+    box-sizing: border-box;
+    /*height: 100vh;*/
+    padding: 20px;
+    width: 100vh;
+    margin: 0 auto;
+    margin-top: 3vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .tittle {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+  }
+  
+  .label {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+  
+  .nombres{
+    background-color: #303245;
+    border:solid #303245;
+    border-radius: 12px;
+    width: 98%;
+    margin-top: 20px;
+  }
+  
+  .input {
+    height: 40px;
+    width: 100%;
+    background-color: #303245;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    font-size: 18px;
+    outline: 0;
+    padding: 4px 10px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    background-color: #303245;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 38px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .button:hover {
+    background-color: #87878a;
+  }

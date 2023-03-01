@@ -1,0 +1,74 @@
+.landContainer{
+    min-height: 42.5rem;
+    display: flex;
+    align-items: center;
+    padding-bottom: 100px;
+}
+
+
+.textContainer{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.imagesContainer{
+    width: 50%;
+}
+
+.image1{
+    width: 8rem;
+    height: 8rem;
+    position: relative;
+    top: 5.5rem;
+    right: 9rem;
+    transform: rotate(315deg);
+}
+.images{
+    margin-right: 5rem;
+}
+
+.image2{
+    width: 30rem;
+    height: 25rem;
+    position: relative;
+    bottom: 3rem;
+}
+
+.text{
+    width: 80%;
+    margin-bottom: 3rem;
+}
+
+.textTitle{
+    color: #0051EE;
+    font-size: 2.5rem;
+}
+
+.textPa{
+    font-family:'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.start{
+    background-color: #0051EE;
+    width: 12rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    text-decoration: none;
+    border-radius: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    border: 3px solid #0051EE;
+}
+
+.start:hover{
+    background-color: aliceblue;
+    color: #0051EE;
+}
