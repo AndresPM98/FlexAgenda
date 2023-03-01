@@ -21,13 +21,13 @@ export default function CardsTurnsAdmin() {
   return (
     <div className={style.adminpage}>
       <h1>Dashboard admin</h1>
-      <Link to="/allProfessionalsDashboardAdmin/dc0768f4-fd11-4c4e-b912-4745911b5e5d">
+      <Link to="/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080">
         <button className={style.adminbutton}>Profesionales</button>
       </Link>
-      <Link to="/allClientsDashboardAdmin/dc0768f4-fd11-4c4e-b912-4745911b5e5d">
+      <Link to="/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080">
         <button className={style.adminbutton}>Clientes</button>
       </Link>
-      <Link to="/allTurnsDashboardAdmin/dc0768f4-fd11-4c4e-b912-4745911b5e5d">
+      <Link to="/allTurnsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080">
         <button className={style.adminbutton}>Turnos</button>
       </Link>
         <h3>Turnos ({allTurns.length})</h3>
