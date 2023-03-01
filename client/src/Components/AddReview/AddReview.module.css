@@ -1,0 +1,82 @@
+#form {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+  }
+  
+#form p {
+text-align: center;
+}
+
+#form label {
+font-size: 20px;
+}
+
+input[type="radio"] {
+display: none;
+}
+
+label {
+color: grey;
+}
+
+.stars {
+direction: rtl;
+unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+color: orange;
+}
+
+.form{
+    background-color: aqua;
+    width: 30rem;
+    height: 15rem;
+    font-size: 2.3rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 1rem;
+}
+
+.formContainer{
+    background-color: blueviolet;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textInput{
+    font-size: 0.9rem;
+    color: black;
+}
+
+.input{
+    resize: none;
+    width: 20rem;
+    height: 5rem;
+}
+
+.input::-webkit-input-placeholder {
+    text-align: start;  
+}
+
+.stars{
+    margin: 0;
+}
+
+.btn{
+    background-color: blue;
+    color: aliceblue;
+    border-radius: 0.4rem;
+    margin-top: 1rem;
+}

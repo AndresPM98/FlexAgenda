@@ -11,6 +11,7 @@ import ServiceCard from "../../Components/ServiceCard/ServiceCard";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import DisplayReview from "../../Components/DisplayReview/DisplayReview";
 
 const ProfessionalPage = () => {
   const { id } = useParams();
@@ -116,6 +117,9 @@ const ProfessionalPage = () => {
           <button className={style.btnEditar}>Sacar turno</button>
         </Link>
      </div>
+      <div>
+      {professional?.review && <DisplayReview review={professional.review} />}
+      </div>
      </div>
     </>
   );

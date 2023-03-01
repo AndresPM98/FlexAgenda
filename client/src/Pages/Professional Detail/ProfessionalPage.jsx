@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import ServiceCard from "../../Components/ServiceCard/ServiceCard";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
-import { getProfessionalDetail, getServices } from "../../Redux/Actions";
+import { getProfessionalDetail, getServices, getProfessionals } from "../../Redux/Actions";
 import Loading from "../Loading/Loading";
 import style from "./ProfessionalPage.module.css";
 import { useState } from "react";
+import DisplayReview from "../../Components/DisplayReview/DisplayReview";
 
 import { Link } from "react-router-dom";
 
@@ -17,11 +18,11 @@ const ProfessionalPage = () => {
   const [loading, setLoading] = useState(true)
 
 
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
     dispatch(getServices())
+    dispatch(getProfessionals())
 
   }, [dispatch, id]);
 
@@ -73,6 +74,10 @@ const ProfessionalPage = () => {
         <Link to={`/professional/edit/${id}/services`}>
         <button className={style.btnEditar}>Agregar Servicios</button>
         </Link>
+        </div>
+        <div>
+        {professional?.review && <DisplayReview review={professional.review} />}
+        {console.log(professional.review)}
         </div>
       </div>
       

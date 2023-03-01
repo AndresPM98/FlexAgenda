@@ -13,7 +13,7 @@ function SignUp() {
   // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
 
-  //enviar al post de professionales
+  //para enviar al post de professionales
   const [form, setForm] = useState({
     firebaseId: "",
     name: "",
@@ -56,7 +56,11 @@ function SignUp() {
         });
       }
     } catch (error) {
-      console.error(error.message);
+      Swal.fire({
+        title: "Error",
+        text: "El correo electrónico ingresado ya está en uso.",
+        icon: "error",
+      });
     }
   };
 

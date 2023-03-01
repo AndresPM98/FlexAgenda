@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { auth } from "../../firebase-config";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 
 import Swal from "sweetalert2";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
@@ -31,26 +35,26 @@ const LoginFirebase = () => {
     setForm({ ...form, [property]: value });
   };
 
-  // const handleSignInWithGoogle = async () => {
-  //   const googleProvider = new GoogleAuthProvider();
+  const handleSignInWithGoogle = async () => {
+    const googleProvider = new GoogleAuthProvider();
 
-  //   const signInWithGoogle = async (googleProvider) => {
-  //     try {
-  //       const res = await signInWithPopup(auth, googleProvider).then(() => {
-  //         // history.push(`/`);
-  //         console.log("se ha logueado con google correctamente");
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   setCurrentState(true);
-  //   await signInWithGoogle(googleProvider);
-  // };
+    const signInWithGoogle = async (googleProvider) => {
+      try {
+        const res = await signInWithPopup(auth, googleProvider).then(() => {
+          // history.push(`/`);
+          console.log("se ha logueado con google correctamente");
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setCurrentState(true);
+    await signInWithGoogle(googleProvider);
+  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    // registrase con mail
+    // loguearse con mail
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -58,18 +62,25 @@ const LoginFirebase = () => {
         form.password
       );
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: "El correo o contraseña ingresado es incorrecto.",
+        icon: "error",
+      });
+      console.error(error.message);
     }
   };
-  const handleUserLoggedIn = async (id) => {
+
+  const handleUserLoggedIn = async (register, prof) => {
     // si se logueo correctamente que le mande a su calendario
+    const findProf = prof.data.find((pro) => pro.email === register.email);
     await Swal.fire({
-      title: "Registro exitoso",
+      title: "Logueo exitoso",
       icon: "success",
-      text: "El usuario ha sido registrado correctamente.",
+      text: "El usuario ha sido logueado correctamente.",
       confirmButtonText: "Aceptar",
     }).then(() => {
-      history.push(`/Calendarpage/${id}`);
+      history.push(`/Calendarpage/${findProf.id}`);
     });
   };
   const handleUserNotLoggedIn = () => {
@@ -114,7 +125,10 @@ const LoginFirebase = () => {
             <button type="submit" className={styles.button}>
               LOGIN
             </button>
-            <button className={styles.googlebtn}>
+            <button
+              className={styles.googlebtn}
+              onClick={handleSignInWithGoogle}
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
                 alt="Google logo"

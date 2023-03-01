@@ -6,6 +6,7 @@ import { useParams, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from 'universal-cookie';
 import axios from "axios";
+import AddReview from "../../Components/AddReview/AddReview";
 
 
 const PaymentApproved = () => {
@@ -55,6 +56,9 @@ const PaymentApproved = () => {
                     <h3>Tu turno ya está registrado</h3>
                 </div>
                 <botton className={s.link} to="#" onClick={handleNavLinkClick}>Tomar otro turno</botton> 
+            </div>
+            <div>
+                <AddReview idProf={id}/>
             </div>
         </div>
     )
