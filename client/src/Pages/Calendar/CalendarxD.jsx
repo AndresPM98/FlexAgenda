@@ -4,7 +4,11 @@ import { useHistory, useParams } from "react-router-dom";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { getTurns, getProfessionals, setCurrentDateAction } from "../../Redux/Actions"; //importa la acción setCurrentDate
+import {
+  getTurns,
+  getProfessionals,
+  setCurrentDateAction,
+} from "../../Redux/Actions"; //importa la acción setCurrentDate
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
@@ -12,7 +16,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Loading from "../Loading/Loading";
 import Error404 from "../../Components/Error404/Error404";
-import "./Calendar.css"
+import "./Calendar.css";
 
 const locales = {
   es: require("date-fns/locale/es"),
@@ -27,20 +31,27 @@ const localizer = dateFnsLocalizer({
 });
 
 function CalendarxD() {
-  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "", key: "" });
+  const [newEvent, setNewEvent] = useState({
+    title: "",
+    start: "",
+    end: "",
+    key: "",
+  });
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams(); 
+  const { id } = useParams();
   const dispatch = useDispatch();
-  console.log("IDCALENDAR",id);
+  console.log("IDCALENDAR", id);
 
   const profClientsTurns = useSelector((state) => state.turns);
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const findProfessional = allProfessionals.find((prof) => id === prof.id);
-  
-  const nameProfessional = findProfessional
-    ? findProfessional.name
-    : <Error404 />;
+
+  const nameProfessional = findProfessional ? (
+    findProfessional.name
+  ) : (
+    <Error404 />
+  );
 
   useEffect(() => {
     dispatch(getTurns());
@@ -49,15 +60,16 @@ function CalendarxD() {
     });
   }, [dispatch]);
 
-
- 
-
   const memoizedEvents = useMemo(() => {
-    const filteredTurns = profClientsTurns.filter((turn) => turn.professionalID === id);
+    const filteredTurns = profClientsTurns.filter(
+      (turn) => turn.professionalID === id
+    );
     return filteredTurns.map((turn) => {
       const title = turn.client.name;
       const start = new Date(turn.date + "T" + turn.hour);
-      const end = new Date(new Date(turn.date + "T" + turn.hour).getTime() + 30 * 60000); // Agrega 30 minutos a la hora de finalización
+      const end = new Date(
+        new Date(turn.date + "T" + turn.hour).getTime() + 30 * 60000
+      ); // Agrega 30 minutos a la hora de finalización
       const key = turn.id;
       return { ...newEvent, title, start, end, key };
     });
@@ -69,23 +81,15 @@ function CalendarxD() {
     history.push(`/queryDetail/${event.key}`); //despues va a ser por ID
   }
 
-  
-
-  if (id === "16aa4db8-b8cf-43bf-989a-5c7945212080" ) {
-     history.push(`/admin/${id}`)
-}
-
+  if (id === "16aa4db8-b8cf-43bf-989a-5c7945212080") {
+    history.push(`/admin/${id}`);
+  }
 
   const profesional = allProfessionals.find((prof) => prof.id === id);
 
-  if (profesional.disponibility === false) {
+  if (profesional && profesional.disponibility === false) {
     history.push(`/blockedPage`);
   }
-
-  
-
-
-
 
   function handleSelectSlot(slotInfo) {
     const selectedDay = slotInfo.start.getDay();
@@ -101,20 +105,18 @@ function CalendarxD() {
     return <Loading />;
   }
 
-
-  return (
-    nameProfessional ? 
+  return nameProfessional ? (
     <div className="containerCalendar">
-      <NavbarTwo/>
+      <NavbarTwo />
 
-<h1 className="saludoCalendar">Hola {nameProfessional}  !</h1>
-<p className="turnosCount">
-  {profClientsTurns.length
-    ? `Tienes ${memoizedEvents.length} turnos`
-    : "No hay turnos"}
-</p>
+      <h1 className="saludoCalendar">Hola {nameProfessional} !</h1>
+      <p className="turnosCount">
+        {profClientsTurns.length
+          ? `Tienes ${memoizedEvents.length} turnos`
+          : "No hay turnos"}
+      </p>
       <Calendar
-      className="calendar"
+        className="calendar"
         localizer={localizer}
         events={memoizedEvents}
         startAccessor="start"
@@ -126,7 +128,8 @@ function CalendarxD() {
         selectable={true} // Habilitar la selección de espacios en blanco
         onSelectSlot={handleSelectSlot} // Agregar este método para manejar la selección de espacios en blanco
       />
-    </div> :
+    </div>
+  ) : (
     <Error404 />
   );
 }
