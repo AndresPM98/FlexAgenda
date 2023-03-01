@@ -111,10 +111,12 @@ const Form = () => {
     
 
     axios
-
-      .post("https://backend-pf-production-1672.up.railway.app/payment", send)
-      .then((res) => (window.location.href = res.data.response.body.init_point))
-      .catch((error) => console.log(error));
+  .post("https://backend-pf-production-1672.up.railway.app/payment", send)
+  .then((res) => {
+    localStorage.removeItem("form");
+    window.location.href = res.data.response.body.init_point;
+  })
+  .catch((error) => console.log(error));
   };
 
   function handleSelectServ(event) {
@@ -134,6 +136,17 @@ const Form = () => {
       })
     );
   }
+
+  useEffect(() => {
+    const storedForm = JSON.parse(localStorage.getItem("form"));
+    if (storedForm) {
+      setForm(storedForm);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("form", JSON.stringify(form));
+  }, [form]);
 
   return (
     <div>
