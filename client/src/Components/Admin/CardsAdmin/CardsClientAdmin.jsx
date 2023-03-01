@@ -9,7 +9,9 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios"
 export default function CardsClientAdmin() {
+
   const allClients = useSelector((state) => state.allClients);
+  const allClientsOrd= allClients.sort((a, b) => (a.name > b.name ? 1 : -1))
 
   const dispatch = useDispatch();
 
@@ -69,12 +71,12 @@ export default function CardsClientAdmin() {
         <button className={style.adminbutton}>Clientes</button>
       </Link>
 
-      <h3>Clientes ({allClients.length})</h3>
+      <h3>Clientes ({allClientsOrd.length})</h3>
       <div
         className={style.cardcontainer}
         style={{ display: "flex", margin: "20px" }}
       >
-        {allClients.map((client, index) => (
+        {allClientsOrd.map((client, index) => (
           <div
             className={style.cardProf}
             key={index}

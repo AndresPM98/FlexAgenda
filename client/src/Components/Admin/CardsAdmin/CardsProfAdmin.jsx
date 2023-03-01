@@ -14,6 +14,9 @@ export default function CardsAdminProf({ id }) {
 
   const allPorfessionals = useSelector((state) => state.allProfessionals);
 
+  const allProfOrd= allPorfessionals.sort((a, b) => (a.name > b.name ? 1 : -1))
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -74,6 +77,11 @@ export default function CardsAdminProf({ id }) {
     return <Loading />;
   }
 
+
+  const disabledProfessionals = allProfOrd.filter((professional) => !professional.disponibility);
+  const enabledProfessionals = allProfOrd.filter((professional) => professional.disponibility);
+  const combinedProfessionals = [...disabledProfessionals, ...enabledProfessionals];
+
   const disabledProfessionals = allPorfessionals.filter(
     (professional) => !professional.disponibility
   );
@@ -84,6 +92,7 @@ export default function CardsAdminProf({ id }) {
     ...disabledProfessionals,
     ...enabledProfessionals,
   ];
+
 
   return (
     <div className={style.adminpage}>
@@ -99,7 +108,7 @@ export default function CardsAdminProf({ id }) {
         <button className={style.adminbutton}>Clientes</button>
       </Link>
 
-      <h3>Profesionales ({allPorfessionals.length})</h3>
+      <h3>Profesionales ({allProfOrd.length})</h3>
       <div className={style.cardcontainer} style={{ display: "flex" }}>
         {combinedProfessionals.map((professional, index) => (
           <div className={style.cardProf}>
