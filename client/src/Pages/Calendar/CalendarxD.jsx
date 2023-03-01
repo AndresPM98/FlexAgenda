@@ -71,10 +71,9 @@ function CalendarxD() {
 
   
 
-  if (id === "879e90bf-403b-4dfe-b46a-79a9ddc34d26" ) {
-     
+  if (id === "16aa4db8-b8cf-43bf-989a-5c7945212080" ) {
      history.push(`/admin/${id}`)
-  }
+}
 
 
   const profesional = allProfessionals.find((prof) => prof.id === id);

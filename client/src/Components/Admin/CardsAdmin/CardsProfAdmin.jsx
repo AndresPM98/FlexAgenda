@@ -83,10 +83,10 @@ export default function CardsAdminProf({id}) {
   return (
     <div className={style.adminpage}>
       <h1>Dashboard admin</h1>
-      <Link to={`/allProfessionalsDashboardAdmin/879e90bf-403b-4dfe-b46a-79a9ddc34d26`}>
+      <Link to={`/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
         <button className={style.adminbutton}>Profesionales</button>
       </Link>
-      <Link to={`/allClientsDashboardAdmin/879e90bf-403b-4dfe-b46a-79a9ddc34d26`}>
+      <Link to={`/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
         <button className={style.adminbutton}>Clientes</button>
       </Link>
 

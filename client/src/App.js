@@ -63,10 +63,10 @@ function App() {
         <Route exact path="/queryDetail/:id" component={QueryPage} />
         <Route exact path="/paymentApproved" component={PaymentApproved} />
 
-        <Route exact path="/admin/879e90bf-403b-4dfe-b46a-79a9ddc34d26" component={Admin} />
-        <Route exact path="/allProfessionalsDashboardAdmin/879e90bf-403b-4dfe-b46a-79a9ddc34d26" component={CardsProfAdmin} />
-        <Route exact path="/allClientsDashboardAdmin/879e90bf-403b-4dfe-b46a-79a9ddc34d26" component={CardsClientAdmin} />
-        <Route exact path="/allTurnsDashboardAdmin/879e90bf-403b-4dfe-b46a-79a9ddc34d26" component={CardsTurnsAdmin} />
+        <Route exact path="/admin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={Admin} />
+        <Route exact path="/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsProfAdmin} />
+        <Route exact path="/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsClientAdmin} />
+        <Route exact path="/allTurnsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsTurnsAdmin} />
 
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Login" component={LoginFirebase} />
