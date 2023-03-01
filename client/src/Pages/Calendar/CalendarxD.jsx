@@ -32,6 +32,7 @@ function CalendarxD() {
 
   const { id } = useParams(); 
   const dispatch = useDispatch();
+  console.log("IDCALENDAR",id);
 
   const profClientsTurns = useSelector((state) => state.turns);
   const allProfessionals = useSelector((state) => state.allProfessionals);
@@ -47,6 +48,9 @@ function CalendarxD() {
       setLoading(false);
     });
   }, [dispatch]);
+
+
+ 
 
   const memoizedEvents = useMemo(() => {
     const filteredTurns = profClientsTurns.filter((turn) => turn.professionalID === id);
@@ -64,6 +68,25 @@ function CalendarxD() {
   function handleSelectEvent(event) {
     history.push(`/queryDetail/${event.key}`); //despues va a ser por ID
   }
+
+  
+
+  if (id === "879e90bf-403b-4dfe-b46a-79a9ddc34d26" ) {
+     
+     history.push(`/admin/${id}`)
+  }
+
+
+  const profesional = allProfessionals.find((prof) => prof.id === id);
+
+  if (profesional.disponibility === false) {
+    history.push(`/blockedPage`);
+  }
+
+  
+
+
+
 
   function handleSelectSlot(slotInfo) {
     const selectedDay = slotInfo.start.getDay();

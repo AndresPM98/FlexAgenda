@@ -22,7 +22,7 @@ export const GET_CLIENT_DETAIL_TURN = "GET_CLIENT_DETAIL_TURN";
 export const CLEAN_DETAIL_TURN = "CLEAN_DETAIL_TURN";
 export const DELETE = "DELETE";
 export const FILTER_CANCELED = "FILTER_CANCELED";
-
+export const DELETE_CLIENTS = "DELETE_CLIENTS";
 
 export const getTurns = () => {
   return async function (dispatch) {
@@ -72,6 +72,22 @@ export const getClientDetailTurn = (id) => {
   };
 };
 
+export const deleteClients = (id) => {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`/client/${id}`);
+      dispatch({
+        type: "DELETE_CLIENTS",
+        id: id,
+      });
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+};
+
 export const cleanDetailTurn = () => {
   return {
     type: CLEAN_DETAIL_TURN,
@@ -109,6 +125,7 @@ export const CLEAN_PROF_DETAIL = "CLEAN_PROF_DETAIL";
 export const EDIT_PROFESSIONAL = "EDIT_PROFESSIONAL";
 export const GET_PROF_CLIENTS_TURNS = "GET_PROF_CLIENTS_TURNS"
 export const CLEAN_DATE = "CLEAN_DATE";
+export const DELETE_PROFESSIONAL = "DELETE_PROFESSIONAL";
 
 
 export const getProfessionals = () => {
@@ -124,6 +141,22 @@ export const getProfessionalDetail = (id) => {
     const bdInfoProf = await axios.get(`/professional/${id}`);
     const professional = bdInfoProf.data;
     dispatch({ type: GET_PROF_DETAIL, payload: professional });
+  };
+};
+
+export const deleteProfessional = (id) => {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`/professional/${id}`);
+      dispatch({
+        type: "DELETE_PROFESSIONAL",
+        id: id,
+      });
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
 };
 
