@@ -107,7 +107,8 @@ const Form = () => {
     const cookies = new Cookies();
     cookies.set("turnToPost", form, { path: "/" });
     cookies.set("idProfessional", id, { path: "/" });
-    cookies.set("findProfessional", findProfesional, { path: "/" });
+    cookies.set("findProfessional", findProfesional, { path: "/" });    
+    
 
     axios
 
@@ -174,7 +175,7 @@ const Form = () => {
 
           <label className={styles.label}>
             PROFESIONAL:
-            <h2 className={styles.nombres}>{findProfesional.name}</h2>
+            {findProfesional && <h2 className={styles.nombres}>{findProfesional.name}</h2>}
           </label>
           <label className={styles.label}>
             CLIENTE:
