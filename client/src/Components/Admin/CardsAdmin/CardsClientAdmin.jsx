@@ -70,6 +70,9 @@ export default function CardsClientAdmin() {
       <Link to={`/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
         <button className={style.adminbutton}>Clientes</button>
       </Link>
+      <Link to={`/allReviewsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
+        <button className={style.adminbutton}>Reviews</button>
+      </Link>
 
       <h3>Clientes ({allClientsOrd.length})</h3>
       <div
