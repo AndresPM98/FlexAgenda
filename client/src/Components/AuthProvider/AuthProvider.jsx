@@ -30,7 +30,7 @@ const AuthProvider = ({
           // const prof = await axios.get("/professional");
 
           console.log("usuario registrado y logueado");
-          onUserLoggedIn(id);
+          onUserLoggedIn(id, register);
         } else {
           console.log("el usuario esta logueado pero no registrado");
           onUserNotRegistered(id);

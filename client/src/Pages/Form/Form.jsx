@@ -8,12 +8,28 @@ import axios from "axios";
 import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, userExists } from "../../firebase-config";
 
 const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
   const [error, setError] = useState({});
+
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userDb, setUserDb] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user.displayName) setCurrentUser(user.displayName);
+      const newUser = await userExists(user.uid);
+
+      setUserDb(newUser.name);
+    });
+  }, []);
+  console.log(currentUser);
+  console.log(userDb);
 
   useEffect(() => {
     dispatch(getClients());
@@ -70,7 +86,7 @@ const Form = () => {
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-   
+
     const selectedDate = new Date(event.target.value);
     if (selectedDate.getDay() === 6 || selectedDate.getDay() === 5) {
       setError((prevErrors) => ({
@@ -107,16 +123,15 @@ const Form = () => {
     const cookies = new Cookies();
     cookies.set("turnToPost", form, { path: "/" });
     cookies.set("idProfessional", id, { path: "/" });
-    cookies.set("findProfessional", findProfesional, { path: "/" });    
-    
+    cookies.set("findProfessional", findProfesional, { path: "/" });
 
     axios
-  .post("https://backend-pf-production-1672.up.railway.app/payment", send)
-  .then((res) => {
-    localStorage.removeItem("form");
-    window.location.href = res.data.response.body.init_point;
-  })
-  .catch((error) => console.log(error));
+      .post("https://backend-pf-production-1672.up.railway.app/payment", send)
+      .then((res) => {
+        localStorage.removeItem("form");
+        window.location.href = res.data.response.body.init_point;
+      })
+      .catch((error) => console.log(error));
   };
 
   function handleSelectServ(event) {
@@ -188,11 +203,15 @@ const Form = () => {
 
           <label className={styles.label}>
             PROFESIONAL:
-            {findProfesional && <h2 className={styles.nombres}>{findProfesional.name}</h2>}
+            {findProfesional && (
+              <h2 className={styles.nombres}>{findProfesional.name}</h2>
+            )}
           </label>
           <label className={styles.label}>
             CLIENTE:
-            <h2 className={styles.nombres}>{ultimoCliente.name}</h2>
+            <h2 className={styles.nombres}>
+              {currentUser ? currentUser : userDb}
+            </h2>
           </label>
 
           <label className={styles.label}>SERVICIO:</label>
@@ -201,7 +220,9 @@ const Form = () => {
             onChange={handleSelectServ}
             className={styles.input}
           >
-            <option value="ServiceId" className={styles.input}>Servicio</option>
+            <option value="ServiceId" className={styles.input}>
+              Servicio
+            </option>
             {servProfs?.map((element, index) => (
               <option key={index} value={element.id} className={styles.input}>
                 {element.name}

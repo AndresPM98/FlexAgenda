@@ -29,7 +29,6 @@ const ProfessionalPage = () => {
       setCurrentUser(user);
     });
   }, []);
-  console.log(currentUser);
 
   const dispatch = useDispatch();
   useEffect(() => {
