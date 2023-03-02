@@ -126,6 +126,12 @@ const FormClient = () => {
   };
   const handleUserNotRegistered = async (id) => {
     console.log(id);
+    const user = auth.currentUser;
+    if (user) {
+      // El usuario ya ha iniciado sesión, redirigir al usuario a la página de destino
+      history.push(`/form/${id}`);
+      return;
+    }
     await Swal.fire({
       title: "Logueo exitoso",
       icon: "success",

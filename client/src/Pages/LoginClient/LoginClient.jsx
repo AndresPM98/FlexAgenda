@@ -94,8 +94,22 @@ const LoginClient = () => {
     // si no esta logueado que le muestre el form
     setCurrentState(1);
   };
-  const handleUserNotRegistered = (id) => {
-    console.log(id);
+  const handleUserNotRegistered = async (id) => {
+    const user = auth.currentUser;
+    if (user) {
+      // El usuario ya ha iniciado sesión, redirigir al usuario a la página de destino
+      history.push(`/form/${id}`);
+      return;
+    }
+    await Swal.fire({
+      title: "Logueo exitoso",
+      icon: "success",
+      text: "El usuario ha sido logueado correctamente.",
+      confirmButtonText: "Aceptar",
+    }).then(() => {
+      // redirigir cuando acepta popup
+      history.push(`/form/${id}`);
+    });
   };
 
   if (state === 1) {

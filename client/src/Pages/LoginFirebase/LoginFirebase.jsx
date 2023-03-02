@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
-
+import axios from "axios";
 import { auth } from "../../firebase-config";
 
 import {
@@ -15,6 +15,7 @@ import {
 
 import Swal from "sweetalert2";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
+import Loading from "../Loading/Loading";
 
 const LoginFirebase = () => {
   const history = useHistory();
@@ -71,16 +72,24 @@ const LoginFirebase = () => {
     }
   };
 
-  const handleUserLoggedIn = async (register, prof) => {
+  const handleUserLoggedIn = async (id, register) => {
     // si se logueo correctamente que le mande a su calendario
+    const prof = await axios.get("/professional");
     const findProf = prof.data.find((pro) => pro.email === register.email);
+    console.log(findProf);
+    const user = auth.currentUser;
+    if (user) {
+      // El usuario ya ha iniciado sesión, redirigir al usuario a la página de destino
+      history.push(`/Calendarpage/${findProf.id}`);
+      return;
+    }
     await Swal.fire({
       title: "Logueo exitoso",
       icon: "success",
       text: "El usuario ha sido logueado correctamente.",
       confirmButtonText: "Aceptar",
     }).then(() => {
-      history.push(`/form/${findProf.id}`);
+      history.push(`/Calendarpage/${findProf.id}`);
     });
   };
   const handleUserNotLoggedIn = () => {
@@ -125,16 +134,6 @@ const LoginFirebase = () => {
             <button type="submit" className={styles.button}>
               LOGIN
             </button>
-            <button
-              className={styles.googlebtn}
-              onClick={handleSignInWithGoogle}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="Google logo"
-              />
-              Sign in with Google
-            </button>
           </form>
         </div>
         <Footer></Footer>
@@ -150,7 +149,7 @@ const LoginFirebase = () => {
       onUserNotRegistered={handleUserNotRegistered}
     >
       <NavbarTwo></NavbarTwo>
-      loading...
+      <Loading />
       <Footer></Footer>
     </AuthProvider>
   );
