@@ -8,6 +8,7 @@ import axios from "axios";
 import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import Swal from "sweetalert2";
 
 const Form = () => {
   const { id } = useParams();
@@ -100,15 +101,20 @@ const Form = () => {
     validate({ ...form, [name]: newValue });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    axios
-      .post("https://backend-pf-production-1672.up.railway.app/service/", form)
-      .then((res) => {
-        alert("Servicio creado correctamente");
-        history.push(`/professionalDetail/${findProfessional.id}`);
-      })
-      .catch((err) => alert(err));
+    try {
+      await axios.post("https://backend-pf-production-1672.up.railway.app/service/", form);
+      await Swal.fire({
+        title: "Servicio Agregado",
+        icon: "success",
+        text: "Se ha agregado un nuevo servicio al perfil.",
+        confirmButtonText: "Aceptar",
+      });
+      history.push(`/professionalDetail/${findProfessional.id}`);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./Filters.module.css";
 import { Link } from "react-router-dom";
 import { id } from "date-fns/locale";
+import Swal from "sweetalert2";
 
 const Filters = ({ lastProfessional }) => {
   const dispatch = useDispatch();
@@ -110,14 +111,19 @@ const Filters = ({ lastProfessional }) => {
 
 
 // console.log(lastProfessional);
-const copyLink = () => {
+const copyLink = async () => {
   const el = document.createElement("textarea");
   el.value = `https://flex-agenda.vercel.app/profTT/${lastProfessional}`;
   document.body.appendChild(el);
   el.select();
   document.execCommand("copy");
   document.body.removeChild(el);
-  alert("Enlace copiado");
+  await Swal.fire({
+    title: "Enlace copiado",
+    icon: "success",
+    text: "Se ha copiado el enlace al portapapeles",
+    confirmButtonText: "Aceptar",
+  });
 };
 
 

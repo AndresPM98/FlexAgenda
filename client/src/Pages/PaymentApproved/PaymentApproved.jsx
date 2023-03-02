@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 import AddReview from "../../Components/AddReview/AddReview";
-
+import Swal from "sweetalert2";
 
 const PaymentApproved = () => {
 
@@ -30,7 +30,16 @@ const PaymentApproved = () => {
         axios
           .post("https://backend-pf-production-1672.up.railway.app/turn", send)
           .then((res) => {
-            alert("Turn taken correctly");
+            if (res.status === 200) {
+              Swal.fire({
+                title: "Turno tomado",
+                icon: "success",
+                text: "Se ha tomado el turno exitosamente.",
+                confirmButtonText: "Aceptar",
+              });
+            } else {
+              alert("Algo salio mal");
+            }
           })
           .catch((err) => alert("Algo salio mal"));
       };
