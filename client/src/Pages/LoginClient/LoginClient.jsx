@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "./LoginFirebase.module.css";
-import { useHistory } from "react-router-dom";
+import styles from "./LoginClient.module.css";
+import { useHistory, useParams } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,9 +15,11 @@ import {
 
 import Swal from "sweetalert2";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
+import Loading from "../Loading/Loading";
 
-const LoginFirebase = () => {
+const LoginClient = () => {
   const history = useHistory();
+  const { id } = useParams();
   const darkMode = useSelector((state) => state.darkMode);
 
   // depende el estado se renderiza algo, no funcionando actualmente
@@ -71,23 +73,30 @@ const LoginFirebase = () => {
     }
   };
 
-  const handleUserLoggedIn = async (register, prof) => {
+  const handleUserLoggedIn = async (id) => {
     // si se logueo correctamente que le mande a su calendario
-    const findProf = prof.data.find((pro) => pro.email === register.email);
+    const user = auth.currentUser;
+    if (user) {
+      // El usuario ya ha iniciado sesión, redirigir al usuario a la página de destino
+      history.push(`/form/${id}`);
+      return;
+    }
     await Swal.fire({
       title: "Logueo exitoso",
       icon: "success",
       text: "El usuario ha sido logueado correctamente.",
       confirmButtonText: "Aceptar",
     }).then(() => {
-      history.push(`/form/${findProf.id}`);
+      history.push(`/form/${id}`);
     });
   };
   const handleUserNotLoggedIn = () => {
     // si no esta logueado que le muestre el form
     setCurrentState(1);
   };
-  const handleUserNotRegistered = () => {};
+  const handleUserNotRegistered = (id) => {
+    console.log(id);
+  };
 
   if (state === 1) {
     return (
@@ -145,15 +154,16 @@ const LoginFirebase = () => {
   // todas las validaciones se manejan aca
   return (
     <AuthProvider
+      id={id}
       onUserLoggedIn={handleUserLoggedIn}
       onUserNotLoggedIn={handleUserNotLoggedIn}
       onUserNotRegistered={handleUserNotRegistered}
     >
       <NavbarTwo></NavbarTwo>
-      loading...
+      <Loading />
       <Footer></Footer>
     </AuthProvider>
   );
 };
 
-export default LoginFirebase;
+export default LoginClient;
