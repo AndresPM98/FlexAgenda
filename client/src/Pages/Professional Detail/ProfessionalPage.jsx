@@ -24,7 +24,7 @@ const ProfessionalPage = () => {
     dispatch(getServices())
     dispatch(getProfessionals())
 
-  }, [dispatch, id]);
+  }, [dispatch, professional, id]);
 
 
  if(loading) return <Loading/>
