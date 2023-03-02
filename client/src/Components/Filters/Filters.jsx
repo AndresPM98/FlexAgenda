@@ -112,7 +112,7 @@ const Filters = ({ lastProfessional }) => {
 // console.log(lastProfessional);
 const copyLink = () => {
   const el = document.createElement("textarea");
-  el.value = `http://localhost:3000/profTT/${lastProfessional}`;
+  el.value = `https://flex-agenda.vercel.app/profTT/${lastProfessional}`;
   document.body.appendChild(el);
   el.select();
   document.execCommand("copy");
