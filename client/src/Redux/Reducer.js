@@ -19,7 +19,8 @@ import {
   SET_CURRENT_DATE,
   FILTER_CANCELED,
   DELETE_PROFESSIONAL,
-  DELETE_CLIENTS
+  DELETE_CLIENTS,
+  DELETE_SERVICE
 } from "./Actions";
 
 const initialState = {
@@ -219,6 +220,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allServices: action.payload,
       };
+      
+      case DELETE_SERVICE:
+        return {
+          ...state,
+        };
 
     case GET_PROF_CLIENTS_TURNS:
       const allTurnsClient = state.turnBackup;

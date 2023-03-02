@@ -94,10 +94,24 @@ export async function createUser(uid, form) {
         description: form.description,
         category: form.category,
       });
-    } else {
-      console.log("faltan datos");
     }
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function createClient(uid, form) {
+  console.log(form);
+  console.log(uid);
+  try {
+    if (form.name && form.email && form.password) {
+      const newUser = await setDoc(doc(db, "professionals", uid), {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 }

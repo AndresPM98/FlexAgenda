@@ -145,14 +145,6 @@ function SignUp() {
           <button className={styles.button} type="submit">
             REGISTRARSE
           </button>
-          <h2>O</h2>
-          <button className={styles.googlebtn}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              alt="Google logo"
-            />
-            Sign in with Google
-          </button>
         </form>
 
         {/* <div>

@@ -11,9 +11,8 @@ const AuthProvider = ({
   onUserLoggedIn,
   onUserNotLoggedIn,
   onUserNotRegistered,
+  id,
 }) => {
-  const dispatch = useDispatch();
-
   // posibilidades
   // 1: el usuario no esta logueado ni registrado
   // 3: el usuario esta logueado y esta registrado
@@ -28,20 +27,20 @@ const AuthProvider = ({
         const register = await userExists(user.uid);
         // usuario logueado y registrado
         if (register) {
-          const prof = await axios.get("/professional");
+          // const prof = await axios.get("/professional");
 
           console.log("usuario registrado y logueado");
-          onUserLoggedIn(register, prof);
+          onUserLoggedIn(id, register);
         } else {
           console.log("el usuario esta logueado pero no registrado");
-          onUserNotRegistered();
+          onUserNotRegistered(id);
         }
       } else {
         console.log("el usuraio no esta logueado y no esta registrado");
         onUserNotLoggedIn();
       }
     });
-  }, [dispatch, onUserLoggedIn, onUserNotLoggedIn, onUserNotRegistered]);
+  }, [id, onUserLoggedIn, onUserNotLoggedIn, onUserNotRegistered]);
   return <div className={styles.container}>{children}</div>;
 };
 

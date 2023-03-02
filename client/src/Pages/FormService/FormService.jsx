@@ -105,7 +105,7 @@ const Form = () => {
     axios
       .post("https://backend-pf-production-1672.up.railway.app/service/", form)
       .then((res) => {
-        alert("Turn taken correctly");
+        alert("Servicio creado correctamente");
         history.push(`/professionalDetail/${findProfessional.id}`);
       })
       .catch((err) => alert(err));
@@ -161,7 +161,7 @@ const Form = () => {
               {error.description && <span>{error.description}</span>}{" "}
             </div>
 
-            <label className={styles.label}>DURACION:</label>
+            <label className={styles.label}>DURACION (en horas):</label>
             <input
               className={styles.input}
               type="number"

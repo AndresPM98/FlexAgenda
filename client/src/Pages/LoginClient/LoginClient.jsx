@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "./LoginFirebase.module.css";
-import { useHistory } from "react-router-dom";
+import styles from "./LoginClient.module.css";
+import { useHistory, useParams } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+
 import { auth } from "../../firebase-config";
 
 import {
@@ -17,8 +17,9 @@ import Swal from "sweetalert2";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
 import Loading from "../Loading/Loading";
 
-const LoginFirebase = () => {
+const LoginClient = () => {
   const history = useHistory();
+  const { id } = useParams();
   const darkMode = useSelector((state) => state.darkMode);
 
   // depende el estado se renderiza algo, no funcionando actualmente
@@ -72,15 +73,12 @@ const LoginFirebase = () => {
     }
   };
 
-  const handleUserLoggedIn = async (id, register) => {
+  const handleUserLoggedIn = async (id) => {
     // si se logueo correctamente que le mande a su calendario
-    const prof = await axios.get("/professional");
-    const findProf = prof.data.find((pro) => pro.email === register.email);
-    console.log(findProf);
     const user = auth.currentUser;
     if (user) {
       // El usuario ya ha iniciado sesión, redirigir al usuario a la página de destino
-      history.push(`/Calendarpage/${findProf.id}`);
+      history.push(`/form/${id}`);
       return;
     }
     await Swal.fire({
@@ -89,14 +87,30 @@ const LoginFirebase = () => {
       text: "El usuario ha sido logueado correctamente.",
       confirmButtonText: "Aceptar",
     }).then(() => {
-      history.push(`/Calendarpage/${findProf.id}`);
+      history.push(`/form/${id}`);
     });
   };
   const handleUserNotLoggedIn = () => {
     // si no esta logueado que le muestre el form
     setCurrentState(1);
   };
-  const handleUserNotRegistered = () => {};
+  const handleUserNotRegistered = async (id) => {
+    const user = auth.currentUser;
+    if (user) {
+      // El usuario ya ha iniciado sesión, redirigir al usuario a la página de destino
+      history.push(`/form/${id}`);
+      return;
+    }
+    await Swal.fire({
+      title: "Logueo exitoso",
+      icon: "success",
+      text: "El usuario ha sido logueado correctamente.",
+      confirmButtonText: "Aceptar",
+    }).then(() => {
+      // redirigir cuando acepta popup
+      history.push(`/form/${id}`);
+    });
+  };
 
   if (state === 1) {
     return (
@@ -134,6 +148,16 @@ const LoginFirebase = () => {
             <button type="submit" className={styles.button}>
               LOGIN
             </button>
+            <button
+              className={styles.googlebtn}
+              onClick={handleSignInWithGoogle}
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                alt="Google logo"
+              />
+              Sign in with Google
+            </button>
           </form>
         </div>
         <Footer></Footer>
@@ -144,6 +168,7 @@ const LoginFirebase = () => {
   // todas las validaciones se manejan aca
   return (
     <AuthProvider
+      id={id}
       onUserLoggedIn={handleUserLoggedIn}
       onUserNotLoggedIn={handleUserNotLoggedIn}
       onUserNotRegistered={handleUserNotRegistered}
@@ -155,4 +180,4 @@ const LoginFirebase = () => {
   );
 };
 
-export default LoginFirebase;
+export default LoginClient;

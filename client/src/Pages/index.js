@@ -13,6 +13,7 @@ import SignUp from "./SignUp/SignUp";
 import LoginFirebase from "./LoginFirebase/LoginFirebase";
 
 import PaymentFailure from "./PaymentFailure/PaymentFailure";
+import LoginClient from "./LoginClient/LoginClient";
 
 export {
   Form,
@@ -27,7 +28,6 @@ export {
   PaymentApproved,
   SignUp,
   LoginFirebase,
-
-  PaymentFailure
-
+  PaymentFailure,
+  LoginClient,
 };
