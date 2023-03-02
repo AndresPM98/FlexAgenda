@@ -182,6 +182,7 @@ export const getProfClientsTurns = (id) => {
 /* ----------------------------SERVICES--------------------------------- */
 
 export const GET_SERVICES = "GET_SERVICES";
+export const DELETE_SERVICE = "DELETE_SERVICE";
 
 export const getServices = () => {
   return async function (dispatch) {
@@ -190,6 +191,23 @@ export const getServices = () => {
     dispatch({ type: GET_SERVICES, payload: services });
   };
 };
+
+export const deleteServices = (id) => {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`/service/${id}`);
+      dispatch({
+        type: "DELETE_SERVICE",
+        id: id,
+      });
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+};
+
 
 /*---------------------------DARK MODE--------------------------------------*/
 
