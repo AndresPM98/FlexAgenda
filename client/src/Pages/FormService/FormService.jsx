@@ -161,7 +161,7 @@ const Form = () => {
               {error.description && <span>{error.description}</span>}{" "}
             </div>
 
-            <label className={styles.label}>DURACION:</label>
+            <label className={styles.label}>DURACION (en horas):</label>
             <input
               className={styles.input}
               type="number"
