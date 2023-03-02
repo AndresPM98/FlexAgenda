@@ -208,7 +208,9 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-            <h2 className={styles.nombres}>{clienteLog.name}</h2>
+          {clienteLog &&(
+          <h2 className={styles.nombres}>{clienteLog.name}</h2>
+          )}
           </label>
 
           <label className={styles.label}>SERVICIO:</label>
