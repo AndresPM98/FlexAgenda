@@ -43,9 +43,8 @@ const Form = () => {
 
   const servProfs = serv.filter((service) => service.ProfessionalId === id);
 
-  const ultimoCliente = allClients.length
-    ? allClients[allClients.length - 1]
-    : "";
+  const clienteLog = allClients.find(clien => clien.name === currentUser || userDb)
+  console.log(clienteLog);
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
   const [form, setForm] = useState({
@@ -57,10 +56,10 @@ const Form = () => {
   });
 
   useEffect(() => {
-    if (allClients.length && allProfessionals.length) {
+    if ((currentUser || userDb) && allProfessionals.length) {
       setForm({
         ...form,
-        ClientId: ultimoCliente.id,
+        ClientId: clienteLog.id,
         ProfessionalId: findProfesional.id,
       });
     }
@@ -209,9 +208,7 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-            <h2 className={styles.nombres}>
-              {currentUser ? currentUser : userDb}
-            </h2>
+            <h2 className={styles.nombres}>{clienteLog.name}</h2>
           </label>
 
           <label className={styles.label}>SERVICIO:</label>
