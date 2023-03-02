@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServices, deleteServices } from "../../Redux/Actions";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import  Style  from "./ServiceCard.module.css";
 
 const ServiceCard = () => {
@@ -10,6 +10,7 @@ const ServiceCard = () => {
   const servicios = serv.filter((servicio) => servicio.ProfessionalId === id);
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleDeleteService = (id) => {
     dispatch(deleteServices(id));
@@ -25,9 +26,11 @@ const ServiceCard = () => {
             <p>Servicio: {service.description}</p>
             <p>Duración: {service.duration} hs</p>
             <p>Precio: {service.price}</p>
-            <button onClick={() => handleDeleteService(service.id)}>
-              Eliminar
-            </button>
+            {location.pathname === `/professionalDetail/${id}` && (
+              <button onClick={() => handleDeleteService(service.id)}>
+                Eliminar
+              </button>
+            )}
           </div>
         );
       })}
