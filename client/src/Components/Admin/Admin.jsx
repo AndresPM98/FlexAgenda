@@ -17,6 +17,9 @@ export default function Admin() {
       <Link to={`/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
         <button className={style.adminbutton}>Clientes</button>
       </Link>
+      <Link to={`/allReviewsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
+        <button className={style.adminbutton}>Reviews</button>
+      </Link>
      
        <h3 style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"200px",color: "red"}}>Bienvenido a la pagina del administrador. Aqui podras controlar a los profesionales, los clientes y a los turnos </h3>
      <Link to="/">

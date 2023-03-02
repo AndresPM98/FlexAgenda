@@ -30,9 +30,9 @@ import Footer from "./Components/Footer/Footer";
 import NavbarTwo from "./Components/NavbarTwo/NavbarTwo";
 import CardsProfAdmin from "./Components/Admin/CardsAdmin/CardsProfAdmin";
 import CardsClientAdmin from "./Components/Admin/CardsAdmin/CardsClientAdmin";
-import CardsTurnsAdmin from "./Components/Admin/CardsAdmin/CardsTurnsAdmin";
+import CardsTurnsAdmin from "./Components/Admin/CardsAdmin/CardsReviewsAdmin";
 import BlockedPage from "./Pages/Bloqueado/Bloqueado";
-
+import CardsReviewsAdmin from "./Components/Admin/CardsAdmin/CardsReviewsAdmin";
 axios.defaults.baseURL = "https://backend-pf-production-1672.up.railway.app/";
 
 function App() {
@@ -67,7 +67,7 @@ function App() {
         <Route exact path="/admin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={Admin} />
         <Route exact path="/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsProfAdmin} />
         <Route exact path="/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsClientAdmin} />
-        <Route exact path="/allTurnsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsTurnsAdmin} />
+        <Route exact path="/allReviewsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080" component={CardsReviewsAdmin} />
 
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Login" component={LoginFirebase} />

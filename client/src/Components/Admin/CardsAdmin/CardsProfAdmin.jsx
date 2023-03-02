@@ -95,6 +95,9 @@ export default function CardsAdminProf({ id }) {
       >
         <button className={style.adminbutton}>Clientes</button>
       </Link>
+      <Link to={`/allReviewsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
+        <button className={style.adminbutton}>Reviews</button>
+      </Link>
 
       <h3>Profesionales ({allProfOrd.length})</h3>
       <div className={style.cardcontainer} style={{ display: "flex" }}>
