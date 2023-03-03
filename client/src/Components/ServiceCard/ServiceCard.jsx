@@ -25,6 +25,7 @@ const ServiceCard = () => {
     });
     if (isConfirmed) {
     dispatch(deleteServices(id));
+
     await Swal.fire({
       title: "Servicio eliminado",
       icon: "success",
@@ -34,6 +35,9 @@ const ServiceCard = () => {
   };
   };
 
+useEffect(()=>{
+  dispatch(getServices())
+},[dispatch, servicios])
   return (
     <>
       {servicios.map((service) => {

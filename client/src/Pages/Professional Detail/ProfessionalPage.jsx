@@ -20,11 +20,11 @@ const ProfessionalPage = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
+      dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
     dispatch(getServices())
     dispatch(getProfessionals())
 
-  }, [dispatch, professional, id]);
+  }, [dispatch, id]);
 
 
  if(loading) return <Loading/>
