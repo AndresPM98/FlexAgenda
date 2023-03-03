@@ -35,7 +35,7 @@ color: orange;
 }
 
 .form{
-    background-color: aqua;
+    background-color: white;
     width: 30rem;
     height: 15rem;
     font-size: 2.3rem;
@@ -44,20 +44,19 @@ color: orange;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
+    border: 2px solid blue;
     border-radius: 1rem;
 }
 
 .formContainer{
-    background-color: blueviolet;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .textInput{
-    font-size: 0.9rem;
-    color: black;
+    font-size: 1.1rem;
+    color: rgb(0, 0, 0);
 }
 
 .input{
@@ -77,6 +76,15 @@ color: orange;
 .btn{
     background-color: blue;
     color: aliceblue;
+    width: 6rem;
+    height: 1.5rem;
     border-radius: 0.4rem;
     margin-top: 1rem;
+    border: 3px solid blue;
+}
+
+.btn:hover{
+    background-color: white;
+    color: blue;
+    transition: 0.5s;
 }
