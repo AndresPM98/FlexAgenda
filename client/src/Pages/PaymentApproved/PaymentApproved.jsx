@@ -4,12 +4,14 @@ import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { NavLink, useHistory } from "react-router-dom";
 import { useParams, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 import AddReview from "../../Components/AddReview/AddReview";
 import Swal from "sweetalert2";
 
 const PaymentApproved = () => {
+
 
     const search = window.location.search;
     const cookies = new Cookies();
@@ -41,7 +43,7 @@ const PaymentApproved = () => {
               alert("Algo salio mal");
             }
           })
-          .catch((err) => alert("Algo salio mal"));
+          .catch((err) => alert("Algo salio mal")); 
       };
 
     useEffect(() => {
@@ -65,10 +67,11 @@ const PaymentApproved = () => {
                     <h3>Tu turno ya está registrado</h3>
                 </div>
                 <botton className={s.link} to="#" onClick={handleNavLinkClick}>Tomar otro turno</botton> 
+                <div>
+                    <AddReview idProf={id}/>
+                </div>
             </div>
-            <div>
-                <AddReview idProf={id}/>
-            </div>
+            
         </div>
     )
 }

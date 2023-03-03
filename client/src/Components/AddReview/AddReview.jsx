@@ -4,6 +4,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 const AddReview = (props) => {
 
+    const [display, setDisplay] = useState(true);
+
     const [state, setState] = useState({
         idProf: props.idProf,
         score: '',
@@ -24,7 +26,7 @@ const AddReview = (props) => {
    
 
         const submitHandler = async (event) => {
-        console.log(state);
+        setDisplay(false)
         event.preventDefault();
         try {
           await axios.post("https://backend-pf-production-1672.up.railway.app/review", state);
@@ -39,6 +41,7 @@ const AddReview = (props) => {
           console.log(err.message);
         }
       };
+
       return(
         <div className={s.formContainer}>
             {!formSumbited ? ( 
@@ -62,7 +65,12 @@ const AddReview = (props) => {
             ) : (
                 <h1 style={{backgroundColor:"white", width:"100%", height:"50px"}}>¡Gracias por enviar tu opinión!</h1>
             )}
+
         </div>
+    ):(
+      <div>
+        
+      </div>
     )
 };
 
