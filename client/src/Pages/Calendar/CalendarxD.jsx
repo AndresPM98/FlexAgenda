@@ -17,6 +17,7 @@ import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Loading from "../Loading/Loading";
 import Error404 from "../../Components/Error404/Error404";
 import "./Calendar.css";
+import Swal from "sweetalert2";
 
 const locales = {
   es: require("date-fns/locale/es"),
@@ -94,9 +95,15 @@ function CalendarxD() {
   function handleSelectSlot(slotInfo) {
     const selectedDay = slotInfo.start.getDay();
     if (selectedDay === 0 || selectedDay === 6) {
-      alert("Día deshabilitado.");
+      Swal.fire({
+        title: "Dia deshabilitado",
+        icon: "warning",
+        text: "No se puede seleccionar los fines de semana.",
+        confirmButtonText: "Aceptar",
+      });
     } else {
-      dispatch(setCurrentDateAction(slotInfo.start)); // actualiza el estado del reducer con la nueva fecha seleccionada
+      dispatch(setCurrentDateAction(slotInfo.start)); 
+      
       history.push(`/home/${findProfessional.id}`);
     }
   }
