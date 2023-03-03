@@ -1,3 +1,7 @@
+.hide {
+  display: none;
+}
+
 .container {
   background-color: #264c4d;
   border-radius: 20px;
