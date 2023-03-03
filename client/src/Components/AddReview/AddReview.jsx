@@ -10,6 +10,8 @@ const AddReview = (props) => {
         text: ''
     });
 
+    const [formSumbited, setFormSubmitted] = useState(false);
+
     const starsHandler = (event) => {
         setState({...state, score: event.target.value})
     }
@@ -19,14 +21,7 @@ const AddReview = (props) => {
     }
 
 
-    // const submitHandler = (event) => {
-    //     console.log(state);       
-    //     event.preventDefault();
-    //     axios
-    //     .post("https://backend-pf-production-1672.up.railway.app/review", state)
-    //     .then((res) => {alert("Opinion agregada con exito")})
-    //     .catch((err) => console.log(err.message));
-    // }
+   
 
         const submitHandler = async (event) => {
         console.log(state);
@@ -36,33 +31,37 @@ const AddReview = (props) => {
           await Swal.fire({
             title: "Opinion enviada",
             icon: "success",
-            text: "Gracias por calificar a nuestro profesional.",
+            text: "Calificaste al profesional con éxito.",
             confirmButtonText: "Aceptar",
           });
+          setFormSubmitted(true);
         } catch (err) {
           console.log(err.message);
         }
       };
-    return(
+      return(
         <div className={s.formContainer}>
-            {console.log(state)}
-            <form onSubmit={submitHandler} className={s.form}>
-                <label className={s.textInput} for="name">Agrega tu opinion sobre el profesional</label>
-                <p onChange={starsHandler} className={s.stars}>
-                    <input id="radio1" type="radio" name="estrellas" value="5"/>
-                    <label for="radio1">★</label>
-                    <input id="radio2" type="radio" name="estrellas" value="4"/>
-                    <label for="radio2">★</label>
-                    <input id="radio3" type="radio" name="estrellas" value="3"/>
-                    <label for="radio3">★</label>
-                    <input id="radio4" type="radio" name="estrellas" value="2"/>
-                    <label for="radio4">★</label>
-                    <input id="radio5" type="radio" name="estrellas" value="1"/>
-                    <label for="radio5">★</label>
-                </p>
-                <textarea onChange={textHandler} className={s.input} placeholder='Agrega una descripcion del profesional...'  id="name" name="name"  minlength="4" ></textarea>
-                <button type='submit' className={s.btn}>Enviar</button>
-             </form>
+            {!formSumbited ? ( 
+                <form onSubmit={submitHandler} className={s.form}>
+                    <label className={s.textInput} for="name">Agrega tu opinion sobre el profesional</label>
+                    <p onChange={starsHandler} className={s.stars}>
+                        <input id="radio1" type="radio" name="estrellas" value="5"/>
+                        <label for="radio1">★</label>
+                        <input id="radio2" type="radio" name="estrellas" value="4"/>
+                        <label for="radio2">★</label>
+                        <input id="radio3" type="radio" name="estrellas" value="3"/>
+                        <label for="radio3">★</label>
+                        <input id="radio4" type="radio" name="estrellas" value="2"/>
+                        <label for="radio4">★</label>
+                        <input id="radio5" type="radio" name="estrellas" value="1"/>
+                        <label for="radio5">★</label>
+                    </p>
+                    <textarea onChange={textHandler} className={s.input} placeholder='Agrega una descripcion del profesional...'  id="name" name="name"  minlength="4" ></textarea>
+                    <button type='submit' className={s.btn}>Enviar</button>
+                 </form>
+            ) : (
+                <h1 style={{backgroundColor:"white", width:"100%", height:"50px"}}>¡Gracias por enviar tu opinión!</h1>
+            )}
         </div>
     )
 };
