@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import Loading from "../../Pages/Loading/Loading";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const CardBorrado = ({ name, date, hour, id, type, email, address, description }) => {
@@ -32,17 +33,42 @@ useEffect(() => {
   fetchData();
 }, [dispatch]);
 
-  const handlerDelete = () => {
-    const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo.");
-    if (confirmDelete) {
-      dispatch(deleteTurn(id)).then(() => {
-        alert("Turno eliminado");
-        window.location.reload();
-        dispatch(getTurns()).then((response) => {
-          setTurns(response);
-        });
+  // const handlerDelete = () => {
+  //   const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo.");
+  //   if (confirmDelete) {
+  //     dispatch(deleteTurn(id)).then(() => {
+  //       alert("Turno eliminado");
+  //       window.location.reload();
+  //       dispatch(getTurns()).then((response) => {
+  //         setTurns(response);
+  //       });
+  //     });
+  //   }
+  // };
+
+  const handlerDelete = async () => {
+    const { isConfirmed } = await Swal.fire({
+      title: "¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    if (isConfirmed) {
+      await dispatch(deleteTurn(id));
+      await Swal.fire({
+        title: "Turno Eliminado",
+        icon: "success",
+        text: "Se ha eliminado el turno.",
+        confirmButtonText: "Aceptar",
       });
-    }
+      const response = await dispatch(getTurns());
+      setTurns(response);
+      window.location.reload();
+    };
   };
 
   const [turnStatus, setTurnStatus] = useState({
@@ -50,17 +76,32 @@ useEffect(() => {
   });
 
   const handlerEdit = async () => {
-    try {
-      const confirmEdit = window.confirm("¿Estás seguro de que deseas recuperar este turno?");
-      if (confirmEdit) {
+  try {
+    const { isConfirmed } = await Swal.fire({
+      title: "¿Estás seguro de que deseas recuperar este turno?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (isConfirmed) {
       await axios.put(`/turn/${id}`, { status: true });
-      setTurnStatus(true); 
-      alert("Turno recuperado");
-      window.location.reload();}
-    } catch (error) {
-      console.log(error);
+      setTurnStatus(true);
+      await Swal.fire({
+        title: "Turno recuperado",
+        icon: "success",
+        text: "Se ha recuperado el turno.",
+        confirmButtonText: "Aceptar",
+      });
+      window.location.reload();
     }
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   if(loading){
     return <Loading />

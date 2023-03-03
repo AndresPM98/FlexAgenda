@@ -1,7 +1,7 @@
 import s from './AddReview.module.css';
 import { useState } from 'react';
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
 const AddReview = (props) => {
 
     const [state, setState] = useState({
@@ -19,15 +19,30 @@ const AddReview = (props) => {
     }
 
 
-    const submitHandler = (event) => {
-        console.log(state);       
-        event.preventDefault();
-        axios
-        .post("https://backend-pf-production-1672.up.railway.app/review", state)
-        .then((res) => {alert("Opinion agregada con exito")})
-        .catch((err) => console.log(err.message));
-    }
+    // const submitHandler = (event) => {
+    //     console.log(state);       
+    //     event.preventDefault();
+    //     axios
+    //     .post("https://backend-pf-production-1672.up.railway.app/review", state)
+    //     .then((res) => {alert("Opinion agregada con exito")})
+    //     .catch((err) => console.log(err.message));
+    // }
 
+        const submitHandler = async (event) => {
+        console.log(state);
+        event.preventDefault();
+        try {
+          await axios.post("https://backend-pf-production-1672.up.railway.app/review", state);
+          await Swal.fire({
+            title: "Opinion enviada",
+            icon: "success",
+            text: "Gracias por calificar a nuestro profesional.",
+            confirmButtonText: "Aceptar",
+          });
+        } catch (err) {
+          console.log(err.message);
+        }
+      };
     return(
         <div className={s.formContainer}>
             {console.log(state)}
