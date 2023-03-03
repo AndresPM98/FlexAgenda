@@ -10,13 +10,12 @@ import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, userExists } from "../../firebase-config";
-
 const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
   const [error, setError] = useState({});
-
+  const [availableTimes, setAvailableTimes] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userDb, setUserDb] = useState(null);
 
@@ -42,8 +41,8 @@ const Form = () => {
   const serv = useSelector((state) => state.allServices);
 
   const servProfs = serv.filter((service) => service.ProfessionalId === id);
-
-  const clienteLog = allClients.find(clien => clien.name === currentUser || userDb)
+  
+  const clienteLog = allClients.find(clien => clien.name === userDb /* || currentUser  */)
   console.log(clienteLog);
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
@@ -59,7 +58,7 @@ const Form = () => {
     if ((currentUser || userDb) && allProfessionals.length) {
       setForm({
         ...form,
-        ClientId: clienteLog.id,
+        ClientId: clienteLog? clienteLog.id : currentUser,
         ProfessionalId: findProfesional.id,
       });
     }
@@ -82,30 +81,57 @@ const Form = () => {
     return error;
   }
 
+  useEffect(() => {
+    const takenHours = []; // list of already taken hours
+    // You should get the list of taken hours from your backend
+    // or from a local storage.
+  
+    const availableTimes = getAvailableTimes(takenHours);
+    setAvailableTimes(availableTimes);
+  }, []);
+
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
+  
     const selectedDate = new Date(event.target.value);
     if (selectedDate.getDay() === 6 || selectedDate.getDay() === 5) {
       setError((prevErrors) => ({
         ...prevErrors,
         date: "No hay turnos para este día",
       }));
+      setAvailableTimes([]);
     } else {
       setError((prevErrors) => ({
         ...prevErrors,
         date: "",
       }));
-      setForm((prevForm) => ({
-        ...prevForm,
-        date: event.target.value,
-      }));
+      const takenHours = []; // list of already taken hours
+      // You should get the list of taken hours from your backend
+      // or from a local storage.
+      const availableTimes = getAvailableTimes(takenHours);
+      setAvailableTimes(availableTimes);
     }
-
+  
     setForm({ ...form, [property]: value });
     validate({ ...form, [property]: value });
   };
+  
+  function getAvailableTimes(takenHours) {
+    const startTime = 7; // start time of working hours
+    const endTime = 19; // end time of working hours
+    const timeSlots = []; // list of available times
+    for (let i = startTime; i <= endTime; i++) {
+      if (i === startTime || i === endTime) {
+        timeSlots.push(`${i}:00`);
+        timeSlots.push(`${i}:30`);
+      } else {
+        timeSlots.push(`${i}:00`);
+        timeSlots.push(`${i}:30`);
+      }
+    }
+    return timeSlots.filter((time) => !takenHours.includes(time));
+  }
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -178,23 +204,28 @@ const Form = () => {
             value={form.date}
             onChange={changeHandler}
             name="date"
+            min={new Date().toISOString().slice(0, 10)}
           />
           <div className={styles.error}>
             {error.date && <span>{error.date}</span>}{" "}
           </div>
 
           <label className={styles.label}>HORA:</label>
-          <br />
-          <input
-            className={styles.input}
-            type="time"
-            value={form.hour}
-            onChange={changeHandler}
-            name="hour"
-            step="1800"
-            min="00:00"
-            max="23:30"
-          />
+<br />
+<select
+  className={styles.input}
+  value={form.hour}
+  onChange={changeHandler}
+  name="hour"
+>
+  <option value="">Seleccione una hora</option>
+  {availableTimes.map((time) => (
+    <option key={time} value={time}>
+      {time}
+    </option>
+  ))}
+</select>
+
 
           <div className={styles.error}>
             {error.hour && <span>{error.hour}</span>}{" "}
@@ -208,9 +239,13 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-          {clienteLog &&(
+          {clienteLog?(
           <h2 className={styles.nombres}>{clienteLog.name}</h2>
-          )}
+          ):
+          (
+            <h2 className={styles.nombres}>{currentUser}</h2>
+            )
+          }
           </label>
 
           <label className={styles.label}>SERVICIO:</label>
