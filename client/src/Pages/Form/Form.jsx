@@ -10,6 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, userExists } from "../../firebase-config";
+
 const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,6 +19,8 @@ const Form = () => {
   const [availableTimes, setAvailableTimes] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userDb, setUserDb] = useState(null);
+
+  const [horarioDisponible, setHorarioDisponible] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -36,14 +39,19 @@ const Form = () => {
     dispatch(getServices());
   }, [dispatch]);
 
+  const turns = useSelector((state) => state.turns);
+  const filteredTurns = turns.filter((turn) => turn.professionalID === id);
+
   const allClients = useSelector((state) => state.allClients);
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const serv = useSelector((state) => state.allServices);
 
   const servProfs = serv.filter((service) => service.ProfessionalId === id);
-  
-  const clienteLog = allClients.find(clien => clien.name === userDb /* || currentUser  */)
-  console.log(clienteLog);
+
+  const clienteLog = allClients.find(
+    (clien) => clien.name === userDb /* || currentUser  */
+  );
+ 
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
   const [form, setForm] = useState({
@@ -54,11 +62,21 @@ const Form = () => {
     ServiceId: "",
   });
 
+  const turnosXdia = form.date
+    ? filteredTurns.filter((t) => t.date == form.date)
+    : console.log("hay turnos");
+  console.log(turnosXdia);
+
+  const horasXdia = turnosXdia
+    ? turnosXdia.map((t) => t.hour)
+    : console.log("hay hora");
+  console.log(horasXdia);
+
   useEffect(() => {
     if ((currentUser || userDb) && allProfessionals.length) {
       setForm({
         ...form,
-        ClientId: clienteLog? clienteLog.id : currentUser,
+        ClientId: clienteLog ? clienteLog.id : currentUser,
         ProfessionalId: findProfesional.id,
       });
     }
@@ -85,7 +103,7 @@ const Form = () => {
     const takenHours = []; // list of already taken hours
     // You should get the list of taken hours from your backend
     // or from a local storage.
-  
+
     const availableTimes = getAvailableTimes(takenHours);
     setAvailableTimes(availableTimes);
   }, []);
@@ -93,7 +111,7 @@ const Form = () => {
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-  
+
     const selectedDate = new Date(event.target.value);
     if (selectedDate.getDay() === 6 || selectedDate.getDay() === 5) {
       setError((prevErrors) => ({
@@ -112,11 +130,11 @@ const Form = () => {
       const availableTimes = getAvailableTimes(takenHours);
       setAvailableTimes(availableTimes);
     }
-  
+
     setForm({ ...form, [property]: value });
     validate({ ...form, [property]: value });
   };
-  
+
   function getAvailableTimes(takenHours) {
     const startTime = 7; // start time of working hours
     const endTime = 19; // end time of working hours
@@ -211,21 +229,20 @@ const Form = () => {
           </div>
 
           <label className={styles.label}>HORA:</label>
-<br />
-<select
-  className={styles.input}
-  value={form.hour}
-  onChange={changeHandler}
-  name="hour"
->
-  <option value="">Seleccione una hora</option>
-  {availableTimes.map((time) => (
-    <option key={time} value={time}>
-      {time}
-    </option>
-  ))}
-</select>
-
+          <br />
+          <select
+            className={styles.input}  
+            value={form.hour}
+            onChange={changeHandler}
+            name="hour"
+          >
+            <option value="">Seleccione una hora</option>
+            {availableTimes.map((time) => (
+              <option key={time} value={time}  className={horasXdia.includes(time) ? styles.hide : ""} >
+                {time}
+              </option>
+            ))}
+          </select>
 
           <div className={styles.error}>
             {error.hour && <span>{error.hour}</span>}{" "}
@@ -239,13 +256,11 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-          {clienteLog?(
-          <h2 className={styles.nombres}>{clienteLog.name}</h2>
-          ):
-          (
-            <h2 className={styles.nombres}>{currentUser}</h2>
-            )
-          }
+            {clienteLog ? (
+              <h2 className={styles.nombres}>{clienteLog.name}</h2>
+            ) : (
+              <h2 className={styles.nombres}>{currentUser}</h2>
+            )}
           </label>
 
           <label className={styles.label}>SERVICIO:</label>
