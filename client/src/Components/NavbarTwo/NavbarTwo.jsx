@@ -39,7 +39,7 @@ export default function NavbarTwo(props){
                 </Link>
                 <h1>FLEXAGENDA</h1>
             </div>
-{location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals" ? null :
+{location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved" ? null :
                 <button style={{ height:"40px", marginTop:"20px", cursor:"pointer"}}onClick={handleLogout} className="allProfessionals">
             CERRAR SESION
           </button>
