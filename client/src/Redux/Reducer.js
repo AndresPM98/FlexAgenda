@@ -46,11 +46,14 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   let allTurnsC = state.profClientsTurnsBackup;
+  // console.log(state.currentDate);
+  // console.log(state.currentName);
+  // console.log(state.setCurrentDate);
   switch (action.type) {
-    case "SET_CURRENT_DATE":
+    case SET_CURRENT_DATE:
       return {
         ...state,
-        setCurrentDate: action.payload,
+        currentDate: action.payload,
       };
 
     case GET_CLIENTS:

@@ -102,7 +102,9 @@ function CalendarxD() {
         confirmButtonText: "Aceptar",
       });
     } else {
-      dispatch(setCurrentDateAction(slotInfo.start)); 
+      const reconfiguredDate = slotInfo.start.toISOString().split('T')[0]; 
+      // console.log(reconfiguredDate);
+      dispatch(setCurrentDateAction(reconfiguredDate)); 
       
       history.push(`/home/${findProfessional.id}`);
     }
