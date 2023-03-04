@@ -8,7 +8,12 @@ import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth, RegisterEmailUser, createClient } from "../../firebase-config";
+import {
+  auth,
+  RegisterEmailUser,
+  createClient,
+  handleSignInWithGoogle,
+} from "../../firebase-config";
 import Swal from "sweetalert2";
 
 const FormClient = () => {
@@ -48,25 +53,6 @@ const FormClient = () => {
     validate({ ...form, [property]: value });
   };
 
-  const handleSignInWithGoogle = async () => {
-    const googleProvider = new GoogleAuthProvider();
-
-    const signInWithGoogle = async (googleProvider) => {
-      try {
-        const res = await signInWithPopup(auth, googleProvider).then(
-          async () => {
-            // history.push(`/`);
-            console.log("se ha logueado con google correctamente");
-          }
-        );
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    setCurrentState(true);
-    await signInWithGoogle(googleProvider);
-  };
   // try {
   //   //registramos el usuario
   //   const { user } = await RegisterEmailUser(auth, form);
