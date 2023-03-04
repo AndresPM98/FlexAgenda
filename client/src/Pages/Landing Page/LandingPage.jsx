@@ -13,10 +13,10 @@ const landingPage = () => {
         <div className="textContainer">
           <div className="text">
             <h2 className="textTitle">
-              Create your online agenda and grow your business
+              ¡Bienvenido a <span class="cursiva">Flex</span>Agenda!
             </h2>
             <h3 className="textPa">
-              Manage your appointments, clients and payments from the app
+            La plataforma virtual de gestión de turnos y organización de agendas que te ayudará a optimizar tu tiempo y aumentar tu productividad.
             </h3>
           </div>
           <NavLink className="start" to="/SignUp">
@@ -25,8 +25,8 @@ const landingPage = () => {
         </div>
         <div className="imagesContainer">
           <div className="images">
-            <img className="image1" src={calendar} alt="calendar" />
-            <img className="image2" src={illustration} alt="calendar" />
+           {/*  <img className="image1" src={calendar} alt="calendar" />
+            <img className="image2" src={illustration} alt="calendar" /> */}
           </div>
         </div>
       </div>
