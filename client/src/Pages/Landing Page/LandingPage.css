@@ -1,39 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Circular&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 .landContainer{
+    background-image:url("../../Imagenes\ y\ logos/calendar.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
     min-height: 42.5rem;
     display: flex;
     align-items: center;
     padding-bottom: 100px;
+    position: relative;
 }
 
-
 .textContainer{
-    width: 50%;
+    background-color: rgba(0, 0, 0, 0.7);;
+    border-radius:  0 4rem 4rem 0; ;
+    margin-top: 10%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.imagesContainer{
-    width: 50%;
-}
-
-.image1{
-    width: 8rem;
-    height: 8rem;
-    position: relative;
-    top: 5.5rem;
-    right: 9rem;
-    transform: rotate(315deg);
-}
-.images{
-    margin-right: 5rem;
-}
-
-.image2{
-    width: 30rem;
-    height: 25rem;
-    position: relative;
-    bottom: 3rem;
 }
 
 .text{
@@ -42,18 +29,37 @@
 }
 
 .textTitle{
-    color: #0051EE;
-    font-size: 2.5rem;
+    color: white;
+    font-size: 4.5rem;
+    margin-top: 0vh;
 }
+.cursiva {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 5rem;
+    color: #cf8b42;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .cursiva::after {
+    content: "";
+    position: absolute;
+    bottom: -0.1rem; 
+    left: 0;
+    right: 0;
+    border-bottom: 0.4rem solid white; 
+    border-radius: 50%; 
+  }
 
 .textPa{
+    color: white;
     font-family:'Poppins', sans-serif;
     font-weight: 300;
     font-size: 1.5rem;
 }
 
 .start{
-    background-color: #0051EE;
+    /* background-color: #0051EE; */
     width: 12rem;
     height: 3rem;
     display: flex;
@@ -65,10 +71,11 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 1.3rem;
-    border: 3px solid #0051EE;
+    border: 3px solid #ffffff;
+    margin-bottom: 2rem;
 }
 
 .start:hover{
     background-color: aliceblue;
-    color: #0051EE;
+    color: #cf8b42;
 }
