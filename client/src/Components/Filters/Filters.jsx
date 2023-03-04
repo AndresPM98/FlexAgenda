@@ -6,6 +6,7 @@ import {
   filterByHour,
   getProfClientsTurns,
   cleanDate,
+  setCurrentDateAction,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Filters.module.css";
@@ -19,9 +20,9 @@ const Filters = ({ lastProfessional }) => {
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
-  const fecha = useSelector((state) => state.setCurrentDate);
-  const fecha2 = fecha.toISOString().split('T')[0]; 
-  const [selectedDate, setSelectedDate] = useState(fecha2);
+  const fecha2 = useSelector((state) => state.currentDate);
+  // const fecha2 = fecha.toISOString().split('T')[0]; 
+  // const [selectedDate, setSelectedDate] = useState(fecha2);
 
   const [hour, setHour] = useState("Hours");
   const [client, setClient] = useState("Clients");
@@ -38,7 +39,8 @@ const Filters = ({ lastProfessional }) => {
   function handleOnChangeDate(e) {
     e.preventDefault();
     dispatch(filterByDate(e.target.value));
-    setSelectedDate(e.target.value)
+    dispatch(setCurrentDateAction(e.target.value))
+    // setSelectedDate(e.target.value)
   }
   // FILTRAR POR HORA
   function handleFilterByHour(event) {
@@ -51,7 +53,7 @@ const Filters = ({ lastProfessional }) => {
     setHour("Hours");
     setClient("Clients");
     dispatch(cleanDate());
-    setSelectedDate("Dale");
+    // setSelectedDate("Dale");
     dispatch(getProfClientsTurns(lastProfessional));
   };
   // MOSTRAR HORARIOS ACTUALES
@@ -101,13 +103,14 @@ const Filters = ({ lastProfessional }) => {
   // }, [input]);
 
   useEffect(() => {
+    dispatch(filterByDate(fecha2));
+  }, [dispatch]);
+  
+  useEffect(() => {
     dispatch(getTurns());
     dispatch(getProfClientsTurns(lastProfessional));
   }, [dispatch, lastProfessional]);
-
-  useEffect(() => {
-    dispatch(filterByDate(fecha2));
-  }, [fecha2]);
+  
 
 
 // console.log(lastProfessional);
@@ -157,10 +160,10 @@ const copyLink = async () => {
       <div>
         <input
           className={style.input}
-          defaultValue={selectedDate}
-          value={selectedDate}
+          defaultValue={fecha2}
+          value={fecha2}
           type="date"
-          onChange={(e)=>handleOnChangeDate(e)}
+          onChange={(e)=>handleSelectChange(e)}
           name="date"
         />
       </div>
