@@ -24,10 +24,10 @@ const Form = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user.displayName) setCurrentUser(user.displayName);
+      if (user.displayName) setCurrentUser(user.email);
       const newUser = await userExists(user.uid);
 
-      setUserDb(newUser.name);
+      setUserDb(newUser.email);
     });
   }, []);
   console.log(currentUser);
@@ -49,9 +49,11 @@ const Form = () => {
   const servProfs = serv.filter((service) => service.ProfessionalId === id);
 
   const clienteLog = allClients.find(
-    (clien) => clien.name === userDb /* || currentUser  */
+    (client) =>
+      client.email === (userDb ? userDb : currentUser) /* || currentUser  */
   );
- 
+  // console.log(clienteLog);
+
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
   const [form, setForm] = useState({
@@ -63,20 +65,20 @@ const Form = () => {
   });
 
   const turnosXdia = form.date
-    ? filteredTurns.filter((t) => t.date == form.date)
+    ? filteredTurns.filter((t) => t.date === form.date)
     : console.log("hay turnos");
-  console.log(turnosXdia);
+  // console.log(turnosXdia);
 
   const horasXdia = turnosXdia
     ? turnosXdia.map((t) => t.hour)
     : console.log("hay hora");
-  console.log(horasXdia);
+  // console.log(horasXdia);
 
   useEffect(() => {
     if ((currentUser || userDb) && allProfessionals.length) {
       setForm({
         ...form,
-        ClientId: clienteLog ? clienteLog.id : currentUser,
+        ClientId: clienteLog.id,
         ProfessionalId: findProfesional.id,
       });
     }
@@ -231,14 +233,18 @@ const Form = () => {
           <label className={styles.label}>HORA:</label>
           <br />
           <select
-            className={styles.input}  
+            className={styles.input}
             value={form.hour}
             onChange={changeHandler}
             name="hour"
           >
             <option value="">Seleccione una hora</option>
             {availableTimes.map((time) => (
-              <option key={time} value={time}  className={horasXdia.includes(time) ? styles.hide : ""} >
+              <option
+                key={time}
+                value={time}
+                className={horasXdia.includes(time) ? styles.hide : ""}
+              >
                 {time}
               </option>
             ))}
