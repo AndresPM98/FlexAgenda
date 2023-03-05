@@ -1,4 +1,5 @@
 .service {
+  justify-content: center;
     width: 190px;
  height: 254px;
  background: rgb(209, 209, 209);
@@ -32,4 +33,19 @@
   .service.p:last-child {
     margin-bottom: 0;
   }
-  
+  .btnborrar {
+    opacity: 1;
+    margin-top: 10px;
+    border-radius: 40px;
+    border: none;
+    background-color: #ff0000;
+    color: white;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  .btnborrar:hover {
+    background-color: #ff0000;
+    color: black;
+  }

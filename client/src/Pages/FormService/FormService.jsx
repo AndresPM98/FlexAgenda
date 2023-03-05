@@ -8,6 +8,8 @@ import axios from "axios";
 import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
 const Form = () => {
   const { id } = useParams();
@@ -100,19 +102,34 @@ const Form = () => {
     validate({ ...form, [name]: newValue });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    axios
-      .post("https://backend-pf-production-1672.up.railway.app/service/", form)
-      .then((res) => {
-        alert("Servicio creado correctamente");
-        history.push(`/professionalDetail/${findProfessional.id}`);
-      })
-      .catch((err) => alert(err));
+    try {
+      await axios.post("https://backend-pf-production-1672.up.railway.app/service/", form);
+      await Swal.fire({
+        title: "Servicio Agregado",
+        icon: "success",
+        text: "Se ha agregado un nuevo servicio al perfil.",
+        confirmButtonText: "Aceptar",
+      });
+      history.push(`/professionalDetail/${findProfessional.id}`);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
     <div>
+       <div className={styles.backContainer}>
+        <NavLink className={styles.back} to={`/professionalDetail/${id}`}>
+          <iconify-icon
+            icon="ion:arrow-back-circle"
+            width="40"
+            height="30"
+          ></iconify-icon>
+          CANCEL
+        </NavLink>
+      </div>
       <NavbarTwo />
       {loading ? (
         <Loading />

@@ -6,6 +6,7 @@ import { getProfessionalDetail } from "../../Redux/Actions";
 import styles from "./EditProfileProf.module.css";
 import axios from "axios";
 import Loading from "../Loading/Loading";
+import Swal from "sweetalert2";
 import { FormGroup, Label, Input, FormText, Container } from "reactstrap";
 
 // funcion que edita el profesional
@@ -68,10 +69,49 @@ export default function EditProfileProf() {
       }));
     }
   }, [profDetail]);
-  console.log(img);
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
+  //   const updatedFields = {};
+  //   if (prof.name !== profDetail.name) {
+  //     updatedFields.name = prof.name;
+  //   }
+  //   if (prof.category !== profDetail.category) {
+  //     updatedFields.category = prof.category;
+  //   }
+  //   if (prof.phone !== profDetail.phone) {
+  //     updatedFields.phone = prof.phone;
+  //   }
+  //   if (prof.address !== profDetail.address) {
+  //     updatedFields.address = prof.address;
+  //   }
+  //   if (prof.addresslocation !== profDetail.addresslocation) {
+  //     updatedFields.addresslocation = prof.addresslocation;
+  //   }
+  //   if (prof.description !== profDetail.description) {
+  //     updatedFields.description = prof.description;
+  //   }
+  //   if (img) {
+  //     updatedFields.image = img;
+  //   }
+  //   axios
+  //     .put(`/professional/${id}`, updatedFields)
+  //     .then((res) => console.log(res))
+  //     .catch((err) => console.log(err));
+
+  //     await Swal.fire({
+  //       title: "Turno Eliminado",
+  //       icon: "success",
+  //       text: "Se ha eliminado el turno.",
+  //       confirmButtonText: "Aceptar",
+  //     });
+  //   history.push(`/professionalDetail/${id}`);
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
     const updatedFields = {};
     if (prof.name !== profDetail.name) {
       updatedFields.name = prof.name;
@@ -94,15 +134,21 @@ export default function EditProfileProf() {
     if (img) {
       updatedFields.image = img;
     }
-    axios
-      .put(`/professional/${id}`, updatedFields)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-
-    alert("Cambios guardados");
-    history.push(`/professionalDetail/${id}`);
+    
+    try {
+      await axios.put(`/professional/${id}`, updatedFields);
+      await Swal.fire({
+        title: "Actualización exitosa",
+        icon: "success",
+        text: "Se ha actualizado el perfil.",
+        confirmButtonText: "Aceptar",
+      });
+      history.push(`/professionalDetail/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
+  
   if (loading) {
     return <Loading />;
   }

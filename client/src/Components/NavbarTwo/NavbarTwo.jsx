@@ -6,6 +6,8 @@ import { auth } from "../../firebase-config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 
 export default function NavbarTwo(props){
@@ -21,6 +23,12 @@ export default function NavbarTwo(props){
           await signOut(auth);
           
           setCurrentUser(null)
+          await Swal.fire({
+            icon: "success",
+            title: "Sesion cerrada",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           history.push("/")
         } catch (error) {
           // Manejar el error
@@ -39,7 +47,8 @@ export default function NavbarTwo(props){
                 </Link>
                 <h1>FLEXAGENDA</h1>
             </div>
-{location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals" ? null :
+           
+{location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved" ? null :
                 <button style={{ height:"40px", marginTop:"20px", cursor:"pointer"}}onClick={handleLogout} className="allProfessionals">
             CERRAR SESION
           </button>

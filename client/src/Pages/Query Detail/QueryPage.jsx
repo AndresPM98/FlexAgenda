@@ -16,6 +16,7 @@ import Loading from "../Loading/Loading";
 import { useState } from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const QueryPage = () => {
   const { id } = useParams();
@@ -44,13 +45,28 @@ const QueryPage = () => {
 
   const history = useHistory();
 
-  const handlerDelete = () => {
-    const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo.");
-    if (confirmDelete) {
-    dispatch(deleteTurn(id));
-    alert("Turno eliminado");
-    history.push(`/home/${turnDetail.ProfessionalId}`);
-    dispatch(getTurnDetail);}
+  const handlerDelete = async () => {
+    const { isConfirmed } = await Swal.fire({
+      title: "¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    if (isConfirmed) {
+      dispatch(deleteTurn(id));
+      await Swal.fire({
+        title: "Turno Eliminado",
+        icon: "success",
+        text: "Se ha eliminado el turno.",
+        confirmButtonText: "Aceptar",
+      });
+      history.push(`/home/${turnDetail.ProfessionalId}`);
+      dispatch(getTurnDetail);
+    }
   };
 
   
@@ -62,7 +78,12 @@ const QueryPage = () => {
     try {
       await axios.put(`/turn/${id}`, { status: false });
       setTurnStatus(false);
-      alert("Turno cancelado");
+      await Swal.fire({
+        title: "Turno Cancelado",
+        icon: "success",
+        text: "Se ha cancelado el turno.",
+        confirmButtonText: "Aceptar",
+      });
       history.push(`/home/${turnDetail.ProfessionalId}`)
     } catch (error) {
       console.log(error);

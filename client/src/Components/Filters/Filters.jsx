@@ -6,11 +6,12 @@ import {
   filterByHour,
   getProfClientsTurns,
   cleanDate,
+  setCurrentDateAction,
 } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Filters.module.css";
 import { Link } from "react-router-dom";
-import { id } from "date-fns/locale";
+import Swal from "sweetalert2";
 
 const Filters = ({ lastProfessional }) => {
   const dispatch = useDispatch();
@@ -18,9 +19,8 @@ const Filters = ({ lastProfessional }) => {
   const profClientsTurnsBackup = useSelector(
     (state) => state.profClientsTurnsBackup
   );
-  const fecha = useSelector((state) => state.setCurrentDate);
-  const fecha2 = fecha.toISOString().split('T')[0]; 
-  const [selectedDate, setSelectedDate] = useState(fecha2);
+  const fecha2 = useSelector((state) => state.currentDate);
+  console.log(fecha2);
 
   const [hour, setHour] = useState("Hours");
   const [client, setClient] = useState("Clients");
@@ -36,8 +36,8 @@ const Filters = ({ lastProfessional }) => {
   // FILTRAR POR FECHA
   function handleOnChangeDate(e) {
     e.preventDefault();
+    dispatch(setCurrentDateAction(e.target.value));
     dispatch(filterByDate(e.target.value));
-    setSelectedDate(e.target.value)
   }
   // FILTRAR POR HORA
   function handleFilterByHour(event) {
@@ -50,7 +50,6 @@ const Filters = ({ lastProfessional }) => {
     setHour("Hours");
     setClient("Clients");
     dispatch(cleanDate());
-    setSelectedDate("Dale");
     dispatch(getProfClientsTurns(lastProfessional));
   };
   // MOSTRAR HORARIOS ACTUALES
@@ -66,7 +65,6 @@ const Filters = ({ lastProfessional }) => {
   // DISTRIBUIR
   function handleSelectChange(event) {
     const { name, value } = event.target;
-
     if (name === "client") {
       if (value === "Clients") {
         // El usuario ha seleccionado el valor por defecto del select de nombres
@@ -91,46 +89,41 @@ const Filters = ({ lastProfessional }) => {
     }
   }
 
-  // RENDERIZACION - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // RENDERIZACION - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
   // useEffect(() => {
-  //   if (!hasTurn) {
-  //     setInputDate("");
-  //     dispatch(cleanDate());
-  //   }
-  // }, [input]);
-
+  // }, [dispatch]);
   useEffect(() => {
     dispatch(getTurns());
     dispatch(getProfClientsTurns(lastProfessional));
+    dispatch(filterByDate(fecha2));
   }, [dispatch, lastProfessional]);
 
-  useEffect(() => {
-    dispatch(filterByDate(fecha2));
-  }, [fecha2]);
 
-
-// console.log(lastProfessional);
-const copyLink = () => {
-  const el = document.createElement("textarea");
-  el.value = `https://flex-agenda.vercel.app/profTT/${lastProfessional}`;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand("copy");
-  document.body.removeChild(el);
-  alert("Enlace copiado");
-};
-
+  const copyLink = async () => {
+    const el = document.createElement("textarea");
+    el.value = `https://flex-agenda.vercel.app/profTT/${lastProfessional}`;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    await Swal.fire({
+      title: "Enlace copiado",
+      icon: "success",
+      text: "Se ha copiado el enlace al portapapeles",
+      confirmButtonText: "Aceptar",
+    });
+  };
 
   return (
     <div className={style.filterContainer}>
       <div className={style.nameLinkProf}>
-              <button className={style.copybtn} onClick={copyLink}>
-                Copiar enlace
-              </button>
-            </div>
+        <button className={style.copybtn} onClick={copyLink}>
+          Copiar enlace
+        </button>
+      </div>
       <Link to={`/turnCanceled/${lastProfessional}`}>
-      
-      <button className={style.turnosCancelados} >Turnos cancelados</button>
+        <button className={style.turnosCancelados}>Turnos cancelados</button>
       </Link>
       <div>
         <select
@@ -151,10 +144,10 @@ const copyLink = () => {
       <div>
         <input
           className={style.input}
-          defaultValue={selectedDate}
-          value={selectedDate}
+          defaultValue={fecha2}
+          value={fecha2}
           type="date"
-          onChange={(e)=>handleOnChangeDate(e)}
+          onChange={(e) => handleSelectChange(e)}
           name="date"
         />
       </div>

@@ -16,16 +16,18 @@ const Form = () => {
   const history = useHistory();
   const { id } = useParams();
   const [error, setError] = useState({});
-
+  const [availableTimes, setAvailableTimes] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userDb, setUserDb] = useState(null);
 
+  const [horarioDisponible, setHorarioDisponible] = useState(true);
+
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user.displayName) setCurrentUser(user.displayName);
+      if (user.displayName) setCurrentUser(user.email);
       const newUser = await userExists(user.uid);
 
-      setUserDb(newUser.name);
+      setUserDb(newUser.email);
     });
   }, []);
   console.log(currentUser);
@@ -37,14 +39,21 @@ const Form = () => {
     dispatch(getServices());
   }, [dispatch]);
 
+  const turns = useSelector((state) => state.turns);
+  const filteredTurns = turns.filter((turn) => turn.professionalID === id);
+
   const allClients = useSelector((state) => state.allClients);
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const serv = useSelector((state) => state.allServices);
 
   const servProfs = serv.filter((service) => service.ProfessionalId === id);
 
-  const clienteLog = allClients.find(clien => clien.name === currentUser || userDb)
-  console.log(clienteLog);
+  const clienteLog = allClients.find(
+    (client) =>
+      client.email === (userDb ? userDb : currentUser) /* || currentUser  */
+  );
+  // console.log(clienteLog);
+
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
   const [form, setForm] = useState({
@@ -54,6 +63,16 @@ const Form = () => {
     ClientId: "",
     ServiceId: "",
   });
+
+  const turnosXdia = form.date
+    ? filteredTurns.filter((t) => t.date === form.date)
+    : console.log("hay turnos");
+  // console.log(turnosXdia);
+
+  const horasXdia = turnosXdia
+    ? turnosXdia.map((t) => t.hour)
+    : console.log("hay hora");
+  // console.log(horasXdia);
 
   useEffect(() => {
     if ((currentUser || userDb) && allProfessionals.length) {
@@ -82,6 +101,15 @@ const Form = () => {
     return error;
   }
 
+  useEffect(() => {
+    const takenHours = []; // list of already taken hours
+    // You should get the list of taken hours from your backend
+    // or from a local storage.
+
+    const availableTimes = getAvailableTimes(takenHours);
+    setAvailableTimes(availableTimes);
+  }, []);
+
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
@@ -92,20 +120,38 @@ const Form = () => {
         ...prevErrors,
         date: "No hay turnos para este día",
       }));
+      setAvailableTimes([]);
     } else {
       setError((prevErrors) => ({
         ...prevErrors,
         date: "",
       }));
-      setForm((prevForm) => ({
-        ...prevForm,
-        date: event.target.value,
-      }));
+      const takenHours = []; // list of already taken hours
+      // You should get the list of taken hours from your backend
+      // or from a local storage.
+      const availableTimes = getAvailableTimes(takenHours);
+      setAvailableTimes(availableTimes);
     }
 
     setForm({ ...form, [property]: value });
     validate({ ...form, [property]: value });
   };
+
+  function getAvailableTimes(takenHours) {
+    const startTime = 7; // start time of working hours
+    const endTime = 19; // end time of working hours
+    const timeSlots = []; // list of available times
+    for (let i = startTime; i <= endTime; i++) {
+      if (i === startTime || i === endTime) {
+        timeSlots.push(`${i}:00`);
+        timeSlots.push(`${i}:30`);
+      } else {
+        timeSlots.push(`${i}:00`);
+        timeSlots.push(`${i}:30`);
+      }
+    }
+    return timeSlots.filter((time) => !takenHours.includes(time));
+  }
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -178,6 +224,7 @@ const Form = () => {
             value={form.date}
             onChange={changeHandler}
             name="date"
+            min={new Date().toISOString().slice(0, 10)}
           />
           <div className={styles.error}>
             {error.date && <span>{error.date}</span>}{" "}
@@ -185,16 +232,23 @@ const Form = () => {
 
           <label className={styles.label}>HORA:</label>
           <br />
-          <input
+          <select
             className={styles.input}
-            type="time"
             value={form.hour}
             onChange={changeHandler}
             name="hour"
-            step="1800"
-            min="00:00"
-            max="23:30"
-          />
+          >
+            <option value="">Seleccione una hora</option>
+            {availableTimes.map((time) => (
+              <option
+                key={time}
+                value={time}
+                className={horasXdia.includes(time) ? styles.hide : ""}
+              >
+                {time}
+              </option>
+            ))}
+          </select>
 
           <div className={styles.error}>
             {error.hour && <span>{error.hour}</span>}{" "}
@@ -208,9 +262,11 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-          {clienteLog &&(
-          <h2 className={styles.nombres}>{clienteLog.name}</h2>
-          )}
+            {clienteLog ? (
+              <h2 className={styles.nombres}>{clienteLog.name}</h2>
+            ) : (
+              <h2 className={styles.nombres}>{currentUser}</h2>
+            )}
           </label>
 
           <label className={styles.label}>SERVICIO:</label>

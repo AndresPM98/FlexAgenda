@@ -17,8 +17,14 @@
 // googleProvider.addScope("email");
 
 // Import the functions you need from the SDKs you need
+import axios from "axios";
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import {
   getFirestore,
   collection,
@@ -115,3 +121,37 @@ export async function createClient(uid, form) {
     console.log(error.message);
   }
 }
+export const handleSignInWithGoogle = async () => {
+  const googleProvider = new GoogleAuthProvider();
+
+  const signInWithGoogle = async (googleProvider) => {
+    try {
+      await signInWithPopup(auth, googleProvider).then(async (result) => {
+        const loginClient = {
+          name: result.user.displayName,
+          email: result.user.email,
+        };
+        const clients = await axios.get("/client");
+        const clientExist = clients.data.find(
+          (client) => client.email === result.user.email
+        );
+        if (!clientExist) {
+          try {
+            await axios.post("/client", loginClient);
+            console.log("usuario guardado por primera vez exitosamente");
+            return;
+          } catch (error) {
+            alert(error.message);
+          }
+        } else {
+          console.log("este usuario ya esta guardado");
+        }
+        console.log("se ha logueado con google correctamente");
+        return result.user;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  await signInWithGoogle(googleProvider);
+};

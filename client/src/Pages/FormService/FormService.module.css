@@ -12,6 +12,28 @@
   flex-direction: column;
   justify-content: center;
 }
+.backContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+  position: absolute;
+  left: 0;
+  margin-top: 100px;
+}
+
+.back{
+  border-radius: 0 1rem 1rem 0;
+  background-color: #183a3b;
+  text-decoration: none;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  height: 2.5rem;
+  margin-left: 0px;
+}
 
 .tittle {
   color: #eee;

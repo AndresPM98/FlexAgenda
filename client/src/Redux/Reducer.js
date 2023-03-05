@@ -47,10 +47,10 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   let allTurnsC = state.profClientsTurnsBackup;
   switch (action.type) {
-    case "SET_CURRENT_DATE":
+    case SET_CURRENT_DATE:
       return {
         ...state,
-        setCurrentDate: action.payload,
+        currentDate: action.payload,
       };
 
     case GET_CLIENTS:
@@ -92,30 +92,30 @@ const rootReducer = (state = initialState, action) => {
         currentDate: [],
         currentName: [],
       };
-
-    case FILTER_BY_CLIENT:
-      // Primero definimos cual es la fuente que vamos a filtrar.
-      // Si ya se filtro por date, usamos esos resultados
+      
+      case FILTER_BY_CLIENT:
+        // Primero definimos cual es la fuente que vamos a filtrar.
+        // Si ya se filtro por date, usamos esos resultados
       let toFilterbyName = state.currentDate.length
-        ? state.profClientsTurnsFilteredByDate
-        : allTurnsC;
-
+      ? state.profClientsTurnsFilteredByDate
+      : allTurnsC;
+      
       // Ahora filtramos
       let filteredbyName = toFilterbyName.filter(
         (e) => e.client.name === action.payload
-      );
-
-      // filtro por nombre en base a la fecha que ya estaba puesta
-      if (
-        state.currentDate.length &&
+        );
+        
+        // filtro por nombre en base a la fecha que ya estaba puesta
+        if (
+          state.currentDate.length &&
         state.currentName.length &&
         state.currentName !== action.payload
       ) {
         filteredbyName = allTurnsC.filter(
           (t) =>
-            t.date === state.currentDate && t.client.name === action.payload
-        );
-      }
+          t.date === state.currentDate && t.client.name === action.payload
+          );
+        }
       return {
         ...state,
         profClientsTurns: filteredbyName,
@@ -147,7 +147,7 @@ const rootReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        profClientsTurns: filteredbyDate,
+        profClientsTurns: action.payload.length === 0? allTurnsC : filteredbyDate,
         profClientsTurnsFilteredByDate: filteredbyDate,
         currentDate: action.payload,
       };
