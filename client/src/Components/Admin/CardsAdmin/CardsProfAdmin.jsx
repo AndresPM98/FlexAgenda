@@ -192,7 +192,7 @@ export default function CardsAdminProf({ id }) {
         <button className={style.adminbutton}>Reviews</button>
       </Link>
 
-      <h3>Profesionales ({allProfOrd.length})</h3>
+      <h2 >Profesionales ({allProfOrd.length})</h2>
       <div className={style.cardcontainer} style={{ display: "flex" }}>
         {combinedProfessionals.map((professional, index) => (
           <div className={style.cardProf}>

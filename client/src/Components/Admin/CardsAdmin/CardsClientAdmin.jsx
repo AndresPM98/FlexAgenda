@@ -119,7 +119,7 @@ const history = useHistory();
         <button className={style.adminbutton}>Reviews</button>
       </Link>
 
-      <h3>Clientes ({allClientsOrd.length})</h3>
+      <h2>Clientes ({allClientsOrd.length})</h2>
       <div
         className={style.cardcontainer}
         style={{ display: "flex", margin: "20px" }}
