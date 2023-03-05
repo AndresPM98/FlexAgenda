@@ -62,7 +62,7 @@ export default function Admin() {
           alignItems: "center",
           marginTop: "50px",
           color: "black",
-          backgroundColor: "#aeafba6e",
+          backgroundColor: "#999a9dc3",
           borderRadius: "10px",
           padding: "30px",
           maxWidth: "800px",
@@ -89,7 +89,7 @@ export default function Admin() {
         gran ayuda en tu tarea de mantener la calidad y la excelencia de
         nuestros servicios!{" "}
       </h2>
-      <div style={{ position: "absolute", top: 0, right: 30 }}>
+      <div style={{ position: "absolute", top: 0, left: 30 }}>
         <Link to={`/`} onClick={handleLogout}>
           <img
             style={{ width: "50px", height: "50px", marginTop: "10px" }}

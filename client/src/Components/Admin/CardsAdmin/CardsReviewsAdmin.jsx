@@ -108,7 +108,7 @@ export default function CardsReviewsAdmin({ id }) {
       >
         <button className={style.adminbutton}>Reviews</button>
       </Link>
-      <h1>Reviews</h1>
+      <h2>Reviews</h2>
       <div className={style.cardcontainer}>
         {allProfessionals.map((professional) =>
           professional.name === "ADMIN" ? (
