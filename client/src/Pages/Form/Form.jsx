@@ -239,15 +239,16 @@ const Form = () => {
             name="hour"
           >
             <option value="">Seleccione una hora</option>
-            {availableTimes.map((time) => (
-              <option
-                key={time}
-                value={time}
-                className={horasXdia.includes(time) ? styles.hide : ""}
-              >
-                {time}
-              </option>
-            ))}
+            {horasXdia &&
+              availableTimes.map((time) => (
+                <option
+                  key={time}
+                  value={time}
+                  className={horasXdia.includes(time) ? styles.hide : ""}
+                >
+                  {time}
+                </option>
+              ))}
           </select>
 
           <div className={styles.error}>
@@ -262,10 +263,8 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-            {clienteLog ? (
+            {clienteLog && (
               <h2 className={styles.nombres}>{clienteLog.name}</h2>
-            ) : (
-              <h2 className={styles.nombres}>{currentUser}</h2>
             )}
           </label>
 
