@@ -4,12 +4,16 @@
   flex-direction: row;
   min-height: 100vh;
   padding-bottom: 100px;
-  
+  color: white;
 }
 
+.nav{
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60));
+}
 .homeContainer {
- background-color: white; 
  font-family: "Playfair Display", serif;
+ background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0));
+ 
 }
 
 .homeContainerDark {
@@ -26,7 +30,7 @@
 .filtersAndButtons {
   display: flex;
   /* background-color: #2b2049e1; */
-  background-color: #2C3333;
+ border-right: solid 3px white;
   width: 19%;
   /* border-radius: 20px; */
 }
