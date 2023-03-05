@@ -102,7 +102,7 @@ const QueryPage = () => {
 
   return (
     <div>
-      <NavbarTwo/>
+     <div className="navv"><NavbarTwo/></div> 
       {turnDetail && dispatchClientDetail(turnDetail.ClientId)}
       <div className={darkMode === false ? "queryPage" : "queryPageDark"}>
         <div className="backContainer">
@@ -112,7 +112,7 @@ const QueryPage = () => {
               width="40"
               height="30"
             ></iconify-icon>
-            BACK
+            VOLVER
           </Link>
         </div>
         <div>
@@ -127,12 +127,11 @@ const QueryPage = () => {
           </div>
         <div className="queryDetailContainer">
           <div className="header-container">
-            <h1 className="turn-detail-tittle">Query Details</h1>
-            <img className="img-turn" src={img} alt="illustration" />
+            <h1 className="turn-detail-tittle">DETALLES DEL TURNO</h1>
           </div>
           <div className="data-turn-container">
             <h3 className="data-turn-text">
-              Client: <b className="data-turn-text-info">{clientDetail.name}</b>
+              Cliente: <b className="data-turn-text-info">{clientDetail.name}</b>
             </h3>
             <h3 className="data-turn-text">
               DNI:{" "}
@@ -142,11 +141,11 @@ const QueryPage = () => {
               Email: <b className="data-turn-text-info">{clientDetail.email}</b>
             </h3>
             <h3 className="data-turn-text">
-              Date:{" "}
+              Fecha:{" "}
               <b className="data-turn-text-info lineDate">{turnDetail.date}</b>
             </h3>
             <h3 className="data-turn-text">
-              Hour: <b className="data-turn-text-info">{turnDetail.hour}</b>
+              Hora: <b className="data-turn-text-info">{turnDetail.hour}</b>
             </h3>
             {turnDetail.status === "false" ?           
               
