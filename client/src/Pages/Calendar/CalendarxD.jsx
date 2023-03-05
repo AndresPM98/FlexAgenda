@@ -116,12 +116,13 @@ function CalendarxD() {
     <div className="containerCalendar">
       <NavbarTwo />
 
-      <h1 className="saludoCalendar">Hola {nameProfessional} !</h1>
-      <p className="turnosCount">
+      <h1 className="saludoCalendar">Hola {nameProfessional} </h1>
+      <br />
+      <h3 className="turnosCount">
         {profClientsTurns.length
           ? `Tienes ${memoizedEvents.length} turnos`
           : "No hay turnos"}
-      </p>
+      </h3>
       <Calendar
         className="calendar"
         localizer={localizer}
