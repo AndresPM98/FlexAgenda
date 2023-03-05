@@ -5,7 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
 
-import { auth } from "../../firebase-config";
+import { auth, handleSignInWithGoogle } from "../../firebase-config";
 
 import {
   GoogleAuthProvider,
@@ -35,23 +35,6 @@ const LoginClient = () => {
     const value = event.target.value;
 
     setForm({ ...form, [property]: value });
-  };
-
-  const handleSignInWithGoogle = async () => {
-    const googleProvider = new GoogleAuthProvider();
-
-    const signInWithGoogle = async (googleProvider) => {
-      try {
-        const res = await signInWithPopup(auth, googleProvider).then(() => {
-          // history.push(`/`);
-          console.log("se ha logueado con google correctamente");
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    setCurrentState(true);
-    await signInWithGoogle(googleProvider);
   };
 
   const submitHandler = async (event) => {
