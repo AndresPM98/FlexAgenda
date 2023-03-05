@@ -7,15 +7,40 @@ import style from "../Admin.module.css";
 import { useState } from "react";
 import Loading from "../../../Pages/Loading/Loading";
 import axios from "axios";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase-config";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function CardsReviewsAdmin({ id }) {
   const allProfessionals = useSelector((state) => state.allProfessionals);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-
+  const history = useHistory();
+  
   useEffect(() => {
     dispatch(getProfessionals()).then(() => setLoading(false));
   }, []);
+
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      
+      setCurrentUser(null)
+      await Swal.fire({
+        icon: "success",
+        title: "Sesion cerrada",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      history.push("/")
+    } catch (error) {
+     
+      console.error(error);
+    }
+  };
 
   if (loading) return <Loading />;
 
@@ -44,9 +69,30 @@ export default function CardsReviewsAdmin({ id }) {
     professionalScores[id] = averageScore;
   }
 
+
   return (
     <div className={style.adminpage}>
       <h1>Dashboard admin</h1>
+      <div style={{ position: "absolute", top: 0, left: 30 }}>
+  <Link to={`/admin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
+    <img
+      style={{ width: "60px", height: "60px", marginTop: "10px" }}
+      src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+      alt=""
+    />
+    
+  </Link>
+</div>
+      <div style={{ position: "absolute", top: 0, right: 30 }}>
+  <Link to={`/`} onClick={handleLogout}>
+    <img
+      style={{ width: "50px", height: "50px", marginTop: "10px" }}
+      src="https://cdn-icons-png.flaticon.com/512/6437/6437583.png"
+      alt=""
+    />
+    
+  </Link>
+</div>
       <Link
         to={`/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}
       >

@@ -1,5 +1,5 @@
 import React from "react";
-import { getProfessionals, deleteProfessional } from "../../../Redux/Actions";
+import { getProfessionals, deleteProfessional, deleteTurn } from "../../../Redux/Actions";
 import style from "../Admin.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -9,12 +9,17 @@ import axios from "axios";
 import { useState } from "react";
 import Loading from "../../../Pages/Loading/Loading";
 import Swal from "sweetalert2";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase-config";
+import { useHistory } from "react-router-dom";
+
 export default function CardsAdminProf({ id }) {
   const [loading, setLoading] = useState(true);
-
+  const history = useHistory();
   const allPorfessionals = useSelector((state) => state.allProfessionals);
-
+  const turns = useSelector((state) => state.turnBackup);
   const allProfOrd= allPorfessionals.sort((a, b) => (a.name > b.name ? 1 : -1))
+
 
 
   const dispatch = useDispatch();
@@ -23,17 +28,52 @@ export default function CardsAdminProf({ id }) {
     dispatch(getProfessionals()).then(() => setLoading(false));
   }, []);
 
-  // const {id} = useParams()
-  const handlerDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas borrar este turno? No podrás recuperarlo."
-    );
-    if (confirmDelete) {
-      dispatch(deleteProfessional(id)).then(() => {
-        alert("Profesional eliminado");
-        window.location.reload();
-        dispatch(getProfessionals());
+  const [currentUser, setCurrentUser] = useState(null);
+  
+ 
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      
+      setCurrentUser(null)
+      await Swal.fire({
+        icon: "success",
+        title: "Sesion cerrada",
+        showConfirmButton: false,
+        timer: 1500,
       });
+      history.push("/")
+    } catch (error) {
+     
+      console.error(error);
+    }
+  };
+
+  
+
+  const handlerDelete = async (id) => {
+    const confirmDelete = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¿Deseas eliminar a este profesional?Tambien se borraran los turnos y no podras recuperarlo",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    });
+    if (confirmDelete.isConfirmed) {
+      dispatch(deleteProfessional(id))
+      await Swal.fire({
+        icon: "success",
+        title: "Profesional eliminado",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      window.location.reload();
+      dispatch(getProfessionals());
+      ;
     }
   };
 
@@ -110,7 +150,32 @@ export default function CardsAdminProf({ id }) {
 
   return (
     <div className={style.adminpage}>
-      <h1>Dashboard admin</h1>
+      <h1>Dashboard admin  
+        </h1>
+        <div style={{ position: "absolute", top: 0, left: 50 }}>
+  <Link to={`/admin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
+    <img
+      style={{ width: "60px", height: "60px", marginTop: "10px" }}
+      src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+      alt=""
+    />
+    
+  </Link>
+    </div>
+
+  <div style={{ position: "absolute", top: 0, right: 30 }}>
+  <Link to={`/`} onClick={handleLogout}>
+    <img
+      style={{ width: "50px", height: "50px", marginTop: "10px" }}
+      src="https://cdn-icons-png.flaticon.com/512/6437/6437583.png"
+      alt=""
+    />
+    
+  </Link>
+</div>
+   
+      
+
       <Link
         to={`/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}
       >
@@ -147,7 +212,7 @@ export default function CardsAdminProf({ id }) {
             </div>
 
             {professional.name === "ADMIN" ? (
-              <p>No se puede editar </p>
+              ""
             ) : (
               <>
                 {professional.disponibility === false ? (
@@ -174,6 +239,7 @@ export default function CardsAdminProf({ id }) {
                       padding: "10px 20px",
                       borderRadius: "5px",
                       cursor: "pointer",
+                      marginBottom: "10px",
                     }}
                   >
                     Deshabilitar
