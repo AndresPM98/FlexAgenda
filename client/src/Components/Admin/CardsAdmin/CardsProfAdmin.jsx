@@ -49,13 +49,12 @@ export default function CardsAdminProf({ id }) {
       console.error(error);
     }
   };
-
   
 
   const handlerDelete = async (id) => {
     const confirmDelete = await Swal.fire({
       title: "¿Estás seguro?",
-      text: "¿Deseas eliminar a este profesional?Tambien se borraran los turnos y no podras recuperarlo",
+      text: "¿Deseas eliminar a este profesional? Tambien se borraran los turnos y no podras recuperarlo",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -64,6 +63,9 @@ export default function CardsAdminProf({ id }) {
       cancelButtonText: "Cancelar"
     });
     if (confirmDelete.isConfirmed) {
+      const turnIdsToDelete = turns.filter(turn => turn.professionalID === id).map(turn => turn.id);
+      const deleteTurnPromises = turnIdsToDelete.map(turnId => dispatch(deleteTurn(turnId)));
+      await Promise.all(deleteTurnPromises); 
       dispatch(deleteProfessional(id))
       await Swal.fire({
         icon: "success",
