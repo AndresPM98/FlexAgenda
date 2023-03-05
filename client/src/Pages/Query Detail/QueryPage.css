@@ -35,6 +35,17 @@ left: 0px;
 top: 20%
 }
 
+.backCalendar {
+  display: flex;
+  /* border: 1px solid blue; */
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+left: 0px;
+top: 25%
+}
+
+
 .back {
   border-radius: 0 1rem 1rem 0;
   background-color: #183a3b;

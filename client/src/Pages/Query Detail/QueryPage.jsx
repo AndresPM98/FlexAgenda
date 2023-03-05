@@ -20,14 +20,14 @@ import Swal from "sweetalert2";
 
 const QueryPage = () => {
   const { id } = useParams();
+  console.log(id);
   const params = useParams();
   const darkMode = useSelector((state) => state.darkMode);
   const turnDetail = useSelector((state) => state.turnDetail);
   const clientDetail = useSelector((state) => state.clientDetailTurn);
 
   const [loading, setLoading] = useState(true);
- 
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -93,6 +93,10 @@ const QueryPage = () => {
   const handlerBack = () => {
     history.push(`/home/${turnDetail.ProfessionalId}`);
   };
+  
+  const handlerCalendar = () => {
+    history.push(`/Calendarpage/${turnDetail.ProfessionalId}`);
+  };
 
   if (loading) return <Loading />;
 
@@ -111,6 +115,16 @@ const QueryPage = () => {
             BACK
           </Link>
         </div>
+        <div>
+            <Link
+              className="backCalendar"
+              onClick={handlerCalendar}
+            >
+              <div>
+                <p className="back">Calendar</p>
+              </div>
+            </Link>
+          </div>
         <div className="queryDetailContainer">
           <div className="header-container">
             <h1 className="turn-detail-tittle">Query Details</h1>
