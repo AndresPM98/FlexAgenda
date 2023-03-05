@@ -40,12 +40,8 @@ export default function NavbarTwo(props){
 
     return(
         <div className={!darkMode? style.navbarContainer : style.navbarContainerDark}>
-            <div className={style.logoTwo} style={{textDecoration:"none", color: "white"}}>
-                <Link to= "/">
-                <iconify-icon icon="fluent-mdl2:calendar-agenda" width="25"></iconify-icon>
-                <iconify-icon icon="fluent-mdl2:gripper-bar-vertical" width="40" height="30"></iconify-icon>
-                </Link>
-                <h1>FLEXAGENDA</h1>
+            <div className={style.logoTwo}>
+                <h1><span class="icono">FLEX</span>AGENDA</h1>
             </div>
            
 {location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved" ? null :
