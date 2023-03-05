@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import Loading from "../../../Pages/Loading/Loading";
-
+import Swal from "sweetalert2";
 export default function CardsAdminProf({ id }) {
   const [loading, setLoading] = useState(true);
 
@@ -43,13 +43,27 @@ export default function CardsAdminProf({ id }) {
 
   const handlerEdit = async (id) => {
     try {
-      const confirmEdit = window.confirm(
-        "¿Estás seguro de que deseas deshabilitar este profesional?"
-      );
-      if (confirmEdit) {
-        axios.put(`/professional/${id}`, { disponibility: false });
+      const confirmEdit = await Swal.fire({
+        title: '¿Estás seguro de que deseas deshabilitar este profesional?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deshabilitar',
+        cancelButtonText: 'Cancelar'
+      });
+  
+      if (confirmEdit.isConfirmed) {
+        await axios.put(`/professional/${id}`, { disponibility: false });
         setDisponibilityStatus({ disponibility: false });
-        alert("Profesional deshabilitado");
+  
+        await Swal.fire({
+          title: 'Profesional deshabilitado',
+          icon: 'success',
+          showConfirmButton: false,
+            timer: 1500,
+        });
+  
         window.location.reload();
       }
     } catch (error) {
@@ -59,13 +73,25 @@ export default function CardsAdminProf({ id }) {
 
   const handlerEditTrue = async (id) => {
     try {
-      const confirmEdit = window.confirm(
-        "¿Estás seguro de que deseas habilitar de nuevo a este profesional?"
-      );
-      if (confirmEdit) {
-        axios.put(`/professional/${id}`, { disponibility: true });
+      const confirmEdit = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¿Deseas habilitar de nuevo a este profesional?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, habilitar",
+        cancelButtonText: "Cancelar",
+      });
+  
+      if (confirmEdit.isConfirmed) {
+        await axios.put(`/professional/${id}`, { disponibility: true });
         setDisponibilityStatus({ disponibility: true });
-        alert("Profesional habilitado");
+        await Swal.fire({
+          title: 'Profesional habilitado',
+          icon: 'success',
+           showConfirmButton: false,
+        timer: 1500});
         window.location.reload();
       }
     } catch (error) {

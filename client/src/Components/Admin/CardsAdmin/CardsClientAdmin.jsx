@@ -8,6 +8,8 @@ import style from "../Admin.module.css";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios"
+import Swal from "sweetalert2";
+
 export default function CardsClientAdmin() {
 
   const allClients = useSelector((state) => state.allClients);
@@ -22,16 +24,28 @@ export default function CardsClientAdmin() {
   }, []);
 
 
-  const handlerDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas borrar este cliente? No podrás recuperarlo."
-    );
-    if (confirmDelete) {
-      dispatch(deleteClients(id)).then(() => {
-        alert("Cliente eliminado");
-        window.location.reload();
+  const handlerDelete = async (id) => {
+    const confirmDelete =  await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¿Deseas eliminar a este cliente? No podras recuperarlo",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+    if (confirmDelete.isConfirmed) {
+      dispatch(deleteClients(id))
+       await Swal.fire({
+          title: 'Cliente eliminado',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500
+        });
         dispatch(getClients());
-      });
+        window.location.reload();
+      ;
     }
   };
   const [disponibilityStatus, setDisponibilityStatus] = useState({
