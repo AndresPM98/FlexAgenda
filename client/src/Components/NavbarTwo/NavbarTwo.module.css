@@ -1,6 +1,6 @@
 .navbarContainer{
     /* background-color: #183a3b; */
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
+    /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0)); */
     color: white;
     display: flex;
     justify-content: space-between;

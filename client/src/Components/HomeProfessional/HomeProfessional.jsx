@@ -60,7 +60,8 @@ const HomeProfessional = ({ id }) => {
 
   return (
     <div>
-      <NavbarTwo />
+      <div className={style.nav}><NavbarTwo/></div>
+      
       <div
         className={!darkMode ? style.homeContainer : style.homeContainerDark}
       >

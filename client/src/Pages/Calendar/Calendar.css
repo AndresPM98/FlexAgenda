@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Circular&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
 .containerCalendar {
     width: 99.3vw;
     height: 110vh;
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0));
   }
 
   .rbc-btn-group > button:not(:first-child):not(:last-child),
@@ -48,8 +52,8 @@
   background-color: rgba(222, 184, 135, 0.658);
 }
 .saludoCalendar {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 45px;
+  font-family:'Poppins', sans-serif;
+  font-size: 3rem;
   letter-spacing: 2px;
   word-spacing: 5.4px;
   color:white;
@@ -58,11 +62,12 @@
   font-style: normal;
   font-variant: normal;
   text-transform: none;
-  border: 2px solid #cf8b42;
+  margin-top: -0.05rem;
+ /* border: 2px solid white;
   padding: 5px;
   border-radius: 10px;
   display: inline-block;
-  background-color: #cf8b42;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));*/
 }
 .rbc-calendar {
   background-color: rgba(9, 9, 9, 0.719);
@@ -79,11 +84,15 @@
 
 .turnosCount {
   color: white;
-  border: 2px solid #cf8b42;
+  margin-top: -1rem;
+  font-family:'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+  /* border: 2px solid #cf8b42;
   padding: 5px;
   border-radius: 10px;
   display: inline-block;
-  background-color: #cf8b42;
+  background-color: #cf8b42; */
 }
 
 
