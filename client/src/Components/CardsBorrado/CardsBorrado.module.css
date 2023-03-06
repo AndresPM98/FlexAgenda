@@ -3,18 +3,18 @@
     flex-direction: column;
     align-items: flex-start;
     border-top: 7px solid rgba(78, 78, 78, 0.377);
-    background-color: #c4c4c427;
+    
 
-    border-bottom: 7px solid rgba(78, 78, 78, 0.377);
+    border-bottom: 7px solid rgba(61, 57, 57, 0.503);
     min-height: 100vh;
     margin: 20px 0px 0px 2%;
     width: 90%;
-    background-color: #c4c4c427;
+    background-color: #0c0c0c95;
     box-shadow: 0 5px 17px rgba(78, 78, 78, 0.658);
+    
 }
 
 .borderCards{
     width: 100%;
-    height: 7vh;
-    background-color: rgb(236, 236, 236);
+    
 }
