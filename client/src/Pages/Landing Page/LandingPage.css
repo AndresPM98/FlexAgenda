@@ -15,7 +15,7 @@
     position: relative;
 }
 .section3{
-    background-image:url("../../Imagenes/calendar.jpg");
+    background-image:url("../../Imagenes/calendario2.jpg");
     background-position: center;
     background-size: cover;
     height: 100vh;
@@ -26,7 +26,7 @@
     position: relative;
 }
   .section2, .section4, .section6 {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     height: 100vh;
     min-height: 42.5rem;
   }
@@ -108,10 +108,18 @@
   }
   
   .text2{
+    color: #000000;
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     font-size: 1.5rem;
     text-align: center;
   }
 
-
+.vistas{
+    background-image: url("../../Imagenes/landing/vistas.png");
+    background-size: cover;
+    width: 100%;
+    height: 60rem;
+    margin: 0 auto;
+    margin-top: -15rem;
+}
