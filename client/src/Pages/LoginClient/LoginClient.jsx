@@ -75,7 +75,7 @@ const LoginClient = () => {
   };
   const handleUserNotLoggedIn = () => {
     // si no esta logueado que le muestre el form
-    setCurrentState(1);
+    setCurrentState(2);
   };
   const handleUserNotRegistered = async (id) => {
     const user = auth.currentUser;
@@ -145,6 +145,46 @@ const LoginClient = () => {
         </div>
         <Footer></Footer>
       </div>
+    );
+  }
+
+  if (state === 2) {
+    return (
+      <>
+        <NavbarTwo />
+        <div className={styles.container2}>
+          <div className={styles.img2}></div>
+          <div>
+            <form className={styles.form2}>
+              <h2 className={styles.tittle2}>Bienvenido a Flex agenda!</h2>
+              <label className={styles.email}>Email:</label>
+              <input type="text" className={styles.email_input} />
+              <p className={styles.error_email}>Email ingresado no valido</p>
+
+              <label className={styles.password}>Contraseña:</label>
+              <input type="password" className={styles.password_input} />
+              <p className={styles.error}>contraseña no valida</p>
+              <button className={styles.login}>Iniciar sesion</button>
+              <h3 className={styles.o}>o</h3>
+              <div className={styles.register}>
+                <div className={styles.register_items}>
+                  <p className={styles.text}>No tienes una cuenta?</p>
+                  <a href="#" className={styles.signUp}>
+                    registrarse
+                  </a>
+                </div>
+              </div>
+              <button className={styles.google}>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                  alt="Google logo"
+                />
+                Continuar con google
+              </button>
+            </form>
+          </div>
+        </div>
+      </>
     );
   }
 
