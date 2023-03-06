@@ -75,14 +75,14 @@ const Form = () => {
   // console.log(horasXdia);
 
   useEffect(() => {
-    if ((currentUser || userDb) && allProfessionals.length) {
+    if (clienteLog && allProfessionals.length) {
       setForm({
         ...form,
         ClientId: clienteLog.id,
         ProfessionalId: findProfesional.id,
       });
     }
-  }, [allClients, allProfessionals]);
+  }, [allClients, allProfessionals, clienteLog]);
 
   function validate(form) {
     let error = {};
