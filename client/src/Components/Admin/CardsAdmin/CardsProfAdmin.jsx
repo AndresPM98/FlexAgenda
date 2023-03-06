@@ -179,16 +179,16 @@ export default function CardsAdminProf({ id }) {
       
 
       <Link
-        to={`/allProfessionalsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}
+        to={`/allProfessionalsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
       >
         <button className={style.adminbutton}>Profesionales</button>
       </Link>
       <Link
-        to={`/allClientsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}
+        to={`/allClientsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
       >
         <button className={style.adminbutton}>Clientes</button>
       </Link>
-      <Link to={`/allReviewsDashboardAdmin/16aa4db8-b8cf-43bf-989a-5c7945212080`}>
+      <Link to={`/allReviewsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}>
         <button className={style.adminbutton}>Reviews</button>
       </Link>
 
@@ -213,7 +213,7 @@ export default function CardsAdminProf({ id }) {
               <h4> Phone: {professional.phone} </h4>
             </div>
 
-            {professional.name === "ADMIN" ? (
+            {professional.name === "Admin" ? (
               ""
             ) : (
               <>
