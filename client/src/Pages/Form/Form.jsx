@@ -143,9 +143,15 @@ const Form = () => {
     const timeSlots = []; // list of available times
     for (let i = startTime; i <= endTime; i++) {
       if (i === startTime || i === endTime) {
+        if (i == 7 || i==8 || i==9) {
+          i = "0"+i
+        }
         timeSlots.push(`${i}:00`);
         timeSlots.push(`${i}:30`);
       } else {
+        if (i == 7 || i==8 || i==9) {
+          i = "0"+i
+        }
         timeSlots.push(`${i}:00`);
         timeSlots.push(`${i}:30`);
       }
