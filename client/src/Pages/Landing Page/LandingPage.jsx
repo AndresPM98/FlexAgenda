@@ -34,7 +34,9 @@ const landingPage = () => {
           <div className="vistas"/> 
       </div>
       <div className="section3">
-        ...
+        <div className="textConteiner3">
+        <h3 className="text3">En FlexAgenda, creemos que la gestión del tiempo es clave para el éxito de cualquier profesional, y estamos comprometidos en ofrecer una solución accesible y eficaz para ayudarte a alcanzar tus objetivos y maximizar tu productividad.</h3>
+      </div>
       </div>
       <div className="section4">
         ...
