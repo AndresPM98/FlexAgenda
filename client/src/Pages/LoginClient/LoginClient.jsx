@@ -103,7 +103,7 @@ const LoginClient = () => {
   };
   const handleUserNotLoggedIn = () => {
     // si no esta logueado que le muestre el form
-    setCurrentState(2);
+    setCurrentState(1);
   };
   const handleUserNotRegistered = async (id) => {
     const user = auth.currentUser;
@@ -124,60 +124,6 @@ const LoginClient = () => {
   };
 
   if (state === 1) {
-    return (
-      <div>
-        <NavbarTwo />
-        <div
-          className={
-            darkMode === false ? styles.container : styles.containerDark
-          }
-        >
-          <form onSubmit={submitHandler} className={styles.form}>
-            <h1 className={styles.tittle}>LOGIN</h1>
-
-            <label className={styles.label}>EMAIL:</label>
-            <br />
-            <input
-              className={styles.input}
-              type="text"
-              required
-              value={form.email}
-              onChange={changeHandler}
-              onBlur={console.log("hola")}
-              name="email"
-            />
-
-            <label className={styles.label}>CONTRASEÑA:</label>
-            <br />
-            <input
-              className={styles.input}
-              type="password"
-              required
-              value={form.name}
-              onChange={changeHandler}
-              name="password"
-            />
-            <button type="submit" className={styles.button}>
-              LOGIN
-            </button>
-            <button
-              className={styles.googlebtn}
-              onClick={handleSignInWithGoogle}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="Google logo"
-              />
-              Sign in with Google
-            </button>
-          </form>
-        </div>
-        <Footer></Footer>
-      </div>
-    );
-  }
-
-  if (state === 2) {
     return (
       <>
         <NavbarTwo />
