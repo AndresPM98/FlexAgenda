@@ -35,7 +35,7 @@
 
 
   .container {
-    background-color: #264c4d;
+    background-color: #00000097;
     border-radius: 20px;
     box-sizing: border-box;
     /*height: 100vh;*/
@@ -48,6 +48,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
+    backdrop-filter: blur(5px);
   }
   
   .tittle {
