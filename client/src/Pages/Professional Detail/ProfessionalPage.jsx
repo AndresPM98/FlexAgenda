@@ -8,8 +8,9 @@ import Loading from "../Loading/Loading";
 import style from "./ProfessionalPage.module.css";
 import { useState } from "react";
 import DisplayReview from "../../Components/DisplayReview/DisplayReview";
-
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import ReactDOMServer from "react-dom/server";
 
 const ProfessionalPage = () => {
   const { id } = useParams();
@@ -25,6 +26,15 @@ const ProfessionalPage = () => {
     dispatch(getProfessionals())
 
   }, [dispatch, id]);
+
+  const reviews = () => {
+    Swal.fire({
+     
+      title: "Reviews ⭐️",
+      showConfirmButton: false,
+      html: ReactDOMServer.renderToString(<DisplayReview review={professional.review} />)
+    });
+  };
 
 
  if(loading) return <Loading/>
@@ -74,11 +84,12 @@ const ProfessionalPage = () => {
         <Link to={`/professional/edit/${id}/services`}>
         <button className={style.btnEditar}>Agregar Servicios</button>
         </Link>
+        <button onClick={reviews} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button>
         </div>
-        <div>
+        {/* <div>
         {professional?.review && <DisplayReview review={professional.review} />}
         {console.log(professional.review)}
-        </div>
+        </div> */}
       </div>
       
     </>
