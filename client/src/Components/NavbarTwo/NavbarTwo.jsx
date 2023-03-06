@@ -7,6 +7,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
 
 
 
@@ -16,6 +17,7 @@ export default function NavbarTwo(props){
     const [currentUser, setCurrentUser] = useState(null);
     const history = useHistory();
     const location = useLocation();
+    const {id} = useParams();
     
 
     const handleLogout = async () => {
@@ -44,7 +46,7 @@ export default function NavbarTwo(props){
                 <h1><span class="icono">FLEX</span>AGENDA</h1>
             </div>
            
-{location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved" ? null :
+{location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}` ? null :
                 <button style={{ height:"40px", marginTop:"20px", cursor:"pointer"}}onClick={handleLogout} className="allProfessionals">
             CERRAR SESION
           </button>

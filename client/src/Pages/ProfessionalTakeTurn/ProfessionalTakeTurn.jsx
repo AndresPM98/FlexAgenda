@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import ReactDOMServer from "react-dom/server";
 
 const ProfessionalPage = () => {
+  const allProfessionals = useSelector((state) => state.allProfessionals);    
   const { id } = useParams();
   const professional = useSelector((state) => state.profDetail);
   const darkMode = useSelector((state) => state.darkMode);
@@ -43,6 +44,8 @@ const ProfessionalPage = () => {
       html: ReactDOMServer.renderToString(<DisplayReview review={professional.review} />)
     });
   };
+
+  console.log(allProfessionals.map((prof) => prof.id === id ));
 
 
   if (loading) {
