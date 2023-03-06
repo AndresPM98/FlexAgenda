@@ -45,7 +45,7 @@ const ProfessionalPage = () => {
     });
   };
 
-  console.log(allProfessionals.map((prof) => prof.id === id ));
+
 
 
   if (loading) {
