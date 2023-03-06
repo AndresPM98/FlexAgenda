@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Circular&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 body {
-  background-image:url("../../client/src/Imagenes\ y\ logos/calendar.jpg");
+  background-image:url("./Imagenes/calendar.jpg");
     background-position: center;
     background-size: cover;
   margin: 0;

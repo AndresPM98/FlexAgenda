@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
-.landContainer{
-    background-image:url("../../Imagenes\ y\ logos/calendar.jpg");
+
+.landContainer, .section5, .section3, .section2, .section4, .section6 {
+    width: 100%;
+  }
+.landContainer, .section5{
+    background-image:url("../../Imagenes/calendar.jpg");
+    background-position: center; 
+    background-size: cover;
+    height: 100dvh;
+    min-height: 42.5rem;
+    display: flex;
+    align-items: center;
+    
+    position: relative;
+}
+.section3{
+    background-image:url("../../Imagenes/calendar.jpg");
     background-position: center;
     background-size: cover;
     height: 100vh;
@@ -10,11 +25,16 @@
     padding-bottom: 100px;
     position: relative;
 }
+  .section2, .section4, .section6 {
+    background-color: white;
+    height: 100vh;
+    min-height: 42.5rem;
+  }
 
 .textContainer{
     background-color: rgba(0, 0, 0, 0.7);
-    border-radius:  0 4rem 4rem 0; ;
-    margin-top: 10%;
+    border-radius:  0 4rem 4rem 0; 
+    margin-top: 6%;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -78,3 +98,20 @@
     background-color: aliceblue;
     color: #cf8b42;
 }
+
+.textConteiner2 {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+

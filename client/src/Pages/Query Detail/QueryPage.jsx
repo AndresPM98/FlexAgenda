@@ -11,7 +11,7 @@ import {
   cleanDetailTurn,
   deleteTurn,
 } from "../../Redux/Actions";
-import img from "../../Imagenes y logos/agenda.png";
+/* import img from "../../Imagenes y logos/agenda.png"; */
 import Loading from "../Loading/Loading";
 import { useState } from "react";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
