@@ -23,7 +23,7 @@ export default function NavbarTwo(props){
 
     const professional = allProfessionals.find(e => e.id === id);
     const imagen = professional?.image;
-    console.log("IMAGEN", imagen);
+
 
     const handleLogout = async () => {
         try {
