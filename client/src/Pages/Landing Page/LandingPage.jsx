@@ -31,9 +31,7 @@ const landingPage = () => {
             En FlexAgenda, ofrecemos una herramienta práctica e intuitiva que te permitirá organizar tu agenda de una manera sencilla y cómoda. Ya no tendrás que preocuparte por perder citas o cambiar tu horario en papel: con nuestro sistema, podrás manejar todo en línea, desde cualquier dispositivo y en cualquier momento.
             </h3>
           </div>
-          <div className="imgCont"> 
-          <img src="client/src/Imagenes/landing/home.jpg" alt="Imagen de inicio"></img>
-          </div>
+          <div className="vistas"/> 
       </div>
       <div className="section3">
         ...
