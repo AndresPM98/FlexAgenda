@@ -102,18 +102,15 @@ const LoginFirebase = () => {
     return (
       <div>
         <NavbarTwo />
-        <div
-          className={
-            darkMode === false ? styles.container : styles.containerDark
-          }
-        >
+        <div className={ styles.container}>
+        <div className={styles.img2}></div>
           <form onSubmit={submitHandler} className={styles.form}>
             <h1 className={styles.tittle}>LOGIN</h1>
 
-            <label className={styles.label}>EMAIL:</label>
+            <label className={styles.email}>EMAIL:</label>
             <br />
             <input
-              className={styles.input}
+              className={styles.email_input}
               type="text"
               required
               value={form.email}
@@ -121,17 +118,17 @@ const LoginFirebase = () => {
               name="email"
             />
 
-            <label className={styles.label}>CONTRASEÑA:</label>
+            <label className={styles.password}>CONTRASEÑA:</label>
             <br />
             <input
-              className={styles.input}
+              className={styles.password_input}
               type="password"
               required
               value={form.name}
               onChange={changeHandler}
               name="password"
             />
-            <button type="submit" className={styles.button}>
+            <button type="submit" className={styles.login}>
               LOGIN
             </button>
           </form>
