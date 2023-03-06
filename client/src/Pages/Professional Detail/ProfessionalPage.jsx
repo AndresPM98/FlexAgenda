@@ -29,7 +29,6 @@ const ProfessionalPage = () => {
 
   const reviews = () => {
     Swal.fire({
-     
       title: "Reviews ⭐️",
       showConfirmButton: false,
       html: ReactDOMServer.renderToString(<DisplayReview review={professional.review} />)
@@ -84,7 +83,8 @@ const ProfessionalPage = () => {
         <Link to={`/professional/edit/${id}/services`}>
         <button className={style.btnEditar}>Agregar Servicios</button>
         </Link>
-        <button onClick={reviews} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button>
+        {professional.review  && professional.review.length > 1 ? <button onClick={(e) => reviews(e)} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button> : <p className={style.btnEditar}> No hay reviews todavía </p>}
+       
         </div>
         {/* <div>
         {professional?.review && <DisplayReview review={professional.review} />}
