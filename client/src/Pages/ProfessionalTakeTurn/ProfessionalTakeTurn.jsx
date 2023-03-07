@@ -88,11 +88,12 @@ const ProfessionalPage = () => {
           </div>
 
           {currentUser ? (
+
             <div>
               <Link to={`/form/${id}`}>
                 <button className={style.btnEditar}>Sacar turno</button>
               </Link>
-              {professional.review && professional.review.length > 1 ? (
+              {professional.review && professional.review.length > 0 ? (
                 <button onClick={(e) => reviews(e)} className={style.btnEditar}>
                   Reviews
                 </button>
@@ -100,6 +101,7 @@ const ProfessionalPage = () => {
                 <p className={style.btnEditar}> No hay reviews todavía </p>
               )}
             </div>
+
           ) : (
             <>
               <Link to={`/formClient/${id}`}>

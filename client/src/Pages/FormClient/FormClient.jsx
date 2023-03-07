@@ -15,6 +15,8 @@ import {
   handleSignInWithGoogle,
 } from "../../firebase-config";
 import Swal from "sweetalert2";
+import { validate } from "./validation";
+import { async } from "@firebase/util";
 
 const FormClient = () => {
   const darkMode = useSelector((state) => state.darkMode);
@@ -29,28 +31,42 @@ const FormClient = () => {
     password: "",
   });
 
-  const [error, setErrors] = useState({
+  const [errors, setErrors] = useState({
     name: "",
     email: "",
     password: "",
   });
-
-  const validate = (form) => {
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
-      setErrors({ ...error, email: "" });
-    } else {
-      setErrors({ ...error, email: "Hay un error en email" });
-    }
-
-    if (form.email === "") setErrors({ ...error, email: "email " });
-  };
 
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
 
     setForm({ ...form, [property]: value });
-    validate({ ...form, [property]: value });
+    if (property !== "email") {
+      setErrors(
+        validate({
+          ...form,
+          [property]: value,
+        })
+      );
+    }
+  };
+
+  const blurvalidation = async (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
+    const allClients = await axios.get("/client");
+    if (property === "email") {
+      setErrors(
+        validate(
+          {
+            ...form,
+            [property]: value,
+          },
+          allClients.data
+        )
+      );
+    }
   };
 
   // try {
@@ -85,14 +101,27 @@ const FormClient = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     //              registramos el usuario
-    const { user } = await RegisterEmailUser(auth, form);
+    if (!form.name || !form.email || !form.password) {
+      console.log("debes rellenar todos los campos");
+      return;
+    }
+    if (!errors.name && !errors.email && !errors.password) {
+      const { user } = await RegisterEmailUser(auth, form);
 
-    await createClient(user.uid, form);
+      await createClient(user.uid, form);
 
-    axios
-      .post("https://backend-pf-production-1672.up.railway.app/client", form)
-      .then((res) => {})
-      .catch((err) => alert(err));
+      axios
+        .post("https://backend-pf-production-1672.up.railway.app/client", form)
+        .then((res) => {})
+        .catch((err) => alert(err));
+    } else {
+      await Swal.fire({
+        title: "ha ocurrido un error",
+        icon: "error",
+        text: "Debes validar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });
+    }
   };
 
   const handleUserLoggedIn = async (id) => {
@@ -108,7 +137,7 @@ const FormClient = () => {
   };
   const handleUserNotLoggedIn = () => {
     // si no esta logueado que le muestre el form
-    setCurrentState(1);
+    setCurrentState(2);
   };
   const handleUserNotRegistered = async (id) => {
     console.log(id);
@@ -161,7 +190,7 @@ const FormClient = () => {
               onChange={changeHandler}
               name="email"
             />
-            {error.email && <span>{error.email}</span>}
+            {errors.email && <span>{errors.email}</span>}
 
             <label className={styles.label}>DNI:</label>
             <input
@@ -178,6 +207,7 @@ const FormClient = () => {
             <button
               className={styles.googlebtn}
               onClick={handleSignInWithGoogle}
+              type="button"
             >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
@@ -189,6 +219,79 @@ const FormClient = () => {
         </div>
         <Footer></Footer>
       </div>
+    );
+  }
+
+  if (state === 2) {
+    return (
+      <>
+        <NavbarTwo />
+        <div className={styles.container2}>
+          <div className={styles.img2}></div>
+          <div>
+            <form className={styles.form2} onSubmit={submitHandler}>
+              <h2 className={styles.tittle2}>Bienvenido a Flex agenda!</h2>
+              <label className={styles.name}>Nombre:</label>
+              <input
+                className={styles.name_input}
+                type="text"
+                value={form.name}
+                onChange={changeHandler}
+                onBlur={blurvalidation}
+                name="name"
+              />
+              {errors.name && (
+                <p className={styles.name_error}>{errors.name}</p>
+              )}
+              <label className={styles.email}>Email:</label>
+              <input
+                type="text"
+                value={form.email}
+                onChange={changeHandler}
+                onBlur={blurvalidation}
+                name="email"
+                className={styles.email_input}
+              />
+              {/* <p className={styles.error_email}>Email ingresado no valido</p> */}
+              {errors.email && (
+                <p className={styles.error_email}>{errors.email}</p>
+              )}
+              <label className={styles.password}>Contraseña:</label>
+              <input
+                type="password"
+                value={form.password}
+                onChange={changeHandler}
+                onBlur={blurvalidation}
+                name="password"
+                className={styles.password_input}
+              />
+              {errors.password && (
+                <p className={styles.error_password}>{errors.password}</p>
+              )}
+              <button className={styles.login}>Registrarse</button>
+              <h3 className={styles.o}>o</h3>
+              <div className={styles.register}>
+                <div className={styles.register_items}>
+                  <p className={styles.text}>Ya te has regstrado?</p>
+                  <a href={`/loginClient/${id}`} className={styles.signUp}>
+                    Iniciar Sesion
+                  </a>
+                </div>
+              </div>
+              <button
+                className={styles.google}
+                onClick={handleSignInWithGoogle}
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                  alt="Google logo"
+                />
+                Continuar con google
+              </button>
+            </form>
+          </div>
+        </div>
+      </>
     );
   }
 

@@ -30,6 +30,7 @@
   border-radius: 50%;
   justify-content: center;
 }
+
 .imagenp {
   border-radius: 50%;
   width: 300px;
@@ -37,6 +38,7 @@
   object-fit: cover;
   float: right;
   justify-content: flex-end;
+
 }
 .detailContainer {
   display: flex;

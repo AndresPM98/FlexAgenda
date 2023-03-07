@@ -11,7 +11,6 @@
     min-height: 42.5rem;
     display: flex;
     align-items: center;
-    
     position: relative;
 }
 .section3{
@@ -24,6 +23,8 @@
     align-items: center;
     padding-bottom: 100px;
     position: relative;
+    flex-direction: column;
+    justify-content: center;
 }
   .section2, .section4, .section6 {
     background-color: rgb(255, 255, 255);
@@ -109,6 +110,7 @@
   
   .text2{
     color: #000000;
+    width: 90%;
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     font-size: 1.5rem;
@@ -122,4 +124,33 @@
     height: 60rem;
     margin: 0 auto;
     margin-top: -15rem;
+}
+
+.textConteiner3{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    margin-top: -30rem;
+}
+
+.text3{
+    color: #000000;
+    width: 90%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.iconContainer{
+    color: #cf8b42;
+    width: 80%;
+    height: 20vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+strong{
+    font-weight: bold;
 }

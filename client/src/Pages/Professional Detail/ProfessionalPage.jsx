@@ -86,6 +86,7 @@ const ProfessionalPage = () => {
               Profesion: {professional?.description}
             </h1>
           </div>
+
           <Link to={`/professional/edit/${id}`}>
             <button className={style.btnEditarR}>Editar Perfil</button>
           </Link>
@@ -97,7 +98,7 @@ const ProfessionalPage = () => {
             <ServiceCard />
           </div>
 
-          {professional.review && professional.review.length > 1 ? (
+          {professional.review && professional.review.length > 0 ? (
             <button
               className={style.btnEditar}
               onClick={(e) => reviews(e)}
@@ -113,6 +114,7 @@ const ProfessionalPage = () => {
           ) : (
             <p className={style.btnEditar}> No hay reviews todavía </p>
           )}
+
         </div>
         {/* <div>
         {professional?.review && <DisplayReview review={professional.review} />}
