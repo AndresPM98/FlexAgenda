@@ -117,16 +117,17 @@ const Filters = ({ lastProfessional }) => {
 
   return (
     <div className={style.filterContainer}>
-      <div className={style.nameLinkProf}>
+      <div className={style.copyBtnContainer}>
         <button className={style.copybtn} onClick={copyLink}>
           Copiar enlace
         </button>
       </div>
-      <Link to={`/turnCanceled/${lastProfessional}`}>
-        <button className={style.turnosCancelados}>Turnos cancelados</button>
+      <Link className={style.cancelContainer} to={`/turnCanceled/${lastProfessional}`}>
+      <button className={style.turnosCancelados}>Turnos cancelados</button>
       </Link>
-      <div>
+      <div className={style.selectContainer}>
         <select
+        className={style.select}
           value={client}
           onChange={(e) => handleSelectChange(e)}
           name="client"
@@ -141,9 +142,9 @@ const Filters = ({ lastProfessional }) => {
           ))}
         </select>
       </div>
-      <div>
+      <div className={style.selectContainer}>
         <input
-          className={style.input}
+          className={`${style.input} ${style.select}`}
           defaultValue={fecha2}
           value={fecha2}
           type="date"
@@ -151,8 +152,8 @@ const Filters = ({ lastProfessional }) => {
           name="date"
         />
       </div>
-      <div>
-        <select value={hour} onChange={(event) => handleFilterByHour(event)}>
+      <div className={style.selectContainer}>
+        <select className={style.select} value={hour} onChange={(event) => handleFilterByHour(event)}>
           <option value="" hidden>
             {" "}
             Horas{" "}
