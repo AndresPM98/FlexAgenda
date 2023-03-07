@@ -70,44 +70,6 @@ export default function EditProfileProf() {
     }
   }, [profDetail]);
   
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const updatedFields = {};
-  //   if (prof.name !== profDetail.name) {
-  //     updatedFields.name = prof.name;
-  //   }
-  //   if (prof.category !== profDetail.category) {
-  //     updatedFields.category = prof.category;
-  //   }
-  //   if (prof.phone !== profDetail.phone) {
-  //     updatedFields.phone = prof.phone;
-  //   }
-  //   if (prof.address !== profDetail.address) {
-  //     updatedFields.address = prof.address;
-  //   }
-  //   if (prof.addresslocation !== profDetail.addresslocation) {
-  //     updatedFields.addresslocation = prof.addresslocation;
-  //   }
-  //   if (prof.description !== profDetail.description) {
-  //     updatedFields.description = prof.description;
-  //   }
-  //   if (img) {
-  //     updatedFields.image = img;
-  //   }
-  //   axios
-  //     .put(`/professional/${id}`, updatedFields)
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-
-  //     await Swal.fire({
-  //       title: "Turno Eliminado",
-  //       icon: "success",
-  //       text: "Se ha eliminado el turno.",
-  //       confirmButtonText: "Aceptar",
-  //     });
-  //   history.push(`/professionalDetail/${id}`);
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

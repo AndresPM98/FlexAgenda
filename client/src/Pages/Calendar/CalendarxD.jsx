@@ -82,7 +82,7 @@ function CalendarxD() {
     history.push(`/queryDetail/${event.key}`); //despues va a ser por ID
   }
 
-  if (id === "16aa4db8-b8cf-43bf-989a-5c7945212080") {
+  if (id === "36d12c77-50ae-4f7c-914b-21a53f82eaab" ) {
     history.push(`/admin/${id}`);
   }
 
@@ -118,12 +118,13 @@ function CalendarxD() {
     <div className="containerCalendar">
       <NavbarTwo />
 
-      <h1 className="saludoCalendar">Hola {nameProfessional} !</h1>
-      <p className="turnosCount">
+      <h1 className="saludoCalendar">Hola {nameProfessional} </h1>
+      <br />
+      <h3 className="turnosCount">
         {profClientsTurns.length
           ? `Tienes ${memoizedEvents.length} turnos`
           : "No hay turnos"}
-      </p>
+      </h3>
       <Calendar
         className="calendar"
         localizer={localizer}

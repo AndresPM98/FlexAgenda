@@ -20,7 +20,7 @@
     border: none;
     border-radius: 4px;
     background-color: #4CAF50; /* Cambia este color por el que prefieras */
-    color: #fff;
+    color: #fcfcfc;
     margin: 0 16px;
     cursor: pointer;
   }
@@ -43,6 +43,7 @@
     width: 300px;
     margin: 16px;
     border: 1px solid #ccc;
+    background-color: #a5a3a3d3;
     border-radius: 4px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
     overflow: hidden;

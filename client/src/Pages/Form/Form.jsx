@@ -75,14 +75,14 @@ const Form = () => {
   // console.log(horasXdia);
 
   useEffect(() => {
-    if ((currentUser || userDb) && allProfessionals.length) {
+    if (clienteLog && allProfessionals.length) {
       setForm({
         ...form,
         ClientId: clienteLog.id,
         ProfessionalId: findProfesional.id,
       });
     }
-  }, [allClients, allProfessionals]);
+  }, [allClients, allProfessionals, clienteLog]);
 
   function validate(form) {
     let error = {};
@@ -143,9 +143,15 @@ const Form = () => {
     const timeSlots = []; // list of available times
     for (let i = startTime; i <= endTime; i++) {
       if (i === startTime || i === endTime) {
+        if (i == 7 || i==8 || i==9) {
+          i = "0"+i
+        }
         timeSlots.push(`${i}:00`);
         timeSlots.push(`${i}:30`);
       } else {
+        if (i == 7 || i==8 || i==9) {
+          i = "0"+i
+        }
         timeSlots.push(`${i}:00`);
         timeSlots.push(`${i}:30`);
       }
@@ -239,15 +245,16 @@ const Form = () => {
             name="hour"
           >
             <option value="">Seleccione una hora</option>
-            {availableTimes.map((time) => (
-              <option
-                key={time}
-                value={time}
-                className={horasXdia.includes(time) ? styles.hide : ""}
-              >
-                {time}
-              </option>
-            ))}
+            {horasXdia &&
+              availableTimes.map((time) => (
+                <option
+                  key={time}
+                  value={time}
+                  className={horasXdia.includes(time) ? styles.hide : ""}
+                >
+                  {time}
+                </option>
+              ))}
           </select>
 
           <div className={styles.error}>
@@ -262,10 +269,8 @@ const Form = () => {
           </label>
           <label className={styles.label}>
             CLIENTE:
-            {clienteLog ? (
+            {clienteLog && (
               <h2 className={styles.nombres}>{clienteLog.name}</h2>
-            ) : (
-              <h2 className={styles.nombres}>{currentUser}</h2>
             )}
           </label>
 

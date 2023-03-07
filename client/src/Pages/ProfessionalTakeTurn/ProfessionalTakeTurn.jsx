@@ -8,15 +8,15 @@ import style from "./ProfessionalTakeTurn.module.css";
 import { useState } from "react";
 import ServiceCard from "../../Components/ServiceCard/ServiceCard";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
 import DisplayReview from "../../Components/DisplayReview/DisplayReview";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import Swal from "sweetalert2";
+import ReactDOMServer from "react-dom/server";
 
 const ProfessionalPage = () => {
+  const allProfessionals = useSelector((state) => state.allProfessionals);    
   const { id } = useParams();
-  const history = useHistory();
   const professional = useSelector((state) => state.profDetail);
   const darkMode = useSelector((state) => state.darkMode);
   const [loading, setLoading] = useState(true);
@@ -35,6 +35,18 @@ const ProfessionalPage = () => {
     dispatch(getProfessionalDetail(id)).then(() => setLoading(false));
     dispatch(getServices());
   }, [dispatch, id]);
+
+  const reviews = () => {
+    Swal.fire({
+     
+      title: "Reviews ⭐️",
+      showConfirmButton: false,
+      html: ReactDOMServer.renderToString(<DisplayReview review={professional.review} />)
+    });
+  };
+
+
+
 
   if (loading) {
     return <Loading />;
@@ -82,9 +94,13 @@ const ProfessionalPage = () => {
           </div>
 
           {currentUser ? (
-            <Link to={`/form/${id}`}>
-              <button className={style.btnEditar}>Sacar turno</button>
-            </Link>
+           <div>
+           <Link to={`/form/${id}`}>
+             <button className={style.btnEditar}>Sacar turno</button>
+           </Link>
+           {professional.review  && professional.review.length > 1 ? <button onClick={(e) => reviews(e)} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button> : <p className={style.btnEditar}> No hay reviews todavía </p>}
+         </div>
+            
           ) : (
             <>
               <Link to={`/formClient/${id}`}>
@@ -97,9 +113,9 @@ const ProfessionalPage = () => {
           )}
         </div>
         <div>
-          {professional?.review && (
+          {/* {professional?.review && (
             <DisplayReview review={professional.review} />
-          )}
+          )} */}
         </div>
       </div>
     </>

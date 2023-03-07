@@ -1,10 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Circular&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
 .containerCalendar {
-    width: 99.3vw;
+    width: 100%;
     height: 110vh;
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0));
   }
+
+  .rbc-btn-group > button:not(:first-child):not(:last-child),
+  .rbc-btn-group > button:last-child:not(:first-child),
+  .rbc-btn-group > button:first-child:not(:last-child){
+    color: white;
+  }
+  
+  .rbc-toolbar button:hover{
+    background-color: #cf8b42;
+  }
+  .rbc-toolbar button:focus{
+    background-color: #cf8b42;
+  }
+
+  .rbc-toolbar button:active .rbc-toolbar button.rbc-active,
+  .rbc-toolbar button:active, .rbc-toolbar button.rbc-active {
+    background-image: none;
+    box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+    background-color: #cf8b42;
+    border-color: #adadad;
+}
   
   .containerCalendar::before {
     content: "";
@@ -21,22 +46,28 @@
     z-index: -1;
   }
 .rbc-off-range-bg {
-  background-color: #183a3bb7;
+  background-color:#734d245e;
 }
 .rbc-today {
   background-color: rgba(222, 184, 135, 0.658);
 }
 .saludoCalendar {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 45px;
+  font-family:'Poppins', sans-serif;
+  font-size: 3rem;
   letter-spacing: 2px;
   word-spacing: 5.4px;
-  color: black;
+  color:white;
   font-weight: 700;
   text-decoration: none;
   font-style: normal;
   font-variant: normal;
   text-transform: none;
+  margin-top: -0.05rem;
+ /* border: 2px solid white;
+  padding: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));*/
 }
 .rbc-calendar {
   background-color: rgba(9, 9, 9, 0.719);
@@ -44,7 +75,7 @@
   backdrop-filter: blur(2px);
 }
 .rbc-event {
-  background-color: #9f44b1c2;
+  background-color:#cf8b42;
 }
 
 /* .rbc-event-label {
@@ -52,5 +83,16 @@
   } */
 
 .turnosCount {
-  color: black;
+  color: white;
+  margin-top: -1rem;
+  font-family:'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+  /* border: 2px solid #cf8b42;
+  padding: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #cf8b42; */
 }
+
+
