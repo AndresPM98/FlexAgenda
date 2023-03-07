@@ -55,7 +55,7 @@ export default function NavbarTwo(props){
 
 {/* icono calendario  */}
 
-{location.pathname === `/Calendarpage/${id}` || location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ? null : (
+{location.pathname === `/Calendarpage/${id}` || location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ||location.pathname === `/form/${id}`? null : (
           <div>
 
             <Link
@@ -111,7 +111,7 @@ export default function NavbarTwo(props){
             </Link>
           </div>
           }
-          {location.pathname === '/Login' || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ? null :
+          {location.pathname === '/Login' || location.pathname === `/form/${id}` || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ? null :
                           <button style={{ height:"40px", marginTop:"30px", cursor:"pointer", marginLeft:"-30px" }}onClick={handleLogout} className="allProfessionals">
                       CERRAR SESION
                     </button>
