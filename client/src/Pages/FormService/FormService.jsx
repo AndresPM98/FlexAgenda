@@ -95,7 +95,12 @@ const Form = () => {
       });
       history.push(`/professionalDetail/${findProfessional.id}`);
     } catch (error) {
-      alert(error);
+      await Swal.fire({
+        title: "Error",
+        icon: "error",
+        text: "Tienes que completar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });;
     }
   };
 
