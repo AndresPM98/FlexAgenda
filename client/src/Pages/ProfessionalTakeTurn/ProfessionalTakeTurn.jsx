@@ -98,7 +98,7 @@ const ProfessionalPage = () => {
            <Link to={`/form/${id}`}>
              <button className={style.btnEditar}>Sacar turno</button>
            </Link>
-           {professional.review  && professional.review.length > 1 ? <button onClick={(e) => reviews(e)} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button> : <p className={style.btnEditar}> No hay reviews todavía </p>}
+           {professional.review  && professional.review.length > 0 ? <button onClick={(e) => reviews(e)} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button> : <p className={style.btnEditar}> No hay reviews todavía </p>}
          </div>
             
           ) : (
