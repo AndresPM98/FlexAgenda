@@ -67,13 +67,14 @@ function SignUp() {
   return (
     <>
       <NavbarTwo />
-      <div className={styles.container}>
-        <form onSubmit={handleRegister} className={styles.form}>
-          <h1 className={styles.tittle}>CREACION DE CUENTA</h1>
-          <label className={styles.label}>NOMBRE:</label>
+      <div className={styles.container3}>
+        <div className={styles.img3}></div>
+        <form onSubmit={handleRegister} className={styles.form3}>
+          <h1 className={styles.tittle3}>CREACION DE CUENTA</h1>
+          <label className={styles.name}>NOMBRE:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.name_input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="name"
@@ -82,30 +83,30 @@ function SignUp() {
 
           <br />
 
-          <label className={styles.label}>EMAIL:</label>
+          <label className={styles.email}>EMAIL:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.email_input}
             onChange={(e) => handleChange(e)}
             type="text"
             name="email"
             value={form.email}
           />
-
-          <label className={styles.label}>CONTRASEÑA:</label>
+           <br />
+          <label className={styles.password}>CONTRASEÑA:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.password_input}
             type="password"
             onChange={(e) => handleChange(e)}
             name="password"
             value={form.password}
           />
 
-          <label className={styles.label}>CONTACTO:</label>
+          <label className={styles.email}>CONTACTO:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.email_input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="phone"
@@ -113,45 +114,38 @@ function SignUp() {
             placeholder="Ej: 3511234567"
           />
 
-          <label className={styles.label}>DIRECCIÓN:</label>
+          <label className={styles.email}>DIRECCIÓN:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.email_input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="address"
           />
 
-          <label className={styles.label}>DESCRIPCION/PROFESION:</label>
+          <label className={styles.description}>DESCRIPCION/PROFESION:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.description_input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="description"
             value={form.description}
           />
-
-          <label className={styles.label}>ÁREA:</label>
+          <label className={styles.area}>ÁREA:</label>
           <br />
           <input
-            className={styles.input}
+            className={styles.area_input}
             type="text"
             onChange={(e) => handleChange(e)}
             name="category"
             value={form.category}
           />
 
-          <button className={styles.button} type="submit">
+          <button className={styles.login} type="submit">
             REGISTRARSE
           </button>
         </form>
-
-        {/* <div>
-            <button onClick={handleSignInWithGoogle}>
-              Sign in with Google
-            </button>
-          </div> */}
       </div>
       <br />
       <br />
