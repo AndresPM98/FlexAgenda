@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
-.landContainer, .section5, .section3, .section2, .section4, .section6 {
+.landContainer, .section3, .section2{
     width: 100%;
   }
-.landContainer, .section5{
+.landContainer{
     background-image:url("../../Imagenes/calendar.jpg");
     background-position: center; 
     background-size: cover;
@@ -12,7 +12,19 @@
     display: flex;
     align-items: center;
     position: relative;
+    opacity: 0;
+    animation: aparecer 1s ease forwards;
 }
+@keyframes aparecer {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 .section3{
     background-image:url("../../Imagenes/calendario2.jpg");
     background-position: center;
@@ -26,7 +38,7 @@
     flex-direction: column;
     justify-content: center;
 }
-  .section2, .section4, .section6 {
+  .section2 {
     background-color: rgb(255, 255, 255);
     height: 100vh;
     min-height: 42.5rem;

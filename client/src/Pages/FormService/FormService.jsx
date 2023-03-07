@@ -75,29 +75,10 @@ const Form = () => {
   }
 
   const changeHandler = (event) => {
-    // const property = event.target.name;
-    // const value = event.target.value;
-    // setForm({ ...form, [property]: value });
+  
     const { name, value } = event.target;
     let newValue = value;
 
-    // if (name === "duration") {
-    //     const minutes = parseFloat(value) * 60;
-    //     let step, updatedValue;
-    //     if (minutes >= 60) {
-    //       const hours = Math.floor(minutes / 60);
-    //       const remainder = minutes % 60;
-    //       const formattedRemainder = remainder.toFixed(0).padStart(2, "0");
-    //       updatedValue = `${hours.toString()}.${formattedRemainder}`;
-    //       step = 60;
-    //     } else {
-    //       const formattedValue = minutes.toFixed(0).padStart(2, "0");
-    //       updatedValue = `0.${formattedValue}`;
-    //       step = 10;
-    //     }
-    //     event.target.step = step;
-    //     newValue = updatedValue;
-    //   }
     setForm({ ...form, [name]: newValue });
     validate({ ...form, [name]: newValue });
   };
@@ -114,7 +95,12 @@ const Form = () => {
       });
       history.push(`/professionalDetail/${findProfessional.id}`);
     } catch (error) {
-      alert(error);
+      await Swal.fire({
+        title: "Error",
+        icon: "error",
+        text: "Tienes que completar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });;
     }
   };
 
@@ -127,7 +113,7 @@ const Form = () => {
             width="40"
             height="30"
           ></iconify-icon>
-          CANCEL
+          CANCELAR
         </NavLink>
       </div>
       <NavbarTwo />

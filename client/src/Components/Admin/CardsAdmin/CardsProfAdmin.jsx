@@ -213,8 +213,8 @@ export default function CardsAdminProf({ id }) {
               <h4> Phone: {professional.phone} </h4>
             </div>
 
-            {professional.name === "Admin" ? (
-              ""
+            {professional.id === "36d12c77-50ae-4f7c-914b-21a53f82eaab" ? (
+              "No se puede editar el administrador "
             ) : (
               <>
                 {professional.disponibility === false ? (

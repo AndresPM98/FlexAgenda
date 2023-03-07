@@ -66,7 +66,7 @@ const HomeProfessional = ({ id }) => {
         className={!darkMode ? style.homeContainer : style.homeContainerDark}
       >
         <div className={style.filtersAndButtons}>
-          <BotonProf id={id} />
+          {/* <BotonProf id={id} /> */}
           <Filters lastProfessional={ultimoProfesional} />
           {/* <DarkMode /> */}
         </div>

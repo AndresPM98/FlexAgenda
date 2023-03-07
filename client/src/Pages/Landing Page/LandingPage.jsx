@@ -45,15 +45,7 @@ const landingPage = () => {
       <Icon icon="fa6-solid:computer" width="150" height="150" />
       </div>
       </div>
-      <div className="section4">
-        ...
-      </div>
-      <div className="section5">
-        ...
-      </div>
-      <div className="section6">
-        ...
-      </div>
+      
     </div>
   );
 };

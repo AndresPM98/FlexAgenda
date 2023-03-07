@@ -20,6 +20,7 @@ import Loading from "../Loading/Loading";
 const LoginFirebase = () => {
   const history = useHistory();
   const darkMode = useSelector((state) => state.darkMode);
+  const [botonTexto, setBotonTexto] = useState("LOGIN");
 
   // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
@@ -53,8 +54,17 @@ const LoginFirebase = () => {
     await signInWithGoogle(googleProvider);
   };
 
+
+
+  function mostrarCargando() {
+    setBotonTexto("Cargando...");
+    setTimeout(function() {
+      setBotonTexto("LOGIN");
+    }, 2000);
+  }
   const submitHandler = async (event) => {
     event.preventDefault();
+    mostrarCargando();
     // loguearse con mail
     try {
       const user = await signInWithEmailAndPassword(
@@ -102,18 +112,15 @@ const LoginFirebase = () => {
     return (
       <div>
         <NavbarTwo />
-        <div
-          className={
-            darkMode === false ? styles.container : styles.containerDark
-          }
-        >
+        <div className={ styles.container}>
+        <div className={styles.img2}></div>
           <form onSubmit={submitHandler} className={styles.form}>
             <h1 className={styles.tittle}>LOGIN</h1>
 
-            <label className={styles.label}>EMAIL:</label>
+            <label className={styles.email}>EMAIL:</label>
             <br />
             <input
-              className={styles.input}
+              className={styles.email_input}
               type="text"
               required
               value={form.email}
@@ -121,18 +128,19 @@ const LoginFirebase = () => {
               name="email"
             />
 
-            <label className={styles.label}>CONTRASEÑA:</label>
+            <label className={styles.password}>CONTRASEÑA:</label>
             <br />
             <input
-              className={styles.input}
+              className={styles.password_input}
               type="password"
               required
               value={form.name}
               onChange={changeHandler}
               name="password"
+              
             />
-            <button type="submit" className={styles.button}>
-              LOGIN
+            <button type="submit" className={styles.login}>
+            {botonTexto}
             </button>
           </form>
         </div>
