@@ -132,7 +132,7 @@ const Filters = ({ lastProfessional }) => {
           name="client"
         >
           <option value="" hidden>
-            Clients
+            Clientes
           </option>
           {uniqueOptions.map((v) => (
             <option value={v.name} key={v.id}>
@@ -155,7 +155,7 @@ const Filters = ({ lastProfessional }) => {
         <select value={hour} onChange={(event) => handleFilterByHour(event)}>
           <option value="" hidden>
             {" "}
-            Hours{" "}
+            Horas{" "}
           </option>
           {uniqueHour.map((v) => (
             <option value={v.hour} key={v.hour}>

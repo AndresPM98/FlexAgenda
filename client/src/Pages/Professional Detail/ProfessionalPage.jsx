@@ -56,7 +56,7 @@ const ProfessionalPage = () => {
               width="40"
               height="30"
             ></iconify-icon>
-            BACK
+            VOLVER
           </NavLink>
         </div>
 
