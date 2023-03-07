@@ -120,6 +120,7 @@
   font-weight: bold;
 }
 .login {
+  margin-bottom: -100px;
   font-size: 20px;
   border: none;
   background-color: #cf8b42;
@@ -129,7 +130,17 @@
   height: 45px;
   align-self: center;
   border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
+
+.login:hover {
+  transform: scale(1.1);
+  color:black;
+  background-color: #9f6b33;
+}
+
+
 .o {
   margin: 0;
   grid-row: 11/12;
