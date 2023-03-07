@@ -4,9 +4,12 @@
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 50%;
-
+  height: 70vh;
   }
+
+.cancelContainer{
+width: 100%;
+}
   .turnosCancelados {
     height: 45px;
     width: 100%;
@@ -21,9 +24,17 @@
     margin-bottom: 10px;
     font-size: 16px;
   }
+
+.copyBtnContainer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   .copybtn {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     background-color: #3e8e41;
+    width: 100%;
     border: none;
     color: white;
     padding: 10px 16px;
@@ -90,12 +101,33 @@
     margin-top: 10px;
   }
 
+.buttonContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
   .inputReset{
     border-radius: 0.5rem;
     border: 1px solid #0051EE;
     font-size: 1rem;
-    margin-left: 0.5rem;
     padding: 0.5rem;
-    width: 5rem;
-    margin-top: 10px;
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+.selectContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select{
+  margin: 0 auto;
+  width: 100%;
+}
