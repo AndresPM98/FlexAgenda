@@ -111,7 +111,7 @@ export default function CardsReviewsAdmin({ id }) {
       <h2>Reviews</h2>
       <div className={style.cardcontainer}>
         {allProfessionals.map((professional) =>
-          professional.name === "ADMIN" ? (
+          professional.id === "36d12c77-50ae-4f7c-914b-21a53f82eaab" ? (
             ""
           ) : (
             <div
