@@ -20,7 +20,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 16px;
-    font-family: "Playfair Display", serif;
   }
   .copybtn {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
@@ -36,7 +35,6 @@
     cursor: pointer;
     border-radius: 4px;
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    font-family: "Playfair Display", serif;
   }
   
   .copybtn:hover {
@@ -80,7 +78,6 @@
     padding: 0.5rem;
     width: 12rem;
     margin-top: 10px;
-    font-family: "Playfair Display", serif;
   }
   
   .input {
@@ -91,7 +88,6 @@
     padding: 0.5rem;
     width: 11rem;
     margin-top: 10px;
-    font-family: "Playfair Display", serif;
   }
 
   .inputReset{

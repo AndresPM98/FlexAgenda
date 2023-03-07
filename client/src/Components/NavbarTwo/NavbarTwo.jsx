@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
+import { Icon } from '@iconify/react';
 
 
 
@@ -62,19 +63,7 @@ export default function NavbarTwo(props){
               style={{textDecoration:"none", color:"white", marginTop:"20px", display:"flex"}}
               >
               <div className={style.calendarIcon}>
-                
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="50"
-                  height="60"
-                  viewBox="0 0 8 8"
-                  style={{marginLeft: "0px"}}       
-                  >
-                  <path
-                    fill="currentColor"
-                    d="M0 0v2h7V0H0zm0 3v4.91c0 .05.04.09.09.09H6.9c.05 0 .09-.04.09-.09V3h-7zm1 1h1v1H1V4zm2 0h1v1H3V4zm2 0h1v1H5V4zM1 6h1v1H1V6zm2 0h1v1H3V6z"
-                    />
-                </svg>
+              <Icon icon="system-uicons:calendar-date" width="60" height="60"/>
               </div>
             </Link>
           </div>) }
