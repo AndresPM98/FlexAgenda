@@ -20,6 +20,7 @@ import Loading from "../Loading/Loading";
 const LoginFirebase = () => {
   const history = useHistory();
   const darkMode = useSelector((state) => state.darkMode);
+  const [botonTexto, setBotonTexto] = useState("LOGIN");
 
   // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
@@ -53,8 +54,17 @@ const LoginFirebase = () => {
     await signInWithGoogle(googleProvider);
   };
 
+
+
+  function mostrarCargando() {
+    setBotonTexto("Cargando...");
+    setTimeout(function() {
+      setBotonTexto("LOGIN");
+    }, 2000);
+  }
   const submitHandler = async (event) => {
     event.preventDefault();
+    mostrarCargando();
     // loguearse con mail
     try {
       const user = await signInWithEmailAndPassword(
@@ -127,9 +137,10 @@ const LoginFirebase = () => {
               value={form.name}
               onChange={changeHandler}
               name="password"
+              
             />
             <button type="submit" className={styles.login}>
-              LOGIN
+            {botonTexto}
             </button>
           </form>
         </div>
