@@ -32,10 +32,11 @@ export default function Navbar(props) {
       <div className="logo">
         <h1><span class="icono">FLEX</span>AGENDA</h1>
       </div>
-      <div className="buttons">
-        <NavLink to="/allProfessionals" className="allProfessionals">
+      
+       <div className="buttons">
+       {/*  <NavLink to="/allProfessionals" className="allProfessionals">
           All Professionals
-        </NavLink>
+  </NavLink> */}
 
         {currentUser ? (
           <button onClick={handleLogout} className="allProfessionals">

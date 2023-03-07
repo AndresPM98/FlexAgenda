@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: black;
   height: 100vh;
   /* border: 1px solid rgb(217, 255, 0); */
 }
@@ -45,7 +44,6 @@
   flex-direction: column;
 
   backdrop-filter: blur(2px);
-  border: 3px solid #183a3b;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 30px;
@@ -55,7 +53,7 @@
 
 .btnEditar {
   display: inline-block;
-  background-color: #183a3b;
+  background-color: #cf8b42;
   border-radius: 0.3rem;
   margin: 5px;
   border: none;
@@ -68,7 +66,7 @@
 }
 .btnEditarR {
   display: inline-block;
-  background-color: #183a3b;
+  background-color: #cf8b42;
   border-radius: 0.3rem;
   margin: 5px;
   border: none;
@@ -93,17 +91,19 @@
   margin-top: 100px;
 }
 
-.back {
+.back{
   border-radius: 0 1rem 1rem 0;
-  background-color: #183a3b;
+  background-color: #cf8b42;
   text-decoration: none;
   color: aliceblue;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6rem;
-  height: 2.5rem;
+  width: 9.5rem;
+  height: 3rem;
   margin-left: 0px;
+  margin-top: 20px;
+  font-size: 25px;
 }
 
 .category,

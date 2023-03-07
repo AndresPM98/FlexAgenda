@@ -11,15 +11,17 @@
   
   .back{
     border-radius: 0 1rem 1rem 0;
-    background-color: #183a3b;
+    background-color: #cf8b42;
     text-decoration: none;
     color: aliceblue;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8rem;
-    height: 2.5rem;
+    width: 9.5rem;
+    height: 3rem;
     margin-left: 0px;
+    margin-top: 20px;
+    font-size: 25px;
   }
   
 
@@ -77,11 +79,11 @@
   .input {
     height: 40px;
     width: 100%;
-    background-color: #303245;
-    border-radius: 12px;
-    border: 0;
+    border-radius: 5px;
+  border: 2px solid #cf8b42;
+  background-color: #cf8b42;
     box-sizing: border-box;
-    color: #eee;
+    color: black;
     font-size: 18px;
     outline: 0;
     padding: 4px 10px 0;
@@ -90,11 +92,11 @@
   }
   
   .button {
-    background-color: #303245;
+    background-color: #cf8b42;
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
-    color: #eee;
+    color: black;
     cursor: pointer;
     font-size: 18px;
     height: 50px;

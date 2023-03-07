@@ -10,6 +10,7 @@ width: 400px;
 background-image: url('../../Imagenes\ y\ logos/agenda-register.jpg');
 background-size: cover;
 background-position: center;
+border-radius: 20px 0px 0px 20px;
 }
 
 .form2 {
@@ -19,6 +20,8 @@ grid-template-rows: 30px 1fr 0.5fr 0.6fr 20px 0.5fr 0.6fr 20px 0.5fr 0.6fr 0.5fr
 height: 600px;
 width: 550px;
 background-color: #fff;
+
+border-radius: 0px 20px 20px 0px;
 }
 
 .tittle2 {
@@ -27,6 +30,7 @@ grid-row: 2/3;
 grid-column: 2/9;
 color: #cf8b42;
 font-weight: bold;
+margin-top: -20px;
 }
 
 .name {
@@ -34,7 +38,6 @@ grid-column: 2/7;
 grid-row: 3/4;
 align-self: self-end;
 justify-self: flex-start;
-margin-bottom: 0;
 padding-bottom: 0;
 font-weight: bold;
 margin-bottom: 3px;
@@ -231,4 +234,5 @@ color: #cf8b42;
 width: 50%;
 height: 20px;
 align-self: center;
+margin-top: -20px;
 }
