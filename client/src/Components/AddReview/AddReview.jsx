@@ -73,7 +73,7 @@ const AddReview = (props) => {
           </button>
         </form>
       ) : (
-        <h1 style={{ backgroundColor: "white", width: "100%", height: "50px" }}>
+        <h1 style={{ backgroundColor: "transparent", width: "100%", height: "50px" }}>
           ¡Gracias por enviar tu opinión!
         </h1>
       )}
