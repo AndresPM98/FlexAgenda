@@ -1,53 +1,54 @@
-.navbarContainer{
-    /* background-color: #183a3b; */
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 100px;
-    border-bottom: 2px solid #ffffff;
-    top: 0;
-    z-index: 1;
-    
+.navbarContainer {
+  /* background-color: #183a3b; */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.95),
+    rgba(0, 0, 0, 0)
+  );
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  border-bottom: 2px solid #ffffff;
+  top: 0;
+  z-index: 1;
 }
 
-.imagenPerfil{
-    display: flex;
-    width:60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-left: 800px;
-    
+.imagenPerfil {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-left: 800px;
+  object-fit: cover;
 }
 
 .calendarIcon {
-    display: flex;
-    width:60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 100px;
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 100px;
 }
 
-.navbarContainerDark{
-    background-color: #18122B;
-    color: aliceblue;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 3rem;
-    border-bottom: 2px solid #c0c0c0;
-    
+.navbarContainerDark {
+  background-color: #18122b;
+  color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  border-bottom: 2px solid #c0c0c0;
 }
 
-.buttons{
-    display: flex;
-    align-items: center;
-    margin-right: 2rem;
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
 }
-.logoTwo{
-    display: flex;
-    align-items: center;
-    margin-left: 1rem;
+.logoTwo {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
 }
-

@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import ReactDOMServer from "react-dom/server";
 
 const ProfessionalPage = () => {
-  const allProfessionals = useSelector((state) => state.allProfessionals);    
+  const allProfessionals = useSelector((state) => state.allProfessionals);
   const { id } = useParams();
   const professional = useSelector((state) => state.profDetail);
   const darkMode = useSelector((state) => state.darkMode);
@@ -38,15 +38,13 @@ const ProfessionalPage = () => {
 
   const reviews = () => {
     Swal.fire({
-     
       title: "Reviews ⭐️",
       showConfirmButton: false,
-      html: ReactDOMServer.renderToString(<DisplayReview review={professional.review} />)
+      html: ReactDOMServer.renderToString(
+        <DisplayReview review={professional.review} />
+      ),
     });
   };
-
-
-
 
   if (loading) {
     return <Loading />;
@@ -59,15 +57,10 @@ const ProfessionalPage = () => {
         className={darkMode === false ? style.container : style.containerDark}
       >
         <div className={style.detailContainer}>
-          <div className={style.info}>
+          <h1 className={style.name}>Profesional: {professional?.name}</h1>
+          <div>
             <img
-              style={{
-                borderRadius: "50%",
-                width: "200px",
-                height: "200px",
-                float: "left",
-                marginRight: "10px",
-              }}
+              className={style.imagenp}
               src={
                 professional?.image
                   ? professional.image
@@ -75,7 +68,8 @@ const ProfessionalPage = () => {
               }
               alt=""
             />
-            <h1 className={style.name}>Profesional: {professional?.name}</h1>
+          </div>
+          <div className={style.info}>
             <h2 className={style.category}>Area: {professional?.category}</h2>
             <h2 className={style.phone}>Contacto: {professional?.phone}</h2>
             <h2 className={style.adress}>Dirección: {professional?.address}</h2>
@@ -94,13 +88,18 @@ const ProfessionalPage = () => {
           </div>
 
           {currentUser ? (
-           <div>
-           <Link to={`/form/${id}`}>
-             <button className={style.btnEditar}>Sacar turno</button>
-           </Link>
-           {professional.review  && professional.review.length > 1 ? <button onClick={(e) => reviews(e)} style={{overflow:"scroll"}}className={style.btnEditar}>Reviews</button> : <p className={style.btnEditar}> No hay reviews todavía </p>}
-         </div>
-            
+            <div>
+              <Link to={`/form/${id}`}>
+                <button className={style.btnEditar}>Sacar turno</button>
+              </Link>
+              {professional.review && professional.review.length > 1 ? (
+                <button onClick={(e) => reviews(e)} className={style.btnEditar}>
+                  Reviews
+                </button>
+              ) : (
+                <p className={style.btnEditar}> No hay reviews todavía </p>
+              )}
+            </div>
           ) : (
             <>
               <Link to={`/formClient/${id}`}>
