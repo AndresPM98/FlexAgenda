@@ -12,6 +12,7 @@
   background-image: url('../../Imagenes\ y\ logos/agenda-login.jpg');
   background-size: cover;
   background-position: center;
+  border-radius: 20px 0px 0px 20px;
 }
 
 .form2 {
@@ -21,6 +22,7 @@
   height: 600px;
   width: 550px;
   background-color: #fff;
+  border-radius: 0px 20px 20px 0px;
 }
 
 .tittle2 {

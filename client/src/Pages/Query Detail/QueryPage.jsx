@@ -104,8 +104,7 @@ const QueryPage = () => {
     <div>
      <div className="navv"><NavbarTwo/></div> 
       {turnDetail && dispatchClientDetail(turnDetail.ClientId)}
-      <div className={darkMode === false ? "queryPage" : "queryPageDark"}>
-        <div className="backContainer">
+      <div className="backContainer">
           <Link className="back" onClick={handlerBack}>
             <iconify-icon
               icon="ion:arrow-back-circle"
@@ -125,6 +124,8 @@ const QueryPage = () => {
               </div>
             </Link>
           </div>
+      <div className={"queryPage"}>
+        <div className="imagenQ"></div>
         <div className="queryDetailContainer">
           <div className="header-container">
             <h1 className="turn-detail-tittle">DETALLES DEL TURNO</h1>
