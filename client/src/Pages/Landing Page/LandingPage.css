@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
-.landContainer, .section5, .section3, .section2, .section4, .section6 {
+.landContainer, .section3, .section2{
     width: 100%;
   }
-.landContainer, .section5{
+.landContainer{
     background-image:url("../../Imagenes/calendar.jpg");
     background-position: center; 
     background-size: cover;
@@ -26,7 +26,7 @@
     flex-direction: column;
     justify-content: center;
 }
-  .section2, .section4, .section6 {
+  .section2 {
     background-color: rgb(255, 255, 255);
     height: 100vh;
     min-height: 42.5rem;
