@@ -17,7 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 9.5rem;
+    width: 11rem;
     height: 3rem;
     margin-left: 0px;
     margin-top: 20px;
@@ -32,12 +32,13 @@
     border-radius: 40%;
     margin-left: -550px;
     justify-content: center;
-    
+    object-fit: cover;
   }
 
 
   .container {
-    background-color: #00000097;
+    background-color: #fff;
+    border: 5px solid #cf8b42;
     border-radius: 20px;
     box-sizing: border-box;
     /*height: 100vh;*/
@@ -54,15 +55,13 @@
   }
   
   .tittle {
-    color: #eee;
-    font-family: sans-serif;
+    color: #cf8b42;
     font-size: 36px;
     font-weight: 600;
   }
   
   .label {
-    color: #eee;
-    font-family: sans-serif;
+    color: #87878a;
     font-size: 16px;
     font-weight: 600;
     margin-top: 20px;
@@ -80,8 +79,8 @@
     height: 40px;
     width: 100%;
     border-radius: 5px;
-  border: 2px solid #cf8b42;
-  background-color: #cf8b42;
+  border: 2px solid #e5c29e;
+  background-color: #e5c29e;
     box-sizing: border-box;
     color: black;
     font-size: 18px;

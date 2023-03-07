@@ -108,7 +108,7 @@ const Form = () => {
             width="40"
             height="30"
           ></iconify-icon>
-          CANCEL
+          CANCELAR
         </NavLink>
       </div>
       <NavbarTwo />

@@ -126,7 +126,7 @@ export default function EditProfileProf() {
             width="40"
             height="30"
           ></iconify-icon>
-          CANCEL
+          CANCELAR
         </NavLink>
       </div>
       <NavbarTwo/>
