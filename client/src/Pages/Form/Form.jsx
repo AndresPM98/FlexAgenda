@@ -95,8 +95,12 @@ const Form = () => {
       error.hour = "Hour is required";
     }
 
-    if (!form.ServiceId[0]) {
+    if (!form.ServiceId[0] || form.ServiceId == "") {
       error.ServiceId = "Service is required";
+    }
+
+    if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
+      error.button = "Complete todos los campos"
     }
     return error;
   }
@@ -217,7 +221,8 @@ const Form = () => {
   return (
     <div>
       <NavbarTwo />
-
+      <div className={styles.divnuevo}>
+      <div className={styles.img}></div> 
       <div className={styles.container}>
         <form onSubmit={submitHandler} className={styles.form}>
           <h1 className={styles.tittle}>AGENDÁ TU TURNO</h1>
@@ -280,7 +285,7 @@ const Form = () => {
             onChange={handleSelectServ}
             className={styles.input}
           >
-            <option value="ServiceId" className={styles.input}>
+            <option value="" className={styles.input}>
               Servicio
             </option>
             {servProfs?.map((element, index) => (
@@ -292,10 +297,15 @@ const Form = () => {
               {error.ServiceId && <span>{error.ServiceId}</span>}
             </div>
           </select>
+          
           <button className={styles.button} type="submit">
             CONFIRMAR TURNO
           </button>
+          <div className={styles.error}>
+          {error.button && <span>{error.button}</span>}
+            </div>
         </form>
+      </div>
       </div>
     </div>
   );
