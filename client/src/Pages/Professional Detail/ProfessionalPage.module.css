@@ -1,105 +1,132 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    height: 100vh;
-    padding-bottom: 100px;
-    /* border: 1px solid rgb(217, 255, 0); */
-    font-family: "Playfair Display", serif;
-    color: #183a3b;
-    
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 100px;
+  /* border: 1px solid rgb(217, 255, 0); */
+  font-family: "Poppins", sans-serif;
+  color: #f8f5f5;
 }
-
-.containerDark{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: black;
-    height: 100vh;
-    /* border: 1px solid rgb(217, 255, 0); */
+.shadow {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0)
+  );
+}
+.containerDark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  height: 100vh;
+  /* border: 1px solid rgb(217, 255, 0); */
 }
 .ProfessionalPage_imagen__cShgg {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    border-radius: 50%;
-    justify-content: center;
-}
-.detailContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    border: 5px solid #183a3b;
-    border-radius: 20px;
-    
-    padding: 30px;
-    margin: 20px 10px;
-    width: 75%;
-    background-color: #00000097;
-    color: rgb(255, 255, 255);
-    backdrop-filter: blur(5px);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
 }
 
+.imagenp {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  float: right;
+  justify-content: flex-end;
+
+}
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+
+  backdrop-filter: blur(2px);
+  border: 3px solid #183a3b;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  margin: 20px 10px;
+  width: 75%;
+}
 
 .btnEditar {
-    display: inline-block;
-    background-color: #183a3b;
-    border-radius: 0.3rem;
-    margin: 5px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-family: "Playfair Display", serif;
-    margin-top: 15px;
+  display: inline-block;
+  background-color: #183a3b;
+  border-radius: 0.3rem;
+  margin: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: "Playfair Display", serif;
+  margin-top: 30px;
+}
+.btnEditarR {
+  display: inline-block;
+  background-color: #183a3b;
+  border-radius: 0.3rem;
+  margin: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 80%;
+  padding: 0.5rem 1rem;
+  font-family: "Playfair Display", serif;
+  margin-top: 1px;
 }
 .description {
-    font-size: 18px;
+  font-size: 18px;
 }
 
-.backContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    position: absolute;
-    left: 0;
-    margin-top: 100px;
+.backContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  position: absolute;
+  left: 0;
+  margin-top: 100px;
 }
 
-.back{
-    border-radius: 0 1rem 1rem 0;
-    background-color: #183a3b;
-    text-decoration: none;
-    color: aliceblue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 6rem;
-    height: 2.5rem;
-    margin-left: 0px;
-
+.back {
+  border-radius: 0 1rem 1rem 0;
+  background-color: #183a3b;
+  text-decoration: none;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 2.5rem;
+  margin-left: 0px;
 }
 
 .category,
 .phone,
 .adress,
-.description{
-    margin-top: -5px;
+.description {
+  margin-top: -5px;
 }
 
-.info{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Playfair Display", serif;
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: "Poppins", sans-serif;
+  margin-top: -250px;
+  margin-left: 5%;
 }
 
-.card{
-    display: flex;
-    flex-direction: row;
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
