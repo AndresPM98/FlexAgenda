@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  
 }
 .img3 {
 height: 600px;
@@ -204,4 +205,39 @@ align-self: center;
 border-radius: 20px;
 margin-top: 20px;
 margin-bottom: 20px;
+width: 200px;
+ margin-left: -65px; 
+ transition: transform 0.2s ease-in-out;
+ cursor: pointer;
+
+}
+
+.login:hover {
+  transform: scale(1.1);
+  color:black;
+  background-color: #9f6b33;
+}
+
+.login2 {
+  font-size: 20px;
+  border: none;
+  background-color: #cf8b42;
+  color: #fff;
+  grid-column: 3/8;
+  height: 45px;
+  align-self: center;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 200px;
+  /* margin-right: -500px; */
+  margin-left: -240px;
+  transition: transform 0.2s ease-in-out;
+ cursor: pointer;
+  }
+
+  .login2:hover {
+  transform: scale(1.1);
+  color:black;
+  background-color: #9f6b33;
 }
