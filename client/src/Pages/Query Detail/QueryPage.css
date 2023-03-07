@@ -59,7 +59,8 @@ top: 20%
   justify-content: center;
   position: absolute;
 left: 0px;
-top: 25%
+top: 25%;
+text-decoration: none;
 }
 
 
@@ -74,6 +75,7 @@ top: 25%
   width: 7rem;
   height: 2.5rem;
   margin-left: 0px;
+  
 }
 
 

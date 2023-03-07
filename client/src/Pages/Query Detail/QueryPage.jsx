@@ -119,8 +119,8 @@ const QueryPage = () => {
               className="backCalendar"
               onClick={handlerCalendar}
             >
-              <div>
-                <p className="back">Calendar</p>
+              <div >
+                <p  className="back">Calendar</p>
               </div>
             </Link>
           </div>
