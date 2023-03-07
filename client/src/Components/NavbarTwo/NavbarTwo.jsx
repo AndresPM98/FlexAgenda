@@ -89,7 +89,7 @@ export default function NavbarTwo(props){
 
           {/* icono perfil */}
 
-          {location.pathname === '/Login' ||location.pathname === `/professionalDetail${id}` ||location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ? null :
+          {location.pathname === '/Login' ||location.pathname === `/professionalDetail${id}` ||location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ||location.pathname === `/form/${id}`? null :
           <div>
             
 
