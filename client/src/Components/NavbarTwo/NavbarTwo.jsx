@@ -57,7 +57,7 @@ export default function NavbarTwo(props){
 
 {/* icono calendario  */}
 
-{location.pathname === `/Calendarpage/${id}` || location.pathname === `/formClient/${id}` || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ||location.pathname === `/form/${id}`? null : (
+{location.pathname === `/Calendarpage/${id}` || location.pathname === `/queryDetail/${id}` || location.pathname === `/formClient/${id}` || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ||location.pathname === `/form/${id}`|| location.pathname === `/Login`? null : (
           <div>
 
             <Link
@@ -91,7 +91,7 @@ export default function NavbarTwo(props){
 
           {/* icono perfil */}
 
-          {location.pathname === `/formClient/${id}` ||location.pathname === `/professionalDetail${id}` ||location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ||location.pathname === `/form/${id}`? null :
+          {location.pathname === `/formClient/${id}` || location.pathname === `/Login` ||location.pathname === `/professionalDetail${id}` ||location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ||location.pathname === `/form/${id}`? null :
           <div>
             
 
@@ -113,7 +113,7 @@ export default function NavbarTwo(props){
             </Link>
           </div>
           }
-          {location.pathname === `/formClient/${id}` || location.pathname === `/form/${id}` || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ? null :
+          {location.pathname === `/formClient/${id}`|| location.pathname === `/Login`|| location.pathname === `/form/${id}` || location.pathname === '/SignUp'|| location.pathname === "/allProfessionals"||location.pathname ==="/paymentApproved"||location.pathname === `/profTT/${id}`||location.pathname === `/loginClient/${id}` ? null :
                           <button style={{ height:"40px", marginTop:"30px", cursor:"pointer", marginLeft:"-30px" }}onClick={handleLogout} className="allProfessionals">
                       CERRAR SESION
                     </button>
