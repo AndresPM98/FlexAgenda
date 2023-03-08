@@ -17,7 +17,7 @@ import { validate } from "./validation";
 const LoginClient = () => {
   const history = useHistory();
   const { id } = useParams();
-
+  const [botomText, setBotomText] = useState("Iniciar Sesion");
   // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
   //enviar al auth de firebase para que verifique
@@ -47,9 +47,16 @@ const LoginClient = () => {
       })
     );
   };
+function mostrarCargando() {
+    setBotomText("Cargando...");
+    setTimeout(function () {
+      setBotomText("Iniciar Sesion");
+    }, 2000);
+  }
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    mostrarCargando()
     // loguearse con mail
     try {
       const user = await signInWithEmailAndPassword(
@@ -150,13 +157,13 @@ const LoginClient = () => {
               {errors.password && (
                 <p className={styles.error_password}>{errors.password}</p>
               )}
-              <button className={styles.login}>Iniciar sesion</button>
+              <button className={styles.login}>{botomText}</button>
               <h3 className={styles.o}>o</h3>
               <div className={styles.register}>
                 <div className={styles.register_items}>
                   <p className={styles.text}>No tienes una cuenta?</p>
                   <a href={`/formClient/${id}`} className={styles.signUp}>
-                    registrarse
+                    Registrarse
                   </a>
                 </div>
               </div>
