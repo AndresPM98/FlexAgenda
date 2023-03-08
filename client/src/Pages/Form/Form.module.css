@@ -10,31 +10,29 @@
 display: flex;
 flex-direction: row;
     align-items: center;
+    width: 60vw;
+    padding: 5vh 0vh;
 }
 .img {
-  height: 780px;
-  width: 550px;
+
   background-image: url('../../Imagenes/foto-form.jpg');
+  height: 100%;
+  width: 50%;
   background-size: cover;
   background-position: center;
   border-radius: 15px 0px 0px 15px;
-  margin-left: 15rem;
-  margin-right: -18rem;
 }
 .container {
   background-color: #fff;
   border-radius: 0px 20px 20px 0px;
   box-sizing: border-box;
   height: 95vh;
-  padding: 20px;
-  width: 75vh;
-  margin: 0 auto;
-  margin-top: 3vh;
+  width: 50%;
+  margin: 0px ;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .tittle {
@@ -60,7 +58,7 @@ flex-direction: row;
   color: black;
 }
 
-.input {
+.input, .select {
   height: 40px;
   width: 100%;
   background-color: #e5c29e;
@@ -70,9 +68,12 @@ flex-direction: row;
   color: black;
   font-size: 18px;
   outline: 0;
-  padding: 4px 10px 0;
+  padding: 4px 0;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.select{
+  margin-left: 0px;
 }
 
 .button {
