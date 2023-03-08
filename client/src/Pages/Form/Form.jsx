@@ -5,7 +5,12 @@ import styles from "./Form.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { getClients, getServices, getProfessionals, getTurns } from "../../Redux/Actions";
+import {
+  getClients,
+  getServices,
+  getProfessionals,
+  getTurns,
+} from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
@@ -38,7 +43,7 @@ const Form = () => {
     dispatch(getClients());
     dispatch(getProfessionals());
     dispatch(getServices());
-    dispatch(getTurns())
+    dispatch(getTurns());
   }, [dispatch]);
 
   const turns = useSelector((state) => state.turns);
@@ -76,12 +81,12 @@ const Form = () => {
   const turnosXdia = form.date
     ? filteredTurns.filter((t) => t.date === form.date)
     : console.log("hay turnos");
-//  console.log(turnosXdia);
+  //  console.log(turnosXdia);
 
   const horasXdia = turnosXdia
     ? turnosXdia.map((t) => t.hour)
     : console.log("hay hora");
-// console.log(horasXdia);
+  // console.log(horasXdia);
 
   useEffect(() => {
     if (clienteLog && allProfessionals.length) {
@@ -108,8 +113,13 @@ const Form = () => {
       error.ServiceId = "Se requiere un servicio";
     }
 
-    if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
-      error.button = "Complete todos los campos"
+    if (
+      !form.date ||
+      !form.hour ||
+      !form.ServiceId[0] ||
+      form.ServiceId == ""
+    ) {
+      error.button = "Complete todos los campos";
     }
     return error;
   }
@@ -156,14 +166,14 @@ const Form = () => {
     const timeSlots = []; // list of available times
     for (let i = startTime; i <= endTime; i++) {
       if (i === startTime || i === endTime) {
-        if (i == 7 || i==8 || i==9) {
-          i = "0"+i
+        if (i == 7 || i == 8 || i == 9) {
+          i = "0" + i;
         }
         timeSlots.push(`${i}:00`);
         
       } else {
-        if (i == 7 || i==8 || i==9) {
-          i = "0"+i
+        if (i == 7 || i == 8 || i == 9) {
+          i = "0" + i;
         }
         timeSlots.push(`${i}:00`);
         
@@ -249,7 +259,8 @@ const Form = () => {
   return (
     <div>
       <NavbarTwo />
-      <div className={styles.divnuevo}>
+        <div style={{ display: "flex" ,justifyContent: "center" }}>
+<div className={styles.divnuevo}>
       <div className={styles.img}></div> 
       <div className={styles.container}>
         <form onSubmit={submitHandler} className={styles.form}>
@@ -339,6 +350,7 @@ const Form = () => {
           {error.button && <span>{error.button}</span>}
             </div>
         </form>
+      </div>
       </div>
       </div>
     </div>
