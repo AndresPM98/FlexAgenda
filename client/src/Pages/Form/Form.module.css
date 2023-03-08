@@ -14,7 +14,7 @@ flex-direction: row;
 .img {
   height: 780px;
   width: 550px;
-  background-image: url('../../Imagenes\ y\ logos/foto-form.jpg');
+  background-image: url('../../Imagenes/foto-form.jpg');
   background-size: cover;
   background-position: center;
   border-radius: 15px 0px 0px 15px;
