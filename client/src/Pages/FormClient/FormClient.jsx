@@ -23,7 +23,7 @@ const FormClient = () => {
   const { id } = useParams();
 
   const [state, setCurrentState] = useState(null);
-
+  const [botonTexto, setBotonTexto] = useState("Registrarse");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -35,6 +35,13 @@ const FormClient = () => {
     email: "",
     password: "",
   });
+
+  function mostrarCargando() {
+    setBotonTexto("Cargando...");
+    setTimeout(function () {
+      setBotonTexto("Registrarse");
+    }, 2500);
+  }
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -70,6 +77,7 @@ const FormClient = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    mostrarCargando();
     //              registramos el usuario
     if (!form.name || !form.email || !form.password) {
       console.log("debes rellenar todos los campos");
@@ -173,7 +181,7 @@ const FormClient = () => {
               {errors.password && (
                 <p className={styles.error_password}>{errors.password}</p>
               )}
-              <button className={styles.login}>Registrarse</button>
+              <button className={styles.login}>{botonTexto}</button>
               <h3 className={styles.o}>o</h3>
               <div className={styles.register}>
                 <div className={styles.register_items}>

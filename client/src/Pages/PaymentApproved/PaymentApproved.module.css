@@ -52,3 +52,18 @@
     color: #0051EE;
     transition: 0.5s;
 }
+
+.quejaContainer{
+    background-color: rgba(0, 0, 0, 0.678);
+    color: white;
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    border: 3px solid white;
+
+}
+
+.queja{
+    font-size: 0.85rem;
+    font-family: Arial, Helvetica, sans-serif;
+}

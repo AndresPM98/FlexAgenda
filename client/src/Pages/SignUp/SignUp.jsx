@@ -10,7 +10,7 @@ import { validate } from "./validate";
 
 function SignUp() {
   const history = useHistory();
-
+  const [botonTexto, setBotonTexto] = useState("Regsitrarse");
   // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
 
@@ -35,6 +35,13 @@ function SignUp() {
     description: "",
     category: "",
   });
+
+  function mostrarCargando() {
+    setBotonTexto("Cargando...");
+    setTimeout(function () {
+      setBotonTexto("Regsitrarse");
+    }, 2500);
+  }
 
   // ir seteando el form
   const handleChange = (event) => {
@@ -71,6 +78,7 @@ function SignUp() {
 
   const handleRegister = async (event) => {
     event.preventDefault();
+    mostrarCargando();
     if (!form.name || !form.email || !form.password || !form.phone) {
       Swal.fire({
         title: "Error",
@@ -188,7 +196,7 @@ function SignUp() {
           />
 
           <button className={styles.login} type="submit">
-            REGISTRARSE
+            {botonTexto}
           </button>
           <div className={styles.register}>
             <div className={styles.register_items}>

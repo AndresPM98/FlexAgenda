@@ -5,10 +5,16 @@ import styles from "./Form.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { getClients, getServices, getProfessionals, getTurns } from "../../Redux/Actions";
+import {
+  getClients,
+  getServices,
+  getProfessionals,
+  getTurns,
+} from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
+import Swal from "sweetalert2";
 import { auth, userExists } from "../../firebase-config";
 
 const Form = () => {
@@ -19,7 +25,7 @@ const Form = () => {
   const [availableTimes, setAvailableTimes] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userDb, setUserDb] = useState(null);
-
+  const [botonTexto, setBotonTexto] = useState("Confirmar turno");
   const [horarioDisponible, setHorarioDisponible] = useState(true);
 
   useEffect(() => {
@@ -37,7 +43,7 @@ const Form = () => {
     dispatch(getClients());
     dispatch(getProfessionals());
     dispatch(getServices());
-    dispatch(getTurns())
+    dispatch(getTurns());
   }, [dispatch]);
 
   const turns = useSelector((state) => state.turns);
@@ -65,15 +71,22 @@ const Form = () => {
     ServiceId: "",
   });
 
+  function mostrarCargando() {
+    setBotonTexto("Cargando...");
+    setTimeout(function () {
+      setBotonTexto("Confirmar turno");
+    }, 2000);
+  }
+
   const turnosXdia = form.date
     ? filteredTurns.filter((t) => t.date === form.date)
     : console.log("hay turnos");
-//  console.log(turnosXdia);
+  //  console.log(turnosXdia);
 
   const horasXdia = turnosXdia
     ? turnosXdia.map((t) => t.hour)
     : console.log("hay hora");
-// console.log(horasXdia);
+  // console.log(horasXdia);
 
   useEffect(() => {
     if (clienteLog && allProfessionals.length) {
@@ -89,19 +102,24 @@ const Form = () => {
     let error = {};
 
     if (!form.date) {
-      error.date = "Date is required";
+      error.date = "Ingresa el día del turno";
     }
 
-    if (!form.hour) {
-      error.hour = "Hour is required";
+    if (!form.hour || form.hour == "") {
+      error.hour = "Ingresa la hora del turno";
     }
 
     if (!form.ServiceId[0] || form.ServiceId == "") {
-      error.ServiceId = "Service is required";
+      error.ServiceId = "Se requiere un servicio";
     }
 
-    if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
-      error.button = "Complete todos los campos"
+    if (
+      !form.date ||
+      !form.hour ||
+      !form.ServiceId[0] ||
+      form.ServiceId == ""
+    ) {
+      error.button = "Complete todos los campos";
     }
     return error;
   }
@@ -148,24 +166,43 @@ const Form = () => {
     const timeSlots = []; // list of available times
     for (let i = startTime; i <= endTime; i++) {
       if (i === startTime || i === endTime) {
-        if (i == 7 || i==8 || i==9) {
-          i = "0"+i
+        if (i == 7 || i == 8 || i == 9) {
+          i = "0" + i;
         }
         timeSlots.push(`${i}:00`);
-        timeSlots.push(`${i}:30`);
+        
       } else {
-        if (i == 7 || i==8 || i==9) {
-          i = "0"+i
+        if (i == 7 || i == 8 || i == 9) {
+          i = "0" + i;
         }
         timeSlots.push(`${i}:00`);
-        timeSlots.push(`${i}:30`);
+        
       }
     }
     return timeSlots.filter((time) => !takenHours.includes(time));
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
+    mostrarCargando()
+    if (error.date || error.hour || error.ServiceId || error.button) {
+       await Swal.fire({
+        title: "ha ocurrido un error",
+        icon: "error",
+        text: "Debes validar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });
+      return
+    }
+    if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
+      await Swal.fire({
+        title: "ha ocurrido un error",
+        icon: "error",
+        text: "Debes completar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });
+      return
+    }
 
     const servElegido = serv.filter((ser) => ser.id == form.ServiceId);
     const send = {
@@ -222,7 +259,8 @@ const Form = () => {
   return (
     <div>
       <NavbarTwo />
-      <div className={styles.divnuevo}>
+        <div style={{ display: "flex" ,justifyContent: "center" }}>
+<div className={styles.divnuevo}>
       <div className={styles.img}></div> 
       <div className={styles.container}>
         <form onSubmit={submitHandler} className={styles.form}>
@@ -245,7 +283,7 @@ const Form = () => {
           <label className={styles.label}>HORA:</label>
           <br />
           <select
-            className={styles.input}
+            className={styles.select}
             value={form.hour}
             onChange={changeHandler}
             name="hour"
@@ -284,28 +322,35 @@ const Form = () => {
           <select
             name="ServiceId"
             onChange={handleSelectServ}
-            className={styles.input}
-          >
-            <option value="" className={styles.input}>
-              Servicio
-            </option>
-            {servProfs?.map((element, index) => (
-              <option key={index} value={element.id} className={styles.input}>
-                {element.name}
-              </option>
-            ))}
+            className={styles.select}
+            >
+           {!form.hour ? "" : 
+           <>
+          <option value="" className={styles.input}>
+                Servicio
+          </option>
+          {servProfs?.map((element, index) => (
+            <option key={index} value={element.id} className={styles.input}>
+           {element.name}
+         </option>
+        ))}
+        </>
+      }
+
+
             <div className={styles.error}>
               {error.ServiceId && <span>{error.ServiceId}</span>}
             </div>
           </select>
           
           <button className={styles.button} type="submit">
-            CONFIRMAR TURNO
+           {botonTexto}
           </button>
           <div className={styles.error}>
           {error.button && <span>{error.button}</span>}
             </div>
         </form>
+      </div>
       </div>
       </div>
     </div>

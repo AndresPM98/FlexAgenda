@@ -6,7 +6,7 @@ export const validate = (value, users) => {
     !regex.test(value.email) &&
     (errors.email = "Email ingresado no valido");
   if (users === "password") errors.password = "la contraseña es incorrecta";
-  if (users === "email")
+  if (users === "email" && value.email)
     errors.email = "El email ingresado no ha sido logueado";
   //   !value.name && (errors.name = "Debes llenar este campo");
   //   !value.countries.length &&
