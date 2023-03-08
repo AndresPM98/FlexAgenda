@@ -125,13 +125,14 @@
   border: none;
   background-color: #cf8b42;
   color: #fff;
-  grid-row: 9/11;
+  grid-row: 9/10;
   grid-column: 3/8;
   height: 45px;
   align-self: center;
   border-radius: 20px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
+  align-self: center;
 }
 
 .login:hover {
