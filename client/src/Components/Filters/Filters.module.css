@@ -5,6 +5,8 @@
     justify-content: space-evenly;
     width: 100%;
   height: 70vh;
+    position: sticky;
+  top: 0px;
   }
 
 .cancelContainer{
@@ -12,7 +14,7 @@ width: 100%;
 }
   .turnosCancelados {
     height: 45px;
-    width: 100%;
+    width: 80%;
     background-color: rgba(183, 9, 9, 0.74);
     color: aliceblue;
     border-radius: 4px;
@@ -34,7 +36,7 @@ width: 100%;
   .copybtn {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     background-color: #3e8e41;
-    width: 100%;
+    width: 80%;
     border: none;
     color: white;
     padding: 10px 16px;
@@ -83,7 +85,7 @@ width: 100%;
   
   select {
     border-radius: 0.5rem;
-    border: 1px solid #0051EE;
+    border: 1px solid #ffffff;
     font-size: 1rem;
     margin-left: 0.5rem;
     padding: 0.5rem;
@@ -93,11 +95,11 @@ width: 100%;
   
   .input {
     border-radius: 0.5rem;
-    border: 1px solid #0051EE;
+    border: 1px solid #ffffff;
     font-size: 1rem;
     margin-left: 0.5rem;
-    padding: 0.5rem;
-    width: 11rem;
+    padding: 0.5rem 0rem;
+    /* width: 11rem; */
     margin-top: 10px;
   }
 
@@ -113,8 +115,8 @@ width: 100%;
     border: 1px solid #0051EE;
     font-size: 1rem;
     padding: 0.5rem;
-    width: 100%;
-    height: 2rem;
+    width: 3.5rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,5 +131,8 @@ width: 100%;
 
 .select{
   margin: 0 auto;
-  width: 100%;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.445);
+  color: white;
+  
 }

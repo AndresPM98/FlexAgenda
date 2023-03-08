@@ -28,9 +28,11 @@
 
 .filtersAndButtons {
   display: flex;
-  /* background-color: #2b2049e1; */
- border-right: solid 3px white;
+  background-color: #0000002f;
+  border-right: solid 3px white;
   width: 19%;
+  backdrop-filter: blur(2px);
   /* border-radius: 20px; */
+
 }
 
