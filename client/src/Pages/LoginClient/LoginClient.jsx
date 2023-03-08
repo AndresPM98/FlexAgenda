@@ -7,22 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { auth, handleSignInWithGoogle } from "../../firebase-config";
 
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Swal from "sweetalert2";
 import AuthProvider from "../../Components/AuthProvider/AuthProvider";
 import Loading from "../Loading/Loading";
 import { validate } from "./validation";
-import axios from "axios";
 
 const LoginClient = () => {
   const history = useHistory();
   const { id } = useParams();
-  const darkMode = useSelector((state) => state.darkMode);
 
   // depende el estado se renderiza algo, no funcionando actualmente
   const [state, setCurrentState] = useState(null);
@@ -148,7 +142,7 @@ const LoginClient = () => {
               <label className={styles.password}>Contraseña:</label>
               <input
                 type="password"
-                value={form.name}
+                value={form.password}
                 onChange={changeHandler}
                 name="password"
                 className={styles.password_input}
