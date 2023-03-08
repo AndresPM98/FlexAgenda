@@ -5,7 +5,12 @@ import styles from "./Form.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { getClients, getServices, getProfessionals, getTurns } from "../../Redux/Actions";
+import {
+  getClients,
+  getServices,
+  getProfessionals,
+  getTurns,
+} from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
@@ -37,7 +42,7 @@ const Form = () => {
     dispatch(getClients());
     dispatch(getProfessionals());
     dispatch(getServices());
-    dispatch(getTurns())
+    dispatch(getTurns());
   }, [dispatch]);
 
   const turns = useSelector((state) => state.turns);
@@ -68,12 +73,12 @@ const Form = () => {
   const turnosXdia = form.date
     ? filteredTurns.filter((t) => t.date === form.date)
     : console.log("hay turnos");
-//  console.log(turnosXdia);
+  //  console.log(turnosXdia);
 
   const horasXdia = turnosXdia
     ? turnosXdia.map((t) => t.hour)
     : console.log("hay hora");
-// console.log(horasXdia);
+  // console.log(horasXdia);
 
   useEffect(() => {
     if (clienteLog && allProfessionals.length) {
@@ -100,8 +105,13 @@ const Form = () => {
       error.ServiceId = "Service is required";
     }
 
-    if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
-      error.button = "Complete todos los campos"
+    if (
+      !form.date ||
+      !form.hour ||
+      !form.ServiceId[0] ||
+      form.ServiceId == ""
+    ) {
+      error.button = "Complete todos los campos";
     }
     return error;
   }
@@ -148,14 +158,14 @@ const Form = () => {
     const timeSlots = []; // list of available times
     for (let i = startTime; i <= endTime; i++) {
       if (i === startTime || i === endTime) {
-        if (i == 7 || i==8 || i==9) {
-          i = "0"+i
+        if (i == 7 || i == 8 || i == 9) {
+          i = "0" + i;
         }
         timeSlots.push(`${i}:00`);
         timeSlots.push(`${i}:30`);
       } else {
-        if (i == 7 || i==8 || i==9) {
-          i = "0"+i
+        if (i == 7 || i == 8 || i == 9) {
+          i = "0" + i;
         }
         timeSlots.push(`${i}:00`);
         timeSlots.push(`${i}:30`);
@@ -222,91 +232,97 @@ const Form = () => {
   return (
     <div>
       <NavbarTwo />
+        <div style={{ display: "flex" ,justifyContent: "center" }}>
       <div className={styles.divnuevo}>
-      <div className={styles.img}></div> 
-      <div className={styles.container}>
-        <form onSubmit={submitHandler} className={styles.form}>
-          <h1 className={styles.tittle}>AGENDÁ TU TURNO</h1>
+          <div className={styles.img}></div>
+          <div className={styles.container}>
+            <form onSubmit={submitHandler} className={styles.form}>
+              <h1 className={styles.tittle}>AGENDÁ TU TURNO</h1>
 
-          <label className={styles.label}>FECHA:</label>
-          <br />
-          <input
-            className={styles.input}
-            type="date"
-            value={form.date}
-            onChange={changeHandler}
-            name="date"
-            min={new Date().toISOString().slice(0, 10)}
-          />
-          <div className={styles.error}>
-            {error.date && <span>{error.date}</span>}{" "}
-          </div>
+              <label className={styles.label}>FECHA:</label>
+              <br />
+              <input
+                className={styles.input}
+                type="date"
+                value={form.date}
+                onChange={changeHandler}
+                name="date"
+                min={new Date().toISOString().slice(0, 10)}
+              />
+              <div className={styles.error}>
+                {error.date && <span>{error.date}</span>}{" "}
+              </div>
 
-          <label className={styles.label}>HORA:</label>
-          <br />
-          <select
-            className={styles.input}
-            value={form.hour}
-            onChange={changeHandler}
-            name="hour"
-          >
-            <option value="">Seleccione una hora</option>
-            {horasXdia &&
-              availableTimes.map((time) => (
-                <option
-                  key={time}
-                  value={time}
-                  className={horasXdia.includes(time) ? styles.hide : ""}
-                >
-                  {time}
+              <label className={styles.label}>HORA:</label>
+              <br />
+              <select
+                className={styles.select}
+                value={form.hour}
+                onChange={changeHandler}
+                name="hour"
+              >
+                <option value="">Seleccione una hora</option>
+                {horasXdia &&
+                  availableTimes.map((time) => (
+                    <option
+                      key={time}
+                      value={time}
+                      className={horasXdia.includes(time) ? styles.hide : ""}
+                    >
+                      {time}
+                    </option>
+                  ))}
+              </select>
+
+              <div className={styles.error}>
+                {error.hour && <span>{error.hour}</span>}{" "}
+              </div>
+
+              <label className={styles.label}>
+                PROFESIONAL:
+                {findProfesional && (
+                  <h2 className={styles.nombres}>{findProfesional.name}</h2>
+                )}
+              </label>
+              <label className={styles.label}>
+                CLIENTE:
+                {clienteLog && (
+                  <h2 className={styles.nombres}>{clienteLog.name}</h2>
+                )}
+              </label>
+
+              <label className={styles.label}>SERVICIO:</label>
+              <select
+                name="ServiceId"
+                onChange={handleSelectServ}
+                className={styles.select}
+              >
+                <option value="" className={styles.input}>
+                  Servicio
                 </option>
-              ))}
-          </select>
+                {servProfs?.map((element, index) => (
+                  <option
+                    key={index}
+                    value={element.id}
+                    className={styles.input}
+                  >
+                    {element.name}
+                  </option>
+                ))}
+                <div className={styles.error}>
+                  {error.ServiceId && <span>{error.ServiceId}</span>}
+                </div>
+              </select>
 
-          <div className={styles.error}>
-            {error.hour && <span>{error.hour}</span>}{" "}
+              <button className={styles.button} type="submit">
+                CONFIRMAR TURNO
+              </button>
+              <div className={styles.error}>
+                {error.button && <span>{error.button}</span>}
+              </div>
+            </form>
           </div>
-
-          <label className={styles.label}>
-            PROFESIONAL:
-            {findProfesional && (
-              <h2 className={styles.nombres}>{findProfesional.name}</h2>
-            )}
-          </label>
-          <label className={styles.label}>
-            CLIENTE:
-            {clienteLog && (
-              <h2 className={styles.nombres}>{clienteLog.name}</h2>
-            )}
-          </label>
-
-          <label className={styles.label}>SERVICIO:</label>
-          <select
-            name="ServiceId"
-            onChange={handleSelectServ}
-            className={styles.input}
-          >
-            <option value="" className={styles.input}>
-              Servicio
-            </option>
-            {servProfs?.map((element, index) => (
-              <option key={index} value={element.id} className={styles.input}>
-                {element.name}
-              </option>
-            ))}
-            <div className={styles.error}>
-              {error.ServiceId && <span>{error.ServiceId}</span>}
-            </div>
-          </select>
-          
-          <button className={styles.button} type="submit">
-            CONFIRMAR TURNO
-          </button>
-          <div className={styles.error}>
-          {error.button && <span>{error.button}</span>}
-            </div>
-        </form>
-      </div>
+        </div>
       </div>
     </div>
   );
