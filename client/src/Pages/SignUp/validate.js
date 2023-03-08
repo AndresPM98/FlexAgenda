@@ -4,6 +4,7 @@ export const validate = (value, professionals) => {
  
   const hasNumber = /\d/;
   const minLength = 7;
+
   const onlyNumbers = /^[0-9]+$/;
   const errors = {};
   value.name &&
