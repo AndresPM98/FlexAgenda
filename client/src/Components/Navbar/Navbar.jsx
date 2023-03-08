@@ -44,9 +44,9 @@ export default function Navbar(props) {
           </button>
         ) : (
           <>
-            <NavLink to="/SignUp" className="login">
+            {/* <NavLink to="/SignUp" className="login">
               SIGN UP
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/Login" className="signUp">
               LOGIN
             </NavLink>

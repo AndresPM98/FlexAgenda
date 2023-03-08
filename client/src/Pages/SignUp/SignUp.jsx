@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth, createUser, RegisterEmailUser } from "../../firebase-config";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import NavbarTwo from "../../Components/NavbarTwo/NavbarTwo";
 import Swal from "sweetalert2";
 import styles from "./Singup.module.css";
@@ -145,6 +145,13 @@ function SignUp() {
           <button className={styles.login} type="submit">
             REGISTRARSE
           </button>
+        
+          <br />
+          <Link to="/Login">
+          <button  className={styles.login2} type="submit">
+            Iniciar Sesion
+          </button>
+          </Link>
         </form>
       </div>
       <br />

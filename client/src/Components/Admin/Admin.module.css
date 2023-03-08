@@ -8,10 +8,10 @@
 
 
 .adminpage {
- 
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    
   }
   
   .adminbutton {
@@ -32,8 +32,14 @@
   .cardcontainer {
     display: flex;
   flex-wrap: wrap;
-  
-  justify-content: space-between;
+  width: max-content;
+  min-width: 70%;
+  padding: 2rem 4rem;
+  justify-content: space-evenly;
+  background-color: rgba(0, 0, 0, 0.432);
+  border-radius: 1rem;
+
+  /* border: 1px solid red; */
   }
   .cardinfo{
     padding: 16px;

@@ -7,7 +7,11 @@
   /* border: 1px solid red; */
   font-family: "Playfair Display", serif;
   color: white;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0)
+  );
 }
 .queryPageDark {
   margin: 0;
@@ -21,15 +25,19 @@
 .imagenQ {
   height: 478px;
   width: 400px;
-  background-image: url('../../Imagenes\ y\ logos/query.jpg');
+  background-image: url("../../Imagenes\ y\ logos/query.jpg");
   background-size: cover;
   background-position: center;
   margin-top: -156px;
   border-radius: 20px 0px 0px 20px;
-  }
+}
 
-.navv{
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60));
+.navv {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6)
+  );
 }
 .queryDetailContainer {
   background-color: rgba(0, 0, 0, 0.7);
@@ -48,8 +56,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-left: 0px;
-top: 20%
+  left: 0px;
+  top: 20%;
 }
 
 .backCalendar {
@@ -58,11 +66,10 @@ top: 20%
   align-items: center;
   justify-content: center;
   position: absolute;
-left: 0px;
-top: 25%;
-text-decoration: none;
+  left: 0px;
+  top: 30%;
+  text-decoration: none;
 }
-
 
 .back {
   border-radius: 0 1rem 1rem 0;
@@ -72,12 +79,12 @@ text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 7rem;
-  height: 2.5rem;
+  width: 9.5rem;
+  height: 3rem;
   margin-left: 0px;
-  
+  margin-top: 20px;
+  font-size: 25px;
 }
-
 
 .header-container {
   display: flex;
@@ -87,8 +94,9 @@ text-decoration: none;
 
 .turn-detail-tittle {
   margin-left: 8rem;
+  margin-top: 5rem;
   color: white;
-  
+
   font-size: 2.5rem;
 }
 
@@ -129,7 +137,6 @@ text-decoration: none;
 }
 .buttonDelete:hover {
   background-color: #d32f2f;
-
 }
 
 .buttonDelete:active {
