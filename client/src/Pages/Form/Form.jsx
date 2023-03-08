@@ -9,6 +9,7 @@ import { getClients, getServices, getProfessionals, getTurns } from "../../Redux
 import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
+import Swal from "sweetalert2";
 import { auth, userExists } from "../../firebase-config";
 
 const Form = () => {
@@ -19,7 +20,7 @@ const Form = () => {
   const [availableTimes, setAvailableTimes] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userDb, setUserDb] = useState(null);
-
+  const [botonTexto, setBotonTexto] = useState("Confirmar turno");
   const [horarioDisponible, setHorarioDisponible] = useState(true);
 
   useEffect(() => {
@@ -65,6 +66,13 @@ const Form = () => {
     ServiceId: "",
   });
 
+  function mostrarCargando() {
+    setBotonTexto("Cargando...");
+    setTimeout(function () {
+      setBotonTexto("Confirmar turno");
+    }, 2000);
+  }
+
   const turnosXdia = form.date
     ? filteredTurns.filter((t) => t.date === form.date)
     : console.log("hay turnos");
@@ -89,15 +97,15 @@ const Form = () => {
     let error = {};
 
     if (!form.date) {
-      error.date = "Date is required";
+      error.date = "Ingresa el día del turno";
     }
 
-    if (!form.hour) {
-      error.hour = "Hour is required";
+    if (!form.hour || form.hour == "") {
+      error.hour = "Ingresa la hora del turno";
     }
 
     if (!form.ServiceId[0] || form.ServiceId == "") {
-      error.ServiceId = "Service is required";
+      error.ServiceId = "Se requiere un servicio";
     }
 
     if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
@@ -152,20 +160,39 @@ const Form = () => {
           i = "0"+i
         }
         timeSlots.push(`${i}:00`);
-        timeSlots.push(`${i}:30`);
+        
       } else {
         if (i == 7 || i==8 || i==9) {
           i = "0"+i
         }
         timeSlots.push(`${i}:00`);
-        timeSlots.push(`${i}:30`);
+        
       }
     }
     return timeSlots.filter((time) => !takenHours.includes(time));
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
+    mostrarCargando()
+    if (error.date || error.hour || error.ServiceId || error.button) {
+       await Swal.fire({
+        title: "ha ocurrido un error",
+        icon: "error",
+        text: "Debes validar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });
+      return
+    }
+    if (!form.date || !form.hour || !form.ServiceId[0] || form.ServiceId == ""){
+      await Swal.fire({
+        title: "ha ocurrido un error",
+        icon: "error",
+        text: "Debes completar todos los campos.",
+        confirmButtonText: "Aceptar",
+      });
+      return
+    }
 
     const servElegido = serv.filter((ser) => ser.id == form.ServiceId);
     const send = {
@@ -285,22 +312,28 @@ const Form = () => {
             name="ServiceId"
             onChange={handleSelectServ}
             className={styles.input}
-          >
-            <option value="" className={styles.input}>
-              Servicio
-            </option>
-            {servProfs?.map((element, index) => (
-              <option key={index} value={element.id} className={styles.input}>
-                {element.name}
-              </option>
-            ))}
+            >
+           {!form.hour ? "" : 
+           <>
+          <option value="" className={styles.input}>
+                Servicio
+          </option>
+          {servProfs?.map((element, index) => (
+            <option key={index} value={element.id} className={styles.input}>
+           {element.name}
+         </option>
+        ))}
+        </>
+      }
+
+
             <div className={styles.error}>
               {error.ServiceId && <span>{error.ServiceId}</span>}
             </div>
           </select>
           
           <button className={styles.button} type="submit">
-            CONFIRMAR TURNO
+           {botonTexto}
           </button>
           <div className={styles.error}>
           {error.button && <span>{error.button}</span>}

@@ -1,7 +1,7 @@
 export const validate = (value, professionals) => {
   let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let regexName = /^[a-zA-Z0-9_ -]{3,16}$/
-  const hasUpperCase = /[A-Z]/;
+ 
   const hasNumber = /\d/;
   const minLength = 8;
   const onlyNumbers = /^[0-9]+$/;
@@ -11,8 +11,6 @@ export const validate = (value, professionals) => {
     (errors.name = "debe contener al menos 3 caracteres");
 
   if (value.password) {
-    (!hasUpperCase.test(value.password) &&
-      (errors.password = "Debe tener al menos una mayuscula")) ||
       (!hasNumber.test(value.password) &&
         (errors.password = "Debe tener al menos un numero")) ||
       (value.password.length <= minLength &&
