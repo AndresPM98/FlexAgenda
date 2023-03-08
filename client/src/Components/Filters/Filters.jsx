@@ -166,7 +166,7 @@ const Filters = ({ lastProfessional }) => {
         </select>
       </div>
       <div className={style.buttonContainer}>
-        <button className={style.inputReset} onClick={refreshHandler}>
+        <button className={style.copybtn} onClick={refreshHandler}>
           <iconify-icon
             icon="material-symbols:refresh"
             width="20"
