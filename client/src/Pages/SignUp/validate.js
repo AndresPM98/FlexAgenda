@@ -3,7 +3,7 @@ export const validate = (value, professionals) => {
   let regexName = /^[a-zA-Z0-9_ -]{3,16}$/
  
   const hasNumber = /\d/;
-  const minLength = 8;
+  const minLength = 7;
   const onlyNumbers = /^[0-9]+$/;
   const errors = {};
   value.name &&
