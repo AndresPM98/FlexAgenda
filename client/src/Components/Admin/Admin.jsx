@@ -12,7 +12,6 @@ import { useHistory } from "react-router-dom";
 
 import { useState } from "react";
 
-
 export default function Admin() {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
@@ -20,15 +19,15 @@ export default function Admin() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      
-      setCurrentUser(null)
+
+      setCurrentUser(null);
       await Swal.fire({
         icon: "success",
         title: "Sesion cerrada",
         showConfirmButton: false,
         timer: 1500,
       });
-      history.push("/")
+      history.push("/");
     } catch (error) {
       // Manejar el error
       console.error(error);
@@ -38,22 +37,23 @@ export default function Admin() {
   return (
     <div className={style.adminpage}>
       <h1 style={{ margin: "40px" }}>Dashboard admin</h1>
-
-      <Link
-        to={`/allProfessionalsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
-      >
-        <button className={style.adminbutton}>Profesionales</button>
-      </Link>
-      <Link
-        to={`/allClientsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
-      >
-        <button className={style.adminbutton}>Clientes</button>
-      </Link>
-      <Link
-        to={`/allReviewsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
-      >
-        <button className={style.adminbutton}>Reviews</button>
-      </Link>
+      <div>
+        <Link
+          to={`/allProfessionalsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
+        >
+          <button className={style.adminbutton}>Profesionales</button>
+        </Link>
+        <Link
+          to={`/allClientsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
+        >
+          <button className={style.adminbutton}>Clientes</button>
+        </Link>
+        <Link
+          to={`/allReviewsDashboardAdmin/36d12c77-50ae-4f7c-914b-21a53f82eaab`}
+        >
+          <button className={style.adminbutton}>Reviews</button>
+        </Link>
+      </div>
 
       <h2
         style={{
