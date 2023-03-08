@@ -23,7 +23,7 @@ const FormClient = () => {
   const { id } = useParams();
 
   const [state, setCurrentState] = useState(null);
-  const [botonTexto, setBotonTexto] = useState("Regsitrarse");
+  const [botonTexto, setBotonTexto] = useState("Registrarse");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -39,7 +39,7 @@ const FormClient = () => {
   function mostrarCargando() {
     setBotonTexto("Cargando...");
     setTimeout(function () {
-      setBotonTexto("Regsitrarse");
+      setBotonTexto("Registrarse");
     }, 2500);
   }
 

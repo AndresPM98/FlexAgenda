@@ -131,6 +131,7 @@
   height: 45px;
   align-self: center;
   border-radius: 20px;
+  cursor: pointer;
 }
 .o {
   margin: 0;
