@@ -70,6 +70,10 @@ const PaymentApproved = () => {
                 <div>
                     <AddReview idProf={id}/>
                 </div>
+                <div className={s.quejaContainer}>
+                    <h3 className={s.queja}>Por consultas o quejas contactarse por mail con flexagenda1@gmail.com</h3>
+                </div>
+
             </div>
             
         </div>
