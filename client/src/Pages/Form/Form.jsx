@@ -283,7 +283,7 @@ const Form = () => {
           <label className={styles.label}>HORA:</label>
           <br />
           <select
-            className={styles.input}
+            className={styles.select}
             value={form.hour}
             onChange={changeHandler}
             name="hour"
@@ -322,7 +322,7 @@ const Form = () => {
           <select
             name="ServiceId"
             onChange={handleSelectServ}
-            className={styles.input}
+            className={styles.select}
             >
            {!form.hour ? "" : 
            <>
