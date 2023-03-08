@@ -134,10 +134,10 @@ const QueryPage = () => {
             <h3 className="data-turn-text">
               Cliente: <b className="data-turn-text-info">{clientDetail.name}</b>
             </h3>
-            <h3 className="data-turn-text">
+            {/* <h3 className="data-turn-text">
               DNI:{" "}
               <b className="data-turn-text-info lineDni">{clientDetail.dni}</b>
-            </h3>
+            </h3> */}
             <h3 className="data-turn-text">
               Email: <b className="data-turn-text-info">{clientDetail.email}</b>
             </h3>
