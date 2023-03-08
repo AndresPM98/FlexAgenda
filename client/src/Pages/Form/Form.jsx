@@ -5,7 +5,7 @@ import styles from "./Form.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { getClients, getServices, getProfessionals } from "../../Redux/Actions";
+import { getClients, getServices, getProfessionals, getTurns } from "../../Redux/Actions";
 import { useHistory, useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { onAuthStateChanged } from "firebase/auth";
@@ -37,6 +37,7 @@ const Form = () => {
     dispatch(getClients());
     dispatch(getProfessionals());
     dispatch(getServices());
+    dispatch(getTurns())
   }, [dispatch]);
 
   const turns = useSelector((state) => state.turns);
@@ -52,7 +53,7 @@ const Form = () => {
     (client) =>
       client.email === (userDb ? userDb : currentUser) /* || currentUser  */
   );
-  // console.log(clienteLog);
+  console.log(turns);
 
   const findProfesional = allProfessionals.find((prof) => id === prof.id);
 
@@ -67,12 +68,12 @@ const Form = () => {
   const turnosXdia = form.date
     ? filteredTurns.filter((t) => t.date === form.date)
     : console.log("hay turnos");
-  // console.log(turnosXdia);
+//  console.log(turnosXdia);
 
   const horasXdia = turnosXdia
     ? turnosXdia.map((t) => t.hour)
     : console.log("hay hora");
-  // console.log(horasXdia);
+// console.log(horasXdia);
 
   useEffect(() => {
     if (clienteLog && allProfessionals.length) {
